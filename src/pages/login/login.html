@@ -1,0 +1,34 @@
+<!--
+  Generated template for the Login page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+</ion-header>
+
+
+<ion-content padding class="container">
+  <div class="vtop-bar">
+    <img class="vkirirom-img" src="img/vkirirom_logo.svg">
+  </div>
+  <form (ngSubmit)="loginForm();">
+    <div class="input-login">
+        <ion-item class="input-field">
+          <ion-input type="text" name="username" id="username" placeholder="Username" [(ngModel)]="user.username"></ion-input>
+          <ion-icon name="ios-person-outline" item-left></ion-icon>
+        </ion-item>
+        <br>
+        <ion-item class="input-field">
+          <ion-input type="password" name="password" id="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
+          <ion-icon name="ios-lock-outline" item-left></ion-icon>
+        </ion-item>
+    </div>
+    <div class="submit-login">
+      <button (click)="sth" type="button" class="forgot-btn">Forgot your password?</button>
+      <button (click)="sth" type="submit" class="signin-btn">Sign In</button>
+      <button (click)="sth" type="button" class="signin-fb-btn"><span class="fb-logo-in-btn"><img src="img/fb-logo.png"></span>Sign In with Facebook</button>
+    </div>
+  </form>
+</ion-content>

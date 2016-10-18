@@ -80236,17 +80236,30 @@ var __decorate$109 = (undefined && undefined.__decorate) || function (decorators
 var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var HomePage = (function () {
-    function HomePage(navCtrl) {
+/*
+  Generated class for the Login page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+var Login = (function () {
+    function Login(navCtrl) {
         this.navCtrl = navCtrl;
+        this.user = {};
     }
-    HomePage = __decorate$109([
+    Login.prototype.ionViewDidLoad = function () {
+        console.log('Hello Login Page');
+    };
+    Login.prototype.loginForm = function () {
+        console.log(this.user);
+    };
+    Login = __decorate$109([
         Component({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\phanith\Desktop\testapp\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Ionic Blank\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  The world is your oyster.\n  <p>\n    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.\n  </p>\n</ion-content>\n'/*ion-inline-end:"C:\Users\phanith\Desktop\testapp\src\pages\home\home.html"*/
+            selector: 'page-login',template:/*ion-inline-start:"/Users/sbc/ionic_project/vkirirom/src/pages/login/login.html"*/'<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/v2/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n</ion-header>\n\n\n<ion-content padding class="container">\n  <div class="vtop-bar">\n    <img class="vkirirom-img" src="img/vkirirom_logo.svg">\n  </div>\n  <form (ngSubmit)="loginForm();">\n    <div class="input-login">\n        <ion-item class="input-field">\n          <ion-input type="text" name="username" id="username" placeholder="Username" [(ngModel)]="user.username"></ion-input>\n          <ion-icon name="ios-person-outline" item-left></ion-icon>\n        </ion-item>\n        <br>\n        <ion-item class="input-field">\n          <ion-input type="password" name="password" id="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>\n          <ion-icon name="ios-lock-outline" item-left></ion-icon>\n        </ion-item>\n    </div>\n    <div class="submit-login">\n      <button (click)="sth" type="button" class="forgot-btn">Forgot your password?</button>\n      <button (click)="sth" type="submit" class="signin-btn">Sign In</button>\n      <button (click)="sth" type="button" class="signin-fb-btn"><span class="fb-logo-in-btn"><img src="img/fb-logo.png"></span>Sign In with Facebook</button>\n    </div>\n  </form>\n</ion-content>\n'/*ion-inline-end:"/Users/sbc/ionic_project/vkirirom/src/pages/login/login.html"*/
         }), 
         __metadata$2('design:paramtypes', [NavController])
-    ], HomePage);
-    return HomePage;
+    ], Login);
+    return Login;
 }());
 
 var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -80260,7 +80273,7 @@ var __metadata$1 = (undefined && undefined.__metadata) || function (k, v) {
 };
 var MyApp = (function () {
     function MyApp(platform) {
-        this.rootPage = HomePage;
+        this.rootPage = Login;
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -80292,7 +80305,7 @@ var AppModule = (function () {
         NgModule({
             declarations: [
                 MyApp,
-                HomePage
+                Login
             ],
             imports: [
                 IonicModule.forRoot(MyApp)
@@ -80300,7 +80313,7 @@ var AppModule = (function () {
             bootstrap: [IonicApp],
             entryComponents: [
                 MyApp,
-                HomePage
+                Login
             ],
             providers: []
         }), 
