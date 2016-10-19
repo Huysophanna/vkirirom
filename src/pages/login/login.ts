@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Dashboard } from '../dashboard/dashboard';
 
 /*
   Generated class for the Login page.
@@ -9,13 +10,14 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
 export class Login {
 
   private user = {}
 
   constructor(public navCtrl: NavController) {
+   
   }
 
   ionViewDidLoad() {
@@ -24,6 +26,8 @@ export class Login {
 
   loginForm() {
     console.log(this.user);
+    this.navCtrl.setRoot(Dashboard);
+
   }
 
 }

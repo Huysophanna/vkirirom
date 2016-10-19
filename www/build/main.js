@@ -80237,6 +80237,64 @@ var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 /*
+  Generated class for the Dashboard page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+var Dashboard = (function () {
+    function Dashboard(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
+    Dashboard.prototype.ionViewDidLoad = function () {
+        console.log('Hello Dashboard Page');
+    };
+    Dashboard = __decorate$109([
+        Component({
+            selector: 'page-dashboard',template:/*ion-inline-start:"/Users/sbc/ionic_project/vkirirom/src/pages/dashboard/dashboard.html"*/'<!--\n  Generated template for the Dashboard page.\n\n  See http://ionicframework.com/docs/v2/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header class="header">\n  <ion-navbar>\n    <button menuToggle><ion-icon [ngStyle]="{\'color\': \'white\'}" name="menu"></ion-icon></button>\n    <button right menuToggle><ion-icon [ngStyle]="{\'color\': \'white\'}" name="ios-notifications"></ion-icon></button>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content class="container">\n  <div class="vtop-bar">\n    <img class="vkirirom-img" src="img/vkirirom_logo.svg">\n  </div>\n  <div class="noti-bar">\n    <p>Please assemble at Football Field</p>\n  </div>\n  <div class="dashboard-action">\n    <div class="first-row">\n      <button class="service-btn"><img src="img/service-btn.svg">Service</button>\n      <button class="member-btn"><img src="img/service-btn.svg">Membership Card</button>\n      <button class="map-btn"><img src="img/service-btn.svg">vMap</button>\n    </div>\n    <div class="second-row">\n      <button class="service-btn"><img src="img/service-btn.svg">Chat</button>\n      <button class="member-btn"><img src="img/service-btn.svg">Media</button>\n      <button class="map-btn"><img src="img/service-btn.svg">About Us</button>\n    </div>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/sbc/ionic_project/vkirirom/src/pages/dashboard/dashboard.html"*/
+        }), 
+        __metadata$2('design:paramtypes', [NavController])
+    ], Dashboard);
+    return Dashboard;
+}());
+
+var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata$1 = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var MyApp = (function () {
+    function MyApp(platform) {
+        this.rootPage = Dashboard;
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            StatusBar.styleDefault();
+        });
+    }
+    MyApp = __decorate$1([
+        Component({
+            template: "<ion-nav [root]=\"rootPage\"></ion-nav>"
+        }), 
+        __metadata$1('design:paramtypes', [Platform])
+    ], MyApp);
+    return MyApp;
+}());
+
+var __decorate$110 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata$3 = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/*
   Generated class for the Login page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
@@ -80252,41 +80310,15 @@ var Login = (function () {
     };
     Login.prototype.loginForm = function () {
         console.log(this.user);
+        this.navCtrl.setRoot(Dashboard);
     };
-    Login = __decorate$109([
+    Login = __decorate$110([
         Component({
-            selector: 'page-login',template:/*ion-inline-start:"/Users/sbc/ionic_project/vkirirom/src/pages/login/login.html"*/'<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/v2/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n</ion-header>\n\n\n<ion-content padding class="container">\n  <div class="vtop-bar">\n    <img class="vkirirom-img" src="img/vkirirom_logo.svg">\n  </div>\n  <form (ngSubmit)="loginForm();">\n    <div class="input-login">\n        <ion-item class="input-field">\n          <ion-input type="text" name="username" id="username" placeholder="Username" [(ngModel)]="user.username"></ion-input>\n          <ion-icon name="ios-person-outline" item-left></ion-icon>\n        </ion-item>\n        <br>\n        <ion-item class="input-field">\n          <ion-input type="password" name="password" id="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>\n          <ion-icon name="ios-lock-outline" item-left></ion-icon>\n        </ion-item>\n    </div>\n    <div class="submit-login">\n      <button (click)="sth" type="button" class="forgot-btn">Forgot your password?</button>\n      <button (click)="sth" type="submit" class="signin-btn">Sign In</button>\n      <button (click)="sth" type="button" class="signin-fb-btn"><span class="fb-logo-in-btn"><img src="img/fb-logo.png"></span>Sign In with Facebook</button>\n    </div>\n  </form>\n</ion-content>\n'/*ion-inline-end:"/Users/sbc/ionic_project/vkirirom/src/pages/login/login.html"*/
+            selector: 'page-login',template:/*ion-inline-start:"/Users/sbc/ionic_project/vkirirom/src/pages/login/login.html"*/'<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/v2/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n</ion-header>\n\n\n<ion-content padding class="container">\n  <div class="vtop-bar">\n    <img class="vkirirom-img" src="img/vkirirom_logo.svg">\n  </div>\n  <form (ngSubmit)="loginForm();">\n    <div class="input-login">\n        <ion-item class="input-field">\n          <ion-input type="text" name="username" id="username" placeholder="Username" [(ngModel)]="user.username"></ion-input>\n          <ion-icon name="ios-person-outline" item-left></ion-icon>\n        </ion-item>\n        <br>\n        <ion-item class="input-field">\n          <ion-input type="password" name="password" id="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>\n          <ion-icon name="ios-lock-outline" item-left></ion-icon>\n        </ion-item>\n    </div>\n    <div class="submit-login">\n      <button (click)="sth" type="button" class="forgot-btn">Forgot your password?</button>\n      <button (click)="sth" type="submit" class="signin-btn">Sign In</button>\n      <button (click)="sth" type="button" class="signin-fb-btn"><span class="fb-logo-in-btn"><img src="img/fb-logo.png"></span>Sign In with Facebook</button>\n    </div>\n  </form>\n</ion-content>\n'/*ion-inline-end:"/Users/sbc/ionic_project/vkirirom/src/pages/login/login.html"*/,
         }), 
-        __metadata$2('design:paramtypes', [NavController])
+        __metadata$3('design:paramtypes', [NavController])
     ], Login);
     return Login;
-}());
-
-var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata$1 = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var MyApp = (function () {
-    function MyApp(platform) {
-        this.rootPage = Login;
-        platform.ready().then(function () {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            StatusBar.styleDefault();
-        });
-    }
-    MyApp = __decorate$1([
-        Component({
-            template: "<ion-nav [root]=\"rootPage\"></ion-nav>"
-        }), 
-        __metadata$1('design:paramtypes', [Platform])
-    ], MyApp);
-    return MyApp;
 }());
 
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -80305,7 +80337,8 @@ var AppModule = (function () {
         NgModule({
             declarations: [
                 MyApp,
-                Login
+                Login,
+                Dashboard
             ],
             imports: [
                 IonicModule.forRoot(MyApp)
@@ -80313,7 +80346,8 @@ var AppModule = (function () {
             bootstrap: [IonicApp],
             entryComponents: [
                 MyApp,
-                Login
+                Login,
+                Dashboard
             ],
             providers: []
         }), 
