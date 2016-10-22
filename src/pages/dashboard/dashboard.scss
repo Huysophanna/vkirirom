@@ -3,6 +3,10 @@ $light_green_color: #669F42;
 $dark_green_color: #1A6940;
 $blue_fb_color: #3956A0;
 
+.scroll-content {
+    overflow-y: hidden;
+}
+
 .header {
     button {
         font-size: xx-large;
@@ -45,7 +49,7 @@ $blue_fb_color: #3956A0;
 .dashboard-action {
     display: block;
     width: 100%;
-    height: 70%;
+    height: 64%;
     text-align: center;
     background: -moz-linear-gradient(90deg, rgba(26,105,64,1) 0%, rgba(26,105,64,1) 17%, rgba(28,137,84,1) 70%, rgba(28,137,84,1) 100%); /* ff3.6+ */ 
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(28,137,84,1)), color-stop(30%, rgba(28,137,84,1)), color-stop(83%, rgba(26,105,64,1)), color-stop(100%, rgba(26,105,64,1))); /* safari4+,chrome */ 
@@ -54,7 +58,9 @@ $blue_fb_color: #3956A0;
     background: -ms-linear-gradient(90deg, rgba(26,105,64,1) 0%, rgba(26,105,64,1) 17%, rgba(28,137,84,1) 70%, rgba(28,137,84,1) 100%); /* ie10+ */ 
     background: linear-gradient(0deg, rgba(26,105,64,1) 0%, rgba(26,105,64,1) 17%, rgba(28,137,84,1) 70%, rgba(28,137,84,1) 100%); /* w3c */ 
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8954', endColorstr='#1a6940',GradientType=0 ); /* ie6-9 */
-
+    img {
+        width: 100%;
+    }
     button {
         background: transparent;
         width: 30%;
@@ -66,6 +72,22 @@ $blue_fb_color: #3956A0;
     }
     .second-row {
         margin-top: 7%;
+    }
+    .emergency {
+        position: relative;
+        margin-top: 10%;
+        width: 100%;
+        height: auto;
+        button {
+            position: relative;
+            width: 80%;
+            height: 4.5em;
+            font-size: 120%;
+            border-radius: 15px; 
+            color: red;
+            background: white;
+            
+        }
     }
     
 }
