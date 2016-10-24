@@ -28,6 +28,22 @@ $blue_fb_color: #3956A0;
     .input-field {
         border: 1px solid white;
     }
+    .error-message {
+        background: transparent;
+        p {
+            color: white;
+            text-align: center;
+        }
+        .label-ios {
+            margin: 0;
+        }
+    }
+    .item-block {
+        min-height: 1.5em;
+    }
+    .item-inner {
+        border-bottom: transparent !important;
+    }
 }
 .submit-login {
     button {
