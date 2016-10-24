@@ -16,19 +16,18 @@
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
     <div class="input-login">
         <ion-item class="input-field">
-          <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)" placeholder="Username" [class.invalid]="!loginForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
+          <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)" placeholder="Email" [class.invalid]="!loginForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
           <ion-icon name="ios-person-outline" item-left></ion-icon>
         </ion-item>
-        <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid  && (emailChanged || submitAttempt)">
-          <p>Please enter a valid email.</p>
+        <ion-item class="error-message">
+          <p *ngIf="!loginForm.controls.email.valid  && (emailChanged || submitAttempt)">Please enter a valid email.</p>
         </ion-item>
-        <br>
         <ion-item class="input-field">
           <ion-input #password formControlName="password" type="password" (change)="elementChanged(password)" placeholder="Password" [class.invalid]="!loginForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
           <ion-icon name="ios-lock-outline" item-left></ion-icon>
         </ion-item>
-        <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid  && (passwordChanged || submitAttempt)">
-          <p>Your password needs more than 6 characters.</p>
+        <ion-item class="error-message">
+          <p *ngIf="!loginForm.controls.password.valid  && (passwordChanged || submitAttempt)">Your password needs more than 6 characters.</p>
         </ion-item>
     </div>
     <div class="submit-login">

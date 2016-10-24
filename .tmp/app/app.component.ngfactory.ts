@@ -13,21 +13,45 @@ import * as import5 from '@angular/core/src/di/injector';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/change_detection';
 import * as import8 from 'ionic-angular/platform/platform';
-import * as import9 from '@angular/core/src/metadata/view';
-import * as import10 from '@angular/core/src/linker/component_factory';
-import * as import11 from 'ionic-angular/components/nav/nav';
-import * as import12 from '../node_modules/ionic-angular/components/nav/nav.ngfactory';
-import * as import13 from 'ionic-angular/navigation/view-controller';
-import * as import14 from 'ionic-angular/navigation/nav-controller-base';
-import * as import15 from 'ionic-angular/components/app/app';
-import * as import16 from 'ionic-angular/config/config';
-import * as import17 from 'ionic-angular/util/keyboard';
-import * as import18 from '@angular/core/src/linker/element_ref';
-import * as import19 from '@angular/core/src/zone/ng_zone';
-import * as import20 from '@angular/core/src/linker/component_factory_resolver';
-import * as import21 from 'ionic-angular/gestures/gesture-controller';
-import * as import22 from 'ionic-angular/transitions/transition-controller';
-import * as import23 from 'ionic-angular/navigation/deep-linker';
+import * as import9 from '../providers/api';
+import * as import10 from '@angular/core/src/metadata/view';
+import * as import11 from '@angular/core/src/linker/component_factory';
+import * as import12 from '@angular/core/src/linker/query_list';
+import * as import13 from 'ionic-angular/components/menu/menu';
+import * as import14 from 'ionic-angular/components/toolbar/toolbar';
+import * as import15 from 'ionic-angular/components/toolbar/toolbar-title';
+import * as import16 from 'ionic-angular/components/content/content';
+import * as import17 from 'ionic-angular/components/list/list';
+import * as import18 from '@angular/common/src/directives/ng_if';
+import * as import19 from 'ionic-angular/components/item/item';
+import * as import20 from 'ionic-angular/components/list/list-header';
+import * as import21 from '@angular/common/src/directives/ng_for';
+import * as import22 from 'ionic-angular/components/nav/nav';
+import * as import23 from '../node_modules/ionic-angular/components/menu/menu.ngfactory';
+import * as import24 from 'ionic-angular/components/menu/menu-controller';
+import * as import25 from '@angular/core/src/linker/element_ref';
+import * as import26 from 'ionic-angular/config/config';
+import * as import27 from 'ionic-angular/util/keyboard';
+import * as import28 from '@angular/core/src/zone/ng_zone';
+import * as import29 from 'ionic-angular/gestures/gesture-controller';
+import * as import30 from 'ionic-angular/navigation/view-controller';
+import * as import31 from '../node_modules/ionic-angular/components/toolbar/toolbar.ngfactory';
+import * as import32 from '../node_modules/ionic-angular/components/toolbar/toolbar-title.ngfactory';
+import * as import33 from 'ionic-angular/components/navbar/navbar';
+import * as import34 from '../node_modules/ionic-angular/components/content/content.ngfactory';
+import * as import35 from 'ionic-angular/components/app/app';
+import * as import36 from 'ionic-angular/components/tabs/tabs';
+import * as import37 from '@angular/core/src/linker/template_ref';
+import * as import38 from '../node_modules/ionic-angular/components/item/item.ngfactory';
+import * as import39 from 'ionic-angular/util/form';
+import * as import40 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import41 from '../node_modules/ionic-angular/components/nav/nav.ngfactory';
+import * as import42 from 'ionic-angular/navigation/nav-controller-base';
+import * as import43 from '@angular/core/src/linker/component_factory_resolver';
+import * as import44 from 'ionic-angular/transitions/transition-controller';
+import * as import45 from 'ionic-angular/navigation/deep-linker';
+import * as import46 from 'ionic-angular/components/menu/menu-close';
+import * as import47 from 'ionic-angular/components/icon/icon';
 var renderType_MyApp_Host:import0.RenderComponentType = (null as any);
 class _View_MyApp_Host0 extends import1.AppView<any> {
   _el_0:any;
@@ -40,7 +64,7 @@ class _View_MyApp_Host0 extends import1.AppView<any> {
     this._el_0 = this.selectOrCreateHostElement('ng-component',rootSelector,(null as any));
     this._appEl_0 = new import2.AppElement(0,(null as any),this,this._el_0);
     var compView_0:any = viewFactory_MyApp0(this.viewUtils,this.injector(0),this._appEl_0);
-    this._MyApp_0_4 = new import3.MyApp(this.parentInjector.get(import8.Platform));
+    this._MyApp_0_4 = new import3.MyApp(this.parentInjector.get(import8.Platform),this.parentInjector.get(import9.Api));
     this._appEl_0.initComponent(this._MyApp_0_4,([] as any[]),compView_0);
     compView_0.create(this._MyApp_0_4,this.projectableNodes,(null as any));
     this.init(([] as any[]).concat([this._el_0]),[this._el_0],([] as any[]),([] as any[]));
@@ -52,48 +76,535 @@ class _View_MyApp_Host0 extends import1.AppView<any> {
   }
 }
 function viewFactory_MyApp_Host0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
-  if ((renderType_MyApp_Host === (null as any))) { (renderType_MyApp_Host = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,([] as any[]),{})); }
+  if ((renderType_MyApp_Host === (null as any))) { (renderType_MyApp_Host = viewUtils.createRenderComponentType('',0,import10.ViewEncapsulation.None,([] as any[]),{})); }
   return new _View_MyApp_Host0(viewUtils,parentInjector,declarationEl);
 }
-export const MyAppNgFactory:import10.ComponentFactory<import3.MyApp> = new import10.ComponentFactory<import3.MyApp>('ng-component',viewFactory_MyApp_Host0,import3.MyApp);
+export const MyAppNgFactory:import11.ComponentFactory<import3.MyApp> = new import11.ComponentFactory<import3.MyApp>('ng-component',viewFactory_MyApp_Host0,import3.MyApp);
 const styles_MyApp:any[] = ([] as any[]);
 var renderType_MyApp:import0.RenderComponentType = (null as any);
 class _View_MyApp0 extends import1.AppView<import3.MyApp> {
+  _viewQuery_Nav_0:import12.QueryList<any>;
   _el_0:any;
   /*private*/ _appEl_0:import2.AppElement;
-  _Nav_0_4:import11.Nav;
+  _Menu_0_4:import13.Menu;
+  _query_Content_0_0:import12.QueryList<any>;
+  _text_1:any;
+  _el_2:any;
+  _Header_2_3:import14.Header;
+  _text_3:any;
+  _el_4:any;
+  /*private*/ _appEl_4:import2.AppElement;
+  _Toolbar_4_4:import14.Toolbar;
+  _text_5:any;
+  _el_6:any;
+  /*private*/ _appEl_6:import2.AppElement;
+  _ToolbarTitle_6_4:import15.ToolbarTitle;
+  _text_7:any;
+  _text_8:any;
+  _text_9:any;
+  _text_10:any;
+  _el_11:any;
+  /*private*/ _appEl_11:import2.AppElement;
+  _Content_11_4:import16.Content;
+  _text_12:any;
+  _el_13:any;
+  _List_13_3:import17.List;
+  _text_14:any;
+  _anchor_15:any;
+  /*private*/ _appEl_15:import2.AppElement;
+  _TemplateRef_15_5:any;
+  _NgIf_15_6:import18.NgIf;
+  _text_16:any;
+  _el_17:any;
+  /*private*/ _appEl_17:import2.AppElement;
+  _Item_17_4:import19.Item;
+  _ListHeader_17_5:import20.ListHeader;
+  _query_Label_17_0:import12.QueryList<any>;
+  _query_Button_17_1:import12.QueryList<any>;
+  _query_Icon_17_2:import12.QueryList<any>;
+  _text_18:any;
+  _text_19:any;
+  _anchor_20:any;
+  /*private*/ _appEl_20:import2.AppElement;
+  _TemplateRef_20_5:any;
+  _NgFor_20_6:import21.NgFor;
+  _text_21:any;
+  _text_22:any;
+  _text_23:any;
+  _text_24:any;
+  _text_25:any;
+  _el_26:any;
+  /*private*/ _appEl_26:import2.AppElement;
+  _Nav_26_4:import22.Nav;
+  _text_27:any;
   /*private*/ _expr_0:any;
+  /*private*/ _expr_1:any;
+  /*private*/ _expr_2:any;
+  /*private*/ _expr_3:any;
+  /*private*/ _expr_4:any;
+  /*private*/ _expr_5:any;
+  /*private*/ _expr_6:any;
   constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement) {
     super(_View_MyApp0,renderType_MyApp,import6.ViewType.COMPONENT,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import2.AppElement {
     const parentRenderNode:any = this.renderer.createViewRoot(this.declarationAppElement.nativeElement);
-    this._el_0 = this.renderer.createElement(parentRenderNode,'ion-nav',(null as any));
+    this._viewQuery_Nav_0 = new import12.QueryList<any>();
+    this._el_0 = this.renderer.createElement(parentRenderNode,'ion-menu',(null as any));
+    this.renderer.setElementAttribute(this._el_0,'role','navigation');
     this._appEl_0 = new import2.AppElement(0,(null as any),this,this._el_0);
-    var compView_0:any = import12.viewFactory_Nav0(this.viewUtils,this.injector(0),this._appEl_0);
-    this._Nav_0_4 = new import11.Nav(this.parentInjector.get(import13.ViewController,(null as any)),this.parentInjector.get(import14.NavControllerBase,(null as any)),this.parentInjector.get(import15.App),this.parentInjector.get(import16.Config),this.parentInjector.get(import17.Keyboard),new import18.ElementRef(this._el_0),this.parentInjector.get(import19.NgZone),this.renderer,this.parentInjector.get(import20.ComponentFactoryResolver),this.parentInjector.get(import21.GestureController),this.parentInjector.get(import22.TransitionController),this.parentInjector.get(import23.DeepLinker,(null as any)));
-    this._appEl_0.initComponent(this._Nav_0_4,([] as any[]),compView_0);
-    compView_0.create(this._Nav_0_4,([] as any[]),(null as any));
+    var compView_0:any = import23.viewFactory_Menu0(this.viewUtils,this.injector(0),this._appEl_0);
+    this._Menu_0_4 = new import13.Menu(this.parentInjector.get(import24.MenuController),new import25.ElementRef(this._el_0),this.parentInjector.get(import26.Config),this.parentInjector.get(import8.Platform),this.renderer,this.parentInjector.get(import27.Keyboard),this.parentInjector.get(import28.NgZone),this.parentInjector.get(import29.GestureController));
+    this._query_Content_0_0 = new import12.QueryList<any>();
+    this._appEl_0.initComponent(this._Menu_0_4,([] as any[]),compView_0);
+    this._text_1 = this.renderer.createText((null as any),'\n  ',(null as any));
+    this._el_2 = this.renderer.createElement((null as any),'ion-header',(null as any));
+    this._Header_2_3 = new import14.Header(this.parentInjector.get(import26.Config),new import25.ElementRef(this._el_2),this.renderer,this.parentInjector.get(import30.ViewController,(null as any)));
+    this._text_3 = this.renderer.createText(this._el_2,'\n    ',(null as any));
+    this._el_4 = this.renderer.createElement(this._el_2,'ion-toolbar',(null as any));
+    this.renderer.setElementAttribute(this._el_4,'class','toolbar');
+    this._appEl_4 = new import2.AppElement(4,2,this,this._el_4);
+    var compView_4:any = import31.viewFactory_Toolbar0(this.viewUtils,this.injector(4),this._appEl_4);
+    this._Toolbar_4_4 = new import14.Toolbar(this.parentInjector.get(import30.ViewController,(null as any)),this.parentInjector.get(import26.Config),new import25.ElementRef(this._el_4),this.renderer);
+    this._appEl_4.initComponent(this._Toolbar_4_4,([] as any[]),compView_4);
+    this._text_5 = this.renderer.createText((null as any),'\n      ',(null as any));
+    this._el_6 = this.renderer.createElement((null as any),'ion-title',(null as any));
+    this._appEl_6 = new import2.AppElement(6,4,this,this._el_6);
+    var compView_6:any = import32.viewFactory_ToolbarTitle0(this.viewUtils,this.injector(6),this._appEl_6);
+    this._ToolbarTitle_6_4 = new import15.ToolbarTitle(this.parentInjector.get(import26.Config),new import25.ElementRef(this._el_6),this.renderer,this._Toolbar_4_4,this.parentInjector.get(import33.Navbar,(null as any)));
+    this._appEl_6.initComponent(this._ToolbarTitle_6_4,([] as any[]),compView_6);
+    this._text_7 = this.renderer.createText((null as any),'Menu',(null as any));
+    compView_6.create(this._ToolbarTitle_6_4,[([] as any[]).concat([this._text_7])],(null as any));
+    this._text_8 = this.renderer.createText((null as any),'\n    ',(null as any));
+    compView_4.create(this._Toolbar_4_4,[
+      ([] as any[]),
+      ([] as any[]),
+      ([] as any[]),
+      ([] as any[]).concat([
+        this._text_5,
+        this._el_6,
+        this._text_8
+      ]
+      )
+    ]
+    ,(null as any));
+    this._text_9 = this.renderer.createText(this._el_2,'\n  ',(null as any));
+    this._text_10 = this.renderer.createText((null as any),'\n\n  ',(null as any));
+    this._el_11 = this.renderer.createElement((null as any),'ion-content',(null as any));
+    this._appEl_11 = new import2.AppElement(11,0,this,this._el_11);
+    var compView_11:any = import34.viewFactory_Content0(this.viewUtils,this.injector(11),this._appEl_11);
+    this._Content_11_4 = new import16.Content(this.parentInjector.get(import26.Config),new import25.ElementRef(this._el_11),this.renderer,this.parentInjector.get(import35.App),this.parentInjector.get(import27.Keyboard),this.parentInjector.get(import28.NgZone),this.parentInjector.get(import30.ViewController,(null as any)),this.parentInjector.get(import36.Tabs,(null as any)));
+    this._appEl_11.initComponent(this._Content_11_4,([] as any[]),compView_11);
+    this._text_12 = this.renderer.createText((null as any),'\n    ',(null as any));
+    this._el_13 = this.renderer.createElement((null as any),'ion-list',(null as any));
+    this._List_13_3 = new import17.List(this.parentInjector.get(import26.Config),new import25.ElementRef(this._el_13),this.renderer,this.parentInjector.get(import29.GestureController));
+    this._text_14 = this.renderer.createText(this._el_13,'\n      ',(null as any));
+    this._anchor_15 = this.renderer.createTemplateAnchor(this._el_13,(null as any));
+    this._appEl_15 = new import2.AppElement(15,13,this,this._anchor_15);
+    this._TemplateRef_15_5 = new import37.TemplateRef_(this._appEl_15,viewFactory_MyApp1);
+    this._NgIf_15_6 = new import18.NgIf(this._appEl_15.vcRef,this._TemplateRef_15_5);
+    this._text_16 = this.renderer.createText(this._el_13,'\n      ',(null as any));
+    this._el_17 = this.renderer.createElement(this._el_13,'ion-list-header',(null as any));
+    this.renderer.setElementAttribute(this._el_17,'class','item');
+    this._appEl_17 = new import2.AppElement(17,13,this,this._el_17);
+    var compView_17:any = import38.viewFactory_Item0(this.viewUtils,this.injector(17),this._appEl_17);
+    this._Item_17_4 = new import19.Item(this.parentInjector.get(import39.Form),this.parentInjector.get(import26.Config),new import25.ElementRef(this._el_17),this.renderer);
+    this._ListHeader_17_5 = new import20.ListHeader(this.parentInjector.get(import26.Config),this.renderer,new import25.ElementRef(this._el_17),(null as any));
+    this._query_Label_17_0 = new import12.QueryList<any>();
+    this._query_Button_17_1 = new import12.QueryList<any>();
+    this._query_Icon_17_2 = new import12.QueryList<any>();
+    this._appEl_17.initComponent(this._Item_17_4,([] as any[]),compView_17);
+    this._text_18 = this.renderer.createText((null as any),'\n        CATEGORIES\n      ',(null as any));
+    this._query_Label_17_0.reset(([] as any[]));
+    this._Item_17_4.contentLabel = this._query_Label_17_0.first;
+    compView_17.create(this._Item_17_4,[
+      ([] as any[]),
+      ([] as any[]),
+      ([] as any[]).concat([this._text_18]),
+      ([] as any[]),
+      ([] as any[])
+    ]
+    ,(null as any));
+    this._text_19 = this.renderer.createText(this._el_13,'\n      ',(null as any));
+    this._anchor_20 = this.renderer.createTemplateAnchor(this._el_13,(null as any));
+    this._appEl_20 = new import2.AppElement(20,13,this,this._anchor_20);
+    this._TemplateRef_20_5 = new import37.TemplateRef_(this._appEl_20,viewFactory_MyApp2);
+    this._NgFor_20_6 = new import21.NgFor(this._appEl_20.vcRef,this._TemplateRef_20_5,this.parentInjector.get(import40.IterableDiffers),this.ref);
+    this._text_21 = this.renderer.createText(this._el_13,'\n    ',(null as any));
+    this._text_22 = this.renderer.createText((null as any),'\n  ',(null as any));
+    compView_11.create(this._Content_11_4,[
+      ([] as any[]),
+      ([] as any[]).concat([
+        this._text_12,
+        this._el_13,
+        this._text_22
+      ]
+      ),
+      ([] as any[])
+    ]
+    ,(null as any));
+    this._text_23 = this.renderer.createText((null as any),'\n\n',(null as any));
+    this._query_Content_0_0.reset([this._Content_11_4]);
+    this._Menu_0_4.menuContent = this._query_Content_0_0.first;
+      compView_0.create(this._Menu_0_4,[([] as any[]).concat([
+        this._text_1,
+        this._el_2,
+        this._text_10,
+        this._el_11,
+        this._text_23
+      ]
+    )],(null as any));
+    this._text_24 = this.renderer.createText(parentRenderNode,'\n\n',(null as any));
+    this._text_25 = this.renderer.createText(parentRenderNode,'\n',(null as any));
+    this._el_26 = this.renderer.createElement(parentRenderNode,'ion-nav',(null as any));
+    this.renderer.setElementAttribute(this._el_26,'swipeBackEnabled','false');
+    this._appEl_26 = new import2.AppElement(26,(null as any),this,this._el_26);
+    var compView_26:any = import41.viewFactory_Nav0(this.viewUtils,this.injector(26),this._appEl_26);
+    this._Nav_26_4 = new import22.Nav(this.parentInjector.get(import30.ViewController,(null as any)),this.parentInjector.get(import42.NavControllerBase,(null as any)),this.parentInjector.get(import35.App),this.parentInjector.get(import26.Config),this.parentInjector.get(import27.Keyboard),new import25.ElementRef(this._el_26),this.parentInjector.get(import28.NgZone),this.renderer,this.parentInjector.get(import43.ComponentFactoryResolver),this.parentInjector.get(import29.GestureController),this.parentInjector.get(import44.TransitionController),this.parentInjector.get(import45.DeepLinker,(null as any)));
+    this._appEl_26.initComponent(this._Nav_26_4,([] as any[]),compView_26);
+    compView_26.create(this._Nav_26_4,([] as any[]),(null as any));
+    this._text_27 = this.renderer.createText(parentRenderNode,'\n',(null as any));
     this._expr_0 = import7.UNINITIALIZED;
-    this.init(([] as any[]),[this._el_0],([] as any[]),([] as any[]));
+    this._expr_1 = import7.UNINITIALIZED;
+    this._expr_2 = import7.UNINITIALIZED;
+    this._expr_3 = import7.UNINITIALIZED;
+    this._expr_4 = import7.UNINITIALIZED;
+    this._expr_5 = import7.UNINITIALIZED;
+    this._expr_6 = import7.UNINITIALIZED;
+    this._viewQuery_Nav_0.reset([this._Nav_26_4]);
+    this.context.nav = this._viewQuery_Nav_0.first;
+    this.init(([] as any[]),[
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3,
+      this._el_4,
+      this._text_5,
+      this._el_6,
+      this._text_7,
+      this._text_8,
+      this._text_9,
+      this._text_10,
+      this._el_11,
+      this._text_12,
+      this._el_13,
+      this._text_14,
+      this._anchor_15,
+      this._text_16,
+      this._el_17,
+      this._text_18,
+      this._text_19,
+      this._anchor_20,
+      this._text_21,
+      this._text_22,
+      this._text_23,
+      this._text_24,
+      this._text_25,
+      this._el_26,
+      this._text_27
+    ]
+    ,([] as any[]),([] as any[]));
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import11.Nav) && (0 === requestNodeIndex))) { return this._Nav_0_4; }
+    if (((token === import15.ToolbarTitle) && ((6 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ToolbarTitle_6_4; }
+    if (((token === import14.Toolbar) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 8)))) { return this._Toolbar_4_4; }
+    if (((token === import14.Header) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 9)))) { return this._Header_2_3; }
+    if (((token === import37.TemplateRef) && (15 === requestNodeIndex))) { return this._TemplateRef_15_5; }
+    if (((token === import18.NgIf) && (15 === requestNodeIndex))) { return this._NgIf_15_6; }
+    if (((token === import19.Item) && ((17 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._Item_17_4; }
+    if (((token === import20.ListHeader) && ((17 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._ListHeader_17_5; }
+    if (((token === import37.TemplateRef) && (20 === requestNodeIndex))) { return this._TemplateRef_20_5; }
+    if (((token === import21.NgFor) && (20 === requestNodeIndex))) { return this._NgFor_20_6; }
+    if (((token === import17.List) && ((13 <= requestNodeIndex) && (requestNodeIndex <= 21)))) { return this._List_13_3; }
+    if (((token === import16.Content) && ((11 <= requestNodeIndex) && (requestNodeIndex <= 22)))) { return this._Content_11_4; }
+    if (((token === import13.Menu) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 23)))) { return this._Menu_0_4; }
+    if (((token === import22.Nav) && (26 === requestNodeIndex))) { return this._Nav_26_4; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0:any = this.context.rootPage;
+    var changed:boolean = true;
+    var changes:{[key: string]:import7.SimpleChange} = (null as any);
+    changed = false;
+    const currVal_0:any = this._Nav_26_4;
     if (import4.checkBinding(throwOnChange,this._expr_0,currVal_0)) {
-      this._Nav_0_4.root = currVal_0;
+      this._Menu_0_4.content = currVal_0;
+      changed = true;
       this._expr_0 = currVal_0;
     }
+    if (changed) { this._appEl_0.componentView.markAsCheckOnce(); }
+    if (((this.numberOfChecks === 0) && !throwOnChange)) { this._Menu_0_4.ngOnInit(); }
+    if (((this.numberOfChecks === 0) && !throwOnChange)) { this._Content_11_4.ngOnInit(); }
+    const currVal_3:any = this.context.isHome;
+    if (import4.checkBinding(throwOnChange,this._expr_3,currVal_3)) {
+      this._NgIf_15_6.ngIf = currVal_3;
+      this._expr_3 = currVal_3;
+    }
+    changes = (null as any);
+    const currVal_4:any = this.context.pages;
+    if (import4.checkBinding(throwOnChange,this._expr_4,currVal_4)) {
+      this._NgFor_20_6.ngForOf = currVal_4;
+      if ((changes === (null as any))) { (changes = {}); }
+      changes['ngForOf'] = new import7.SimpleChange(this._expr_4,currVal_4);
+      this._expr_4 = currVal_4;
+    }
+    if ((changes !== (null as any))) { this._NgFor_20_6.ngOnChanges(changes); }
+    if (!throwOnChange) { this._NgFor_20_6.ngDoCheck(); }
+    const currVal_5:any = this.context.rootPage;
+    if (import4.checkBinding(throwOnChange,this._expr_5,currVal_5)) {
+      this._Nav_26_4.root = currVal_5;
+      this._expr_5 = currVal_5;
+    }
+    const currVal_6:any = 'false';
+    if (import4.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
+      this._Nav_26_4.swipeBackEnabled = currVal_6;
+      this._expr_6 = currVal_6;
+    }
     this.detectContentChildrenChanges(throwOnChange);
+    if (!throwOnChange) {
+      if (this._query_Button_17_1.dirty) {
+        this._query_Button_17_1.reset(([] as any[]));
+        this._Item_17_4._buttons = this._query_Button_17_1;
+        this._query_Button_17_1.notifyOnChanges();
+      }
+      if (this._query_Icon_17_2.dirty) {
+        this._query_Icon_17_2.reset(([] as any[]));
+        this._Item_17_4._icons = this._query_Icon_17_2;
+        this._query_Icon_17_2.notifyOnChanges();
+      }
+      if ((this.numberOfChecks === 0)) { this._Item_17_4.ngAfterContentInit(); }
+    }
+    const currVal_1:any = this._Toolbar_4_4._sbPadding;
+    if (import4.checkBinding(throwOnChange,this._expr_1,currVal_1)) {
+      this.renderer.setElementClass(this._el_4,'statusbar-padding',currVal_1);
+      this._expr_1 = currVal_1;
+    }
+    const currVal_2:any = this._Content_11_4._sbPadding;
+    if (import4.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
+      this.renderer.setElementClass(this._el_11,'statusbar-padding',currVal_2);
+      this._expr_2 = currVal_2;
+    }
     this.detectViewChildrenChanges(throwOnChange);
-    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Nav_0_4.ngAfterViewInit(); } }
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Nav_26_4.ngAfterViewInit(); } }
+  }
+  destroyInternal():void {
+    this._Content_11_4.ngOnDestroy();
+    this._Menu_0_4.ngOnDestroy();
   }
 }
 export function viewFactory_MyApp0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<import3.MyApp> {
-  if ((renderType_MyApp === (null as any))) { (renderType_MyApp = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,styles_MyApp,{})); }
+  if ((renderType_MyApp === (null as any))) { (renderType_MyApp = viewUtils.createRenderComponentType('',0,import10.ViewEncapsulation.None,styles_MyApp,{})); }
   return new _View_MyApp0(viewUtils,parentInjector,declarationEl);
+}
+class _View_MyApp1 extends import1.AppView<any> {
+  _el_0:any;
+  /*private*/ _appEl_0:import2.AppElement;
+  _Item_0_4:import19.Item;
+  _ItemContent_0_5:import19.ItemContent;
+  _MenuClose_0_6:import46.MenuClose;
+  _query_Label_0_0:import12.QueryList<any>;
+  _query_Button_0_1:import12.QueryList<any>;
+  _query_Icon_0_2:import12.QueryList<any>;
+  _text_1:any;
+  _el_2:any;
+  _Icon_2_3:import47.Icon;
+  _text_3:any;
+  /*private*/ _expr_2:any;
+  /*private*/ _expr_3:any;
+  /*private*/ _expr_4:any;
+  constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement) {
+    super(_View_MyApp1,renderType_MyApp,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
+  }
+  createInternal(rootSelector:string):import2.AppElement {
+    this._el_0 = this.renderer.createElement((null as any),'button',(null as any));
+    this.renderer.setElementAttribute(this._el_0,'class','item item-block');
+    this.renderer.setElementAttribute(this._el_0,'ion-item','');
+    this.renderer.setElementAttribute(this._el_0,'menuClose','');
+    this._appEl_0 = new import2.AppElement(0,(null as any),this,this._el_0);
+    var compView_0:any = import38.viewFactory_Item0(this.viewUtils,this.injector(0),this._appEl_0);
+    this._Item_0_4 = new import19.Item(this.parent.parentInjector.get(import39.Form),this.parent.parentInjector.get(import26.Config),new import25.ElementRef(this._el_0),this.renderer);
+    this._ItemContent_0_5 = new import19.ItemContent();
+    this._MenuClose_0_6 = new import46.MenuClose(this.parent.parentInjector.get(import24.MenuController));
+    this._query_Label_0_0 = new import12.QueryList<any>();
+    this._query_Button_0_1 = new import12.QueryList<any>();
+    this._query_Icon_0_2 = new import12.QueryList<any>();
+    this._appEl_0.initComponent(this._Item_0_4,([] as any[]),compView_0);
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this._el_2 = this.renderer.createElement((null as any),'ion-icon',(null as any));
+    this.renderer.setElementAttribute(this._el_2,'name','home');
+    this.renderer.setElementAttribute(this._el_2,'role','img');
+    this._Icon_2_3 = new import47.Icon(this.parent.parentInjector.get(import26.Config),new import25.ElementRef(this._el_2),this.renderer);
+    this._text_3 = this.renderer.createText((null as any),'\n      ',(null as any));
+    this._query_Label_0_0.reset(([] as any[]));
+    this._Item_0_4.contentLabel = this._query_Label_0_0.first;
+    compView_0.create(this._Item_0_4,[
+      ([] as any[]),
+      ([] as any[]),
+      ([] as any[]).concat([
+        this._text_1,
+        this._el_2,
+        this._text_3
+      ]
+      ),
+      ([] as any[]),
+      ([] as any[])
+    ]
+    ,(null as any));
+    var disposable_0:Function = this.renderer.listen(this._el_0,'click',this.eventHandler(this._handle_click_0_0.bind(this)));
+    this._expr_2 = import7.UNINITIALIZED;
+    this._expr_3 = import7.UNINITIALIZED;
+    this._expr_4 = import7.UNINITIALIZED;
+    this.init(([] as any[]).concat([this._el_0]),[
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3
+    ]
+    ,[disposable_0],([] as any[]));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import47.Icon) && (2 === requestNodeIndex))) { return this._Icon_2_3; }
+    if (((token === import19.Item) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._Item_0_4; }
+    if (((token === import19.ItemContent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._ItemContent_0_5; }
+    if (((token === import46.MenuClose) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._MenuClose_0_6; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2:any = '';
+    if (import4.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
+      this._MenuClose_0_6.menuClose = currVal_2;
+      this._expr_2 = currVal_2;
+    }
+    const currVal_3:any = 'home';
+    if (import4.checkBinding(throwOnChange,this._expr_3,currVal_3)) {
+      this._Icon_2_3.name = currVal_3;
+      this._expr_3 = currVal_3;
+    }
+    this.detectContentChildrenChanges(throwOnChange);
+    if (!throwOnChange) {
+      if (this._query_Button_0_1.dirty) {
+        this._query_Button_0_1.reset(([] as any[]));
+        this._Item_0_4._buttons = this._query_Button_0_1;
+        this._query_Button_0_1.notifyOnChanges();
+      }
+      if (this._query_Icon_0_2.dirty) {
+        this._query_Icon_0_2.reset([this._Icon_2_3]);
+        this._Item_0_4._icons = this._query_Icon_0_2;
+        this._query_Icon_0_2.notifyOnChanges();
+      }
+      if ((this.numberOfChecks === 0)) { this._Item_0_4.ngAfterContentInit(); }
+    }
+    const currVal_4:any = this._Icon_2_3._hidden;
+    if (import4.checkBinding(throwOnChange,this._expr_4,currVal_4)) {
+      this.renderer.setElementClass(this._el_2,'hide',currVal_4);
+      this._expr_4 = currVal_4;
+    }
+    this.detectViewChildrenChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this._Icon_2_3.ngOnDestroy();
+  }
+  private _handle_click_0_0($event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    const pd_0:any = ((<any>this.parent.context.openHome()) !== false);
+    const pd_1:any = ((<any>this._MenuClose_0_6.close()) !== false);
+    return ((true && pd_0) && pd_1);
+  }
+}
+function viewFactory_MyApp1(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
+  return new _View_MyApp1(viewUtils,parentInjector,declarationEl);
+}
+class _View_MyApp2 extends import1.AppView<any> {
+  _el_0:any;
+  /*private*/ _appEl_0:import2.AppElement;
+  _Item_0_4:import19.Item;
+  _ItemContent_0_5:import19.ItemContent;
+  _MenuClose_0_6:import46.MenuClose;
+  _query_Label_0_0:import12.QueryList<any>;
+  _query_Button_0_1:import12.QueryList<any>;
+  _query_Icon_0_2:import12.QueryList<any>;
+  _text_1:any;
+  /*private*/ _expr_2:any;
+  /*private*/ _expr_3:any;
+  constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement) {
+    super(_View_MyApp2,renderType_MyApp,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
+  }
+  createInternal(rootSelector:string):import2.AppElement {
+    this._el_0 = this.renderer.createElement((null as any),'button',(null as any));
+    this.renderer.setElementAttribute(this._el_0,'class','item item-block');
+    this.renderer.setElementAttribute(this._el_0,'ion-item','');
+    this.renderer.setElementAttribute(this._el_0,'menuClose','');
+    this._appEl_0 = new import2.AppElement(0,(null as any),this,this._el_0);
+    var compView_0:any = import38.viewFactory_Item0(this.viewUtils,this.injector(0),this._appEl_0);
+    this._Item_0_4 = new import19.Item(this.parent.parentInjector.get(import39.Form),this.parent.parentInjector.get(import26.Config),new import25.ElementRef(this._el_0),this.renderer);
+    this._ItemContent_0_5 = new import19.ItemContent();
+    this._MenuClose_0_6 = new import46.MenuClose(this.parent.parentInjector.get(import24.MenuController));
+    this._query_Label_0_0 = new import12.QueryList<any>();
+    this._query_Button_0_1 = new import12.QueryList<any>();
+    this._query_Icon_0_2 = new import12.QueryList<any>();
+    this._appEl_0.initComponent(this._Item_0_4,([] as any[]),compView_0);
+    this._text_1 = this.renderer.createText((null as any),'',(null as any));
+    this._query_Label_0_0.reset(([] as any[]));
+    this._Item_0_4.contentLabel = this._query_Label_0_0.first;
+    compView_0.create(this._Item_0_4,[
+      ([] as any[]),
+      ([] as any[]),
+      ([] as any[]).concat([this._text_1]),
+      ([] as any[]),
+      ([] as any[])
+    ]
+    ,(null as any));
+    var disposable_0:Function = this.renderer.listen(this._el_0,'click',this.eventHandler(this._handle_click_0_0.bind(this)));
+    this._expr_2 = import7.UNINITIALIZED;
+    this._expr_3 = import7.UNINITIALIZED;
+    this.init(([] as any[]).concat([this._el_0]),[
+      this._el_0,
+      this._text_1
+    ]
+    ,[disposable_0],([] as any[]));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import19.Item) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._Item_0_4; }
+    if (((token === import19.ItemContent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._ItemContent_0_5; }
+    if (((token === import46.MenuClose) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._MenuClose_0_6; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2:any = '';
+    if (import4.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
+      this._MenuClose_0_6.menuClose = currVal_2;
+      this._expr_2 = currVal_2;
+    }
+    this.detectContentChildrenChanges(throwOnChange);
+    if (!throwOnChange) {
+      if (this._query_Button_0_1.dirty) {
+        this._query_Button_0_1.reset(([] as any[]));
+        this._Item_0_4._buttons = this._query_Button_0_1;
+        this._query_Button_0_1.notifyOnChanges();
+      }
+      if (this._query_Icon_0_2.dirty) {
+        this._query_Icon_0_2.reset(([] as any[]));
+        this._Item_0_4._icons = this._query_Icon_0_2;
+        this._query_Icon_0_2.notifyOnChanges();
+      }
+      if ((this.numberOfChecks === 0)) { this._Item_0_4.ngAfterContentInit(); }
+    }
+    const currVal_3:any = import4.interpolate(1,'\n        ',this.context.$implicit.title,'\n      ');
+    if (import4.checkBinding(throwOnChange,this._expr_3,currVal_3)) {
+      this.renderer.setText(this._text_1,currVal_3);
+      this._expr_3 = currVal_3;
+    }
+    this.detectViewChildrenChanges(throwOnChange);
+  }
+  private _handle_click_0_0($event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    const pd_0:any = ((<any>this.parent.context.openPage(this.context.$implicit)) !== false);
+    const pd_1:any = ((<any>this._MenuClose_0_6.close()) !== false);
+    return ((true && pd_0) && pd_1);
+  }
+}
+function viewFactory_MyApp2(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
+  return new _View_MyApp2(viewUtils,parentInjector,declarationEl);
 }

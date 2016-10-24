@@ -21148,6 +21148,8 @@ sub {
   text-align: center;
   font-weight: bold;
   border: 1px solid;
+  border-right: none;
+  border-left: none;
   background: #669F42;
 }
 
