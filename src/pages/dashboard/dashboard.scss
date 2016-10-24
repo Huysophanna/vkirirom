@@ -26,13 +26,14 @@ $blue_fb_color: #3956A0;
     margin: auto;
     background: $green_primary_color;
 }
-.vtop-bar {
+.top-bar {
     width: 100%; 
-    height: 25% !important;
-    display: block !important;
+    height: 25%;
+    display: block;
 
     .vkirirom-img {
         display: block;
+        width: 45%;
         margin: 0 auto;
     }
 }

@@ -10,7 +10,7 @@ import { Dashboard } from '../pages/dashboard/dashboard';
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = Login;
+  private rootPage: any;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
@@ -26,6 +26,13 @@ export class MyApp {
       databaseURL: "https://vkirirom-809f8.firebaseio.com",
       storageBucket: "vkirirom-809f8.appspot.com",
       messagingSenderId: "82070365426"
+    });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        this.rootPage = Login;
+      } else {
+        this.rootPage = Dashboard;
+      }
     });
   }
 }
