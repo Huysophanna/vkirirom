@@ -3,6 +3,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
+import { AuthData } from '../providers/auth-data';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { Dashboard } from '../pages/dashboard/dashboard';
     Login,
     Dashboard
   ],
-  providers: []
+  providers: [
+    AuthData
+  ]
 })
 export class AppModule {}

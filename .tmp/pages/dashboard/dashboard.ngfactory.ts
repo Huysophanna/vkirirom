@@ -228,7 +228,7 @@ class _View_Dashboard0 extends import1.AppView<import3.Dashboard> {
     this._appEl_13.initComponent(this._Content_13_4,([] as any[]),compView_13);
     this._text_14 = this.renderer.createText((null as any),'\n  ',(null as any));
     this._el_15 = this.renderer.createElement((null as any),'div',(null as any));
-    this.renderer.setElementAttribute(this._el_15,'class','vtop-bar');
+    this.renderer.setElementAttribute(this._el_15,'class','top-bar');
     this._text_16 = this.renderer.createText(this._el_15,'\n    ',(null as any));
     this._el_17 = this.renderer.createElement(this._el_15,'img',(null as any));
     this.renderer.setElementAttribute(this._el_17,'class','vkirirom-img');

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController  } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Keyboard } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
 
@@ -63,7 +64,14 @@ export class Login {
     });
       this.loading.present();
     }
+  }
 
+  /**
+   * Receives an input field and sets the corresponding fieldChanged property to 'true' to help with the styles.
+   */
+  elementChanged(input){
+    let field = input.inputControl.name;
+    this[field + "Changed"] = true;
   }
 
 }

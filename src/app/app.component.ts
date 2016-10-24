@@ -10,14 +10,15 @@ import { Dashboard } from '../pages/dashboard/dashboard';
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  private rootPage: any;
+  public rootPage: any = Login;
+
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-    });
+    }); 
 
     //firebase configuration
     firebase.initializeApp({

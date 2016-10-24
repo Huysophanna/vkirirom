@@ -13,16 +13,22 @@
   <div class="vtop-bar">
     <img class="vkirirom-img" src="img/vkirirom_logo.svg">
   </div>
-  <form (ngSubmit)="loginForm();">
+  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
     <div class="input-login">
         <ion-item class="input-field">
-          <ion-input type="text" name="username" id="username" placeholder="Username"></ion-input>
+          <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)" placeholder="Username" [class.invalid]="!loginForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
           <ion-icon name="ios-person-outline" item-left></ion-icon>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid  && (emailChanged || submitAttempt)">
+          <p>Please enter a valid email.</p>
         </ion-item>
         <br>
         <ion-item class="input-field">
-          <ion-input type="password" name="password" id="password" placeholder="Password"></ion-input>
+          <ion-input #password formControlName="password" type="password" (change)="elementChanged(password)" placeholder="Password" [class.invalid]="!loginForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
           <ion-icon name="ios-lock-outline" item-left></ion-icon>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid  && (passwordChanged || submitAttempt)">
+          <p>Your password needs more than 6 characters.</p>
         </ion-item>
     </div>
     <div class="submit-login">
