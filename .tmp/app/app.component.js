@@ -7,7 +7,7 @@ import { Dashboard } from '../pages/dashboard/dashboard';
 export var MyApp = (function () {
     function MyApp(platform) {
         var _this = this;
-        this.rootPage = Login;
+        this.rootPage = Dashboard;
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -24,9 +24,6 @@ export var MyApp = (function () {
         firebase.auth().onAuthStateChanged(function (user) {
             if (!user) {
                 _this.rootPage = Login;
-            }
-            else {
-                _this.rootPage = Dashboard;
             }
         });
     }

@@ -10,7 +10,7 @@ import { Dashboard } from '../pages/dashboard/dashboard';
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  public rootPage: any = Login;
+  public rootPage: any = Dashboard;
 
 
   constructor(platform: Platform) {
@@ -31,8 +31,6 @@ export class MyApp {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.rootPage = Login;
-      } else {
-        this.rootPage = Dashboard;
       }
     });
   }
