@@ -16,16 +16,4 @@ export class Api {
     console.log('Hello Api Provider');
   }
 
-  category(){
-    return this.http.get('http://localhost/ionWordpress/wp-json/wp/v2/categories')
-    .toPromise()
-    .then(data => data.json());
-  }
-
-  posts_category(id, page){
-    return this.http.get("http://localhost/ionWordpress/wp-json/wp/v2/posts?_embed&categories="+id+"&filter[order]=DESC&filter[posts_per_page]=5&page="+page)
-            .toPromise()
-            .then(data => data.json)
-  }
-
 }

@@ -1,23 +1,30 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, LoadingController } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
-import { Api } from '../providers/api';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
-import { Category } from '../pages/category/category';
+import { AuthData } from '../providers/auth-data';
 export var MyApp = (function () {
-    function MyApp(platform, api) {
+    function MyApp(platform, loadingCtrl) {
         var _this = this;
-        this.api = api;
+        this.loadingCtrl = loadingCtrl;
         this.rootPage = Dashboard;
         this.isHome = false;
         this.pages = [];
+        this.authData = AuthData;
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
         });
+        // set our app's pages
+        this.pages = [
+            { title: 'Setting', component: Dashboard },
+            { title: 'About', component: Dashboard },
+            { title: 'Contact Us', component: Dashboard },
+            { title: 'Log Out', id: 4 }
+        ];
         //firebase configuration
         firebase.initializeApp({
             apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
@@ -27,28 +34,24 @@ export var MyApp = (function () {
             messagingSenderId: "82070365426"
         });
         firebase.auth().onAuthStateChanged(function (user) {
+            _this.loading = _this.loadingCtrl.create({
+                dismissOnPageChange: true,
+            });
             if (!user) {
+                _this.loading.present();
+                _this.loading.dismiss();
                 _this.rootPage = Login;
-            }
-        });
-        api.category().then(function (datas) {
-            for (var _i = 0, datas_1 = datas; _i < datas_1.length; _i++) {
-                var i = datas_1[_i];
-                _this.pages.push({
-                    title: i.name,
-                    id: i.id
-                });
             }
         });
     }
     MyApp.prototype.openPage = function (page) {
         // Reset the content nav to have just this page
         // we wouldn't want the back button to show in this scenario
-        this.nav.setRoot(Category, {
-            id: page.id,
-            title: page.title
-        });
-        this.isHome = true;
+        //logout function
+        if (page.id == 4) {
+            this.nav.setRoot(Login);
+            console.log(page.title);
+        }
     };
     MyApp.prototype.openHome = function () {
         //this.nav.setRoot(Page1);
@@ -56,13 +59,13 @@ export var MyApp = (function () {
     };
     MyApp.decorators = [
         { type: Component, args: [{
-                    templateUrl: 'app.html'
+                    templateUrl: 'app.html',
                 },] },
     ];
     /** @nocollapse */
     MyApp.ctorParameters = [
         { type: Platform, },
-        { type: Api, },
+        { type: LoadingController, },
     ];
     MyApp.propDecorators = {
         'nav': [{ type: ViewChild, args: [Nav,] },],

@@ -16,6 +16,7 @@ export var Category = (function () {
     Category.prototype.ionViewDidLoad = function () {
         console.log('Hello Category Page');
         this.title = this.params.data.title;
+        console.log(this.title);
     };
     Category.decorators = [
         { type: Component, args: [{

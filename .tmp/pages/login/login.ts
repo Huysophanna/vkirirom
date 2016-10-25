@@ -29,6 +29,10 @@ export class Login {
           email: ['', Validators.compose([Validators.required])],
           password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
        });
+
+       
+
+       this.authData.logoutUser();
       
   }
 

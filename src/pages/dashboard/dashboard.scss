@@ -68,6 +68,10 @@ $blue_fb_color: #3956A0;
         width: 30%;
         color: white;
         font-weight: bold;
+        transition: 0.5s;
+    }
+    button.activated {
+        opacity: 0.2;
     }
     .first-row {
         margin-top: 7%;

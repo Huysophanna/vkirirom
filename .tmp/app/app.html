@@ -10,9 +10,6 @@
       <button *ngIf="isHome" menuClose ion-item (click)="openHome()">
         <ion-icon name="home"></ion-icon>
       </button>
-      <ion-list-header>
-        CATEGORIES
-      </ion-list-header>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>

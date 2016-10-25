@@ -1,12 +1,13 @@
-import { Nav, Platform } from 'ionic-angular';
-import { Api } from '../providers/api';
+import { Nav, Platform, LoadingController } from 'ionic-angular';
 export declare class MyApp {
-    private api;
+    loadingCtrl: LoadingController;
     nav: Nav;
     rootPage: any;
     isHome: boolean;
     pages: any;
-    constructor(platform: Platform, api: Api);
+    authData: any;
+    loading: any;
+    constructor(platform: Platform, loadingCtrl: LoadingController);
     openPage(page: any): void;
     openHome(): void;
 }

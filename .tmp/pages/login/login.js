@@ -23,6 +23,7 @@ export var Login = (function () {
             email: ['', Validators.compose([Validators.required])],
             password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
         });
+        this.authData.logoutUser();
     }
     Login.prototype.ionViewDidLoad = function () {
         console.log('Hello Login Page');

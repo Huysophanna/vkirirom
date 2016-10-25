@@ -13,16 +13,6 @@ export var Api = (function () {
         this.http = http;
         console.log('Hello Api Provider');
     }
-    Api.prototype.category = function () {
-        return this.http.get('http://localhost/ionWordpress/wp-json/wp/v2/categories')
-            .toPromise()
-            .then(function (data) { return data.json(); });
-    };
-    Api.prototype.posts_category = function (id, page) {
-        return this.http.get("http://localhost/ionWordpress/wp-json/wp/v2/posts?_embed&categories=" + id + "&filter[order]=DESC&filter[posts_per_page]=5&page=" + page)
-            .toPromise()
-            .then(function (data) { return data.json; });
-    };
     Api.decorators = [
         { type: Injectable },
     ];
