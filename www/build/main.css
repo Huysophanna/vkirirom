@@ -21158,11 +21158,6 @@ sub {
   width: 100%;
   height: 64%;
   text-align: center;
-  /* ff3.6+ */
-  /* safari4+,chrome */
-  /* safari5.1+,chrome10+ */
-  /* opera 11.10+ */
-  /* ie10+ */
   background: linear-gradient(0deg, #1a6940 0%, #1a6940 17%, #1c8954 70%, #1c8954 100%);
   /* w3c */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8954', endColorstr='#1a6940',GradientType=0 );
@@ -21332,4 +21327,94 @@ sub {
 .submit-login .signin-fb-btn.activated {
   color: transparent;
   background-color: transparent;
+}
+
+span {
+  font-weight: bold;
+}
+
+.header .back-button {
+  color: white;
+  font-size: large;
+}
+
+.header .toolbar-title {
+  color: white;
+  font-size: x-large;
+  margin-top: 3px;
+  display: block;
+}
+
+.header ion-buttons {
+  font-size: 2.3em;
+}
+
+.container {
+  background: linear-gradient(0deg, #1a6940 0%, #1a6940 17%, #1c8954 70%, #1c8954 100%);
+  /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8954', endColorstr='#1a6940',GradientType=0 );
+  /* ie6-9 */
+}
+
+.container .profile-wrapper {
+  background: transparent;
+  height: 25%;
+  display: block;
+  margin-top: 20px;
+}
+
+.container .profile-wrapper .profile {
+  text-align: center;
+  margin-top: 5%;
+  height: 100%;
+}
+
+.container .profile-wrapper .profile img {
+  background: transparent;
+  width: 50%;
+  height: 110%;
+  margin: 0 auto;
+  border: 6px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: block;
+}
+
+.container .profile-wrapper .profile-info {
+  text-align: center;
+  display: block;
+  font-size: xx-large;
+  color: white;
+  margin-top: 40px;
+}
+
+.container .profile-wrapper .detail {
+  margin-top: 20px;
+  text-align: center;
+  display: block;
+  color: white;
+  font-size: xx-large;
+}
+
+.container .profile-wrapper .detail .detail-item {
+  border: 1px solid grey;
+  background: white;
+  color: grey;
+  font-size: x-large;
+}
+
+.container .profile-wrapper .detail .detail-item span {
+  font-size: xx-large;
+}
+
+.container .profile-wrapper .detail .detail-item span b {
+  color: goldenrod;
+}
+
+.container .profile-wrapper .expire-date {
+  margin-top: 20px;
+  text-align: center;
+  display: block;
+  color: white;
+  font-size: large;
 }
