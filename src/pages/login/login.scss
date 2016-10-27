@@ -1,6 +1,9 @@
 $green_primary_color: #1C8954;
 $blue_fb_color: #3956A0;
 
+.scroll-content {
+    overflow-y: hidden;
+}
 .container {
     position: relative;
     width: 100%;

@@ -21173,6 +21173,11 @@ sub {
   width: 30%;
   color: white;
   font-weight: bold;
+  transition: 0.5s;
+}
+
+.dashboard-action button.activated {
+  opacity: 0.2;
 }
 
 .dashboard-action .first-row {
@@ -21198,6 +21203,10 @@ sub {
   border-radius: 15px;
   color: red;
   background: white;
+}
+
+.scroll-content {
+  overflow-y: hidden;
 }
 
 .container {

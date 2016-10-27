@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, LoadingController } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import { Api } from '../providers/api';
 import firebase from 'firebase';
@@ -10,15 +10,18 @@ import { AuthData } from '../providers/auth-data';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   public rootPage: any = Dashboard;
   isHome: boolean = false;
   pages: any = []
+  authData: any = AuthData; 
+  loading: any;
 
-  constructor(platform: Platform, private api: Api) {
+  constructor(platform: Platform, public loadingCtrl: LoadingController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -42,24 +45,26 @@ export class MyApp {
       messagingSenderId: "82070365426"
     });
     firebase.auth().onAuthStateChanged((user) => {
+      this.loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+      });
       if (!user) {
+        this.loading.present();
+        this.loading.dismiss();
         this.rootPage = Login;
       }
     });
-
-
   }
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    console.log(page.title);
-    if (page.id == 4) {
-
-    }
     
-      
-  
+    //logout function
+    if (page.id == 4) { 
+      this.nav.setRoot(Login);
+      console.log(page.title);
+    }
   }
 
   openHome(){
