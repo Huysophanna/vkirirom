@@ -339,6 +339,7 @@ var _View_Login0 = (function (_super) {
         this._expr_36 = import7.UNINITIALIZED;
         this._expr_37 = import7.UNINITIALIZED;
         this._expr_38 = import7.UNINITIALIZED;
+        var disposable_4 = this.renderer.listen(this._el_48, 'click', this.eventHandler(this._handle_click_48_0.bind(this)));
         this.init([], [
             this._text_0,
             this._el_1,
@@ -400,7 +401,8 @@ var _View_Login0 = (function (_super) {
             disposable_0,
             disposable_1,
             disposable_2,
-            disposable_3
+            disposable_3,
+            disposable_4
         ], []);
         return null;
     };
@@ -780,6 +782,11 @@ var _View_Login0 = (function (_super) {
     _View_Login0.prototype._handle_change_29_0 = function ($event) {
         this.markPathToRootAsCheckOnce();
         var pd_0 = (this.context.elementChanged(this._TextInput_29_7) !== false);
+        return (true && pd_0);
+    };
+    _View_Login0.prototype._handle_click_48_0 = function ($event) {
+        this.markPathToRootAsCheckOnce();
+        var pd_0 = (this.context.facebookLogin() !== false);
         return (true && pd_0);
     };
     return _View_Login0;

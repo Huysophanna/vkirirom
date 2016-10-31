@@ -12,9 +12,11 @@ export declare class Login {
     passwordChanged: boolean;
     submitAttempt: boolean;
     loading: any;
+    userProfile: any;
     constructor(nav: NavController, authData: AuthData, formBuilder: FormBuilder, alertCtrl: AlertController, loadingCtrl: LoadingController);
     ionViewDidLoad(): void;
     loginUser(): void;
+    facebookLogin(): void;
     /**
      * Receives an input field and sets the corresponding fieldChanged property to 'true' to help with the styles.
      */

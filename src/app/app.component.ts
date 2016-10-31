@@ -61,7 +61,7 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     
     //logout function
-    if (page.id == 4) { 
+    if (page.id == 4) {
       this.nav.setRoot(Login);
       console.log(page.title);
     }

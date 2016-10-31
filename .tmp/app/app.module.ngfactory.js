@@ -54,7 +54,7 @@ import * as import42 from 'ionic-angular/components/toast/toast';
 import * as import43 from 'ionic-angular/translation/translate';
 import * as import44 from 'ionic-angular/transitions/transition-controller';
 import * as import45 from '../providers/auth-data';
-import * as import46 from '../providers/api';
+import * as import46 from 'ionic-native/dist/es5/plugins/facebook';
 import * as import48 from '../node_modules/ionic-angular/components/action-sheet/action-sheet-component.ngfactory';
 import * as import49 from '../node_modules/ionic-angular/components/alert/alert-component.ngfactory';
 import * as import50 from '../node_modules/ionic-angular/components/app/app-root.ngfactory';
@@ -630,12 +630,12 @@ var AppModuleInjector = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(AppModuleInjector.prototype, "_Api_76", {
+    Object.defineProperty(AppModuleInjector.prototype, "_Facebook_76", {
         get: function () {
-            if ((this.__Api_76 == null)) {
-                (this.__Api_76 = new import46.Api(this._Http_50));
+            if ((this.__Facebook_76 == null)) {
+                (this.__Facebook_76 = new import46.Facebook());
             }
-            return this.__Api_76;
+            return this.__Facebook_76;
         },
         enumerable: true,
         configurable: true
@@ -902,8 +902,8 @@ var AppModuleInjector = (function (_super) {
         if ((token === import45.AuthData)) {
             return this._AuthData_75;
         }
-        if ((token === import46.Api)) {
-            return this._Api_76;
+        if ((token === import46.Facebook)) {
+            return this._Facebook_76;
         }
         return notFoundResult;
     };

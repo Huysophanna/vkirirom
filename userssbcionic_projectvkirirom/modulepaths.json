@@ -196,6 +196,7 @@
   "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-angular/gestures/slide-edge-gesture.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-angular/navigation/nav-controller-base.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-angular/translation/translate.js",
+  "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-native/dist/esm/index.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/rxjs/Subscriber.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/rxjs/Subscription.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/rxjs/symbol/rxSubscriber.js",
@@ -447,7 +448,6 @@
   "/Users/sbc/ionic_project/vkirirom/node_modules/rxjs/util/errorObject.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/rxjs/util/isFunction.js",
   "/Users/sbc/ionic_project/vkirirom/src/pages/login/login.ts",
-  "/Users/sbc/ionic_project/vkirirom/src/providers/api.ts",
   "/Users/sbc/ionic_project/vkirirom/node_modules/@angular/platform-browser-dynamic/index.js",
   "/Users/sbc/ionic_project/vkirirom/src/app/app.module.ts",
   "/Users/sbc/ionic_project/vkirirom/node_modules/@angular/common/src/common_module.js",
@@ -579,7 +579,6 @@
   "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-angular/translation/translate_pipe.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-angular/util/click-block.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-angular/util/datetime-util.js",
-  "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-native/dist/esm/index.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-native/dist/esm/ng1.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/ionic-native/dist/esm/util.js",
   "/Users/sbc/ionic_project/vkirirom/node_modules/rxjs/Observer.js",
@@ -598,5 +597,6 @@
   "/Users/sbc/ionic_project/vkirirom/node_modules/rxjs/util/tryCatch.js",
   "/Users/sbc/ionic_project/vkirirom/src/app/app.component.ts",
   "/Users/sbc/ionic_project/vkirirom/src/pages/category/category.ts",
+  "/Users/sbc/ionic_project/vkirirom/src/providers/api.ts",
   "/Users/sbc/ionic_project/vkirirom/src/app/main.dev.ts"
 ]
