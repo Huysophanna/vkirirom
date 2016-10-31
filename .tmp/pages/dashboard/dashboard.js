@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Membership } from '../membership/membership';
 /*
   Generated class for the Dashboard page.
 
@@ -9,7 +10,12 @@ import { NavController } from 'ionic-angular';
 export var Dashboard = (function () {
     function Dashboard(navCtrl) {
         this.navCtrl = navCtrl;
+        this.membership = Membership;
     }
+    Dashboard.prototype.navigate = function () {
+        console.log("function is calling");
+        this.navCtrl.push(Membership);
+    };
     Dashboard.prototype.ionViewDidLoad = function () {
         console.log('Hello Dashboard Page');
     };

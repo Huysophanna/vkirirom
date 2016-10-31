@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import firebase from 'firebase';
 import { Facebook } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
@@ -11,12 +12,13 @@ import { Dashboard } from '../dashboard/dashboard';
   Ionic pages and navigation.
 */
 export var Login = (function () {
-    function Login(nav, authData, formBuilder, alertCtrl, loadingCtrl) {
+    function Login(nav, authData, formBuilder, alertCtrl, loadingCtrl, fb) {
         this.nav = nav;
         this.authData = authData;
         this.formBuilder = formBuilder;
         this.alertCtrl = alertCtrl;
         this.loadingCtrl = loadingCtrl;
+        this.fb = fb;
         this.emailChanged = false;
         this.passwordChanged = false;
         this.submitAttempt = false;
@@ -60,27 +62,23 @@ export var Login = (function () {
         }
     };
     Login.prototype.facebookLogin = function () {
+        var _this = this;
         console.log("Facebook Login Function");
         Facebook.login(['email']).then(function (response) {
             alert("Logged in");
-            alert(JSON.stringify(response.authResponse));
-            // let facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-            // firebase.auth().signInWithCredential(facebookCredential)
-            //   .then((success) => {
-            //     console.log("Facebook Login Success");
-            //     console.log("Firebase success: " + JSON.stringify(success));
-            //     this.userProfile = success;
-            //     this.nav.setRoot(Dashboard,{
-            //       userProfile: this.userProfile
-            //     });
-            //   })
-            //   .catch((error) => {
-            //     console.log("Facebook Login Failed");
-            //     console.log("Firebase failure: " + JSON.stringify(error));
-            //     this.nav.setRoot(Dashboard,{
-            //       userProfile: this.userProfile
-            //     });
-            // });
+            //alert(JSON.stringify(response.authResponse));
+            var facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+            firebase.auth().signInWithCredential(facebookCredential)
+                .then(function (success) {
+                alert("Firebase success: " + JSON.stringify(success));
+                _this.userProfile = success;
+                _this.nav.setRoot(Dashboard, {
+                    userProfile: _this.userProfile
+                });
+            })
+                .catch(function (error) {
+                alert("Firebase failure: " + JSON.stringify(error));
+            });
         }).catch(function (error) {
             alert(error);
         });
@@ -105,6 +103,7 @@ export var Login = (function () {
         { type: FormBuilder, },
         { type: AlertController, },
         { type: LoadingController, },
+        { type: Facebook, },
     ];
     return Login;
 }());

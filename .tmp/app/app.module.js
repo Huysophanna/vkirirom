@@ -5,6 +5,7 @@ import { Login } from '../pages/login/login';
 import { Facebook } from 'ionic-native';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Category } from '../pages/category/category';
+import { Membership } from '../pages/membership/membership';
 import { AuthData } from '../providers/auth-data';
 export var AppModule = (function () {
     function AppModule() {
@@ -15,7 +16,8 @@ export var AppModule = (function () {
                         MyApp,
                         Login,
                         Dashboard,
-                        Category
+                        Category,
+                        Membership
                     ],
                     imports: [
                         IonicModule.forRoot(MyApp)
@@ -25,7 +27,8 @@ export var AppModule = (function () {
                         MyApp,
                         Login,
                         Dashboard,
-                        Category
+                        Category,
+                        Membership
                     ],
                     providers: [
                         AuthData,

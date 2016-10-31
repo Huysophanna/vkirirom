@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController  } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Keyboard } from 'ionic-native';
+import firebase from 'firebase';
 import { Facebook } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
@@ -26,7 +27,7 @@ export class Login {
 
   constructor(public nav: NavController, public authData: AuthData, 
     public formBuilder: FormBuilder, public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController, public fb: Facebook) {
       this.userProfile;
        this.loginForm = formBuilder.group({
           email: ['', Validators.compose([Validators.required])],
@@ -74,28 +75,23 @@ export class Login {
   facebookLogin(){
     console.log("Facebook Login Function");
     
-    Facebook.login(['email']).then( (response) => {
+    Facebook.login(['email']).then((response) => {
       alert("Logged in");
-      alert(JSON.stringify(response.authResponse));
+      //alert(JSON.stringify(response.authResponse));
 
-      // let facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+      let facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
-      // firebase.auth().signInWithCredential(facebookCredential)
-      //   .then((success) => {
-      //     console.log("Facebook Login Success");
-      //     console.log("Firebase success: " + JSON.stringify(success));
-      //     this.userProfile = success;
-      //     this.nav.setRoot(Dashboard,{
-      //       userProfile: this.userProfile
-      //     });
-      //   })
-      //   .catch((error) => {
-      //     console.log("Facebook Login Failed");
-      //     console.log("Firebase failure: " + JSON.stringify(error));
-      //     this.nav.setRoot(Dashboard,{
-      //       userProfile: this.userProfile
-      //     });
-      // });
+      firebase.auth().signInWithCredential(facebookCredential)
+        .then((success) => {
+          alert("Firebase success: " + JSON.stringify(success));
+          this.userProfile = success;
+          this.nav.setRoot(Dashboard,{
+            userProfile: this.userProfile
+          });
+        })
+        .catch((error) => {
+          alert("Firebase failure: " + JSON.stringify(error));
+      });
 
     }).catch((error) => { 
       alert(error); 
