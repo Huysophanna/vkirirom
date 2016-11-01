@@ -5,6 +5,8 @@ import { Toast } from 'ionic-native';
 
 import { Membership } from '../membership/membership';
 
+import { Membership } from '../membership/membership';
+
 /*
   Generated class for the Dashboard page.
 
@@ -26,6 +28,7 @@ export class Dashboard {
     this.navCtrl.push(Membership);
   }
 
+<<<<<<< HEAD
   sos() {
     SMS.send('+855962304669', 'Hello World')
       .then(()=> {
@@ -40,6 +43,8 @@ export class Dashboard {
     console.log("SOS is calling ");
   }
 
+=======
+>>>>>>> 024f66d27359556a77894acce16268b0584dbd85
   ionViewDidLoad() {
     console.log('Hello Dashboard Page');
   }

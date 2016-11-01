@@ -25,6 +25,14 @@ module.exports = [
         ]
     },
     {
+        "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
+        "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
+        "pluginId": "cordova-plugin-facebook4",
+        "clobbers": [
+            "facebookConnectPlugin"
+        ]
+    },
+    {
         "id": "cordova-plugin-splashscreen.SplashScreen",
         "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
         "pluginId": "cordova-plugin-splashscreen",
@@ -48,6 +56,7 @@ module.exports = [
             "cordova.plugins.Keyboard"
         ],
         "runs": true
+<<<<<<< HEAD
     },
     {
         "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
@@ -77,6 +86,8 @@ module.exports = [
         "id": "cordova-plugin-x-toast.tests",
         "file": "plugins/cordova-plugin-x-toast/test/tests.js",
         "pluginId": "cordova-plugin-x-toast"
+=======
+>>>>>>> 024f66d27359556a77894acce16268b0584dbd85
     }
 ];
 module.exports.metadata = 
@@ -84,13 +95,18 @@ module.exports.metadata =
 {
     "cordova-plugin-console": "1.0.4",
     "cordova-plugin-device": "1.1.3",
+    "cordova-plugin-facebook4": "1.7.4",
     "cordova-plugin-splashscreen": "4.0.0",
     "cordova-plugin-statusbar": "2.2.0",
     "cordova-plugin-whitelist": "1.3.0",
+<<<<<<< HEAD
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-facebook4": "1.7.4",
     "cordova-sms-plugin": "0.1.11",
     "cordova-plugin-x-toast": "2.5.2"
+=======
+    "ionic-plugin-keyboard": "2.2.1"
+>>>>>>> 024f66d27359556a77894acce16268b0584dbd85
 };
 // BOTTOM OF METADATA
 });

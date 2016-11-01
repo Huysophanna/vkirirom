@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"__symbolic":"module","version":1,"metadata":{"Dashboard":{"__symbolic":"class","decorators":[{"__symbolic":"call","expression":{"__symbolic":"reference","module":"@angular/core","name":"Component"},"arguments":[{"selector":"page-dashboard","templateUrl":"dashboard.html"}]}],"members":{"__ctor__":[{"__symbolic":"constructor","parameters":[{"__symbolic":"reference","module":"ionic-angular","name":"NavController"}]}],"navigate":[{"__symbolic":"method"}],"sos":[{"__symbolic":"method"}],"ionViewDidLoad":[{"__symbolic":"method"}]}}}}
+=======
+{"__symbolic":"module","version":1,"metadata":{"Dashboard":{"__symbolic":"class","decorators":[{"__symbolic":"call","expression":{"__symbolic":"reference","module":"@angular/core","name":"Component"},"arguments":[{"selector":"page-dashboard","templateUrl":"dashboard.html"}]}],"members":{"__ctor__":[{"__symbolic":"constructor","parameters":[{"__symbolic":"reference","module":"ionic-angular","name":"NavController"}]}],"navigate":[{"__symbolic":"method"}],"ionViewDidLoad":[{"__symbolic":"method"}]}}}}
+>>>>>>> 024f66d27359556a77894acce16268b0584dbd85

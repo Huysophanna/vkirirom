@@ -217,7 +217,11 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._text_13 = this.renderer.createText(this._el_1,'\n\n',(null as any));
     this._text_14 = this.renderer.createText(parentRenderNode,'\n\n\n',(null as any));
     this._el_15 = this.renderer.createElement(parentRenderNode,'ion-content',(null as any));
+<<<<<<< HEAD
     this.renderer.setElementAttribute(this._el_15,'class','container');
+=======
+    this.renderer.setElementAttribute(this._el_15,'class','member-container');
+>>>>>>> 024f66d27359556a77894acce16268b0584dbd85
     this.renderer.setElementAttribute(this._el_15,'padding','');
     this._appEl_15 = new import2.AppElement(15,(null as any),this,this._el_15);
     var compView_15:any = import27.viewFactory_Content0(this.viewUtils,this.injector(15),this._appEl_15);

@@ -17,26 +17,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"ios-package\" value=\"FacebookConnectPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
@@ -62,6 +42,26 @@
                         },
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         },
                         {
@@ -113,26 +113,26 @@
     },
     "installed_plugins": {
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.testapp215213"
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.testapp215213"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.testapp215213"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.testapp215213"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.testapp215213"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.testapp215213"
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
         },
         "cordova-plugin-facebook4": {
             "APP_ID": "1190088291053783",
             "APP_NAME": "vkirirom",
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
         },
         "cordova-sms-plugin": {
@@ -169,6 +169,14 @@
             ]
         },
         {
+            "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
+            "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
+            "pluginId": "cordova-plugin-facebook4",
+            "clobbers": [
+                "facebookConnectPlugin"
+            ]
+        },
+        {
             "id": "cordova-plugin-splashscreen.SplashScreen",
             "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
             "pluginId": "cordova-plugin-splashscreen",
@@ -192,6 +200,7 @@
                 "cordova.plugins.Keyboard"
             ],
             "runs": true
+<<<<<<< HEAD
         },
         {
             "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
@@ -221,17 +230,24 @@
             "id": "cordova-plugin-x-toast.tests",
             "file": "plugins/cordova-plugin-x-toast/test/tests.js",
             "pluginId": "cordova-plugin-x-toast"
+=======
+>>>>>>> 024f66d27359556a77894acce16268b0584dbd85
         }
     ],
     "plugin_metadata": {
         "cordova-plugin-console": "1.0.4",
         "cordova-plugin-device": "1.1.3",
+        "cordova-plugin-facebook4": "1.7.4",
         "cordova-plugin-splashscreen": "4.0.0",
         "cordova-plugin-statusbar": "2.2.0",
         "cordova-plugin-whitelist": "1.3.0",
+<<<<<<< HEAD
         "ionic-plugin-keyboard": "2.2.1",
         "cordova-plugin-facebook4": "1.7.4",
         "cordova-sms-plugin": "0.1.11",
         "cordova-plugin-x-toast": "2.5.2"
+=======
+        "ionic-plugin-keyboard": "2.2.1"
+>>>>>>> 024f66d27359556a77894acce16268b0584dbd85
     }
 }
