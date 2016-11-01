@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { SMS } from 'ionic-native';
+import { Toast } from 'ionic-native';
+
+import { Membership } from '../membership/membership';
 
 /*
   Generated class for the Dashboard page.
@@ -13,7 +17,28 @@ import { NavController } from 'ionic-angular';
 })
 export class Dashboard {
 
+  membership = Membership;
+
   constructor(public navCtrl: NavController) {}
+
+  navigate() {
+    console.log("function is calling");
+    this.navCtrl.push(Membership);
+  }
+
+  sos() {
+    SMS.send('+855962304669', 'Hello World')
+      .then(()=> {
+        alert('success');
+      }, ()=> {
+        Toast.show("I'm a toast", '5000', 'center').subscribe(
+          toast => {
+            console.log(toast);
+          }
+        );
+      });
+    console.log("SOS is calling ");
+  }
 
   ionViewDidLoad() {
     console.log('Hello Dashboard Page');

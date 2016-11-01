@@ -23,6 +23,11 @@
 		3C3158BAB2234BDFAAD475AF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A43081500542453D8ECFE61F /* FBSDKCoreKit.framework */; };
 		21AF62DB1CF74B2EB9C00DE0 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BEA1F8CE96415B81DA7190 /* FBSDKLoginKit.framework */; };
 		DE93D36D770D490EB466D966 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C48C11465C44FBFBB2E2BE6 /* FBSDKShareKit.framework */; };
+		94FCB45487014E3A82F3831C /* Sms.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C44869693403288021018 /* Sms.m */; };
+		E47C6D925FA04197949D99E1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7911ADED9DBD490FA79F85DE /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CECAD79ADEC64652A7561A0B /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64937163A78F413F9A02903B /* Toast+UIView.m */; };
+		6FD5249DA84145EDB4353B9E /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB36372B204EADB3F69CA8 /* Toast.m */; };
+		39B3442899534A9E878F5957 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B821C6ED74E456CB6213A57 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +85,14 @@
 		A43081500542453D8ECFE61F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; name = "FBSDKCoreKit.framework"; path = "vkirirom/Plugins/cordova-plugin-facebook4/FBSDKCoreKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		37BEA1F8CE96415B81DA7190 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; name = "FBSDKLoginKit.framework"; path = "vkirirom/Plugins/cordova-plugin-facebook4/FBSDKLoginKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		3C48C11465C44FBFBB2E2BE6 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; name = "FBSDKShareKit.framework"; path = "vkirirom/Plugins/cordova-plugin-facebook4/FBSDKShareKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		8C3C44869693403288021018 /* Sms.m */ = {isa = PBXFileReference; name = "Sms.m"; path = "cordova-sms-plugin/Sms.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		8EB8A99BDA8647149A5B2FFA /* Sms.h */ = {isa = PBXFileReference; name = "Sms.h"; path = "cordova-sms-plugin/Sms.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		7911ADED9DBD490FA79F85DE /* MessageUI.framework */ = {isa = PBXFileReference; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		64937163A78F413F9A02903B /* Toast+UIView.m */ = {isa = PBXFileReference; name = "Toast+UIView.m"; path = "cordova-plugin-x-toast/Toast+UIView.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		2DBB36372B204EADB3F69CA8 /* Toast.m */ = {isa = PBXFileReference; name = "Toast.m"; path = "cordova-plugin-x-toast/Toast.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		0678DF1EBC534584893A0327 /* Toast+UIView.h */ = {isa = PBXFileReference; name = "Toast+UIView.h"; path = "cordova-plugin-x-toast/Toast+UIView.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		85748CE27BAE486D9393486D /* Toast.h */ = {isa = PBXFileReference; name = "Toast.h"; path = "cordova-plugin-x-toast/Toast.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		7B821C6ED74E456CB6213A57 /* QuartzCore.framework */ = {isa = PBXFileReference; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +105,8 @@
 				3C3158BAB2234BDFAAD475AF /* FBSDKCoreKit.framework in Frameworks */,
 				21AF62DB1CF74B2EB9C00DE0 /* FBSDKLoginKit.framework in Frameworks */,
 				DE93D36D770D490EB466D966 /* FBSDKShareKit.framework in Frameworks */,
+				E47C6D925FA04197949D99E1 /* MessageUI.framework in Frameworks */,
+				39B3442899534A9E878F5957 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +180,8 @@
 				A43081500542453D8ECFE61F /* FBSDKCoreKit.framework */,
 				37BEA1F8CE96415B81DA7190 /* FBSDKLoginKit.framework */,
 				3C48C11465C44FBFBB2E2BE6 /* FBSDKShareKit.framework */,
+				7911ADED9DBD490FA79F85DE /* MessageUI.framework */,
+				7B821C6ED74E456CB6213A57 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -204,6 +221,12 @@
 				496BD5B2D47449F9BD530681 /* IonicKeyboard.h */,
 				06A0A191CEA44D8B9645A526 /* FacebookConnectPlugin.m */,
 				75988DB9907B4C99A42EC9AA /* FacebookConnectPlugin.h */,
+				8C3C44869693403288021018 /* Sms.m */,
+				8EB8A99BDA8647149A5B2FFA /* Sms.h */,
+				64937163A78F413F9A02903B /* Toast+UIView.m */,
+				2DBB36372B204EADB3F69CA8 /* Toast.m */,
+				0678DF1EBC534584893A0327 /* Toast+UIView.h */,
+				85748CE27BAE486D9393486D /* Toast.h */,
 			);
 			name = Plugins;
 			path = vkirirom/Plugins;
@@ -330,6 +353,9 @@
 				BA69BD0FD4E045EAA673FDF7 /* CDVStatusBar.m in Sources */,
 				0BCA9EFCA565459082832359 /* IonicKeyboard.m in Sources */,
 				7737C6B9017F4EB8B8EEFAC3 /* FacebookConnectPlugin.m in Sources */,
+				94FCB45487014E3A82F3831C /* Sms.m in Sources */,
+				CECAD79ADEC64652A7561A0B /* Toast+UIView.m in Sources */,
+				6FD5249DA84145EDB4353B9E /* Toast.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

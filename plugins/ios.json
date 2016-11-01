@@ -29,6 +29,12 @@
             "APP_ID": "1190088291053783",
             "APP_NAME": "vkirirom",
             "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "cordova-sms-plugin": {
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
         }
     },
     "dependent_plugins": {}

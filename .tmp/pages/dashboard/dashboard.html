@@ -5,33 +5,33 @@
   Ionic pages and navigation.
 -->
 <ion-header class="header">
-  <ion-navbar>
-    <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
-    <button right menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="ios-notifications"></ion-icon></button>
-  </ion-navbar>
+    <ion-navbar>
+        <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
+        <button right menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="ios-notifications"></ion-icon></button>
+    </ion-navbar>
 </ion-header>
 
 
 <ion-content class="container">
-  <div class="top-bar">
-    <img class="vkirirom-img" src="img/vkirirom_logo.svg">
-  </div>
-  <div class="noti-bar">
-    <p>Please assemble at Football Field</p>
-  </div>
-  <div class="dashboard-action">
-    <div class="first-row">
-      <button class="service-btn"><img src="img/service-icon.svg">Service</button>
-      <button class="member-btn"><img src="img/card-icon.svg">Membership Card</button>
-      <button class="map-btn"><img src="img/map-icon.svg">vMap</button>
+    <div class="top-bar">
+        <img class="vkirirom-img" src="img/vkirirom_logo.svg">
     </div>
-    <div class="second-row">
-      <button class="service-btn"><img src="img/chat-icon.svg">Chat</button>
-      <button class="member-btn"><img src="img/media-icon.svg">Media</button>
-      <button class="map-btn"><img src="img/about-icon.svg">About Us</button>
+    <div class="noti-bar">
+        <p>Please assemble at Football Field</p>
     </div>
-    <div class="emergency">
-      <button>EMERGENCY SOS</button>
+    <div class="dashboard-action">
+        <div class="first-row">
+            <button class="service-btn"><img src="img/service-icon.svg">Service</button>
+            <button (click)="navigate()" class="member-btn"><img src="img/card-icon.svg">Membership Card</button>
+            <button class="map-btn"><img src="img/map-icon.svg">vMap</button>
+        </div>
+        <div class="second-row">
+            <button class="service-btn"><img src="img/chat-icon.svg">Chat</button>
+            <button class="member-btn"><img src="img/media-icon.svg">Media</button>
+            <button class="map-btn"><img src="img/about-icon.svg">About Us</button>
+        </div>
+        <div class="emergency">
+            <button (click)="sos()">EMERGENCY SOS</button>
+        </div>
     </div>
-  </div>
 </ion-content>

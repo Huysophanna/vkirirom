@@ -80,14 +80,14 @@ var _View_Dashboard0 = (function (_super) {
         this._el_1 = this.renderer.createElement(parentRenderNode, 'ion-header', null);
         this.renderer.setElementAttribute(this._el_1, 'class', 'header');
         this._Header_1_3 = new import11.Header(this.parentInjector.get(import19.Config), new import20.ElementRef(this._el_1), this.renderer, this.parentInjector.get(import21.ViewController, null));
-        this._text_2 = this.renderer.createText(this._el_1, '\n  ', null);
+        this._text_2 = this.renderer.createText(this._el_1, '\n    ', null);
         this._el_3 = this.renderer.createElement(this._el_1, 'ion-navbar', null);
         this.renderer.setElementAttribute(this._el_3, 'class', 'toolbar');
         this._appEl_3 = new import2.AppElement(3, 1, this, this._el_3);
         var compView_3 = import22.viewFactory_Navbar0(this.viewUtils, this.injector(3), this._appEl_3);
         this._Navbar_3_4 = new import12.Navbar(this.parentInjector.get(import23.App), this.parentInjector.get(import21.ViewController, null), this.parentInjector.get(import8.NavController, null), this.parentInjector.get(import19.Config), new import20.ElementRef(this._el_3), this.renderer);
         this._appEl_3.initComponent(this._Navbar_3_4, [], compView_3);
-        this._text_4 = this.renderer.createText(null, '\n    ', null);
+        this._text_4 = this.renderer.createText(null, '\n        ', null);
         this._el_5 = this.renderer.createElement(null, 'button', null);
         this.renderer.setElementAttribute(this._el_5, 'left', '');
         this.renderer.setElementAttribute(this._el_5, 'menuToggle', '');
@@ -99,7 +99,7 @@ var _View_Dashboard0 = (function (_super) {
         this.renderer.setElementAttribute(this._el_6, 'role', 'img');
         this._NgStyle_6_3 = new import16.NgStyle(this.parentInjector.get(import25.KeyValueDiffers), new import20.ElementRef(this._el_6), this.renderer);
         this._Icon_6_4 = new import17.Icon(this.parentInjector.get(import19.Config), new import20.ElementRef(this._el_6), this.renderer);
-        this._text_7 = this.renderer.createText(null, '\n    ', null);
+        this._text_7 = this.renderer.createText(null, '\n        ', null);
         this._el_8 = this.renderer.createElement(null, 'button', null);
         this.renderer.setElementAttribute(this._el_8, 'menuToggle', '');
         this.renderer.setElementAttribute(this._el_8, 'right', '');
@@ -111,7 +111,7 @@ var _View_Dashboard0 = (function (_super) {
         this.renderer.setElementAttribute(this._el_9, 'role', 'img');
         this._NgStyle_9_3 = new import16.NgStyle(this.parentInjector.get(import25.KeyValueDiffers), new import20.ElementRef(this._el_9), this.renderer);
         this._Icon_9_4 = new import17.Icon(this.parentInjector.get(import19.Config), new import20.ElementRef(this._el_9), this.renderer);
-        this._text_10 = this.renderer.createText(null, '\n  ', null);
+        this._text_10 = this.renderer.createText(null, '\n    ', null);
         compView_3.create(this._Navbar_3_4, [
             [].concat([
                 this._el_5,
@@ -133,76 +133,76 @@ var _View_Dashboard0 = (function (_super) {
         var compView_13 = import26.viewFactory_Content0(this.viewUtils, this.injector(13), this._appEl_13);
         this._Content_13_4 = new import18.Content(this.parentInjector.get(import19.Config), new import20.ElementRef(this._el_13), this.renderer, this.parentInjector.get(import23.App), this.parentInjector.get(import27.Keyboard), this.parentInjector.get(import28.NgZone), this.parentInjector.get(import21.ViewController, null), this.parentInjector.get(import29.Tabs, null));
         this._appEl_13.initComponent(this._Content_13_4, [], compView_13);
-        this._text_14 = this.renderer.createText(null, '\n  ', null);
+        this._text_14 = this.renderer.createText(null, '\n    ', null);
         this._el_15 = this.renderer.createElement(null, 'div', null);
         this.renderer.setElementAttribute(this._el_15, 'class', 'top-bar');
-        this._text_16 = this.renderer.createText(this._el_15, '\n    ', null);
+        this._text_16 = this.renderer.createText(this._el_15, '\n        ', null);
         this._el_17 = this.renderer.createElement(this._el_15, 'img', null);
         this.renderer.setElementAttribute(this._el_17, 'class', 'vkirirom-img');
         this.renderer.setElementAttribute(this._el_17, 'src', 'img/vkirirom_logo.svg');
-        this._text_18 = this.renderer.createText(this._el_15, '\n  ', null);
-        this._text_19 = this.renderer.createText(null, '\n  ', null);
+        this._text_18 = this.renderer.createText(this._el_15, '\n    ', null);
+        this._text_19 = this.renderer.createText(null, '\n    ', null);
         this._el_20 = this.renderer.createElement(null, 'div', null);
         this.renderer.setElementAttribute(this._el_20, 'class', 'noti-bar');
-        this._text_21 = this.renderer.createText(this._el_20, '\n    ', null);
+        this._text_21 = this.renderer.createText(this._el_20, '\n        ', null);
         this._el_22 = this.renderer.createElement(this._el_20, 'p', null);
         this._text_23 = this.renderer.createText(this._el_22, 'Please assemble at Football Field', null);
-        this._text_24 = this.renderer.createText(this._el_20, '\n  ', null);
-        this._text_25 = this.renderer.createText(null, '\n  ', null);
+        this._text_24 = this.renderer.createText(this._el_20, '\n    ', null);
+        this._text_25 = this.renderer.createText(null, '\n    ', null);
         this._el_26 = this.renderer.createElement(null, 'div', null);
         this.renderer.setElementAttribute(this._el_26, 'class', 'dashboard-action');
-        this._text_27 = this.renderer.createText(this._el_26, '\n    ', null);
+        this._text_27 = this.renderer.createText(this._el_26, '\n        ', null);
         this._el_28 = this.renderer.createElement(this._el_26, 'div', null);
         this.renderer.setElementAttribute(this._el_28, 'class', 'first-row');
-        this._text_29 = this.renderer.createText(this._el_28, '\n      ', null);
+        this._text_29 = this.renderer.createText(this._el_28, '\n            ', null);
         this._el_30 = this.renderer.createElement(this._el_28, 'button', null);
         this.renderer.setElementAttribute(this._el_30, 'class', 'service-btn');
         this._el_31 = this.renderer.createElement(this._el_30, 'img', null);
         this.renderer.setElementAttribute(this._el_31, 'src', 'img/service-icon.svg');
         this._text_32 = this.renderer.createText(this._el_30, 'Service', null);
-        this._text_33 = this.renderer.createText(this._el_28, '\n      ', null);
+        this._text_33 = this.renderer.createText(this._el_28, '\n            ', null);
         this._el_34 = this.renderer.createElement(this._el_28, 'button', null);
         this.renderer.setElementAttribute(this._el_34, 'class', 'member-btn');
         this._el_35 = this.renderer.createElement(this._el_34, 'img', null);
         this.renderer.setElementAttribute(this._el_35, 'src', 'img/card-icon.svg');
         this._text_36 = this.renderer.createText(this._el_34, 'Membership Card', null);
-        this._text_37 = this.renderer.createText(this._el_28, '\n      ', null);
+        this._text_37 = this.renderer.createText(this._el_28, '\n            ', null);
         this._el_38 = this.renderer.createElement(this._el_28, 'button', null);
         this.renderer.setElementAttribute(this._el_38, 'class', 'map-btn');
         this._el_39 = this.renderer.createElement(this._el_38, 'img', null);
         this.renderer.setElementAttribute(this._el_39, 'src', 'img/map-icon.svg');
         this._text_40 = this.renderer.createText(this._el_38, 'vMap', null);
-        this._text_41 = this.renderer.createText(this._el_28, '\n    ', null);
-        this._text_42 = this.renderer.createText(this._el_26, '\n    ', null);
+        this._text_41 = this.renderer.createText(this._el_28, '\n        ', null);
+        this._text_42 = this.renderer.createText(this._el_26, '\n        ', null);
         this._el_43 = this.renderer.createElement(this._el_26, 'div', null);
         this.renderer.setElementAttribute(this._el_43, 'class', 'second-row');
-        this._text_44 = this.renderer.createText(this._el_43, '\n      ', null);
+        this._text_44 = this.renderer.createText(this._el_43, '\n            ', null);
         this._el_45 = this.renderer.createElement(this._el_43, 'button', null);
         this.renderer.setElementAttribute(this._el_45, 'class', 'service-btn');
         this._el_46 = this.renderer.createElement(this._el_45, 'img', null);
         this.renderer.setElementAttribute(this._el_46, 'src', 'img/chat-icon.svg');
         this._text_47 = this.renderer.createText(this._el_45, 'Chat', null);
-        this._text_48 = this.renderer.createText(this._el_43, '\n      ', null);
+        this._text_48 = this.renderer.createText(this._el_43, '\n            ', null);
         this._el_49 = this.renderer.createElement(this._el_43, 'button', null);
         this.renderer.setElementAttribute(this._el_49, 'class', 'member-btn');
         this._el_50 = this.renderer.createElement(this._el_49, 'img', null);
         this.renderer.setElementAttribute(this._el_50, 'src', 'img/media-icon.svg');
         this._text_51 = this.renderer.createText(this._el_49, 'Media', null);
-        this._text_52 = this.renderer.createText(this._el_43, '\n      ', null);
+        this._text_52 = this.renderer.createText(this._el_43, '\n            ', null);
         this._el_53 = this.renderer.createElement(this._el_43, 'button', null);
         this.renderer.setElementAttribute(this._el_53, 'class', 'map-btn');
         this._el_54 = this.renderer.createElement(this._el_53, 'img', null);
         this.renderer.setElementAttribute(this._el_54, 'src', 'img/about-icon.svg');
         this._text_55 = this.renderer.createText(this._el_53, 'About Us', null);
-        this._text_56 = this.renderer.createText(this._el_43, '\n    ', null);
-        this._text_57 = this.renderer.createText(this._el_26, '\n    ', null);
+        this._text_56 = this.renderer.createText(this._el_43, '\n        ', null);
+        this._text_57 = this.renderer.createText(this._el_26, '\n        ', null);
         this._el_58 = this.renderer.createElement(this._el_26, 'div', null);
         this.renderer.setElementAttribute(this._el_58, 'class', 'emergency');
-        this._text_59 = this.renderer.createText(this._el_58, '\n      ', null);
+        this._text_59 = this.renderer.createText(this._el_58, '\n            ', null);
         this._el_60 = this.renderer.createElement(this._el_58, 'button', null);
         this._text_61 = this.renderer.createText(this._el_60, 'EMERGENCY SOS', null);
-        this._text_62 = this.renderer.createText(this._el_58, '\n    ', null);
-        this._text_63 = this.renderer.createText(this._el_26, '\n  ', null);
+        this._text_62 = this.renderer.createText(this._el_58, '\n        ', null);
+        this._text_63 = this.renderer.createText(this._el_26, '\n    ', null);
         this._text_64 = this.renderer.createText(null, '\n', null);
         compView_13.create(this._Content_13_4, [
             [],
@@ -217,7 +217,6 @@ var _View_Dashboard0 = (function (_super) {
             ]),
             []
         ], null);
-        this._text_65 = this.renderer.createText(parentRenderNode, '\n', null);
         this._expr_0 = import7.UNINITIALIZED;
         this._expr_1 = import7.UNINITIALIZED;
         var disposable_0 = this.renderer.listen(this._el_5, 'click', this.eventHandler(this._handle_click_5_0.bind(this)));
@@ -239,6 +238,8 @@ var _View_Dashboard0 = (function (_super) {
         this._expr_12 = import7.UNINITIALIZED;
         this._expr_13 = import7.UNINITIALIZED;
         this._expr_14 = import7.UNINITIALIZED;
+        var disposable_2 = this.renderer.listen(this._el_34, 'click', this.eventHandler(this._handle_click_34_0.bind(this)));
+        var disposable_3 = this.renderer.listen(this._el_60, 'click', this.eventHandler(this._handle_click_60_0.bind(this)));
         this.init([], [
             this._text_0,
             this._el_1,
@@ -304,11 +305,12 @@ var _View_Dashboard0 = (function (_super) {
             this._text_61,
             this._text_62,
             this._text_63,
-            this._text_64,
-            this._text_65
+            this._text_64
         ], [
             disposable_0,
-            disposable_1
+            disposable_1,
+            disposable_2,
+            disposable_3
         ], []);
         return null;
     };
@@ -456,6 +458,16 @@ var _View_Dashboard0 = (function (_super) {
     _View_Dashboard0.prototype._handle_click_8_0 = function ($event) {
         this.markPathToRootAsCheckOnce();
         var pd_0 = (this._MenuToggle_8_3.toggle() !== false);
+        return (true && pd_0);
+    };
+    _View_Dashboard0.prototype._handle_click_34_0 = function ($event) {
+        this.markPathToRootAsCheckOnce();
+        var pd_0 = (this.context.navigate() !== false);
+        return (true && pd_0);
+    };
+    _View_Dashboard0.prototype._handle_click_60_0 = function ($event) {
+        this.markPathToRootAsCheckOnce();
+        var pd_0 = (this.context.sos() !== false);
         return (true && pd_0);
     };
     return _View_Dashboard0;
