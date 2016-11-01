@@ -76,21 +76,21 @@ export class Login {
     console.log("Facebook Login Function");
     
     Facebook.login(['email']).then((response) => {
-      alert("Logged in");
+      //alert("Logged in");
       //alert(JSON.stringify(response.authResponse));
 
       let facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
-          alert("Firebase success: " + JSON.stringify(success));
+          //alert("Firebase success: " + JSON.stringify(success));
           this.userProfile = success;
           this.nav.setRoot(Dashboard,{
             userProfile: this.userProfile
           });
         })
         .catch((error) => {
-          alert("Firebase failure: " + JSON.stringify(error));
+          //alert("Firebase failure: " + JSON.stringify(error));
       });
 
     }).catch((error) => { 
