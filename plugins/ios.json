@@ -24,6 +24,11 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.testapp215213"
+        },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "1190088291053783",
+            "APP_NAME": "vkirirom",
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
         }
     },
     "dependent_plugins": {}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Facebook } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
 /*
@@ -19,6 +20,7 @@ export var Login = (function () {
         this.emailChanged = false;
         this.passwordChanged = false;
         this.submitAttempt = false;
+        this.userProfile;
         this.loginForm = formBuilder.group({
             email: ['', Validators.compose([Validators.required])],
             password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
@@ -56,6 +58,32 @@ export var Login = (function () {
             });
             this.loading.present();
         }
+    };
+    Login.prototype.facebookLogin = function () {
+        console.log("Facebook Login Function");
+        Facebook.login(['email']).then(function (response) {
+            alert("Logged in");
+            alert(JSON.stringify(response.authResponse));
+            // let facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+            // firebase.auth().signInWithCredential(facebookCredential)
+            //   .then((success) => {
+            //     console.log("Facebook Login Success");
+            //     console.log("Firebase success: " + JSON.stringify(success));
+            //     this.userProfile = success;
+            //     this.nav.setRoot(Dashboard,{
+            //       userProfile: this.userProfile
+            //     });
+            //   })
+            //   .catch((error) => {
+            //     console.log("Facebook Login Failed");
+            //     console.log("Firebase failure: " + JSON.stringify(error));
+            //     this.nav.setRoot(Dashboard,{
+            //       userProfile: this.userProfile
+            //     });
+            // });
+        }).catch(function (error) {
+            alert(error);
+        });
     };
     /**
      * Receives an input field and sets the corresponding fieldChanged property to 'true' to help with the styles.

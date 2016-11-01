@@ -481,6 +481,7 @@ class _View_Login0 extends import1.AppView<import3.Login> {
     this._expr_36 = import7.UNINITIALIZED;
     this._expr_37 = import7.UNINITIALIZED;
     this._expr_38 = import7.UNINITIALIZED;
+    var disposable_4:Function = this.renderer.listen(this._el_48,'click',this.eventHandler(this._handle_click_48_0.bind(this)));
     this.init(([] as any[]),[
       this._text_0,
       this._el_1,
@@ -543,7 +544,8 @@ class _View_Login0 extends import1.AppView<import3.Login> {
       disposable_0,
       disposable_1,
       disposable_2,
-      disposable_3
+      disposable_3,
+      disposable_4
     ]
     ,([] as any[]));
     return (null as any);
@@ -844,6 +846,11 @@ class _View_Login0 extends import1.AppView<import3.Login> {
   private _handle_change_29_0($event:any):boolean {
     this.markPathToRootAsCheckOnce();
     const pd_0:any = ((<any>this.context.elementChanged(this._TextInput_29_7)) !== false);
+    return (true && pd_0);
+  }
+  private _handle_click_48_0($event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    const pd_0:any = ((<any>this.context.facebookLogin()) !== false);
     return (true && pd_0);
   }
 }

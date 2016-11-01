@@ -50,7 +50,7 @@ import * as import42 from 'ionic-angular/components/toast/toast';
 import * as import43 from 'ionic-angular/translation/translate';
 import * as import44 from 'ionic-angular/transitions/transition-controller';
 import * as import45 from '../providers/auth-data';
-import * as import46 from '../providers/api';
+import * as import46 from 'ionic-native/dist/es5/plugins/facebook';
 import * as import47 from '@angular/core/src/di/injector';
 import * as import48 from '../node_modules/ionic-angular/components/action-sheet/action-sheet-component.ngfactory';
 import * as import49 from '../node_modules/ionic-angular/components/alert/alert-component.ngfactory';
@@ -170,7 +170,7 @@ class AppModuleInjector extends import0.NgModuleInjector<import1.AppModule> {
   __UrlSerializer_73:any;
   __DeepLinker_74:any;
   __AuthData_75:import45.AuthData;
-  __Api_76:import46.Api;
+  __Facebook_76:import46.Facebook;
   constructor(parent:import47.Injector) {
     super(parent,[
       import48.ActionSheetCmpNgFactory,
@@ -399,9 +399,9 @@ class AppModuleInjector extends import0.NgModuleInjector<import1.AppModule> {
     if ((this.__AuthData_75 == (null as any))) { (this.__AuthData_75 = new import45.AuthData()); }
     return this.__AuthData_75;
   }
-  get _Api_76():import46.Api {
-    if ((this.__Api_76 == (null as any))) { (this.__Api_76 = new import46.Api(this._Http_50)); }
-    return this.__Api_76;
+  get _Facebook_76():import46.Facebook {
+    if ((this.__Facebook_76 == (null as any))) { (this.__Facebook_76 = new import46.Facebook()); }
+    return this.__Facebook_76;
   }
   createInternal():import1.AppModule {
     this._CommonModule_0 = new import2.CommonModule();
@@ -514,7 +514,7 @@ class AppModuleInjector extends import0.NgModuleInjector<import1.AppModule> {
     if ((token === import69.UrlSerializer)) { return this._UrlSerializer_73; }
     if ((token === import70.DeepLinker)) { return this._DeepLinker_74; }
     if ((token === import45.AuthData)) { return this._AuthData_75; }
-    if ((token === import46.Api)) { return this._Api_76; }
+    if ((token === import46.Facebook)) { return this._Facebook_76; }
     return notFoundResult;
   }
   destroyInternal():void {

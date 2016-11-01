@@ -18,6 +18,11 @@
 		BA69BD0FD4E045EAA673FDF7 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 44996219799C42249CA05893 /* CDVStatusBar.m */; };
 		E773E76C1797456E82A69CD0 /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E07A142A97435BB3E6F944 /* CDVViewController+SplashScreen.m */; };
 		EC6DA0DB3DC844DE904A9125 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2AA8D1C77C408FAC43A23C /* CDVDevice.m */; };
+		7737C6B9017F4EB8B8EEFAC3 /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0A191CEA44D8B9645A526 /* FacebookConnectPlugin.m */; };
+		464280A1654648F9AD486885 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A09B05E5BFC54E438B22C748 /* Bolts.framework */; };
+		3C3158BAB2234BDFAAD475AF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A43081500542453D8ECFE61F /* FBSDKCoreKit.framework */; };
+		21AF62DB1CF74B2EB9C00DE0 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BEA1F8CE96415B81DA7190 /* FBSDKLoginKit.framework */; };
+		DE93D36D770D490EB466D966 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C48C11465C44FBFBB2E2BE6 /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +74,12 @@
 		F3621293D7264799938AB8CC /* IonicKeyboard.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = IonicKeyboard.m; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = vkirirom/config.xml; sourceTree = "<group>"; };
 		FB2AA8D1C77C408FAC43A23C /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
+		06A0A191CEA44D8B9645A526 /* FacebookConnectPlugin.m */ = {isa = PBXFileReference; name = "FacebookConnectPlugin.m"; path = "cordova-plugin-facebook4/FacebookConnectPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		75988DB9907B4C99A42EC9AA /* FacebookConnectPlugin.h */ = {isa = PBXFileReference; name = "FacebookConnectPlugin.h"; path = "cordova-plugin-facebook4/FacebookConnectPlugin.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		A09B05E5BFC54E438B22C748 /* Bolts.framework */ = {isa = PBXFileReference; name = "Bolts.framework"; path = "vkirirom/Plugins/cordova-plugin-facebook4/Bolts.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		A43081500542453D8ECFE61F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; name = "FBSDKCoreKit.framework"; path = "vkirirom/Plugins/cordova-plugin-facebook4/FBSDKCoreKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		37BEA1F8CE96415B81DA7190 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; name = "FBSDKLoginKit.framework"; path = "vkirirom/Plugins/cordova-plugin-facebook4/FBSDKLoginKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		3C48C11465C44FBFBB2E2BE6 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; name = "FBSDKShareKit.framework"; path = "vkirirom/Plugins/cordova-plugin-facebook4/FBSDKShareKit.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +88,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
+				464280A1654648F9AD486885 /* Bolts.framework in Frameworks */,
+				3C3158BAB2234BDFAAD475AF /* FBSDKCoreKit.framework in Frameworks */,
+				21AF62DB1CF74B2EB9C00DE0 /* FBSDKLoginKit.framework in Frameworks */,
+				DE93D36D770D490EB466D966 /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +161,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A09B05E5BFC54E438B22C748 /* Bolts.framework */,
+				A43081500542453D8ECFE61F /* FBSDKCoreKit.framework */,
+				37BEA1F8CE96415B81DA7190 /* FBSDKLoginKit.framework */,
+				3C48C11465C44FBFBB2E2BE6 /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -183,6 +202,8 @@
 				05D86CCADF0E4B8A95453EE8 /* CDVStatusBar.h */,
 				F3621293D7264799938AB8CC /* IonicKeyboard.m */,
 				496BD5B2D47449F9BD530681 /* IonicKeyboard.h */,
+				06A0A191CEA44D8B9645A526 /* FacebookConnectPlugin.m */,
+				75988DB9907B4C99A42EC9AA /* FacebookConnectPlugin.h */,
 			);
 			name = Plugins;
 			path = vkirirom/Plugins;
@@ -308,6 +329,7 @@
 				E773E76C1797456E82A69CD0 /* CDVViewController+SplashScreen.m in Sources */,
 				BA69BD0FD4E045EAA673FDF7 /* CDVStatusBar.m in Sources */,
 				0BCA9EFCA565459082832359 /* IonicKeyboard.m in Sources */,
+				7737C6B9017F4EB8B8EEFAC3 /* FacebookConnectPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +365,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				PRODUCT_NAME = "vkirirom";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+				);
 			};
 			name = Debug;
 		};
@@ -364,6 +393,13 @@
 				INFOPLIST_FILE = "vkirirom/vkirirom-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				PRODUCT_NAME = "vkirirom";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+				);
 			};
 			name = Release;
 		};
@@ -391,6 +427,13 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				PRODUCT_NAME = "vkirirom";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+				);
 			};
 			name = Debug;
 		};
@@ -417,6 +460,13 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				PRODUCT_NAME = "vkirirom";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+					"\"vkirirom/Plugins/cordova-plugin-facebook4\"",
+				);
 			};
 			name = Release;
 		};

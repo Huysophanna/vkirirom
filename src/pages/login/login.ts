@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController  } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Keyboard } from 'ionic-native';
+import { Facebook } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
 
@@ -21,16 +22,16 @@ export class Login {
   passwordChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
+  userProfile: any;
 
   constructor(public nav: NavController, public authData: AuthData, 
     public formBuilder: FormBuilder, public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController) {
+      this.userProfile;
        this.loginForm = formBuilder.group({
           email: ['', Validators.compose([Validators.required])],
           password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
        });
-
-       
 
        this.authData.logoutUser();
       
@@ -68,6 +69,39 @@ export class Login {
     });
       this.loading.present();
     }
+  }
+
+  facebookLogin(){
+    console.log("Facebook Login Function");
+    
+    Facebook.login(['email']).then( (response) => {
+      alert("Logged in");
+      alert(JSON.stringify(response.authResponse));
+
+      // let facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+
+      // firebase.auth().signInWithCredential(facebookCredential)
+      //   .then((success) => {
+      //     console.log("Facebook Login Success");
+      //     console.log("Firebase success: " + JSON.stringify(success));
+      //     this.userProfile = success;
+      //     this.nav.setRoot(Dashboard,{
+      //       userProfile: this.userProfile
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.log("Facebook Login Failed");
+      //     console.log("Firebase failure: " + JSON.stringify(error));
+      //     this.nav.setRoot(Dashboard,{
+      //       userProfile: this.userProfile
+      //     });
+      // });
+
+    }).catch((error) => { 
+      alert(error); 
+    });
+
+    
   }
 
   /**

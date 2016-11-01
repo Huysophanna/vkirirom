@@ -21253,6 +21253,7 @@ sub {
 .input-login .error-message p {
   color: white;
   text-align: center;
+  transition: 1s;
 }
 
 .input-login .error-message .label-ios {
