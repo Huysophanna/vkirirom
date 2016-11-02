@@ -19,7 +19,14 @@ export var Dashboard = (function () {
         this.navCtrl.push(Membership);
     };
     Dashboard.prototype.sos = function () {
-        SMS.send('+855962304669', 'Hello World')
+        var options = {
+            replaceLineBreaks: false,
+            android: {
+                //  intent: 'INTENT'  // Opens Default sms app
+                intent: '' // Sends sms without opening default sms app
+            }
+        };
+        SMS.send('+855962304669', 'https://www.google.com/maps/dir/Current+Location/', options)
             .then(function () {
             Toast.show("Success", '5000', 'bottom').subscribe(function (toast) {
                 console.log(toast);

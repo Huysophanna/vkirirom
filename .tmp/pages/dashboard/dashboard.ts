@@ -26,7 +26,14 @@ export class Dashboard {
   }
 
   sos() {
-    SMS.send('+855962304669', 'Hello World')
+    var options={
+          replaceLineBreaks: false, // true to replace \n by a new line, false by default
+          android: {
+              //  intent: 'INTENT'  // Opens Default sms app
+              intent: '' // Sends sms without opening default sms app
+            }
+    }
+    SMS.send('+855962304669', 'https://www.google.com/maps/dir/Current+Location/', options)
       .then(()=> {
         Toast.show("Success", '5000', 'bottom').subscribe(
           toast => {

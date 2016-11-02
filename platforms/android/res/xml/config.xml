@@ -34,6 +34,9 @@
         <param name="android-package" value="io.ionic.keyboard.IonicKeyboard" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="SQLitePlugin">
+        <param name="android-package" value="io.sqlc.SQLitePlugin" />
+    </feature>
     <name>vkirirom</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -45,14 +48,14 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
+    <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <allow-intent href="market:*" />
-    <icon density="ldpi" src="resources\android\icon\drawable-ldpi-icon.png" />
-    <icon density="mdpi" src="resources\android\icon\drawable-mdpi-icon.png" />
-    <icon density="hdpi" src="resources\android\icon\drawable-hdpi-icon.png" />
-    <icon density="xhdpi" src="resources\android\icon\drawable-xhdpi-icon.png" />
-    <icon density="xxhdpi" src="resources\android\icon\drawable-xxhdpi-icon.png" />
-    <icon density="xxxhdpi" src="resources\android\icon\drawable-xxxhdpi-icon.png" />
+    <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
+    <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
+    <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
+    <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <icon density="xxhdpi" src="resources/android/icon/drawable-xxhdpi-icon.png" />
+    <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi-icon.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="webviewbounce" value="false" />
@@ -63,7 +66,4 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="FadeSplashScreenDuration" value="0" />
     <preference name="SplashScreenBackgroundColor" value="0xFFFFFFFF" />
-    <feature name="SQLitePlugin">
-        <param name="android-package" value="io.sqlc.SQLitePlugin" />
-    </feature>
 </widget>
