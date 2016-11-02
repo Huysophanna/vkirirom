@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { Facebook } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
+import { Storage } from '@ionic/storage';
 /*
   Generated class for the Login page.
 
@@ -12,13 +13,14 @@ import { Dashboard } from '../dashboard/dashboard';
   Ionic pages and navigation.
 */
 export var Login = (function () {
-    function Login(nav, authData, formBuilder, alertCtrl, loadingCtrl, fb) {
+    function Login(nav, authData, formBuilder, alertCtrl, loadingCtrl, fb, storage) {
         this.nav = nav;
         this.authData = authData;
         this.formBuilder = formBuilder;
         this.alertCtrl = alertCtrl;
         this.loadingCtrl = loadingCtrl;
         this.fb = fb;
+        this.storage = storage;
         this.emailChanged = false;
         this.passwordChanged = false;
         this.submitAttempt = false;
@@ -65,22 +67,26 @@ export var Login = (function () {
         var _this = this;
         console.log("Facebook Login Function");
         Facebook.login(['email']).then(function (response) {
-            alert("Logged in");
+            //alert("Logged in");
             //alert(JSON.stringify(response.authResponse));
             var facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+            _this.loading = _this.loadingCtrl.create({
+                dismissOnPageChange: true,
+            });
+            _this.loading.present();
             firebase.auth().signInWithCredential(facebookCredential)
                 .then(function (success) {
-                alert("Firebase success: " + JSON.stringify(success));
+                //alert("Firebase success: " + JSON.stringify(success));
                 _this.userProfile = success;
-                _this.nav.setRoot(Dashboard, {
-                    userProfile: _this.userProfile
-                });
+                _this.nav.setRoot(Dashboard);
+                //store userProfile object to the phone storage
+                _this.storage.set('userProfile', _this.userProfile);
             })
                 .catch(function (error) {
-                alert("Firebase failure: " + JSON.stringify(error));
+                //alert("Firebase failure: " + JSON.stringify(error));
             });
         }).catch(function (error) {
-            alert(error);
+            console.log(error);
         });
     };
     /**
@@ -104,6 +110,7 @@ export var Login = (function () {
         { type: AlertController, },
         { type: LoadingController, },
         { type: Facebook, },
+        { type: Storage, },
     ];
     return Login;
 }());

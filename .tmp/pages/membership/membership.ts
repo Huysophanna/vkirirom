@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the Membership page.
@@ -14,8 +15,15 @@ import { NavController } from 'ionic-angular';
 export class Membership {
 
   point: any;
+  userName: any;
+  userPhoto: any;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public storage: Storage) {
+    this.storage.get('userProfile').then((value) => {
+        this.userName = value.displayName;
+        this.userPhoto = value.photoURL;
+    });
+  }
 
   ionViewDidLoad() {
     console.log('Hello Membership Page');

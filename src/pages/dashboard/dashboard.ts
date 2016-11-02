@@ -16,7 +16,6 @@ import { Membership } from '../membership/membership';
   templateUrl: 'dashboard.html'
 })
 export class Dashboard {
-
   membership = Membership;
 
   constructor(public navCtrl: NavController) {}

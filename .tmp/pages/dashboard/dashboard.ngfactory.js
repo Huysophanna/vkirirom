@@ -239,10 +239,7 @@ var _View_Dashboard0 = (function (_super) {
         this._expr_13 = import7.UNINITIALIZED;
         this._expr_14 = import7.UNINITIALIZED;
         var disposable_2 = this.renderer.listen(this._el_34, 'click', this.eventHandler(this._handle_click_34_0.bind(this)));
-<<<<<<< HEAD
         var disposable_3 = this.renderer.listen(this._el_60, 'click', this.eventHandler(this._handle_click_60_0.bind(this)));
-=======
->>>>>>> 024f66d27359556a77894acce16268b0584dbd85
         this.init([], [
             this._text_0,
             this._el_1,
@@ -312,12 +309,8 @@ var _View_Dashboard0 = (function (_super) {
         ], [
             disposable_0,
             disposable_1,
-<<<<<<< HEAD
             disposable_2,
             disposable_3
-=======
-            disposable_2
->>>>>>> 024f66d27359556a77894acce16268b0584dbd85
         ], []);
         return null;
     };
@@ -472,14 +465,11 @@ var _View_Dashboard0 = (function (_super) {
         var pd_0 = (this.context.navigate() !== false);
         return (true && pd_0);
     };
-<<<<<<< HEAD
     _View_Dashboard0.prototype._handle_click_60_0 = function ($event) {
         this.markPathToRootAsCheckOnce();
         var pd_0 = (this.context.sos() !== false);
         return (true && pd_0);
     };
-=======
->>>>>>> 024f66d27359556a77894acce16268b0584dbd85
     return _View_Dashboard0;
 }(import1.AppView));
 export function viewFactory_Dashboard0(viewUtils, parentInjector, declarationEl) {

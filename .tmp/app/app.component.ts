@@ -7,6 +7,7 @@ import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Category } from '../pages/category/category';
 import { AuthData } from '../providers/auth-data';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class MyApp {
   authData: any = AuthData; 
   loading: any;
 
-  constructor(platform: Platform, public loadingCtrl: LoadingController) {
+  constructor(platform: Platform, public loadingCtrl: LoadingController, public storage: Storage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -62,6 +63,8 @@ export class MyApp {
     
     //logout function
     if (page.id == 4) {
+      //store userProfile object to the phone storage
+      this.storage.set('userProfile', "");
       this.nav.setRoot(Login);
       console.log(page.title);
     }

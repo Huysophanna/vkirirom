@@ -333,10 +333,7 @@ class _View_Dashboard0 extends import1.AppView<import3.Dashboard> {
     this._expr_13 = import7.UNINITIALIZED;
     this._expr_14 = import7.UNINITIALIZED;
     var disposable_2:Function = this.renderer.listen(this._el_34,'click',this.eventHandler(this._handle_click_34_0.bind(this)));
-<<<<<<< HEAD
     var disposable_3:Function = this.renderer.listen(this._el_60,'click',this.eventHandler(this._handle_click_60_0.bind(this)));
-=======
->>>>>>> 024f66d27359556a77894acce16268b0584dbd85
     this.init(([] as any[]),[
       this._text_0,
       this._el_1,
@@ -407,12 +404,8 @@ class _View_Dashboard0 extends import1.AppView<import3.Dashboard> {
     ,[
       disposable_0,
       disposable_1,
-<<<<<<< HEAD
       disposable_2,
       disposable_3
-=======
-      disposable_2
->>>>>>> 024f66d27359556a77894acce16268b0584dbd85
     ]
     ,([] as any[]));
     return (null as any);
@@ -536,14 +529,11 @@ class _View_Dashboard0 extends import1.AppView<import3.Dashboard> {
     const pd_0:any = ((<any>this.context.navigate()) !== false);
     return (true && pd_0);
   }
-<<<<<<< HEAD
   private _handle_click_60_0($event:any):boolean {
     this.markPathToRootAsCheckOnce();
     const pd_0:any = ((<any>this.context.sos()) !== false);
     return (true && pd_0);
   }
-=======
->>>>>>> 024f66d27359556a77894acce16268b0584dbd85
 }
 export function viewFactory_Dashboard0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<import3.Dashboard> {
   if ((renderType_Dashboard === (null as any))) { (renderType_Dashboard = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,styles_Dashboard,{})); }

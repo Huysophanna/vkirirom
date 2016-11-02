@@ -5,10 +5,12 @@ import firebase from 'firebase';
 import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { AuthData } from '../providers/auth-data';
+import { Storage } from '@ionic/storage';
 export var MyApp = (function () {
-    function MyApp(platform, loadingCtrl) {
+    function MyApp(platform, loadingCtrl, storage) {
         var _this = this;
         this.loadingCtrl = loadingCtrl;
+        this.storage = storage;
         this.rootPage = Dashboard;
         this.isHome = false;
         this.pages = [];
@@ -49,6 +51,8 @@ export var MyApp = (function () {
         // we wouldn't want the back button to show in this scenario
         //logout function
         if (page.id == 4) {
+            //store userProfile object to the phone storage
+            this.storage.set('userProfile', "");
             this.nav.setRoot(Login);
             console.log(page.title);
         }
@@ -66,6 +70,7 @@ export var MyApp = (function () {
     MyApp.ctorParameters = [
         { type: Platform, },
         { type: LoadingController, },
+        { type: Storage, },
     ];
     MyApp.propDecorators = {
         'nav': [{ type: ViewChild, args: [Nav,] },],

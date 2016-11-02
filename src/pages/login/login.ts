@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController  } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Keyboard } from 'ionic-native';
 import firebase from 'firebase';
 import { Facebook } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
+import { KeyboardAttachDirective } from '../../app/keyboard-attach.directive'
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the Login page.
@@ -27,7 +29,7 @@ export class Login {
 
   constructor(public nav: NavController, public authData: AuthData, 
     public formBuilder: FormBuilder, public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController, public fb: Facebook) {
+    public loadingCtrl: LoadingController, public fb: Facebook, public storage: Storage) {
       this.userProfile;
        this.loginForm = formBuilder.group({
           email: ['', Validators.compose([Validators.required])],
@@ -80,24 +82,26 @@ export class Login {
       //alert(JSON.stringify(response.authResponse));
 
       let facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-
+      this.loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+      });
+      this.loading.present();
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
           //alert("Firebase success: " + JSON.stringify(success));
           this.userProfile = success;
-          this.nav.setRoot(Dashboard,{
-            userProfile: this.userProfile
-          });
+          this.nav.setRoot(Dashboard);
+
+          //store userProfile object to the phone storage
+          this.storage.set('userProfile', this.userProfile);
         })
         .catch((error) => {
           //alert("Firebase failure: " + JSON.stringify(error));
       });
 
     }).catch((error) => { 
-      alert(error); 
-    });
-
-    
+      console.log(error); 
+    });    
   }
 
   /**

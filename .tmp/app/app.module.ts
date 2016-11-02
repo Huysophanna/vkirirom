@@ -8,6 +8,7 @@ import { Category } from '../pages/category/category';
 import { Membership } from '../pages/membership/membership';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
+import { Storage } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { Api } from '../providers/api';
   ],
   providers: [
     AuthData,
-    Facebook
+    Facebook,
+    Storage
   ]
 })
 export class AppModule {}

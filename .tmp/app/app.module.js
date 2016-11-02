@@ -7,6 +7,7 @@ import { Dashboard } from '../pages/dashboard/dashboard';
 import { Category } from '../pages/category/category';
 import { Membership } from '../pages/membership/membership';
 import { AuthData } from '../providers/auth-data';
+import { Storage } from '@ionic/storage';
 export var AppModule = (function () {
     function AppModule() {
     }
@@ -32,7 +33,8 @@ export var AppModule = (function () {
                     ],
                     providers: [
                         AuthData,
-                        Facebook
+                        Facebook,
+                        Storage
                     ]
                 },] },
     ];

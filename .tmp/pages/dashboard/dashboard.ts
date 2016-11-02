@@ -5,8 +5,6 @@ import { Toast } from 'ionic-native';
 
 import { Membership } from '../membership/membership';
 
-import { Membership } from '../membership/membership';
-
 /*
   Generated class for the Dashboard page.
 
@@ -18,7 +16,6 @@ import { Membership } from '../membership/membership';
   templateUrl: 'dashboard.html'
 })
 export class Dashboard {
-
   membership = Membership;
 
   constructor(public navCtrl: NavController) {}
@@ -28,13 +25,16 @@ export class Dashboard {
     this.navCtrl.push(Membership);
   }
 
-<<<<<<< HEAD
   sos() {
     SMS.send('+855962304669', 'Hello World')
       .then(()=> {
-        alert('success');
+        Toast.show("Success", '5000', 'bottom').subscribe(
+          toast => {
+            console.log(toast);
+          }
+        );
       }, ()=> {
-        Toast.show("I'm a toast", '5000', 'center').subscribe(
+        Toast.show("Error", '5000', 'bottom').subscribe(
           toast => {
             console.log(toast);
           }
@@ -43,8 +43,6 @@ export class Dashboard {
     console.log("SOS is calling ");
   }
 
-=======
->>>>>>> 024f66d27359556a77894acce16268b0584dbd85
   ionViewDidLoad() {
     console.log('Hello Dashboard Page');
   }

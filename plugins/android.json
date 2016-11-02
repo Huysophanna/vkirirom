@@ -35,6 +35,9 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
         }
     },
     "dependent_plugins": {}
