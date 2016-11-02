@@ -26,19 +26,21 @@ import * as import16 from '@angular/core/src/linker/query_list';
 import * as import17 from '@angular/common/src/directives/ng_style';
 import * as import18 from 'ionic-angular/components/icon/icon';
 import * as import19 from 'ionic-angular/components/content/content';
-import * as import20 from 'ionic-angular/components/grid/grid';
-import * as import21 from 'ionic-angular/config/config';
-import * as import22 from '@angular/core/src/linker/element_ref';
-import * as import23 from 'ionic-angular/navigation/view-controller';
-import * as import24 from '../../node_modules/ionic-angular/components/navbar/navbar.ngfactory';
-import * as import25 from 'ionic-angular/components/app/app';
-import * as import26 from '../../node_modules/ionic-angular/components/toolbar/toolbar-title.ngfactory';
-import * as import27 from '@angular/core/src/change_detection/differs/keyvalue_differs';
-import * as import28 from '../../node_modules/ionic-angular/components/content/content.ngfactory';
-import * as import29 from 'ionic-angular/util/keyboard';
-import * as import30 from '@angular/core/src/zone/ng_zone';
-import * as import31 from 'ionic-angular/components/tabs/tabs';
-import * as import32 from '@angular/core/src/security';
+import * as import20 from '@angular/common/src/directives/ng_if';
+import * as import21 from 'ionic-angular/components/grid/grid';
+import * as import22 from 'ionic-angular/config/config';
+import * as import23 from '@angular/core/src/linker/element_ref';
+import * as import24 from 'ionic-angular/navigation/view-controller';
+import * as import25 from '../../node_modules/ionic-angular/components/navbar/navbar.ngfactory';
+import * as import26 from 'ionic-angular/components/app/app';
+import * as import27 from '../../node_modules/ionic-angular/components/toolbar/toolbar-title.ngfactory';
+import * as import28 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import29 from '../../node_modules/ionic-angular/components/content/content.ngfactory';
+import * as import30 from 'ionic-angular/util/keyboard';
+import * as import31 from '@angular/core/src/zone/ng_zone';
+import * as import32 from 'ionic-angular/components/tabs/tabs';
+import * as import33 from '@angular/core/src/linker/template_ref';
+import * as import34 from '@angular/core/src/security';
 var renderType_Membership_Host = null;
 var _View_Membership_Host0 = (function (_super) {
     __extends(_View_Membership_Host0, _super);
@@ -82,33 +84,33 @@ var _View_Membership0 = (function (_super) {
         this._text_0 = this.renderer.createText(parentRenderNode, '\n', null);
         this._el_1 = this.renderer.createElement(parentRenderNode, 'ion-header', null);
         this.renderer.setElementAttribute(this._el_1, 'class', 'header');
-        this._Header_1_3 = new import12.Header(this.parentInjector.get(import21.Config), new import22.ElementRef(this._el_1), this.renderer, this.parentInjector.get(import23.ViewController, null));
+        this._Header_1_3 = new import12.Header(this.parentInjector.get(import22.Config), new import23.ElementRef(this._el_1), this.renderer, this.parentInjector.get(import24.ViewController, null));
         this._text_2 = this.renderer.createText(this._el_1, '\n\n    ', null);
         this._el_3 = this.renderer.createElement(this._el_1, 'ion-navbar', null);
         this.renderer.setElementAttribute(this._el_3, 'class', 'toolbar');
         this._appEl_3 = new import2.AppElement(3, 1, this, this._el_3);
-        var compView_3 = import24.viewFactory_Navbar0(this.viewUtils, this.injector(3), this._appEl_3);
-        this._Navbar_3_4 = new import13.Navbar(this.parentInjector.get(import25.App), this.parentInjector.get(import23.ViewController, null), this.parentInjector.get(import8.NavController, null), this.parentInjector.get(import21.Config), new import22.ElementRef(this._el_3), this.renderer);
+        var compView_3 = import25.viewFactory_Navbar0(this.viewUtils, this.injector(3), this._appEl_3);
+        this._Navbar_3_4 = new import13.Navbar(this.parentInjector.get(import26.App), this.parentInjector.get(import24.ViewController, null), this.parentInjector.get(import8.NavController, null), this.parentInjector.get(import22.Config), new import23.ElementRef(this._el_3), this.renderer);
         this._appEl_3.initComponent(this._Navbar_3_4, [], compView_3);
         this._text_4 = this.renderer.createText(null, '\n        ', null);
         this._el_5 = this.renderer.createElement(null, 'ion-title', null);
         this._appEl_5 = new import2.AppElement(5, 3, this, this._el_5);
-        var compView_5 = import26.viewFactory_ToolbarTitle0(this.viewUtils, this.injector(5), this._appEl_5);
-        this._ToolbarTitle_5_4 = new import14.ToolbarTitle(this.parentInjector.get(import21.Config), new import22.ElementRef(this._el_5), this.renderer, this.parentInjector.get(import12.Toolbar, null), this._Navbar_3_4);
+        var compView_5 = import27.viewFactory_ToolbarTitle0(this.viewUtils, this.injector(5), this._appEl_5);
+        this._ToolbarTitle_5_4 = new import14.ToolbarTitle(this.parentInjector.get(import22.Config), new import23.ElementRef(this._el_5), this.renderer, this.parentInjector.get(import12.Toolbar, null), this._Navbar_3_4);
         this._appEl_5.initComponent(this._ToolbarTitle_5_4, [], compView_5);
         this._text_6 = this.renderer.createText(null, 'Membership Card', null);
         compView_5.create(this._ToolbarTitle_5_4, [[].concat([this._text_6])], null);
         this._text_7 = this.renderer.createText(null, '\n        ', null);
         this._el_8 = this.renderer.createElement(null, 'ion-buttons', null);
         this.renderer.setElementAttribute(this._el_8, 'right', '');
-        this._ToolbarItem_8_3 = new import15.ToolbarItem(this.parentInjector.get(import21.Config), new import22.ElementRef(this._el_8), this.renderer, this.parentInjector.get(import12.Toolbar, null), this._Navbar_3_4);
+        this._ToolbarItem_8_3 = new import15.ToolbarItem(this.parentInjector.get(import22.Config), new import23.ElementRef(this._el_8), this.renderer, this.parentInjector.get(import12.Toolbar, null), this._Navbar_3_4);
         this._query_Button_8_0 = new import16.QueryList();
         this._text_9 = this.renderer.createText(this._el_8, '\n            ', null);
         this._el_10 = this.renderer.createElement(this._el_8, 'ion-icon', null);
         this.renderer.setElementAttribute(this._el_10, 'name', 'ios-notifications');
         this.renderer.setElementAttribute(this._el_10, 'role', 'img');
-        this._NgStyle_10_3 = new import17.NgStyle(this.parentInjector.get(import27.KeyValueDiffers), new import22.ElementRef(this._el_10), this.renderer);
-        this._Icon_10_4 = new import18.Icon(this.parentInjector.get(import21.Config), new import22.ElementRef(this._el_10), this.renderer);
+        this._NgStyle_10_3 = new import17.NgStyle(this.parentInjector.get(import28.KeyValueDiffers), new import23.ElementRef(this._el_10), this.renderer);
+        this._Icon_10_4 = new import18.Icon(this.parentInjector.get(import22.Config), new import23.ElementRef(this._el_10), this.renderer);
         this._text_11 = this.renderer.createText(this._el_8, '\n        ', null);
         this._text_12 = this.renderer.createText(null, '\n    ', null);
         compView_3.create(this._Navbar_3_4, [
@@ -128,8 +130,8 @@ var _View_Membership0 = (function (_super) {
         this.renderer.setElementAttribute(this._el_15, 'class', 'member-container');
         this.renderer.setElementAttribute(this._el_15, 'padding', '');
         this._appEl_15 = new import2.AppElement(15, null, this, this._el_15);
-        var compView_15 = import28.viewFactory_Content0(this.viewUtils, this.injector(15), this._appEl_15);
-        this._Content_15_4 = new import19.Content(this.parentInjector.get(import21.Config), new import22.ElementRef(this._el_15), this.renderer, this.parentInjector.get(import25.App), this.parentInjector.get(import29.Keyboard), this.parentInjector.get(import30.NgZone), this.parentInjector.get(import23.ViewController, null), this.parentInjector.get(import31.Tabs, null));
+        var compView_15 = import29.viewFactory_Content0(this.viewUtils, this.injector(15), this._appEl_15);
+        this._Content_15_4 = new import19.Content(this.parentInjector.get(import22.Config), new import23.ElementRef(this._el_15), this.renderer, this.parentInjector.get(import26.App), this.parentInjector.get(import30.Keyboard), this.parentInjector.get(import31.NgZone), this.parentInjector.get(import24.ViewController, null), this.parentInjector.get(import32.Tabs, null));
         this._appEl_15.initComponent(this._Content_15_4, [], compView_15);
         this._text_16 = this.renderer.createText(null, '\n\n    ', null);
         this._el_17 = this.renderer.createElement(null, 'div', null);
@@ -138,80 +140,87 @@ var _View_Membership0 = (function (_super) {
         this._el_19 = this.renderer.createElement(this._el_17, 'div', null);
         this.renderer.setElementAttribute(this._el_19, 'class', 'profile');
         this._text_20 = this.renderer.createText(this._el_19, '\n            ', null);
-        this._el_21 = this.renderer.createElement(this._el_19, 'img', null);
-        this.renderer.setElementAttribute(this._el_21, 'alt', 'Profile Picture');
-        this._text_22 = this.renderer.createText(this._el_19, '\n        ', null);
-        this._text_23 = this.renderer.createText(this._el_17, '\n\n        ', null);
-        this._el_24 = this.renderer.createElement(this._el_17, 'div', null);
-        this.renderer.setElementAttribute(this._el_24, 'class', 'profile-info');
-        this._text_25 = this.renderer.createText(this._el_24, '\n            ', null);
-        this._el_26 = this.renderer.createElement(this._el_24, 'span', null);
-        this._text_27 = this.renderer.createText(this._el_26, '', null);
-        this._text_28 = this.renderer.createText(this._el_24, '\n        ', null);
-        this._text_29 = this.renderer.createText(this._el_17, '\n\n        ', null);
-        this._el_30 = this.renderer.createElement(this._el_17, 'div', null);
-        this.renderer.setElementAttribute(this._el_30, 'class', 'profile-info');
-        this._text_31 = this.renderer.createText(this._el_30, '\n            ID: ', null);
-        this._el_32 = this.renderer.createElement(this._el_30, 'span', null);
-        this._text_33 = this.renderer.createText(this._el_32, ' 9412558112 ', null);
-        this._text_34 = this.renderer.createText(this._el_30, '\n        ', null);
-        this._text_35 = this.renderer.createText(this._el_17, '\n\n        ', null);
-        this._el_36 = this.renderer.createElement(this._el_17, 'ion-grid', null);
-        this.renderer.setElementAttribute(this._el_36, 'class', 'detail');
-        this._Grid_36_3 = new import20.Grid();
-        this._text_37 = this.renderer.createText(this._el_36, '\n            ', null);
-        this._el_38 = this.renderer.createElement(this._el_36, 'ion-row', null);
-        this._Row_38_3 = new import20.Row();
-        this._text_39 = this.renderer.createText(this._el_38, '\n                ', null);
-        this._el_40 = this.renderer.createElement(this._el_38, 'ion-col', null);
-        this.renderer.setElementAttribute(this._el_40, 'class', 'detail-item');
-        this.renderer.setElementAttribute(this._el_40, 'width-50', '');
-        this._Col_40_3 = new import20.Col();
-        this._text_41 = this.renderer.createText(this._el_40, '\n                    ', null);
-        this._el_42 = this.renderer.createElement(this._el_40, 'ion-icon', null);
-        this.renderer.setElementAttribute(this._el_42, 'name', 'basket');
-        this.renderer.setElementAttribute(this._el_42, 'role', 'img');
-        this._Icon_42_3 = new import18.Icon(this.parentInjector.get(import21.Config), new import22.ElementRef(this._el_42), this.renderer);
-        this._text_43 = this.renderer.createText(this._el_40, '  vPoint', null);
-        this._el_44 = this.renderer.createElement(this._el_40, 'br', null);
-        this._text_45 = this.renderer.createText(this._el_40, '\n                    ', null);
-        this._el_46 = this.renderer.createElement(this._el_40, 'span', null);
-        this._text_47 = this.renderer.createText(this._el_46, '168', null);
-        this._text_48 = this.renderer.createText(this._el_40, '\n                ', null);
-        this._text_49 = this.renderer.createText(this._el_38, '\n                ', null);
-        this._el_50 = this.renderer.createElement(this._el_38, 'ion-col', null);
-        this.renderer.setElementAttribute(this._el_50, 'class', 'detail-item');
-        this.renderer.setElementAttribute(this._el_50, 'width-50', '');
-        this._Col_50_3 = new import20.Col();
-        this._text_51 = this.renderer.createText(this._el_50, '\n                    ', null);
-        this._el_52 = this.renderer.createElement(this._el_50, 'ion-icon', null);
-        this.renderer.setElementAttribute(this._el_52, 'name', 'logo-buffer');
-        this.renderer.setElementAttribute(this._el_52, 'role', 'img');
-        this._Icon_52_3 = new import18.Icon(this.parentInjector.get(import21.Config), new import22.ElementRef(this._el_52), this.renderer);
-        this._text_53 = this.renderer.createText(this._el_50, '  Type', null);
-        this._el_54 = this.renderer.createElement(this._el_50, 'br', null);
-        this._text_55 = this.renderer.createText(this._el_50, '\n                    ', null);
-        this._el_56 = this.renderer.createElement(this._el_50, 'span', null);
-        this._el_57 = this.renderer.createElement(this._el_56, 'b', null);
-        this._text_58 = this.renderer.createText(this._el_57, 'Gold', null);
-        this._text_59 = this.renderer.createText(this._el_50, '\n                ', null);
-        this._text_60 = this.renderer.createText(this._el_38, '\n            ', null);
-        this._text_61 = this.renderer.createText(this._el_36, '\n        ', null);
-        this._text_62 = this.renderer.createText(this._el_17, '\n\n        ', null);
-        this._el_63 = this.renderer.createElement(this._el_17, 'div', null);
-        this.renderer.setElementAttribute(this._el_63, 'class', 'expire-date');
-        this._text_64 = this.renderer.createText(this._el_63, '\n            Expire Date: ', null);
-        this._el_65 = this.renderer.createElement(this._el_63, 'span', null);
-        this._text_66 = this.renderer.createText(this._el_65, '10/ Oct/ 2017', null);
-        this._text_67 = this.renderer.createText(this._el_63, '\n        ', null);
-        this._text_68 = this.renderer.createText(this._el_17, '\n    ', null);
-        this._text_69 = this.renderer.createText(null, '\n\n', null);
+        this._anchor_21 = this.renderer.createTemplateAnchor(this._el_19, null);
+        this._appEl_21 = new import2.AppElement(21, 19, this, this._anchor_21);
+        this._TemplateRef_21_5 = new import33.TemplateRef_(this._appEl_21, viewFactory_Membership1);
+        this._NgIf_21_6 = new import20.NgIf(this._appEl_21.vcRef, this._TemplateRef_21_5);
+        this._text_22 = this.renderer.createText(this._el_19, '\n            ', null);
+        this._anchor_23 = this.renderer.createTemplateAnchor(this._el_19, null);
+        this._appEl_23 = new import2.AppElement(23, 19, this, this._anchor_23);
+        this._TemplateRef_23_5 = new import33.TemplateRef_(this._appEl_23, viewFactory_Membership2);
+        this._NgIf_23_6 = new import20.NgIf(this._appEl_23.vcRef, this._TemplateRef_23_5);
+        this._text_24 = this.renderer.createText(this._el_19, '\n        ', null);
+        this._text_25 = this.renderer.createText(this._el_17, '\n\n        ', null);
+        this._el_26 = this.renderer.createElement(this._el_17, 'div', null);
+        this.renderer.setElementAttribute(this._el_26, 'class', 'profile-info');
+        this._text_27 = this.renderer.createText(this._el_26, '\n            ', null);
+        this._el_28 = this.renderer.createElement(this._el_26, 'span', null);
+        this._text_29 = this.renderer.createText(this._el_28, '', null);
+        this._text_30 = this.renderer.createText(this._el_26, '\n        ', null);
+        this._text_31 = this.renderer.createText(this._el_17, '\n\n        ', null);
+        this._el_32 = this.renderer.createElement(this._el_17, 'div', null);
+        this.renderer.setElementAttribute(this._el_32, 'class', 'profile-info');
+        this._text_33 = this.renderer.createText(this._el_32, '\n            ID: ', null);
+        this._el_34 = this.renderer.createElement(this._el_32, 'span', null);
+        this._text_35 = this.renderer.createText(this._el_34, ' 9412558112 ', null);
+        this._text_36 = this.renderer.createText(this._el_32, '\n        ', null);
+        this._text_37 = this.renderer.createText(this._el_17, '\n\n        ', null);
+        this._el_38 = this.renderer.createElement(this._el_17, 'ion-grid', null);
+        this.renderer.setElementAttribute(this._el_38, 'class', 'detail');
+        this._Grid_38_3 = new import21.Grid();
+        this._text_39 = this.renderer.createText(this._el_38, '\n            ', null);
+        this._el_40 = this.renderer.createElement(this._el_38, 'ion-row', null);
+        this._Row_40_3 = new import21.Row();
+        this._text_41 = this.renderer.createText(this._el_40, '\n                ', null);
+        this._el_42 = this.renderer.createElement(this._el_40, 'ion-col', null);
+        this.renderer.setElementAttribute(this._el_42, 'class', 'detail-item');
+        this.renderer.setElementAttribute(this._el_42, 'width-50', '');
+        this._Col_42_3 = new import21.Col();
+        this._text_43 = this.renderer.createText(this._el_42, '\n                    ', null);
+        this._el_44 = this.renderer.createElement(this._el_42, 'ion-icon', null);
+        this.renderer.setElementAttribute(this._el_44, 'name', 'basket');
+        this.renderer.setElementAttribute(this._el_44, 'role', 'img');
+        this._Icon_44_3 = new import18.Icon(this.parentInjector.get(import22.Config), new import23.ElementRef(this._el_44), this.renderer);
+        this._text_45 = this.renderer.createText(this._el_42, '  vPoint', null);
+        this._el_46 = this.renderer.createElement(this._el_42, 'br', null);
+        this._text_47 = this.renderer.createText(this._el_42, '\n                    ', null);
+        this._el_48 = this.renderer.createElement(this._el_42, 'span', null);
+        this._text_49 = this.renderer.createText(this._el_48, '168', null);
+        this._text_50 = this.renderer.createText(this._el_42, '\n                ', null);
+        this._text_51 = this.renderer.createText(this._el_40, '\n                ', null);
+        this._el_52 = this.renderer.createElement(this._el_40, 'ion-col', null);
+        this.renderer.setElementAttribute(this._el_52, 'class', 'detail-item');
+        this.renderer.setElementAttribute(this._el_52, 'width-50', '');
+        this._Col_52_3 = new import21.Col();
+        this._text_53 = this.renderer.createText(this._el_52, '\n                    ', null);
+        this._el_54 = this.renderer.createElement(this._el_52, 'ion-icon', null);
+        this.renderer.setElementAttribute(this._el_54, 'name', 'logo-buffer');
+        this.renderer.setElementAttribute(this._el_54, 'role', 'img');
+        this._Icon_54_3 = new import18.Icon(this.parentInjector.get(import22.Config), new import23.ElementRef(this._el_54), this.renderer);
+        this._text_55 = this.renderer.createText(this._el_52, '  Type', null);
+        this._el_56 = this.renderer.createElement(this._el_52, 'br', null);
+        this._text_57 = this.renderer.createText(this._el_52, '\n                    ', null);
+        this._el_58 = this.renderer.createElement(this._el_52, 'span', null);
+        this._el_59 = this.renderer.createElement(this._el_58, 'b', null);
+        this._text_60 = this.renderer.createText(this._el_59, 'Gold', null);
+        this._text_61 = this.renderer.createText(this._el_52, '\n                ', null);
+        this._text_62 = this.renderer.createText(this._el_40, '\n            ', null);
+        this._text_63 = this.renderer.createText(this._el_38, '\n        ', null);
+        this._text_64 = this.renderer.createText(this._el_17, '\n\n        ', null);
+        this._el_65 = this.renderer.createElement(this._el_17, 'div', null);
+        this.renderer.setElementAttribute(this._el_65, 'class', 'expire-date');
+        this._text_66 = this.renderer.createText(this._el_65, '\n            Expire Date: ', null);
+        this._el_67 = this.renderer.createElement(this._el_65, 'span', null);
+        this._text_68 = this.renderer.createText(this._el_67, '10/ Oct/ 2017', null);
+        this._text_69 = this.renderer.createText(this._el_65, '\n        ', null);
+        this._text_70 = this.renderer.createText(this._el_17, '\n    ', null);
+        this._text_71 = this.renderer.createText(null, '\n\n', null);
         compView_15.create(this._Content_15_4, [
             [],
             [].concat([
                 this._text_16,
                 this._el_17,
-                this._text_69
+                this._text_71
             ]),
             []
         ], null);
@@ -230,6 +239,7 @@ var _View_Membership0 = (function (_super) {
         this._expr_9 = import7.UNINITIALIZED;
         this._expr_10 = import7.UNINITIALIZED;
         this._expr_11 = import7.UNINITIALIZED;
+        this._expr_12 = import7.UNINITIALIZED;
         this.init([], [
             this._text_0,
             this._el_1,
@@ -252,22 +262,22 @@ var _View_Membership0 = (function (_super) {
             this._text_18,
             this._el_19,
             this._text_20,
-            this._el_21,
+            this._anchor_21,
             this._text_22,
-            this._text_23,
-            this._el_24,
+            this._anchor_23,
+            this._text_24,
             this._text_25,
             this._el_26,
             this._text_27,
-            this._text_28,
+            this._el_28,
             this._text_29,
-            this._el_30,
+            this._text_30,
             this._text_31,
             this._el_32,
             this._text_33,
-            this._text_34,
+            this._el_34,
             this._text_35,
-            this._el_36,
+            this._text_36,
             this._text_37,
             this._el_38,
             this._text_39,
@@ -279,28 +289,30 @@ var _View_Membership0 = (function (_super) {
             this._text_45,
             this._el_46,
             this._text_47,
-            this._text_48,
+            this._el_48,
             this._text_49,
-            this._el_50,
+            this._text_50,
             this._text_51,
             this._el_52,
             this._text_53,
             this._el_54,
             this._text_55,
             this._el_56,
-            this._el_57,
-            this._text_58,
-            this._text_59,
+            this._text_57,
+            this._el_58,
+            this._el_59,
             this._text_60,
             this._text_61,
             this._text_62,
-            this._el_63,
+            this._text_63,
             this._text_64,
             this._el_65,
             this._text_66,
-            this._text_67,
+            this._el_67,
             this._text_68,
-            this._text_69
+            this._text_69,
+            this._text_70,
+            this._text_71
         ], [], []);
         return null;
     };
@@ -323,25 +335,37 @@ var _View_Membership0 = (function (_super) {
         if (((token === import12.Header) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 13)))) {
             return this._Header_1_3;
         }
-        if (((token === import18.Icon) && (42 === requestNodeIndex))) {
-            return this._Icon_42_3;
+        if (((token === import33.TemplateRef) && (21 === requestNodeIndex))) {
+            return this._TemplateRef_21_5;
         }
-        if (((token === import20.Col) && ((40 <= requestNodeIndex) && (requestNodeIndex <= 48)))) {
-            return this._Col_40_3;
+        if (((token === import20.NgIf) && (21 === requestNodeIndex))) {
+            return this._NgIf_21_6;
         }
-        if (((token === import18.Icon) && (52 === requestNodeIndex))) {
-            return this._Icon_52_3;
+        if (((token === import33.TemplateRef) && (23 === requestNodeIndex))) {
+            return this._TemplateRef_23_5;
         }
-        if (((token === import20.Col) && ((50 <= requestNodeIndex) && (requestNodeIndex <= 59)))) {
-            return this._Col_50_3;
+        if (((token === import20.NgIf) && (23 === requestNodeIndex))) {
+            return this._NgIf_23_6;
         }
-        if (((token === import20.Row) && ((38 <= requestNodeIndex) && (requestNodeIndex <= 60)))) {
-            return this._Row_38_3;
+        if (((token === import18.Icon) && (44 === requestNodeIndex))) {
+            return this._Icon_44_3;
         }
-        if (((token === import20.Grid) && ((36 <= requestNodeIndex) && (requestNodeIndex <= 61)))) {
-            return this._Grid_36_3;
+        if (((token === import21.Col) && ((42 <= requestNodeIndex) && (requestNodeIndex <= 50)))) {
+            return this._Col_42_3;
         }
-        if (((token === import19.Content) && ((15 <= requestNodeIndex) && (requestNodeIndex <= 69)))) {
+        if (((token === import18.Icon) && (54 === requestNodeIndex))) {
+            return this._Icon_54_3;
+        }
+        if (((token === import21.Col) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 61)))) {
+            return this._Col_52_3;
+        }
+        if (((token === import21.Row) && ((40 <= requestNodeIndex) && (requestNodeIndex <= 62)))) {
+            return this._Row_40_3;
+        }
+        if (((token === import21.Grid) && ((38 <= requestNodeIndex) && (requestNodeIndex <= 63)))) {
+            return this._Grid_38_3;
+        }
+        if (((token === import19.Content) && ((15 <= requestNodeIndex) && (requestNodeIndex <= 71)))) {
             return this._Content_15_4;
         }
         return notFoundResult;
@@ -363,15 +387,25 @@ var _View_Membership0 = (function (_super) {
         if (((this.numberOfChecks === 0) && !throwOnChange)) {
             this._Content_15_4.ngOnInit();
         }
-        var currVal_8 = 'basket';
-        if (import4.checkBinding(throwOnChange, this._expr_8, currVal_8)) {
-            this._Icon_42_3.name = currVal_8;
-            this._expr_8 = currVal_8;
+        var currVal_6 = this.context.userPhoto;
+        if (import4.checkBinding(throwOnChange, this._expr_6, currVal_6)) {
+            this._NgIf_21_6.ngIf = currVal_6;
+            this._expr_6 = currVal_6;
         }
-        var currVal_10 = 'logo-buffer';
-        if (import4.checkBinding(throwOnChange, this._expr_10, currVal_10)) {
-            this._Icon_52_3.name = currVal_10;
-            this._expr_10 = currVal_10;
+        var currVal_7 = !this.context.userPhoto;
+        if (import4.checkBinding(throwOnChange, this._expr_7, currVal_7)) {
+            this._NgIf_23_6.ngIf = currVal_7;
+            this._expr_7 = currVal_7;
+        }
+        var currVal_9 = 'basket';
+        if (import4.checkBinding(throwOnChange, this._expr_9, currVal_9)) {
+            this._Icon_44_3.name = currVal_9;
+            this._expr_9 = currVal_9;
+        }
+        var currVal_11 = 'logo-buffer';
+        if (import4.checkBinding(throwOnChange, this._expr_11, currVal_11)) {
+            this._Icon_54_3.name = currVal_11;
+            this._expr_11 = currVal_11;
         }
         this.detectContentChildrenChanges(throwOnChange);
         if (!throwOnChange) {
@@ -401,25 +435,20 @@ var _View_Membership0 = (function (_super) {
             this.renderer.setElementClass(this._el_15, 'statusbar-padding', currVal_5);
             this._expr_5 = currVal_5;
         }
-        var currVal_6 = import4.interpolate(1, '', this.context.userPhoto, '');
-        if (import4.checkBinding(throwOnChange, this._expr_6, currVal_6)) {
-            this.renderer.setElementProperty(this._el_21, 'src', this.viewUtils.sanitizer.sanitize(import32.SecurityContext.URL, currVal_6));
-            this._expr_6 = currVal_6;
+        var currVal_8 = import4.interpolate(1, '', this.context.userName, '');
+        if (import4.checkBinding(throwOnChange, this._expr_8, currVal_8)) {
+            this.renderer.setText(this._text_29, currVal_8);
+            this._expr_8 = currVal_8;
         }
-        var currVal_7 = import4.interpolate(1, '', this.context.userName, '');
-        if (import4.checkBinding(throwOnChange, this._expr_7, currVal_7)) {
-            this.renderer.setText(this._text_27, currVal_7);
-            this._expr_7 = currVal_7;
+        var currVal_10 = this._Icon_44_3._hidden;
+        if (import4.checkBinding(throwOnChange, this._expr_10, currVal_10)) {
+            this.renderer.setElementClass(this._el_44, 'hide', currVal_10);
+            this._expr_10 = currVal_10;
         }
-        var currVal_9 = this._Icon_42_3._hidden;
-        if (import4.checkBinding(throwOnChange, this._expr_9, currVal_9)) {
-            this.renderer.setElementClass(this._el_42, 'hide', currVal_9);
-            this._expr_9 = currVal_9;
-        }
-        var currVal_11 = this._Icon_52_3._hidden;
-        if (import4.checkBinding(throwOnChange, this._expr_11, currVal_11)) {
-            this.renderer.setElementClass(this._el_52, 'hide', currVal_11);
-            this._expr_11 = currVal_11;
+        var currVal_12 = this._Icon_54_3._hidden;
+        if (import4.checkBinding(throwOnChange, this._expr_12, currVal_12)) {
+            this.renderer.setElementClass(this._el_54, 'hide', currVal_12);
+            this._expr_12 = currVal_12;
         }
         this.detectViewChildrenChanges(throwOnChange);
         if (!throwOnChange) {
@@ -430,8 +459,8 @@ var _View_Membership0 = (function (_super) {
     };
     _View_Membership0.prototype.destroyInternal = function () {
         this._Icon_10_4.ngOnDestroy();
-        this._Icon_42_3.ngOnDestroy();
-        this._Icon_52_3.ngOnDestroy();
+        this._Icon_44_3.ngOnDestroy();
+        this._Icon_54_3.ngOnDestroy();
         this._Content_15_4.ngOnDestroy();
     };
     return _View_Membership0;
@@ -441,4 +470,47 @@ export function viewFactory_Membership0(viewUtils, parentInjector, declarationEl
         (renderType_Membership = viewUtils.createRenderComponentType('', 0, import10.ViewEncapsulation.None, styles_Membership, {}));
     }
     return new _View_Membership0(viewUtils, parentInjector, declarationEl);
+}
+var _View_Membership1 = (function (_super) {
+    __extends(_View_Membership1, _super);
+    function _View_Membership1(viewUtils, parentInjector, declarationEl) {
+        _super.call(this, _View_Membership1, renderType_Membership, import6.ViewType.EMBEDDED, viewUtils, parentInjector, declarationEl, import7.ChangeDetectorStatus.CheckAlways);
+    }
+    _View_Membership1.prototype.createInternal = function (rootSelector) {
+        this._el_0 = this.renderer.createElement(null, 'img', null);
+        this.renderer.setElementAttribute(this._el_0, 'alt', 'Profile Picture');
+        this._expr_0 = import7.UNINITIALIZED;
+        this.init([].concat([this._el_0]), [this._el_0], [], []);
+        return null;
+    };
+    _View_Membership1.prototype.detectChangesInternal = function (throwOnChange) {
+        this.detectContentChildrenChanges(throwOnChange);
+        var currVal_0 = import4.interpolate(1, '', this.parent.context.userPhoto, '');
+        if (import4.checkBinding(throwOnChange, this._expr_0, currVal_0)) {
+            this.renderer.setElementProperty(this._el_0, 'src', this.viewUtils.sanitizer.sanitize(import34.SecurityContext.URL, currVal_0));
+            this._expr_0 = currVal_0;
+        }
+        this.detectViewChildrenChanges(throwOnChange);
+    };
+    return _View_Membership1;
+}(import1.AppView));
+function viewFactory_Membership1(viewUtils, parentInjector, declarationEl) {
+    return new _View_Membership1(viewUtils, parentInjector, declarationEl);
+}
+var _View_Membership2 = (function (_super) {
+    __extends(_View_Membership2, _super);
+    function _View_Membership2(viewUtils, parentInjector, declarationEl) {
+        _super.call(this, _View_Membership2, renderType_Membership, import6.ViewType.EMBEDDED, viewUtils, parentInjector, declarationEl, import7.ChangeDetectorStatus.CheckAlways);
+    }
+    _View_Membership2.prototype.createInternal = function (rootSelector) {
+        this._el_0 = this.renderer.createElement(null, 'img', null);
+        this.renderer.setElementAttribute(this._el_0, 'alt', 'Profile Picture');
+        this.renderer.setElementAttribute(this._el_0, 'src', 'img/profile.png');
+        this.init([].concat([this._el_0]), [this._el_0], [], []);
+        return null;
+    };
+    return _View_Membership2;
+}(import1.AppView));
+function viewFactory_Membership2(viewUtils, parentInjector, declarationEl) {
+    return new _View_Membership2(viewUtils, parentInjector, declarationEl);
 }

@@ -20,7 +20,8 @@
 
     <div class="profile-wrapper">
         <div class="profile">
-            <img src="{{userPhoto}}" alt="Profile Picture">
+            <img *ngIf="userPhoto" src="{{userPhoto}}" alt="Profile Picture">
+            <img *ngIf="!userPhoto" src="img/profile.png" alt="Profile Picture">
         </div>
 
         <div class="profile-info">
