@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^2.0.0",
     "@angular/platform-server": "^2.0.0",
     "@ionic/app-scripts": "0.0.37",
+    "@ionic/cloud-angular": "^0.7.0",
     "@ionic/storage": "^1.0.3",
     "firebase": "^3.5.2",
     "ionic-angular": "^2.0.0-rc.1",

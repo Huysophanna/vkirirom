@@ -8,6 +8,8 @@ import { Dashboard } from '../pages/dashboard/dashboard';
 import { Category } from '../pages/category/category';
 import { AuthData } from '../providers/auth-data';
 import { Storage } from '@ionic/storage';
+import { Push, PushToken } from '@ionic/cloud-angular';
+import { Facebook } from 'ionic-native';
 
 
 @Component({
@@ -22,11 +24,12 @@ export class MyApp {
   authData: any = AuthData; 
   loading: any;
 
-  constructor(platform: Platform, public loadingCtrl: LoadingController, public storage: Storage) {
+  constructor(platform: Platform, public loadingCtrl: LoadingController, public storage: Storage, public push: Push) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+      
     });
 
     // set our app's pages
@@ -55,6 +58,16 @@ export class MyApp {
         this.rootPage = Login;
       }
     });
+
+    //Push notification configuration
+    this.push.register().then((t: PushToken) => {
+      return this.push.saveToken(t);
+    }).then((t: PushToken) => {
+      console.log('Token saved:', t.token);
+    });
+    this.push.rx.notification().subscribe((msg) => {
+      alert(msg.title + ': ' + msg.text);
+    });
   }
 
   openPage(page) {
@@ -65,6 +78,7 @@ export class MyApp {
     if (page.id == 4) {
       //store userProfile object to the phone storage
       this.storage.set('userProfile', "");
+      Facebook.logout();
       this.nav.setRoot(Login);
       console.log(page.title);
     }

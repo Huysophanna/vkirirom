@@ -84,9 +84,11 @@ export var Login = (function () {
             })
                 .catch(function (error) {
                 //alert("Firebase failure: " + JSON.stringify(error));
+                alert("Cannot sign you in, firebase problem");
             });
         }).catch(function (error) {
             console.log(error);
+            alert("Cannot sign you in, facebook problem");
         });
     };
     /**

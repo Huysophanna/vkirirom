@@ -6,11 +6,14 @@ import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { AuthData } from '../providers/auth-data';
 import { Storage } from '@ionic/storage';
+import { Push } from '@ionic/cloud-angular';
+import { Facebook } from 'ionic-native';
 export var MyApp = (function () {
-    function MyApp(platform, loadingCtrl, storage) {
+    function MyApp(platform, loadingCtrl, storage, push) {
         var _this = this;
         this.loadingCtrl = loadingCtrl;
         this.storage = storage;
+        this.push = push;
         this.rootPage = Dashboard;
         this.isHome = false;
         this.pages = [];
@@ -45,6 +48,15 @@ export var MyApp = (function () {
                 _this.rootPage = Login;
             }
         });
+        //Push notification configuration
+        this.push.register().then(function (t) {
+            return _this.push.saveToken(t);
+        }).then(function (t) {
+            console.log('Token saved:', t.token);
+        });
+        this.push.rx.notification().subscribe(function (msg) {
+            alert(msg.title + ': ' + msg.text);
+        });
     }
     MyApp.prototype.openPage = function (page) {
         // Reset the content nav to have just this page
@@ -53,6 +65,7 @@ export var MyApp = (function () {
         if (page.id == 4) {
             //store userProfile object to the phone storage
             this.storage.set('userProfile', "");
+            Facebook.logout();
             this.nav.setRoot(Login);
             console.log(page.title);
         }
@@ -71,6 +84,7 @@ export var MyApp = (function () {
         { type: Platform, },
         { type: LoadingController, },
         { type: Storage, },
+        { type: Push, },
     ];
     MyApp.propDecorators = {
         'nav': [{ type: ViewChild, args: [Nav,] },],

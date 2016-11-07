@@ -11,6 +11,20 @@ $blue_fb_color: #3956A0;
         .vkirirom-img {
             height: 100%;
         }
+    }
+    .container {
+        //for android when there is home button below
+        .dashboard-action {
+            .first-row {
+                margin-top: 5%;
+            }
+            .second-row {
+                margin-top: 5%;
+            }
+            .emergency {
+                margin-top: 8%;
+            }
+        }
     }    
 }
 

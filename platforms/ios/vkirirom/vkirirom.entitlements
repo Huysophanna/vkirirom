@@ -5,6 +5,7 @@
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.ionicframework.vkirirom215213</string>
+		<string>$(AppIdentifierPrefix)com.ionicframework.vkirirom215213</string>
 	</array>
 </dict>
 </plist>

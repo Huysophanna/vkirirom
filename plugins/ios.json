@@ -38,7 +38,18 @@
         },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "82070365426",
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.ionicframework.vkirirom215213"
+        }
+    }
 }

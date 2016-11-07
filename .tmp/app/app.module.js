@@ -8,6 +8,25 @@ import { Category } from '../pages/category/category';
 import { Membership } from '../pages/membership/membership';
 import { AuthData } from '../providers/auth-data';
 import { Storage } from '@ionic/storage';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+var CloudSettings = {
+    'core': {
+        'app_id': '89423043'
+    },
+    'push': {
+        'sender_id': '82070365426',
+        'pluginConfig': {
+            'ios': {
+                'alert': true,
+                'badge': true,
+                'sound': true
+            },
+            'android': {
+                'iconColor': '#343434'
+            }
+        }
+    }
+};
 export var AppModule = (function () {
     function AppModule() {
     }
@@ -21,7 +40,8 @@ export var AppModule = (function () {
                         Membership
                     ],
                     imports: [
-                        IonicModule.forRoot(MyApp)
+                        IonicModule.forRoot(MyApp),
+                        CloudModule.forRoot(CloudSettings)
                     ],
                     bootstrap: [IonicApp],
                     entryComponents: [
