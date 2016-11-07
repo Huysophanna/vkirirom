@@ -4,6 +4,7 @@ import { SMS } from 'ionic-native';
 import { Toast } from 'ionic-native';
 import { Geolocation } from 'ionic-native';
 import { Membership } from '../membership/membership';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the Dashboard page.
@@ -18,9 +19,13 @@ import { Membership } from '../membership/membership';
 
 export class Dashboard {
   membership = Membership;
+  pushNotification: any = null;
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController, public storage: Storage) {
+    this.storage.get('push-notification').then((value) => {
+        this.pushNotification = value;
+    });
+    setTimeout(() => this.pushNotification=null, 5000);
   }
 
   navigate() {
@@ -40,7 +45,6 @@ export class Dashboard {
         var message = "http://maps.google.com/?q=" + lat + "," + lng + "";
         console.log(message);
         var options = {
-
           replaceLineBreaks: false, // true to replace \n by a new line, false by default
           android: {
               //  intent: 'INTENT'  // Opens Default sms app
@@ -48,7 +52,7 @@ export class Dashboard {
             }
         }
         console.log("ready");
-        SMS.send(number, message, options)
+        SMS.send(number, message)
           .then(() => {
             alert("Please stay safe. Our team will be there so soon!");
             Toast.show("Please stay safe. Our team will be there so soon!", '5000', 'bottom').subscribe(

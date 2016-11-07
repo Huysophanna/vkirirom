@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { Nav, Platform, LoadingController } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import { Api } from '../providers/api';
@@ -23,6 +23,7 @@ export class MyApp {
   pages: any = []
   authData: any = AuthData; 
   loading: any;
+  pushNotifications: any;
 
   constructor(platform: Platform, public loadingCtrl: LoadingController, public storage: Storage, public push: Push) {
     platform.ready().then(() => {
@@ -66,6 +67,8 @@ export class MyApp {
       console.log('Token saved:', t.token);
     });
     this.push.rx.notification().subscribe((msg) => {
+      // this.storage.set('push-notification', msg.text);
+      // this.pushNotifications = msg.text;
       alert(msg.title + ': ' + msg.text);
     });
   }

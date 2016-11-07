@@ -6,23 +6,23 @@ $blue_fb_color: #3956A0;
 .scroll-content {
     overflow-y: hidden;
 }
+
+//remove header line in android
+.header-md::after {
+    background-image: none;
+}
 .platform-android {
-    .top-bar {
-        .vkirirom-img {
-            height: 100%;
-        }
-    }
     .container {
         //for android when there is home button below
         .dashboard-action {
             .first-row {
-                margin-top: 5%;
+                margin-top: 4%;
             }
             .second-row {
-                margin-top: 5%;
+                margin-top: 4%;
             }
             .emergency {
-                margin-top: 8%;
+                margin-top: 4%;
             }
         }
     }    

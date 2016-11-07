@@ -17,7 +17,8 @@
         <img class="vkirirom-img" src="img/vkirirom_logo.svg">
     </div>
     <div class="noti-bar">
-        <p>Please assemble at Football Field</p>
+        <p *ngIf="!pushNotification">Welcome to vKirirom Mobile App</p>
+        <p *ngIf="pushNotification">{{ pushNotification }}</p>
     </div>
     <div class="dashboard-action">
         <div class="first-row">
