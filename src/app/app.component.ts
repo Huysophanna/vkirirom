@@ -67,8 +67,8 @@ export class MyApp {
       console.log('Token saved:', t.token);
     });
     this.push.rx.notification().subscribe((msg) => {
-      // this.storage.set('push-notification', msg.text);
-      // this.pushNotifications = msg.text;
+      this.storage.set('push-notification', msg.text);
+      this.pushNotifications = msg.text;
       alert(msg.title + ': ' + msg.text);
     });
   }
