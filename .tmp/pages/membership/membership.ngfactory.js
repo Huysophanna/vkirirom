@@ -505,7 +505,7 @@ var _View_Membership2 = (function (_super) {
     _View_Membership2.prototype.createInternal = function (rootSelector) {
         this._el_0 = this.renderer.createElement(null, 'img', null);
         this.renderer.setElementAttribute(this._el_0, 'alt', 'Profile Picture');
-        this.renderer.setElementAttribute(this._el_0, 'src', 'img/profile.png');
+        this.renderer.setElementAttribute(this._el_0, 'src', 'img/profile.svg');
         this.init([].concat([this._el_0]), [this._el_0], [], []);
         return null;
     };

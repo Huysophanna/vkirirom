@@ -566,7 +566,7 @@ class _View_Membership2 extends import1.AppView<any> {
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'img',(null as any));
     this.renderer.setElementAttribute(this._el_0,'alt','Profile Picture');
-    this.renderer.setElementAttribute(this._el_0,'src','img/profile.png');
+    this.renderer.setElementAttribute(this._el_0,'src','img/profile.svg');
     this.init(([] as any[]).concat([this._el_0]),[this._el_0],([] as any[]),([] as any[]));
     return (null as any);
   }

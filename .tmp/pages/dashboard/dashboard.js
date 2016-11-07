@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SMS } from 'ionic-native';
 import { Toast } from 'ionic-native';
+import { Geolocation } from 'ionic-native';
 import { Membership } from '../membership/membership';
 /*
   Generated class for the Dashboard page.
@@ -19,24 +20,44 @@ export var Dashboard = (function () {
         this.navCtrl.push(Membership);
     };
     Dashboard.prototype.sos = function () {
-        var options = {
-            replaceLineBreaks: false,
-            android: {
-                //  intent: 'INTENT'  // Opens Default sms app
-                intent: '' // Sends sms without opening default sms app
-            }
-        };
-        SMS.send('+855962304669', 'https://www.google.com/maps/dir/Current+Location/', options)
-            .then(function () {
-            Toast.show("Success", '5000', 'bottom').subscribe(function (toast) {
-                console.log(toast);
+        console.log("Sending SMS");
+        Geolocation.getCurrentPosition()
+            .then(function (resp) {
+            var lat = resp.coords.latitude;
+            var lng = resp.coords.longitude;
+            console.log(lat);
+            console.log(lng);
+            var number = "0962304669";
+            var message = "http://maps.google.com/?q=" + lat + "," + lng + "";
+            console.log(message);
+            var options = {
+                replaceLineBreaks: false,
+                android: {
+                    //  intent: 'INTENT'  // Opens Default sms app
+                    intent: '' // Sends sms without opening default sms app
+                },
+                ios: {
+                    //  intent: 'INTENT'  // Opens Default sms app
+                    intent: '' // Sends sms without opening default sms app
+                }
+            };
+            console.log("ready");
+            SMS.send(number, message, options)
+                .then(function () {
+                alert("success");
+                Toast.show("Success", '5000', 'bottom').subscribe(function (toast) {
+                    console.log(toast);
+                });
+            }, function () {
+                alert("Error");
+                Toast.show("Error", '5000', 'bottom').subscribe(function (toast) {
+                    console.log(toast);
+                });
             });
-        }, function () {
-            Toast.show("Error", '5000', 'bottom').subscribe(function (toast) {
-                console.log(toast);
-            });
+        }, function (Error) {
+            console.log("Geolocation error" + Error);
+            alert("error");
         });
-        console.log("SOS is calling ");
     };
     Dashboard.prototype.ionViewDidLoad = function () {
         console.log('Hello Dashboard Page');

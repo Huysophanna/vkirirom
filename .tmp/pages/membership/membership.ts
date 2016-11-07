@@ -14,9 +14,10 @@ import { Storage } from '@ionic/storage';
 })
 export class Membership {
 
-  point: any;
+  point: number;
   userName: any;
   userPhoto: any;
+  profilePicture: any;
 
   constructor(public navCtrl: NavController, public storage: Storage) {
     this.storage.get('userProfile').then((value) => {

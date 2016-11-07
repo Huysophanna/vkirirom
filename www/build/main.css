@@ -21106,6 +21106,41 @@ sub {
   }
 }
 
+.header ion-fab {
+  top: 0;
+}
+
+.container ion-searchbar {
+  background: transparent;
+}
+
+.container ion-searchbar .searchbar-input {
+  border-radius: 15px;
+}
+
+.container .chat-wrapper ion-label {
+  margin: 5px 0 0 0;
+}
+
+.container .chat-wrapper ion-item {
+  background: transparent;
+}
+
+.container .chat-wrapper ion-item ion-col .username {
+  color: white;
+}
+
+.container .chat-wrapper ion-item ion-col .message {
+  margin: 15px 0 0 3px;
+  color: #9E9E9E;
+  font-size: 1.1em;
+}
+
+.container .chat-wrapper ion-item ion-col .status {
+  margin-top: 45px;
+  color: white;
+}
+
 .scroll-content {
   overflow-y: hidden;
 }
@@ -21388,7 +21423,6 @@ span {
 }
 
 .member-container .profile-wrapper .profile img {
-  background: transparent;
   width: 50%;
   height: 110%;
   margin: 0 auto;
