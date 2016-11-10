@@ -6,11 +6,13 @@ import { Facebook } from 'ionic-native';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Category } from '../pages/category/category';
 import { Membership } from '../pages/membership/membership';
+import { Chat } from '../pages/chat/chat';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
 import { Storage } from '@ionic/storage';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Push, PushToken } from '@ionic/cloud-angular';
+import { NotificationService } from '../providers/notifications';
 
 const CloudSettings: CloudSettings = {
   'core': {
@@ -37,7 +39,8 @@ const CloudSettings: CloudSettings = {
     Login,
     Dashboard,
     Category,
-    Membership
+    Membership,
+    Chat
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -49,12 +52,14 @@ const CloudSettings: CloudSettings = {
     Login,
     Dashboard,
     Category,
-    Membership
+    Membership,
+    Chat
   ],
   providers: [
     AuthData,
     Facebook,
-    Storage
+    Storage,
+    NotificationService
   ]
 })
 export class AppModule {}

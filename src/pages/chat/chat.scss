@@ -1,0 +1,38 @@
+.header {
+    ion-fab {
+        top: 0;
+    }
+}
+.container {
+    ion-searchbar {
+        background: transparent;
+
+        .searchbar-input {
+            border-radius: 15px;
+        }
+    }
+
+    .chat-wrapper {
+        ion-label {
+            margin: 5px 0 0 0;
+        }
+        ion-item {
+            background: transparent;
+
+            ion-col {
+                .username {
+                    color: white;
+                }
+                .message {
+                    margin: 15px 0 0 3px;
+                    color: #9E9E9E;
+                    font-size: 1.1em;
+                }
+                .status {
+                    margin-top: 45px;
+                    color: white;
+                }
+            }
+        }
+    }
+}

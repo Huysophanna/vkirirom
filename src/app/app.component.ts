@@ -13,7 +13,7 @@ import { Facebook } from 'ionic-native';
 
 
 @Component({
-  templateUrl: 'app.html',
+  templateUrl: 'app.html'
 })
 
 export class MyApp {
@@ -24,13 +24,18 @@ export class MyApp {
   authData: any = AuthData; 
   loading: any;
   pushNotifications: any;
+  pushNotificationTitle: any;
 
   constructor(platform: Platform, public loadingCtrl: LoadingController, public storage: Storage, public push: Push) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-      
+      // if ( this.pushNotifications == null) {
+      //   alert("Null");
+      // } else {
+      //   alert("In app cpmponent" + this.pushNotifications + this.pushNotificationTitle);
+      // }
     });
 
     // set our app's pages
@@ -60,17 +65,18 @@ export class MyApp {
       }
     });
 
-    //Push notification configuration
-    this.push.register().then((t: PushToken) => {
-      return this.push.saveToken(t);
-    }).then((t: PushToken) => {
-      console.log('Token saved:', t.token);
-    });
-    this.push.rx.notification().subscribe((msg) => {
-      this.storage.set('push-notification', msg.text);
-      this.pushNotifications = msg.text;
-      alert(msg.title + ': ' + msg.text);
-    });
+     //Push notification configuration
+      this.push.register().then((t: PushToken) => {
+          return this.push.saveToken(t);
+      }).then((t: PushToken) => {
+          console.log('Token saved:', t.token);
+      });
+      this.push.rx.notification().subscribe((msg) => {
+        //   this.storage.set('push-notification', msg.text);
+        this.pushNotifications = msg.text;
+        this.pushNotificationTitle = msg.title;
+        alert(this.pushNotifications + ': ' + this.pushNotificationTitle);
+      });
   }
 
   openPage(page) {
