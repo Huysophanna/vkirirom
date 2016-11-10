@@ -1,6 +1,19 @@
 $green_primary_color: #1C8954;
 $blue_fb_color: #3956A0;
 
+//for android platform 
+.platform-android {
+    //forgot btn no shadow on android
+    .forgot-btn.button-md {
+        box-shadow: none;
+    }
+    .error-message {
+        .label-md {
+            margin: 0;
+        }
+    }
+}
+
 .scroll-content {
     overflow-y: hidden;
 }
@@ -49,12 +62,17 @@ $blue_fb_color: #3956A0;
         border-bottom: transparent !important;
     }
 }
+
 .submit-login {
     button {
         line-height: 2;
     }
     .button-inner {
         display: block;
+        font-weight: initial;
+    }
+    .button-md {
+        text-transform: none;
     }
     width: 100%;
     height: 40%;
@@ -118,3 +136,5 @@ $blue_fb_color: #3956A0;
         background-color: transparent;
     }
 }
+
+
