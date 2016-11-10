@@ -10,6 +10,28 @@ import { Chat } from '../pages/chat/chat';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
 import { Storage } from '@ionic/storage';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { Push, PushToken } from '@ionic/cloud-angular';
+import { NotificationService } from '../providers/notifications';
+
+const CloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '89423043'
+  },
+  'push': {
+    'sender_id': '82070365426',
+    'pluginConfig': {
+      'ios': {
+        'alert': true,
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434'
+      }
+    }
+  }
+};
 
 @NgModule({
   declarations: [
@@ -21,7 +43,8 @@ import { Storage } from '@ionic/storage';
     Chat
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    CloudModule.forRoot(CloudSettings)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -35,7 +58,8 @@ import { Storage } from '@ionic/storage';
   providers: [
     AuthData,
     Facebook,
-    Storage
+    Storage,
+    NotificationService
   ]
 })
 export class AppModule {}

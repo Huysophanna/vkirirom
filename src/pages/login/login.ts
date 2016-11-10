@@ -97,10 +97,12 @@ export class Login {
         })
         .catch((error) => {
           //alert("Firebase failure: " + JSON.stringify(error));
+          alert("Cannot sign you in, firebase problem");
       });
 
     }).catch((error) => { 
       console.log(error); 
+      alert("Cannot sign you in, facebook problem");
     });    
   }
 

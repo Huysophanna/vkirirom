@@ -25,7 +25,8 @@
         </div>
 
         <div class="profile-info">
-            <span>{{ userName }}</span>
+            <span *ngIf="userName">{{ userName }}</span>
+            <span *ngIf="!userName">Chain.PK</span>
         </div>
 
         <div class="profile-info">

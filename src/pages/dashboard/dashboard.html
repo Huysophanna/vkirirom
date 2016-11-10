@@ -1,9 +1,3 @@
-<!--
-  Generated template for the Dashboard page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header class="header">
     <ion-navbar>
         <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
@@ -17,7 +11,8 @@
         <img class="vkirirom-img" src="img/vkirirom_logo.svg">
     </div>
     <div class="noti-bar">
-        <p>Please assemble at Football Field</p>
+        <p *ngIf="!Notification">Welcome to vKirirom Mobile App</p>
+        <p *ngIf="Notification">{{ Notification }}</p>
     </div>
     <div class="dashboard-action">
         <div class="first-row">
@@ -26,7 +21,7 @@
             <button class="map-btn"><img src="img/map-icon.svg">vMap</button>
         </div>
         <div class="second-row">
-            <button (click)="chat()" class="service-btn"><img src="img/chat-icon.svg">Chat</button>
+            <button class="service-btn"><img src="img/chat-icon.svg">Chat</button>
             <button class="member-btn"><img src="img/media-icon.svg">Media</button>
             <button class="map-btn"><img src="img/about-icon.svg">About Us</button>
         </div>
