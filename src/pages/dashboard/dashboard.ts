@@ -96,4 +96,5 @@ export class Dashboard {
   ionViewDidLoad() {
     console.log('Hello Dashboard Page');
   }
+
 }
