@@ -7,7 +7,7 @@ import { Facebook } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
 import { KeyboardAttachDirective } from '../../app/keyboard-attach.directive'
-import { Storage } from '@ionic/storage';
+import { NativeStorage } from 'ionic-native';
 
 /*
   Generated class for the Login page.
@@ -28,7 +28,7 @@ export class Login {
 
   constructor(public nav: NavController, public authData: AuthData, 
     public formBuilder: FormBuilder, public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController, public fb: Facebook, public storage: Storage) {
+    public loadingCtrl: LoadingController, public fb: Facebook) {
       this.userProfile;
        this.loginForm = formBuilder.group({
           email: ['', Validators.compose([Validators.required])],
@@ -93,7 +93,11 @@ export class Login {
           this.nav.setRoot(Dashboard);
 
           //store userProfile object to the phone storage
-          this.storage.set('userProfile', this.userProfile);
+          NativeStorage.setItem('userDetails', this.userProfile)
+            .then(
+              () => console.log('Stored item!'),
+              error => console.error('Error storing item', error)
+            );
         })
         .catch((error) => {
           //alert("Firebase failure: " + JSON.stringify(error));

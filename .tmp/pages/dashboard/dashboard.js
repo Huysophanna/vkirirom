@@ -57,6 +57,7 @@ export var Dashboard = (function () {
                 }
             };
             console.log("ready");
+            alert("about to send");
             SMS.send(number, message)
                 .then(function () {
                 alert("Please stay safe. Our team will be there so soon!");
@@ -71,6 +72,7 @@ export var Dashboard = (function () {
             });
         }, function (Error) {
             console.log("Geolocation error" + Error);
+            alert(Error);
             Toast.show("Cannot get your location", '5000', 'bottom').subscribe(function (toast) {
                 console.log(toast);
             });

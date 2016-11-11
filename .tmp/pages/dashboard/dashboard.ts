@@ -65,6 +65,7 @@ export class Dashboard {
             }
         }
         console.log("ready");
+        alert("about to send");
         SMS.send(number, message)
           .then(() => {
             alert("Please stay safe. Our team will be there so soon!");
@@ -84,6 +85,7 @@ export class Dashboard {
       },
       (Error) => {
         console.log("Geolocation error" + Error);
+        alert(Error)
         Toast.show("Cannot get your location", '5000', 'bottom').subscribe(
           toast => {
             console.log(toast);

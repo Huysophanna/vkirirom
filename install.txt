@@ -1,0 +1,6 @@
+//plugins to install when re-add platform
+
+ionic plugin add cordova-plugin-geolocation
+ionic plugin add cordova-sms-plugin
+cordova plugin add phonegap-plugin-push --variable SENDER_ID="82070365426"
+cordova plugin add cordova-plugin-nativestorage
