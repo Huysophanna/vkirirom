@@ -49,7 +49,7 @@ span {
         .profile-info {
             text-align: center;
             display: block;
-            font-size: xx-large;
+            font-size: 210%;
             color: white;
             margin-top: 40px;
         }
@@ -83,6 +83,48 @@ span {
             display: block;
             color: white;
             font-size: large;
+        }
+    }
+}
+
+//iphone 6
+@media only screen and (max-device-width: 375px) {
+    .header {
+        .back-button {
+            color: white;
+            font-size: 120%;
+        }
+
+        .toolbar-title {
+            font-size: 150%;
+        }
+
+        ion-buttons{
+            font-size: 210%;
+        }
+    }
+}
+
+//iphone 5 screen
+@media only screen and (max-device-width: 320px) {
+    .header {
+        .back-button {
+            font-size: 120%;
+        }
+
+        .toolbar-title {
+            font-size: 115%;
+        }
+
+        ion-buttons{
+            font-size: 190%;
+        }
+    }
+    .member-container {
+        .profile-wrapper {
+            .profile-info {
+                font-size: x-large;
+            }
         }
     }
 }
