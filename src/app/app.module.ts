@@ -12,7 +12,6 @@ import { Api } from '../providers/api';
 import { Storage } from '@ionic/storage';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Push, PushToken } from '@ionic/cloud-angular';
-import { NotificationService } from '../providers/notifications';
 
 const CloudSettings: CloudSettings = {
   'core': {
@@ -58,8 +57,7 @@ const CloudSettings: CloudSettings = {
   providers: [
     AuthData,
     Facebook,
-    Storage,
-    NotificationService
+    Storage
   ]
 })
 export class AppModule {}

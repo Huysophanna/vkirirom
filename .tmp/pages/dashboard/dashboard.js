@@ -28,6 +28,9 @@ export var Dashboard = (function () {
         this.push.rx.notification().subscribe(function (msg) {
             //   this.storage.set('push-notification', msg.text);
             _this.Notification = msg.text;
+            setTimeout(function () {
+                _this.Notification = null;
+            }, 3000);
         });
     }
     Dashboard.prototype.navigate = function () {

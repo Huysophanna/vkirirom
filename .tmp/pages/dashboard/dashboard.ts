@@ -33,6 +33,9 @@ export class Dashboard {
       this.push.rx.notification().subscribe((msg) => {
         //   this.storage.set('push-notification', msg.text);
         this.Notification = msg.text;
+        setTimeout(() => {
+        this.Notification = null;
+      }, 3000);
       });
   }
 

@@ -73,9 +73,7 @@ export class MyApp {
       });
       this.push.rx.notification().subscribe((msg) => {
         //   this.storage.set('push-notification', msg.text);
-        this.pushNotifications = msg.text;
-        this.pushNotificationTitle = msg.title;
-        alert(this.pushNotifications + ': ' + this.pushNotificationTitle);
+        alert(msg.title + ': ' + msg.text);
       });
   }
 
