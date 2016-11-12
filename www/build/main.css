@@ -21106,12 +21106,64 @@ sub {
   }
 }
 
+.sidemenu-header {
+  /*background: #f26e20;*/
+  height: 35%;
+}
+
+.profile {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.profile .profile-info span {
+  font-size: initial;
+  font-weight: 500;
+}
+
+.profile img {
+  width: 50%;
+  margin: 0 auto;
+  border: 6px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: #49a076;
+  display: block;
+}
+
+.option-btn {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+.option-btn .option-icon {
+  width: 20%;
+}
+
+.option-btn .option-title {
+  vertical-align: super;
+}
+
+.btn-section span {
+  font-weight: 400;
+  color: white;
+}
+
+.btn-section .option-btn {
+  background-color: #49a076;
+}
+
+.btn-section .option-icon.item-icon {
+  color: white;
+  font-size: 2.2em;
+}
+
 .header ion-fab {
   top: 0;
 }
 
 .container .scroll-content {
-  margin-top: 40px !important;
+  margin-top: 40px;
 }
 
 .container ion-searchbar {
