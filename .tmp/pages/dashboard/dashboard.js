@@ -4,6 +4,7 @@ import { SMS } from 'ionic-native';
 import { Toast } from 'ionic-native';
 import { Geolocation } from 'ionic-native';
 import { Membership } from '../membership/membership';
+import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
 import { Storage } from '@ionic/storage';
 import { Push } from '@ionic/cloud-angular';
@@ -30,11 +31,9 @@ export var Dashboard = (function () {
         this.push.rx.notification().subscribe(function (msg) {
             //   this.storage.set('push-notification', msg.text);
             _this.Notification = msg.text;
-            setTimeout(function () {
-                _this.Notification = null;
-            }, 3000);
         });
     }
+<<<<<<< HEAD
     Dashboard.prototype.Start = function () {
         this.locationTracker.startTracking();
     };
@@ -44,6 +43,20 @@ export var Dashboard = (function () {
     Dashboard.prototype.navigate = function () {
         console.log("function is calling");
         this.navCtrl.push(Membership);
+=======
+    Dashboard.prototype.navigate = function (num) {
+        switch (num) {
+            case 2:
+                this.navCtrl.push(Membership);
+                break;
+            case 3:
+                this.navCtrl.push(GoogleMapPage);
+                break;
+            case 4:
+                this.navCtrl.push(Chat);
+                break;
+        }
+>>>>>>> c18e1ad94fb66bd01177fb05cc4052462bdcd9c0
     };
     Dashboard.prototype.chat = function () {
         console.log("navigating to chat screen");
@@ -68,6 +81,7 @@ export var Dashboard = (function () {
                 }
             };
             console.log("ready");
+            alert("about to send");
             SMS.send(number, message)
                 .then(function () {
                 alert("Please stay safe. Our team will be there so soon!");
@@ -82,6 +96,7 @@ export var Dashboard = (function () {
             });
         }, function (Error) {
             console.log("Geolocation error" + Error);
+            alert(Error);
             Toast.show("Cannot get your location", '5000', 'bottom').subscribe(function (toast) {
                 console.log(toast);
             });

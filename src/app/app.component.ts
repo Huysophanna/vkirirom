@@ -1,16 +1,14 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import { Nav, Platform, LoadingController } from 'ionic-angular';
-import { StatusBar } from 'ionic-native';
+import { StatusBar, Facebook, NativeStorage } from 'ionic-native';
 import { Api } from '../providers/api';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
+import { GoogleMapPage } from '../pages/map/map';
 import { Category } from '../pages/category/category';
 import { AuthData } from '../providers/auth-data';
-import { Storage } from '@ionic/storage';
 import { Push, PushToken } from '@ionic/cloud-angular';
-import { Facebook } from 'ionic-native';
-
 
 @Component({
   templateUrl: 'app.html'
@@ -25,25 +23,29 @@ export class MyApp {
   loading: any;
   pushNotifications: any;
   pushNotificationTitle: any;
+  userName: any;
+  userPhoto: any;
+  userEmail: any;
 
-  constructor(platform: Platform, public loadingCtrl: LoadingController, public storage: Storage, public push: Push) {
+  constructor(platform: Platform, public loadingCtrl: LoadingController, public push: Push) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-      // if ( this.pushNotifications == null) {
-      //   alert("Null");
-      // } else {
-      //   alert("In app cpmponent" + this.pushNotifications + this.pushNotificationTitle);
-      // }
+      NativeStorage.getItem('userDetails')
+        .then(
+          data => {
+            this.userName = data.displayName;
+            this.userPhoto = data.photoURL;
+            this.userEmail = data.email;
+          },
+          error => console.error(error)
+        );
     });
 
     // set our app's pages
     this.pages = [
-      { title: 'Setting', component: Dashboard},
-      { title: 'About', component: Dashboard},
-      { title: 'Contact Us', component: Dashboard},
-      { title: 'Log Out', id: 4}
+      { title: 'Setting', component: Dashboard, ionicon: 'ios-settings-outline'},
+      { title: 'Contact Us', component: Dashboard, ionicon: 'ios-call-outline'},
+      { title: 'Log Out', id: 4, ionicon: 'ios-exit-outline'}
     ];
 
     //firebase configuration
@@ -72,8 +74,9 @@ export class MyApp {
           console.log('Token saved:', t.token);
       });
       this.push.rx.notification().subscribe((msg) => {
-        //   this.storage.set('push-notification', msg.text);
-        alert(msg.title + ': ' + msg.text);
+        this.pushNotifications = msg.text;
+        this.pushNotificationTitle = msg.title;
+        alert(this.pushNotifications + ': ' + this.pushNotificationTitle);
       });
   }
 
@@ -84,7 +87,6 @@ export class MyApp {
     //logout function
     if (page.id == 4) {
       //store userProfile object to the phone storage
-      this.storage.set('userProfile', "");
       Facebook.logout();
       this.nav.setRoot(Login);
       console.log(page.title);
@@ -95,6 +97,4 @@ export class MyApp {
     //this.nav.setRoot(Page1);
     this.isHome = false;
   }
-
-
 }

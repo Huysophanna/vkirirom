@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Chatmessage } from '../chatmessage/chatmessage';
+declare var io: any;
 
 /*
   Generated class for the Chat page.
@@ -13,12 +15,23 @@ import { NavController } from 'ionic-angular';
 })
 export class Chat {
 
-  Name = ["phanith", "phanna", "vinei", "Leo", "Dinesh", "Hide", "Brain"]
+  socket: any;
+  Name = ["Room One"]
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController) {
+
+  }
 
   ionViewDidLoad() {
     console.log('Hello Chat Page');
+  }
+
+  navtochatsms(name) {
+    console.log("clicked");
+    this.navCtrl.push(Chatmessage, {
+      messageTitle: name
+    });
+    
   }
 
 }

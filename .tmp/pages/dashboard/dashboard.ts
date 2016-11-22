@@ -4,6 +4,7 @@ import { SMS } from 'ionic-native';
 import { Toast } from 'ionic-native';
 import { Geolocation } from 'ionic-native';
 import { Membership } from '../membership/membership';
+import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
 import { Storage } from '@ionic/storage';
 import { Push, PushToken } from '@ionic/cloud-angular';
@@ -34,12 +35,10 @@ export class Dashboard {
       this.push.rx.notification().subscribe((msg) => {
         //   this.storage.set('push-notification', msg.text);
         this.Notification = msg.text;
-        setTimeout(() => {
-        this.Notification = null;
-      }, 3000);
       });
   }
 
+<<<<<<< HEAD
   Start() {
     this.locationTracker.startTracking();
   }
@@ -51,6 +50,18 @@ export class Dashboard {
   navigate() {
     console.log("function is calling");
     this.navCtrl.push(Membership);
+=======
+  navigate(num) {
+    switch (num) {
+      case 2: this.navCtrl.push(Membership);
+      break;
+      case 3: this.navCtrl.push(GoogleMapPage);
+      break;
+      case 4: this.navCtrl.push(Chat);
+      break;
+    }
+      
+>>>>>>> c18e1ad94fb66bd01177fb05cc4052462bdcd9c0
   }
 
   chat() {
@@ -77,6 +88,7 @@ export class Dashboard {
             }
         }
         console.log("ready");
+        alert("about to send");
         SMS.send(number, message)
           .then(() => {
             alert("Please stay safe. Our team will be there so soon!");
@@ -96,6 +108,7 @@ export class Dashboard {
       },
       (Error) => {
         console.log("Geolocation error" + Error);
+        alert(Error)
         Toast.show("Cannot get your location", '5000', 'bottom').subscribe(
           toast => {
             console.log(toast);
@@ -106,4 +119,5 @@ export class Dashboard {
   ionViewDidLoad() {
     console.log('Hello Dashboard Page');
   }
+
 }
