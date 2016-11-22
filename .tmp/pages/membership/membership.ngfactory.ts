@@ -639,7 +639,7 @@ class _View_Membership4 extends import1.AppView<any> {
   }
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'Chain.PK',(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'Username',(null as any));
     this.init(([] as any[]).concat([this._el_0]),[
       this._el_0,
       this._text_1

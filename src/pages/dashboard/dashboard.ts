@@ -7,6 +7,7 @@ import { Membership } from '../membership/membership';
 import { Chat } from '../chat/chat';
 import { Storage } from '@ionic/storage';
 import { Push, PushToken } from '@ionic/cloud-angular';
+import { LocationTracker } from '../../providers/location-tracker';
 
 /*
   Generated class for the Dashboard page.
@@ -23,7 +24,7 @@ export class Dashboard {
   membership = Membership;
   Notification:any;
 
-  constructor(public navCtrl: NavController, public storage: Storage, public push: Push) {
+  constructor(public navCtrl: NavController, public storage: Storage, public push: Push, public locationTracker: LocationTracker) {
     //Push notification configuration
       this.push.register().then((t: PushToken) => {
           return this.push.saveToken(t);
@@ -37,6 +38,14 @@ export class Dashboard {
         this.Notification = null;
       }, 3000);
       });
+  }
+
+  Start() {
+    this.locationTracker.startTracking();
+  }
+
+  Stop() {
+    this.locationTracker.stopTracking();
   }
 
   navigate() {

@@ -576,7 +576,7 @@ var _View_Membership4 = (function (_super) {
     }
     _View_Membership4.prototype.createInternal = function (rootSelector) {
         this._el_0 = this.renderer.createElement(null, 'span', null);
-        this._text_1 = this.renderer.createText(this._el_0, 'Chain.PK', null);
+        this._text_1 = this.renderer.createText(this._el_0, 'Username', null);
         this.init([].concat([this._el_0]), [
             this._el_0,
             this._text_1

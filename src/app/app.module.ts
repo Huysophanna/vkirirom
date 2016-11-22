@@ -12,6 +12,7 @@ import { Api } from '../providers/api';
 import { Storage } from '@ionic/storage';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Push, PushToken } from '@ionic/cloud-angular';
+import { LocationTracker } from '../providers/location-tracker';
 
 const CloudSettings: CloudSettings = {
   'core': {
@@ -57,7 +58,8 @@ const CloudSettings: CloudSettings = {
   providers: [
     AuthData,
     Facebook,
-    Storage
+    Storage,
+    LocationTracker
   ]
 })
 export class AppModule {}

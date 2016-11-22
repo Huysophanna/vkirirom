@@ -7,17 +7,19 @@ import { Membership } from '../membership/membership';
 import { Chat } from '../chat/chat';
 import { Storage } from '@ionic/storage';
 import { Push } from '@ionic/cloud-angular';
+import { LocationTracker } from '../../providers/location-tracker';
 /*
   Generated class for the Dashboard page.
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 export var Dashboard = (function () {
-    function Dashboard(navCtrl, storage, push) {
+    function Dashboard(navCtrl, storage, push, locationTracker) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.storage = storage;
         this.push = push;
+        this.locationTracker = locationTracker;
         this.membership = Membership;
         //Push notification configuration
         this.push.register().then(function (t) {
@@ -33,6 +35,12 @@ export var Dashboard = (function () {
             }, 3000);
         });
     }
+    Dashboard.prototype.Start = function () {
+        this.locationTracker.startTracking();
+    };
+    Dashboard.prototype.Stop = function () {
+        this.locationTracker.stopTracking();
+    };
     Dashboard.prototype.navigate = function () {
         console.log("function is calling");
         this.navCtrl.push(Membership);
@@ -93,6 +101,7 @@ export var Dashboard = (function () {
         { type: NavController, },
         { type: Storage, },
         { type: Push, },
+        { type: LocationTracker, },
     ];
     return Dashboard;
 }());
