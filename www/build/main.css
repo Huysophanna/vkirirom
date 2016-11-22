@@ -21158,6 +21158,19 @@ sub {
   font-size: 2.2em;
 }
 
+.fa {
+  color: white;
+  display: block;
+  margin: 5px 5px 0 0;
+}
+
+.page-wrapper {
+  background: linear-gradient(0deg, #1a6940 0%, #1a6940 17%, #1c8954 70%, #1c8954 100%);
+  /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8954', endColorstr='#1a6940',GradientType=0 );
+  /* ie6-9 */
+}
+
 .header ion-fab {
   top: 0;
 }
@@ -21195,6 +21208,126 @@ sub {
 .container .chat-wrapper ion-item ion-col .status {
   margin-top: 45px;
   color: white;
+}
+
+.list-ios:after {
+  content: "";
+  display: inline-table;
+  position: relative;
+  clear: both;
+}
+
+.chatmessage-container .chat-content {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 93.5%;
+}
+
+.chatmessage-container .scroll-content {
+  margin-top: 0;
+  padding: 5px;
+}
+
+.chatmessage-container .chat-wrapper {
+  position: relative;
+}
+
+.chatmessage-container .chat-wrapper:after {
+  content: "";
+  display: table;
+  position: relative;
+  clear: both;
+}
+
+.chatmessage-container .chat-wrapper p {
+  box-sizing: none;
+  color: white;
+}
+
+.chatmessage-container .chat-wrapper .chat-person-image {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble {
+  width: 70%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble:before {
+  background-color: #1C8954;
+  content: "\00a0";
+  display: block;
+  height: 16px;
+  position: absolute;
+  top: 5px;
+  -webkit-transform: rotate(39deg) skew(-35deg);
+  transform: rotate(39deg) skew(-35deg);
+  width: 20px;
+  z-index: 1;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble p {
+  margin: 0;
+  background-color: #1C8954;
+  border-radius: 5px;
+  box-shadow: 0 0 6px #B2B2B2;
+  display: inline-block;
+  padding: 10px 18px;
+  position: relative;
+  vertical-align: top;
+  z-index: 0;
+}
+
+.chatmessage-container .chat-wrapper .me {
+  margin: 5px 45px 5px 20px;
+}
+
+.chatmessage-container .chat-wrapper .me::before {
+  box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
+  left: -9px;
+}
+
+.chatmessage-container .chat-wrapper .you {
+  float: right;
+  margin: 5px 20px 5px 45px;
+}
+
+.chatmessage-container .chat-wrapper .you::before {
+  box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, 0.4);
+  right: -9px;
+}
+
+.chatmessage-container .chat-input {
+  position: absolute;
+  bottom: 0px;
+  border-top: 1px solid #1C8954;
+  width: 100%;
+}
+
+.chatmessage-container .chat-input .chatinput-field {
+  display: inline-block;
+  width: 80%;
+}
+
+.chatmessage-container .chat-input .chatinput-btn {
+  width: 18%;
+  background: #1C8954;
+  color: white;
+  line-height: 2;
+  border-radius: 15px;
+  transition: 0.5s;
+}
+
+.chatmessage-container .chat-input .chatinput-btn.activated {
+  opacity: 0.2;
 }
 
 .scroll-content {
@@ -21473,6 +21606,22 @@ sub {
 .submit-login .signin-fb-btn.activated {
   color: transparent;
   background-color: transparent;
+}
+
+ion-app._gmaps_cdv_ .nav-decor {
+  background-color: transparent !important;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.map-container #map {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 span {

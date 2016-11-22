@@ -27,7 +27,7 @@
     </ion-searchbar>
 
     <div class="chat-wrapper">
-        <ion-item *ngFor="let name of Name">
+        <ion-item *ngFor="let name of Name" (click)="navtochatsms(name)">
             <ion-grid>
                 <ion-row>
                     <ion-col width-20>

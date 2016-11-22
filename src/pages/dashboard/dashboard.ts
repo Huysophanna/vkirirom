@@ -4,6 +4,7 @@ import { SMS } from 'ionic-native';
 import { Toast } from 'ionic-native';
 import { Geolocation } from 'ionic-native';
 import { Membership } from '../membership/membership';
+import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
 import { Storage } from '@ionic/storage';
 import { Push, PushToken } from '@ionic/cloud-angular';
@@ -36,9 +37,16 @@ export class Dashboard {
       });
   }
 
-  navigate() {
-    console.log("function is calling");
-    this.navCtrl.push(Membership);
+  navigate(num) {
+    switch (num) {
+      case 2: this.navCtrl.push(Membership);
+      break;
+      case 3: this.navCtrl.push(GoogleMapPage);
+      break;
+      case 4: this.navCtrl.push(Chat);
+      break;
+    }
+      
   }
 
   chat() {

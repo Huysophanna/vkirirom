@@ -5,6 +5,7 @@ import { Api } from '../providers/api';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
+import { GoogleMapPage } from '../pages/map/map';
 import { Category } from '../pages/category/category';
 import { AuthData } from '../providers/auth-data';
 import { Push, PushToken } from '@ionic/cloud-angular';
