@@ -4,5 +4,9 @@ ionic plugin add cordova-plugin-geolocation
 ionic plugin add cordova-sms-plugin
 cordova plugin add phonegap-plugin-push --variable SENDER_ID="82070365426"
 cordova plugin add cordova-plugin-nativestorage
+<<<<<<< HEAD
 cordova plugin add cordova-plugin-network-information
 npm install angularfire2 --save
+=======
+ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"
+>>>>>>> 704df27e4bcbdaa7d381dafef2fef5105dddfe75

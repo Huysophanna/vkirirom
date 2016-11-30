@@ -117,6 +117,14 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-mauron85-background-geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-mauron85-background-geolocation"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-nativestorage": {
         "source": {
             "type": "registry",
@@ -125,28 +133,10 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.googlemaps.ios": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk",
-            "subdir": "."
-        },
-        "is_top_level": false,
-        "variables": {}
-    },
-    "ionic-plugin-keyboard": {
+    "plugin.google.maps": {
         "source": {
             "type": "registry",
-            "id": "ionic-plugin-keyboard@~2.2.1"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-googlemaps": {
-        "source": {
-            "type": "git",
-            "url": "http://github.com/phonegap-googlemaps-plugin/cordova-plugin-googlemaps",
-            "subdir": "."
+            "id": "cordova-plugin-googlemaps"
         },
         "is_top_level": true,
         "variables": {
