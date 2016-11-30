@@ -24,8 +24,8 @@
                 {{ userStatus[userStatus.length - 1] }}
             </p>-->
 
-            <div *ngIf="chatsLength == timeLength">
-                <div class="chat-wrapper" *ngFor="let time of time; let i=index">
+            <!--<div *ngIf="chatsLength == timeLength">-->
+                <div class="chat-wrapper" *ngFor="let i of chats">
                     <!--<p class="user-status" *ngIf="userStatus && userStatus.length > 1">
                     {{ userStatus[userStatus.length - 1] }}
                 </p><br>-->
@@ -36,12 +36,12 @@
                     <div class="chat-bubble me">
                         <span *ngIf="!userName">Anonymous</span>
                         <span *ngIf="userName">{{ userName }}</span>
-                        <p>{{chats[i]}}</p>
-                        <b>{{ time | date:'shortTime' }}</b>
+                        <p>{{i}}</p>
+                        <!--<b>{{ time | date:'shortTime' }}</b>-->
                     </div>
 
                 </div>
-            </div>
+            <!--</div>-->
             <!--<p class="user-status" *ngIf="userStatus && userStatus.length > 1">
                 {{ userStatus[userStatus.length - 1] }}
             </p>-->

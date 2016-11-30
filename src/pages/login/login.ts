@@ -8,7 +8,6 @@ import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
 import { KeyboardAttachDirective } from '../../app/keyboard-attach.directive'
 import { NativeStorage } from 'ionic-native';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 /*
   Generated class for the Login page.
@@ -29,7 +28,7 @@ export class Login {
 
   constructor(public nav: NavController, public authData: AuthData, 
     public formBuilder: FormBuilder, public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController, public fb: Facebook, private angFire: AngularFire) {
+    public loadingCtrl: LoadingController, public fb: Facebook) {
       this.userProfile;
        this.loginForm = formBuilder.group({
           email: ['', Validators.compose([Validators.required])],

@@ -20,10 +20,10 @@ export class Chatmessage {
     return [NgZone];
   }
   isUser: boolean;
-  chatsLength: number;
-  timeLength: number;
-  time: any;
-  timeObj: any;
+  // chatsLength: number;
+  // timeLength: number;
+  // time: any;
+  // timeObj: any;
   chats: any;
   chatinp: any;
   pkt: any;
@@ -42,9 +42,10 @@ export class Chatmessage {
             data: '',
             room: 'room1'
         };
-        this.time = [];
+        // this.time = [];
         this.socket = io.connect('http://110.74.203.152:3000');
-        console.log(this.timeObj);       
+        // console.log(this.timeObj);
+        
         console.log("run");
         this.socket.on(this.pkt.room + 'message', (msg) => {
           // this.test = new Date();
@@ -52,10 +53,10 @@ export class Chatmessage {
           this.ngzone.run(() => {
             console.log("run1");
             this.chats.push(msg);
-            this.time.push(this.timeObj = new Date());
-            this.timeLength = this.time.length;
-            this.chatsLength = this.chats.length;
-            console.log(this.time);
+            // this.time.push(this.timeObj = new Date());
+            // this.timeLength = this.time.length;
+            // this.chatsLength = this.chats.length;
+            // console.log(this.time);
             if (this.isUser == true) {
               console.log("This is me !!!!");
             } else {
@@ -67,15 +68,16 @@ export class Chatmessage {
           });
           
         }); 
+
         this.socket.on(this.pkt.room + 'userentered', (userenter) => {
           console.log("run2");
             this.ngzone.run(() => {
                 this.chats.push(userenter + ' has joined');
-                this.time.push(this.timeObj = new Date());
-                this.timeLength = this.time.length;
-                this.chatsLength = this.chats.length;
+                // this.time.push(this.timeObj = new Date());
+                // this.timeLength = this.time.length;
+                // this.chatsLength = this.chats.length;
                 console.log("run2");
-                console.log(this.time);
+                // console.log(this.time);
                 
             });
         });
@@ -83,11 +85,11 @@ export class Chatmessage {
           console.log("run3");
             this.ngzone.run(() => {
                 this.chats.push(userleave + ' has left');
-                this.time.push(this.timeObj = new Date());
-                this.timeLength = this.time.length;
-                this.chatsLength = this.chats.length;
+                // this.time.push(this.timeObj = new Date());
+                // this.timeLength = this.time.length;
+                // this.chatsLength = this.chats.length;
                 console.log("run3");
-                console.log(this.time);
+                // console.log(this.time);
                 
             });
         });
@@ -100,25 +102,27 @@ export class Chatmessage {
         },
         error => console.error(error)
       );
+      console.log("runend");
+      
   }
   
   send(msg) {
-      if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
-        let alert = this.alertCtrl.create({
-            title: "Something went wrong",
-            subTitle: "There was a problem with network connection. Try again in another minutes ...",
-            buttons: ["OK"]
-        });
-        alert.present();
-      } else {
+      // if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
+      //   let alert = this.alertCtrl.create({
+      //       title: "Something went wrong",
+      //       subTitle: "There was a problem with network connection. Try again in another minutes ...",
+      //       buttons: ["OK"]
+      //   });
+      //   alert.present();
+      // } else {
         if (msg != '') {
             this.pkt.data = msg;
             this.socket.emit('message', this.pkt);
             console.log("sms send");
         }
-        this.chatinp = '';
-      }
+      this.chatinp = '';
       this.isUser = true;
+
   }
 
   // doInfinite(infiniteScroll) {
@@ -135,9 +139,7 @@ export class Chatmessage {
     console.log("enteruser");
       this.pkt.data = this.userName;
       if(this.userName==null) {
-        this.pkt.data = "Anonymous"
-      } else {
-        this.pkt.data = this.userName
+        this.pkt.data = "Anonymous";
       }
       this.socket.emit('userentered', this.pkt);
       console.log("enteruser");
@@ -146,7 +148,7 @@ export class Chatmessage {
   ionViewDidLeave(){
       this.pkt.data = this.userName;
       if(this.userName==null) {
-        this.pkt.data = "User"
+        this.pkt.data = "Anonymous";
       }
       this.socket.emit('userleave', this.pkt);
       console.log("userleave");
