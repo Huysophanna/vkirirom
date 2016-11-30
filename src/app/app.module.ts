@@ -15,19 +15,7 @@ import { Api } from '../providers/api';
 import { Storage } from '@ionic/storage';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Push, PushToken } from '@ionic/cloud-angular';
-<<<<<<< HEAD
-import { AngularFireModule } from 'angularfire2';
-
-export const firebaseConfig = {
-  apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
-  authDomain: "vkirirom-809f8.firebaseapp.com",
-  databaseURL: "https://vkirirom-809f8.firebaseio.com",
-  storageBucket: "vkirirom-809f8.appspot.com",
-  messagingSenderId: "82070365426"
-}
-=======
 import { LocationTracker } from '../providers/location-tracker';
->>>>>>> 704df27e4bcbdaa7d381dafef2fef5105dddfe75
 
 const CloudSettings: CloudSettings = {
   'core': {
@@ -62,8 +50,7 @@ const CloudSettings: CloudSettings = {
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    CloudModule.forRoot(CloudSettings),
-    AngularFireModule.initializeApp(firebaseConfig)
+    CloudModule.forRoot(CloudSettings)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
