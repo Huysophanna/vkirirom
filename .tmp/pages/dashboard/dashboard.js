@@ -33,17 +33,6 @@ export var Dashboard = (function () {
             _this.Notification = msg.text;
         });
     }
-<<<<<<< HEAD
-    Dashboard.prototype.Start = function () {
-        this.locationTracker.startTracking();
-    };
-    Dashboard.prototype.Stop = function () {
-        this.locationTracker.stopTracking();
-    };
-    Dashboard.prototype.navigate = function () {
-        console.log("function is calling");
-        this.navCtrl.push(Membership);
-=======
     Dashboard.prototype.navigate = function (num) {
         switch (num) {
             case 2:
@@ -56,7 +45,6 @@ export var Dashboard = (function () {
                 this.navCtrl.push(Chat);
                 break;
         }
->>>>>>> c18e1ad94fb66bd01177fb05cc4052462bdcd9c0
     };
     Dashboard.prototype.chat = function () {
         console.log("navigating to chat screen");

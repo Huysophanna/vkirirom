@@ -4,3 +4,4 @@ ionic plugin add cordova-plugin-geolocation
 ionic plugin add cordova-sms-plugin
 cordova plugin add phonegap-plugin-push --variable SENDER_ID="82070365426"
 cordova plugin add cordova-plugin-nativestorage
+ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"

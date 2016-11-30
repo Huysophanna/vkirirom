@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!--
   Generated template for the Membership page.
 
@@ -52,59 +51,4 @@
         </div>
     </div>
 
-=======
-<!--
-  Generated template for the Membership page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header class="header">
-
-    <ion-navbar>
-        <ion-title>Membership Card</ion-title>
-        <ion-buttons right>
-            <ion-icon [ngStyle]="{'color': 'white'}" name="ios-notifications"></ion-icon>
-        </ion-buttons>
-    </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding class="member-container">
-
-    <div class="profile-wrapper">
-        <div class="profile">
-            <img *ngIf="userPhoto" src="{{userPhoto}}" alt="Profile Picture">
-            <img *ngIf="!userPhoto" src="img/profile.svg" alt="Profile Picture">
-        </div>
-
-        <div class="profile-info">
-            <span *ngIf="userName">{{ userName }}</span>
-            <span *ngIf="!userName">Username</span>
-        </div>
-
-        <div class="profile-info">
-            ID: <span> 9412558112 </span>
-        </div>
-
-        <ion-grid class="detail">
-            <ion-row>
-                <ion-col width-50 class="detail-item">
-                    <ion-icon name="basket"></ion-icon>&nbsp;&nbsp;vPoint<br>
-                    <span>168</span>
-                </ion-col>
-                <ion-col width-50 class="detail-item">
-                    <ion-icon name="logo-buffer"></ion-icon>&nbsp;&nbsp;Type<br>
-                    <span><b>Gold</b></span>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-
-        <div class="expire-date">
-            Expire Date: <span>10/ Oct/ 2017</span>
-        </div>
-    </div>
-
->>>>>>> c18e1ad94fb66bd01177fb05cc4052462bdcd9c0
 </ion-content>

@@ -38,19 +38,6 @@ export class Dashboard {
       });
   }
 
-<<<<<<< HEAD
-  Start() {
-    this.locationTracker.startTracking();
-  }
-
-  Stop() {
-    this.locationTracker.stopTracking();
-  }
-
-  navigate() {
-    console.log("function is calling");
-    this.navCtrl.push(Membership);
-=======
   navigate(num) {
     switch (num) {
       case 2: this.navCtrl.push(Membership);
@@ -60,8 +47,6 @@ export class Dashboard {
       case 4: this.navCtrl.push(Chat);
       break;
     }
-      
->>>>>>> c18e1ad94fb66bd01177fb05cc4052462bdcd9c0
   }
 
   chat() {
