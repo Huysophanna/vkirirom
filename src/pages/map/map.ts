@@ -17,11 +17,23 @@ export class GoogleMapPage{
     platform.ready().then(() => {
       this.initMap();
     });
+    var subscription = Geolocation.watchPosition()
+                              .filter((p) => p.code === undefined) //Filter Out Errors
+                             .subscribe(position => {
+      this.Longitude = position.coords.longitude;
+      this.Latitude = position.coords.latitude;
+      // alert(position.coords.longitude + ' ' + position.coords.latitude);
+    });
+
+    // To stop notifications
+    // subscription.unsubscribe();
   }
+
+  
 
   initMap(){
     // create a new map using element ID
-    let LatLng = new GoogleMapsLatLng(43.0741904, -89.3809802);
+    let LatLng = new GoogleMapsLatLng(11.3167, 104.0651);
     let map = new GoogleMap('map', {
           'mapTypeControl': true,
           'backgroundColor': 'white',
@@ -71,15 +83,26 @@ export class GoogleMapPage{
     map.addMarker(markerOptions)
       .then((marker: GoogleMapsMarker) => {
         marker.showInfoWindow();
+        marker.setTitle('vKirirom Pine Resort');
       });
 
     let bounds = [
-      new GoogleMapsLatLng(43.0741904, -89.3809802),
-      new GoogleMapsLatLng(43.6741904, -89.2809802)
+      new GoogleMapsLatLng(11.3191, 104.0743),
+      new GoogleMapsLatLng(11.3202, 104.0606),
+      new GoogleMapsLatLng(11.3116, 104.0599),
+      new GoogleMapsLatLng(11.3099, 104.0734),
     ];
+    // let bounds = [
+    //   new GoogleMapsLatLng(11.3202, 104.0734),
+    //   new GoogleMapsLatLng(11.3202, 104.0599),
+    //   new GoogleMapsLatLng(11.3099, 104.0599),
+    //   new GoogleMapsLatLng(11.3099, 104.0734),
+    // ];
+
+
 
     map.addGroundOverlay({
-      'url': "img/testmap.jpg",
+      'url': "img/vmap.png",
       'bounds': bounds
     });
 

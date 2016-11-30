@@ -4,3 +4,5 @@ ionic plugin add cordova-plugin-geolocation
 ionic plugin add cordova-sms-plugin
 cordova plugin add phonegap-plugin-push --variable SENDER_ID="82070365426"
 cordova plugin add cordova-plugin-nativestorage
+cordova plugin add cordova-plugin-network-information
+npm install angularfire2 --save

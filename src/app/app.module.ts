@@ -15,6 +15,15 @@ import { Api } from '../providers/api';
 import { Storage } from '@ionic/storage';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Push, PushToken } from '@ionic/cloud-angular';
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
+  authDomain: "vkirirom-809f8.firebaseapp.com",
+  databaseURL: "https://vkirirom-809f8.firebaseio.com",
+  storageBucket: "vkirirom-809f8.appspot.com",
+  messagingSenderId: "82070365426"
+}
 
 const CloudSettings: CloudSettings = {
   'core': {
@@ -49,7 +58,8 @@ const CloudSettings: CloudSettings = {
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    CloudModule.forRoot(CloudSettings)
+    CloudModule.forRoot(CloudSettings),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -52,7 +52,6 @@ $blue_fb_color: #3956A0;
         border: 1px solid;
         border-right: none;
         border-left: none;
-        background: $light_green_color;
     }
     .dashboard-action {
         display: block;
@@ -109,7 +108,7 @@ $blue_fb_color: #3956A0;
                 margin-top: 4%;
             }
             .second-row {
-                margin-top: 4%;
+                margin-top: 3%;
             }
             .emergency {
                 margin-top: 4%;
@@ -129,7 +128,10 @@ $blue_fb_color: #3956A0;
                 margin-top: 4%;
             }
             .emergency {
-                margin-top: 4%;
+                margin-top: 7%;
+                button {
+                    height: 4em;
+                }
             }
         }
     }

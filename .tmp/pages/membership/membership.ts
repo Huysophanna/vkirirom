@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 
 /*
@@ -19,8 +20,10 @@ export class Membership {
   userName: any;
   userPhoto: any;
   profilePicture: any;
+  users: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private angFire: AngularFire) {
+    this.users = angFire.database.list('/Users');
     NativeStorage.getItem('userDetails')
       .then(
         data => {

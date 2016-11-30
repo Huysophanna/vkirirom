@@ -1,6 +1,6 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { NavController, Content } from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
+import { NavController, Content, Platform, AlertController} from 'ionic-angular';
+import { NativeStorage, Network } from 'ionic-native';
 declare var io: any;
 
 /*
@@ -25,7 +25,7 @@ export class Chatmessage {
   userName: any;
   userPhoto: any;
   messageTitle: any;
-  constructor(public navCtrl: NavController, public ngzone: NgZone) {
+  constructor(public navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
         this.ngzone = new NgZone({enableLongStackTrace: false});
         this.chats = [];
         this.chatinp ='';
@@ -34,29 +34,21 @@ export class Chatmessage {
             room: 'room1'
         };
         this.socket = io.connect('http://110.74.203.152:3000');
-        console.log("run");
         this.socket.on(this.pkt.room + 'message', (msg) => {
-          console.log("runn1");
           this.ngzone.run(() => {
-            console.log("run1");
-            this.chats.push(msg);
+             this.chats.push(msg);
             this.content.scrollToBottom();
-            
           });
           
         }); 
         this.socket.on(this.pkt.room + 'userentered', (user) => {
-          console.log("run2");
             this.ngzone.run(() => {
                 this.chats.push(user + ' has joined');
-                console.log("run2");
             });
         });
         this.socket.on(this.pkt.room + 'userleave', (user) => {
-          console.log("run3");
             this.ngzone.run(() => {
                 this.chats.push(user + ' has left');
-                console.log("run3");
             });
         });
 
@@ -64,20 +56,27 @@ export class Chatmessage {
         data => {
           this.userName = data.displayName;
           this.userPhoto = data.photoURL;
-          console.log("runstorage");
         },
         error => console.error(error)
       );
-      console.log("runend");
   }
   
   send(msg) {
-      if(msg != ''){
-          this.pkt.data = msg;
-          this.socket.emit('message', this.pkt);
-          console.log("sms send");
+      if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
+        let alert = this.alertCtrl.create({
+            title: "Something went wrong",
+            subTitle: "There was a problem with network connection. Try again in another minutes ...",
+            buttons: ["OK"]
+        });
+        alert.present();
+      } else {
+        if (msg != '') {
+            this.pkt.data = msg;
+            this.socket.emit('message', this.pkt);
+            console.log("sms send");
+        }
+        this.chatinp = '';
       }
-      this.chatinp = '';
   }
 
   // doInfinite(infiniteScroll) {

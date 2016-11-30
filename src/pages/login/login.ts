@@ -8,6 +8,7 @@ import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
 import { KeyboardAttachDirective } from '../../app/keyboard-attach.directive'
 import { NativeStorage } from 'ionic-native';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 /*
   Generated class for the Login page.
@@ -24,11 +25,11 @@ export class Login {
   passwordChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
-  userProfile: any;
+  userProfile: any; users: any;
 
   constructor(public nav: NavController, public authData: AuthData, 
     public formBuilder: FormBuilder, public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController, public fb: Facebook) {
+    public loadingCtrl: LoadingController, public fb: Facebook, private angFire: AngularFire) {
       this.userProfile;
        this.loginForm = formBuilder.group({
           email: ['', Validators.compose([Validators.required])],
@@ -74,6 +75,29 @@ export class Login {
     }
   }
 
+  createNewUser() {
+    let user = firebase.database().ref('/Users');
+    user.child(this.userProfile.uid).set({"name": this.userProfile.displayName , "cardid": "", "email": this.userProfile.email, "vpoint": "", "type": "", "joined": "", "expire": ""});
+  }
+
+  userExist() {
+    //set database for users
+    let user = firebase.database().ref('/Users/'+this.userProfile.uid);
+    user.once('value')
+    .then((response)=>{
+      let existed = response.child('name').exists();
+      alert(existed);
+      if(!existed){
+        this.createNewUser();
+      }
+      console.log(existed);
+      alert("passed existed");
+    }).catch((err)=>{
+      console.log(err);
+      alert(err);
+    });
+  }
+
   facebookLogin(){
     console.log("Facebook Login Function");
     
@@ -88,8 +112,9 @@ export class Login {
       this.loading.present();
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
-          //alert("Firebase success: " + JSON.stringify(success));
           this.userProfile = success;
+          this.userExist();
+          //alert("Firebase success: " + JSON.stringify(success));
           this.nav.setRoot(Dashboard);
 
           //store userProfile object to the phone storage

@@ -45,3 +45,13 @@
         font-size: 2.2em;
     }
 }
+
+
+//iphone 5 screen
+@media only screen and (max-device-width: 320px) {
+    .btn-section {
+        .option-btn {
+            font-size: 1.2rem;
+        }
+    }
+}
