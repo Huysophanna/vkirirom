@@ -17,15 +17,9 @@
 
     <ion-scroll scrollY="true" class="chat-content">
         <ion-list>
-            <!--<p class="user-status" *ngIf="userStatus && userStatus.length > 0">
-                {{ userStatus[userStatus.length - 1] }}
-            </p>-->
-            <!--<p class="user-status" *ngIf="userStatus && userStatus.length == 1">
-                {{ userStatus[userStatus.length - 1] }}
-            </p>-->
 
-            <!--<div *ngIf="chatsLength == timeLength">-->
-                <div class="chat-wrapper" *ngFor="let i of chats">
+            <div *ngIf="chatsLength == timeLength">
+                <div class="chat-wrapper" *ngFor="let time of time; let i=index">
                     <!--<p class="user-status" *ngIf="userStatus && userStatus.length > 1">
                     {{ userStatus[userStatus.length - 1] }}
                 </p><br>-->
@@ -36,20 +30,12 @@
                     <div class="chat-bubble me">
                         <span *ngIf="!userName">Anonymous</span>
                         <span *ngIf="userName">{{ userName }}</span>
-<<<<<<< HEAD
                         <p>{{chats[i]}}</p>
                         <b>{{ time }}</b><i>{{ timeStatus }}</i>
-=======
-                        <p>{{i}}</p>
-                        <!--<b>{{ time | date:'shortTime' }}</b>-->
->>>>>>> 8e5aa51a8049377964deb47ca43440cb97c6360d
                     </div>
 
                 </div>
-            <!--</div>-->
-            <!--<p class="user-status" *ngIf="userStatus && userStatus.length > 1">
-                {{ userStatus[userStatus.length - 1] }}
-            </p>-->
+            </div>
 
 
         </ion-list>

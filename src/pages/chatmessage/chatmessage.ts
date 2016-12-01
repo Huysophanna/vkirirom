@@ -45,15 +45,10 @@ export class Chatmessage {
             data: '',
             room: 'room1'
         };
-        // this.time = [];
+        this.time = [];
         this.socket = io.connect('http://110.74.203.152:3000');
-        // console.log(this.timeObj);
-        
-        console.log("run");
         this.socket.on(this.pkt.room + 'message', (msg) => {
-          console.log("runn1");
           this.ngzone.run(() => {
-            console.log("run1");
             this.timeObj = new Date();
             this.hours = this.timeObj.getHours().toString();
             if (this.hours >= 1 && this.hours <= 12) {
@@ -76,15 +71,13 @@ export class Chatmessage {
             } else {
               console.log("Not me");
             }
-            
-            // this.userStatus.push(msg);
+
             this.content.scrollToBottom();
           });
           
         }); 
 
         this.socket.on(this.pkt.room + 'userentered', (userenter) => {
-          console.log("run2");
             this.ngzone.run(() => {
                 this.timeObj = new Date();
                 this.hours = this.timeObj.getHours().toString();
@@ -101,13 +94,9 @@ export class Chatmessage {
                 this.time.push(this.hours +":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
-                console.log("run2");
-                // console.log(this.time);
-                
             });
         });
         this.socket.on(this.pkt.room + 'userleave', (userleave) => {
-          console.log("run3");
             this.ngzone.run(() => {
                 this.timeObj = new Date();
                 this.hours = this.timeObj.getHours().toString();
@@ -124,61 +113,45 @@ export class Chatmessage {
                 this.time.push(this.hours+":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
-                console.log("run3");
-                // console.log(this.time);
                 
             });
         });
 
       NativeStorage.getItem('userDetails').then(
         data => {
-          console.log("runstorage");
           this.userName = data.displayName;
           this.userPhoto = data.photoURL;
         },
         error => console.error(error)
       );
-      console.log("runend");
       
   }
   
   send(msg) {
-      // if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
-      //   let alert = this.alertCtrl.create({
-      //       title: "Something went wrong",
-      //       subTitle: "There was a problem with network connection. Try again in another minutes ...",
-      //       buttons: ["OK"]
-      //   });
-      //   alert.present();
-      // } else {
+      if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
+        let alert = this.alertCtrl.create({
+            title: "Something went wrong",
+            subTitle: "There was a problem with network connection. Try again in another minutes ...",
+            buttons: ["OK"]
+        });
+        alert.present();
+      } else {
         if (msg != '') {
             this.pkt.data = msg;
             this.socket.emit('message', this.pkt);
-            console.log("sms send");
         }
       this.chatinp = '';
       this.isUser = true;
 
+    }
   }
-
-  // doInfinite(infiniteScroll) {
-  //   console.log('Begin async operation');
-
-  //   setTimeout(() => {
-
-  //     console.log('Async operation has ended');
-  //     infiniteScroll.complete();
-  //   }, 1000);
-  // }
     
   ionViewDidEnter(){
-    console.log("enteruser");
       this.pkt.data = this.userName;
       if(this.userName==null) {
         this.pkt.data = "Anonymous";
       }
       this.socket.emit('userentered', this.pkt);
-      console.log("enteruser");
   }
                          
   ionViewDidLeave(){
@@ -187,7 +160,6 @@ export class Chatmessage {
         this.pkt.data = "User";
       }
       this.socket.emit('userleave', this.pkt);
-      console.log("userleave");
   }
 
   ionViewDidLoad() {
