@@ -37,7 +37,7 @@
                         <span *ngIf="!userName">Anonymous</span>
                         <span *ngIf="userName">{{ userName }}</span>
                         <p>{{chats[i]}}</p>
-                        <b>{{ time | date:'shortTime' }}</b>
+                        <b>{{ time }}</b><i>{{ timeStatus }}</i>
                     </div>
 
                 </div>

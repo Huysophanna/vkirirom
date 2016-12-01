@@ -19,6 +19,9 @@ export class Chatmessage {
   static get parameters() {
     return [NgZone];
   }
+  timeStatus: string;
+  hours: any;
+  minute: any;
   isUser: boolean;
   chatsLength: number;
   timeLength: number;
@@ -47,12 +50,23 @@ export class Chatmessage {
         console.log(this.timeObj);       
         console.log("run");
         this.socket.on(this.pkt.room + 'message', (msg) => {
-          // this.test = new Date();
           console.log("runn1");
           this.ngzone.run(() => {
             console.log("run1");
+            this.timeObj = new Date();
+            this.hours = this.timeObj.getHours().toString();
+            if (this.hours >= 1 && this.hours <= 12) {
+              this.timeStatus = "AM";
+            } else if (this.hours > 12 && this.hours <= 24) {
+              this.timeStatus = "PM";
+              this.hours = this.hours - 12;
+            } else {
+              this.timeStatus = "";
+            }
+            
+            this.minute = this.timeObj.getMinutes().toString();
             this.chats.push(msg);
-            this.time.push(this.timeObj = new Date());
+            this.time.push(this.hours +":"+ this.minute);    
             this.timeLength = this.time.length;
             this.chatsLength = this.chats.length;
             console.log(this.time);
@@ -70,8 +84,19 @@ export class Chatmessage {
         this.socket.on(this.pkt.room + 'userentered', (userenter) => {
           console.log("run2");
             this.ngzone.run(() => {
+                this.timeObj = new Date();
+                this.hours = this.timeObj.getHours().toString();
+                if (this.hours >=1 && this.hours <= 12) {
+                  this.timeStatus = "AM";
+                } else if (this.hours > 12 && this.hours <= 24) {
+                  this.timeStatus = "PM";
+                  this.hours = this.hours - 12;
+                } else {
+                  this.timeStatus = "";
+                }
+                this.minute = this.timeObj.getMinutes().toString();
                 this.chats.push(userenter + ' has joined');
-                this.time.push(this.timeObj = new Date());
+                this.time.push(this.hours +":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
                 console.log("run2");
@@ -82,8 +107,19 @@ export class Chatmessage {
         this.socket.on(this.pkt.room + 'userleave', (userleave) => {
           console.log("run3");
             this.ngzone.run(() => {
+                this.timeObj = new Date();
+                this.hours = this.timeObj.getHours().toString();
+                if (this.hours >=1 && this.hours <= 12) {
+                  this.timeStatus = "AM";
+                } else if (this.hours > 12 && this.hours <= 24) {
+                  this.timeStatus = "PM";
+                  this.hours = this.hours - 12;
+                } else {
+                  this.timeStatus = "";
+                }
+                this.minute = this.timeObj.getMinutes().toString();
                 this.chats.push(userleave + ' has left');
-                this.time.push(this.timeObj = new Date());
+                this.time.push(this.hours+":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
                 console.log("run3");
@@ -135,7 +171,7 @@ export class Chatmessage {
     console.log("enteruser");
       this.pkt.data = this.userName;
       if(this.userName==null) {
-        this.pkt.data = "Anonymous"
+        this.pkt.data = "Anonymous";
       } else {
         this.pkt.data = this.userName
       }
@@ -146,7 +182,7 @@ export class Chatmessage {
   ionViewDidLeave(){
       this.pkt.data = this.userName;
       if(this.userName==null) {
-        this.pkt.data = "User"
+        this.pkt.data = "User";
       }
       this.socket.emit('userleave', this.pkt);
       console.log("userleave");
