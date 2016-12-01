@@ -25,6 +25,7 @@
     "@ionic/app-scripts": "0.0.37",
     "@ionic/cloud-angular": "0.7.0",
     "firebase": "^3.3.0",
+    "intl": "^1.2.5",
     "ionic-angular": "2.0.0-rc.1",
     "ionic-native": "^2.2.3",
     "ionicons": "3.0.0",
