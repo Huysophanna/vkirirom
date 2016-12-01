@@ -30,24 +30,28 @@
         </div>
 
         <div class="profile-info">
-            ID: <span> 9412558112 </span>
+            ID: <span *ngIf="userID"> {{ userID}} </span>
+                <span *ngIf="!userID"> 99123912 </span>
         </div>
 
         <ion-grid class="detail">
             <ion-row>
                 <ion-col width-50 class="detail-item">
                     <ion-icon name="basket"></ion-icon>&nbsp;&nbsp;vPoint<br>
-                    <span>168</span>
+                    <span *ngIf="userPoint"> {{ userPoint }} </span>
+                    <span *ngIf="!userPoint"> 168 </span>
                 </ion-col>
                 <ion-col width-50 class="detail-item">
                     <ion-icon name="logo-buffer"></ion-icon>&nbsp;&nbsp;Type<br>
-                    <span><b>Gold</b></span>
+                    <span *ngIf="userCardType"><b>{{ userCardType }}</b></span>
+                    <span *ngIf="!userCardType"><b>Gold</b></span>
                 </ion-col>
             </ion-row>
         </ion-grid>
 
         <div class="expire-date">
-            Expire Date: <span>10/ Oct/ 2017</span>
+            Expire Date: <span *ngIf="userCardExpire">{{ userCardExpire }}</span>
+                         <span *ngIf="!userCardExpire">10/ Oct/ 2017</span>
         </div>
     </div>
 
