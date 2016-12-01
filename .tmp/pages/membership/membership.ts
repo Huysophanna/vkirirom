@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
-
+import firebase from 'firebase';
 
 /*
   Generated class for the Membership page.
@@ -15,10 +15,8 @@ import { NativeStorage } from 'ionic-native';
 })
 export class Membership {
 
-  point: number;
-  userName: any;
-  userPhoto: any;
-  profilePicture: any;
+  userPoint: number; userName: any; userPhoto: any; userID; userCardType: any; 
+  userCardExpire: any; profilePicture: any; userData: any; 
 
   constructor(public navCtrl: NavController) {
     NativeStorage.getItem('userDetails')
@@ -26,9 +24,18 @@ export class Membership {
         data => {
           this.userName = data.displayName;
           this.userPhoto = data.photoURL;
+          //get the user data from firebase database
+          this.userData = firebase.database().ref('Users/' + data.uid).once('value').then(data => {
+            this.userID = data.child('cardid').val();
+            this.userPoint = data.child('vpoint').val();
+            this.userCardType = data.child('type').val();
+            this.userCardExpire = data.child('expire').val();
+          });
         },
         error => console.error(error)
-      );
+    );
+    
+
   }
 
   ionViewDidLoad() {
@@ -36,7 +43,7 @@ export class Membership {
   }
 
   pointSys() {
-    if (this.point == 0) {
+    if (this.userPoint == 0) {
       console.log("Out of vPoint!!!!!");
     } else {
       console.log("Point is here!!!!");
