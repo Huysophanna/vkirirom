@@ -21267,9 +21267,9 @@ sub {
   position: relative;
   margin-bottom: 10px;
   max-width: 100%;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .chatmessage-container .chat-wrapper:after {
@@ -21286,7 +21286,7 @@ sub {
 
 .chatmessage-container .chat-wrapper .chat-person-image {
   display: inline-block;
-  width: 60px;
+  width: 53px;
   height: 43px;
   position: relative;
   overflow: hidden;
@@ -21384,33 +21384,27 @@ sub {
   margin: 0px 10px 0px 30px;
 }
 
-.chatmessage-container .chat-wrapper .me::before {
+.chatmessage-container .chat-wrapper .me .you {
+  margin: 0px 10px 0px 20px;
+}
+
+.chatmessage-container .chat-wrapper .me .you::before {
   box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
   left: -8px;
 }
 
-.chatmessage-container .chat-wrapper .you {
-  float: right;
-  margin: 5px 20px 5px 45px;
-}
-
-.chatmessage-container .chat-wrapper .you::before {
-  box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, 0.4);
-  right: -9px;
-}
-
-.chatmessage-container .chat-input {
+.chatmessage-container .chat-wrapper .chat-input {
   position: fixed;
   border-top: 1px solid #1C8954;
   width: 100%;
 }
 
-.chatmessage-container .chat-input .chatinput-field {
+.chatmessage-container .chat-wrapper .chat-input .chatinput-field {
   display: inline-block;
   width: 80%;
 }
 
-.chatmessage-container .chat-input .chatinput-btn {
+.chatmessage-container .chat-wrapper .chat-input .chatinput-btn {
   width: 18%;
   background: #1C8954;
   color: white;
@@ -21422,7 +21416,7 @@ sub {
   right: 10px;
 }
 
-.chatmessage-container .chat-input .chatinput-btn.activated {
+.chatmessage-container .chat-wrapper .chat-input .chatinput-btn.activated {
   opacity: 0.2;
 }
 

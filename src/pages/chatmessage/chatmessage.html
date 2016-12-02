@@ -17,8 +17,8 @@
 
     <ion-scroll scrollY="true" class="chat-content">
         <ion-list>
-
-            <div *ngIf="chatsLength == timeLength">
+            <div *ngIf="chatsLength == timeLength ">
+                <!--Me section-->
                 <div class="chat-wrapper" *ngFor="let i of time; let j=index;">
                     <div class="chat-person-image" *ngIf="chats[j].message">
                         <img *ngIf="userPhoto" src="{{userPhoto}}">
@@ -36,10 +36,9 @@
                         </div>
                         <strong *ngIf="chats[j].status">{{ chats[j].status }}</strong>
                     </div>
-
                 </div>
-            </div>
 
+            </div>
 
         </ion-list>
     </ion-scroll>
