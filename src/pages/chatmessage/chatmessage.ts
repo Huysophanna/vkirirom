@@ -52,6 +52,7 @@ export class Chatmessage {
         this.pkt = {
             message: '',
             username: '',
+            photo: '',
             status: '',
             room: 'room1'
         };
@@ -77,13 +78,6 @@ export class Chatmessage {
             this.time.push(this.hours +":"+ this.minute);    
             this.timeLength = this.time.length;
             this.chatsLength = this.chats.length;
-
-            if (this.isUser == true) {
-              console.log("This is me !!!!");
-            } else {
-              console.log("Not me");
-            }
-
             this.content.scrollToBottom();
           });
           
@@ -153,12 +147,13 @@ export class Chatmessage {
       } else {
         if (msg != '') {
             this.pkt.message = msg;
+            this.pkt.photo = this.userPhoto;
             this.socket.emit('message', this.pkt);
         }
       }
       this.chatinp = '';
       this.isUser = true;
-
+      this.content.scrollToBottom(1);
     }
   
     
@@ -174,7 +169,7 @@ export class Chatmessage {
       
       this.socket.emit('userentered', this.pkt);
   }
-                         
+
   ionViewDidLeave(){
       this.pkt.status = this.userName  + ' has left';
       this.pkt.username = this.userName;

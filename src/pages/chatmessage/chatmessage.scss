@@ -26,7 +26,7 @@ $green_primary_color: #1C8954;
         position: relative;
         margin-bottom: 10px;
         max-width: 100%;
-        display: inline-flex;
+        display: flex;
         &:after {
             content: "";
             display: table;
@@ -39,7 +39,7 @@ $green_primary_color: #1C8954;
         }
         .chat-person-image {
             display: inline-block;
-            width: 60px;
+            width: 53px;
             height: 43px;
             position: relative;
             overflow: hidden;
@@ -88,18 +88,18 @@ $green_primary_color: #1C8954;
                 font-size: 12px;
             }
         }
-        .me {
+        .you {
             margin: 0px 10px 0px 20px;
         }
-        .me::before {
+        .you::before {
             box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4);
             left: -8px;
         }
-        .you {
+        .me {
             float: right;
             margin: 5px 20px 5px 45px;
         }
-        .you::before {
+        .me::before {
             box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4);
             right: -9px;
         }
