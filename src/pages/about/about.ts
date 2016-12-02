@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
+import * as firebase from 'firebase';
+import { Observable } from 'rxjs';
+
 
 /*
   Generated class for the About page.
@@ -12,11 +15,47 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'about.html'
 })
 export class About {
+	service = "accom";
+	error: any;
+	contents: Observable<any[]>;
+	constructor(public platform: Platform){
+		
+	}
 
-  constructor(public navCtrl: NavController) {}
+	catagorize(i){
 
-  ionViewDidLoad() {
-    console.log('Hello About Page');
-  }
+		switch (i) {
+			case 1:
+				this.service = "accom";
+				break;
+			case 2:
+				this.service = "service";
+				break;
+			case 3:
+				this.service = "prop"
+				break;
+			
+			default:
+				this.service = "accom";
+				break;
+		}
+	}
 
+	launchUrl(url){
+		this.platform.ready().then(()=>{
+			let cordova: any;
+			cordova.InappBrowser.open(url, "_system", "location=true");
+		});
+	}
+
+	// getContents(){
+	// 	let rootRef = firebase.database().ref();
+	// 	let contentsRef = rootRef.child('contents');
+
+	// 	contentsRef.once('value').then((data)=>{
+	// 		this.contents = data.val();
+	// 	}).catch((error)=>{
+	// 		this.error = error.message;
+	// 	});
+	// }
 }

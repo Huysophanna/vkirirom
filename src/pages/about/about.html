@@ -1,27 +1,137 @@
-<!--
-  Generated template for the About page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header class="header">
 
     <ion-navbar>
         <ion-title>About Us</ion-title>
-        <ion-buttons right>
-            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-        </ion-buttons>
     </ion-navbar>
 
 </ion-header>
 
+<div class="content">
+	<ion-content class="about-container" ([ngModel])="service" [ngSwitch]="service">
+	
+		<div class="accommodation" *ngSwitchCase="'accom'">
+			<ion-scroll zooming="false" scrollY="true" class="page-scroll" [ngSwitch]="service">
+				<ion-card class="custom-card">
+				  <img src="img/aboutus/bungalow.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Bungalow
+				      </ion-card-title>
+				    <p>
+				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				      tempor incididunt ut labore.
+				    </p>
+				  </ion-card-content>
+				</ion-card>
 
-<ion-content padding class="page-wrapper">
-    <div class="wrapper">
-        <ion-tabs>
-            <ion-tab title="Tab-1"></ion-tab>
-            <ion-tab title="Tab-2"></ion-tab>
-            <ion-tab title="Tab-3"></ion-tab>
-        </ion-tabs>
-    </div>
-</ion-content>
+				<ion-card class="custom-card">
+				  <img src="img/aboutus/camping.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Camping
+				      </ion-card-title>
+				    <p>
+					  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				      tempor incididunt ut labore.
+				    </p>
+				  </ion-card-content>
+				</ion-card>
+
+				<ion-card class="custom-card">
+				  <img src="img/aboutus/khmercottage.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Khmer Cottage
+				      </ion-card-title>
+				    <p>
+				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				      tempor incididunt ut labore.
+				    </p>
+				  </ion-card-content>
+				</ion-card>
+
+				<ion-card class="custom-card">
+				  <img src="img/aboutus/luxurytent.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				 	  Luxury Tent
+				      </ion-card-title>
+				    <p>
+				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				      tempor incididunt ut labore.
+				    </p>
+				  </ion-card-content>
+				</ion-card>
+
+				<ion-card class="custom-card">
+				  <img src="img/aboutus/piperoom.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Pipe Room
+				      </ion-card-title>
+				    <p>
+				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				      tempor incididunt ut labore.
+				    </p>
+				  </ion-card-content>
+				</ion-card>
+			</ion-scroll>
+		</div>
+
+		<div class="property" *ngSwitchCase="'prop'">
+			<ion-scroll zooming="false" scrollY="true" class="page-scroll">
+				<ion-card class="custom-card">
+				  <img src="img/aboutus/boreyA.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Borey A
+				    </ion-card-title>
+				    <p>
+					  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				      tempor incididunt ut labore.
+				    </p>
+				  </ion-card-content>
+				</ion-card>
+			</ion-scroll>
+		</div>
+
+		<div class="services" *ngSwitchCase="'service'">
+			<ion-scroll zooming="false" scrollY="true" class="page-scroll">
+				<ion-card class="custom-card">
+				  <img src="img/aboutus/pineResort.JPG"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Pine View Restaurant
+				    </ion-card-title>
+				    <p>
+				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				      tempor incididunt ut labore.
+				      <button (click)="launchUrl('http://vkirirom.com')">DETAIL</button>
+				    </p>
+
+				  </ion-card-content>
+				</ion-card>
+			</ion-scroll>
+		</div>
+		
+	</ion-content>
+</div>
+
+<div class="tab_bar">
+	<div class="inner">
+
+		<button class="btn" [ngClass]="{active: service == 'accom'}" (click)="catagorize(1)">
+			Accommodation
+		</button>
+
+		<button class="btn" [ngClass]="{active: service == 'service'}" (click)="catagorize(2)">
+			Service
+		</button>
+
+		<button class="btn" [ngClass]="{active: service == 'prop'}" (click)="catagorize(3)">
+			Property
+		</button>
+
+	</div>
+</div>
