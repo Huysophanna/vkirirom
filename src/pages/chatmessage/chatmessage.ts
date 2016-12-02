@@ -61,6 +61,10 @@ export class Chatmessage {
             }
             
             this.minute = this.timeObj.getMinutes().toString();
+            if (this.minute < 10) {
+              this.minute = "0" + this.minute;
+            }
+
             this.chats.push(msg);
             this.time.push(this.hours +":"+ this.minute);    
             this.timeLength = this.time.length;
@@ -90,6 +94,10 @@ export class Chatmessage {
                   this.timeStatus = "";
                 }
                 this.minute = this.timeObj.getMinutes().toString();
+                if (this.minute < 10) {
+                  this.minute = "0" + this.minute;
+                }
+
                 this.chats.push(userenter + ' has joined');
                 this.time.push(this.hours +":"+this.minute);
                 this.timeLength = this.time.length;
@@ -109,6 +117,9 @@ export class Chatmessage {
                   this.timeStatus = "";
                 }
                 this.minute = this.timeObj.getMinutes().toString();
+                if (this.minute < 10) {
+                  this.minute = "0" + this.minute;
+                }
                 this.chats.push(userleave + ' has left');
                 this.time.push(this.hours+":"+this.minute);
                 this.timeLength = this.time.length;
