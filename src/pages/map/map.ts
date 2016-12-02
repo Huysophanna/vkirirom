@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, Geolocation, GoogleMapsMarker, CameraPosition, GoogleMapsMarkerOptions} from 'ionic-native';
 declare var plugin: any;
+declare var navigator: any;
 
 @Component({
 	selector: 'page-map',
  	templateUrl: 'map.html',
 })
 
-export class GoogleMapPage{
+export class GoogleMapPage {
 	Map: any;
   Longitude: any;
   Latitude: any;
@@ -16,20 +17,23 @@ export class GoogleMapPage{
   constructor(public navCtrl: NavController, public platform: Platform) {
     platform.ready().then(() => {
       this.initMap();
+      this.watchPosition();
     });
-    var subscription = Geolocation.watchPosition()
-                              .filter((p) => p.code === undefined) //Filter Out Errors
-                             .subscribe(position => {
-      this.Longitude = position.coords.longitude;
-      this.Latitude = position.coords.latitude;
-      // alert(position.coords.longitude + ' ' + position.coords.latitude);
-    });
-
-    // To stop notifications
-    // subscription.unsubscribe();
   }
 
-  
+  watchPosition(){
+    navigator.geolocation.watchPosition(this.onWatchSuccess,this.onWatchError,{enableHighAccuracy: true});
+  }
+
+  onWatchSuccess(position){
+    this.Latitude = position.coords.Latitude;
+    this.Longitude = position.coords.Longitude;
+
+  }
+
+  onWatchError(error){
+    console.log(error.code+" : "+error.message);
+  }
 
   initMap(){
     // create a new map using element ID

@@ -19,8 +19,22 @@ export class Chatmessage {
   static get parameters() {
     return [NgZone];
   }
-  isUser: boolean; chatsLength: number; timeLength: number; time: any; timeObj: any; chats: any; chatinp: any;
-  pkt: any; socket: any; userName: any; userPhoto: any; messageTitle: any; userStatus: any;
+  timeStatus: string;
+  hours: any;
+  minute: any;
+  isUser: boolean;
+  chatsLength: number;
+  timeLength: number;
+  time: any;
+  timeObj: any;
+  chats: any = [];
+  chatinp: any;
+  pkt: any;
+  socket: any;
+  userName: any;
+  userPhoto: any;
+  messageTitle: any;
+  userStatus: any;
 
   constructor(public navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
         NativeStorage.getItem('userDetails')
@@ -33,66 +47,98 @@ export class Chatmessage {
 
         this.isUser = false;
         this.ngzone = new NgZone({enableLongStackTrace: false});
-        this.chats = [];
         this.userStatus = [];
         this.chatinp ='';
         this.pkt = {
             message: '',
-            username: 'Phanna',
+            username: '',
+            status: '',
             room: 'room1'
         };
         this.time = [];
         this.socket = io.connect('http://110.74.203.152:3000');
         // console.log(this.timeObj);
         
-        console.log("run");
         this.socket.on(this.pkt.room + 'message', (data) => {
-          // this.test = new Date();
-          console.log("runn1");
-          this.ngzone.run(() => {
-            this.content.scrollToBottom();
-            console.log("run1");
+            this.ngzone.run(() => {
+            this.timeObj = new Date();
+            this.hours = this.timeObj.getHours().toString();
+            if (this.hours >= 1 && this.hours <= 12) {
+              this.timeStatus = "AM";
+            } else if (this.hours > 12 && this.hours <= 24) {
+              this.timeStatus = "PM";
+              this.hours = this.hours - 12;
+            } else {
+              this.timeStatus = "";
+            }
+            
+            this.minute = this.timeObj.getMinutes().toString();
             this.chats.push(data);
-            this.time.push(this.timeObj = new Date());
+            this.time.push(this.hours +":"+ this.minute);    
             this.timeLength = this.time.length;
             this.chatsLength = this.chats.length;
-            // console.log(this.time);
+
             if (this.isUser == true) {
               console.log("This is me !!!!");
             } else {
               console.log("Not me");
             }
-            
-            // this.userStatus.push(msg);
+
             this.content.scrollToBottom();
           });
           
         }); 
 
         this.socket.on(this.pkt.room + 'userentered', (userenter) => {
-          console.log("run2");
             this.ngzone.run(() => {
-                this.chats.push(userenter + ' has joined');
-                this.time.push(this.timeObj = new Date());
+                this.timeObj = new Date();
+                this.hours = this.timeObj.getHours().toString();
+                if (this.hours >=1 && this.hours <= 12) {
+                  this.timeStatus = "AM";
+                } else if (this.hours > 12 && this.hours <= 24) {
+                  this.timeStatus = "PM";
+                  this.hours = this.hours - 12;
+                } else {
+                  this.timeStatus = "";
+                }
+                this.minute = this.timeObj.getMinutes().toString();
+
+                this.chats.push(userenter);
+                console.log(userenter);          
+                this.time.push(this.hours +":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
-                console.log("run2");
-                // console.log(this.time);
-                
             });
         });
         this.socket.on(this.pkt.room + 'userleave', (userleave) => {
-          console.log("run3");
             this.ngzone.run(() => {
-                this.chats.push(userleave + ' has left');
-                this.time.push(this.timeObj = new Date());
+                this.timeObj = new Date();
+                this.hours = this.timeObj.getHours().toString();
+                if (this.hours >=1 && this.hours <= 12) {
+                  this.timeStatus = "AM";
+                } else if (this.hours > 12 && this.hours <= 24) {
+                  this.timeStatus = "PM";
+                  this.hours = this.hours - 12;
+                } else {
+                  this.timeStatus = "";
+                }
+                this.minute = this.timeObj.getMinutes().toString();
+                this.chats.push(userleave);
+
+                this.time.push(this.hours+":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
-                console.log("run3");
-                // console.log(this.time);
                 
             });
         });
+
+      NativeStorage.getItem('userDetails').then(
+        data => {
+          this.userName = data.displayName;
+          this.userPhoto = data.photoURL;
+        },
+        error => console.error(error)
+      );
       
   }
   
@@ -108,31 +154,35 @@ export class Chatmessage {
         if (msg != '') {
             this.pkt.message = msg;
             this.socket.emit('message', this.pkt);
-            console.log("sms send");
         }
       }
       this.chatinp = '';
       this.isUser = true;
 
-  }
+    }
+  
     
   ionViewDidEnter(){
     console.log("enteruser");
+      this.pkt.status = this.userName  + ' has joined';
       this.pkt.username = this.userName;
       if(this.userName==null) {
         this.pkt.username = "Anonymous";
+        this.pkt.status = "Anonymous"  + ' has joined';
       }
+      // console.log(this.pkt.message);
+      
       this.socket.emit('userentered', this.pkt);
-      console.log("enteruser");
   }
                          
   ionViewDidLeave(){
+      this.pkt.status = this.userName  + ' has left';
       this.pkt.username = this.userName;
       if(this.userName==null) {
         this.pkt.username = "Anonymous";
+        this.pkt.status = "Anonymous"  + ' has left';
       }
       this.socket.emit('userleave', this.pkt);
-      console.log("userleave");
   }
 
   ionViewDidLoad() {
