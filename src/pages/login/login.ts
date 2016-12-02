@@ -85,12 +85,10 @@ export class Login {
     user.once('value')
     .then((response)=>{
       let existed = response.child('name').exists();
-      alert(existed);
       if(!existed){
         this.createNewUser();
       }
       console.log(existed);
-      alert("passed existed");
     }).catch((err)=>{
       console.log(err);
       alert(err);
@@ -113,6 +111,7 @@ export class Login {
         .then((success) => {
           this.userProfile = success;
           this.userExist();
+          
           //alert("Firebase success: " + JSON.stringify(success));
           this.nav.setRoot(Dashboard);
 
@@ -121,7 +120,7 @@ export class Login {
             .then(
               () => console.log('Stored item!'),
               error => console.error('Error storing item', error)
-            );
+          );
         })
         .catch((error) => {
           //alert("Firebase failure: " + JSON.stringify(error));

@@ -90,18 +90,18 @@ export class GoogleMapPage {
         marker.setTitle('vKirirom Pine Resort');
       });
 
-    let bounds = [
-      new GoogleMapsLatLng(11.3191, 104.0743),
-      new GoogleMapsLatLng(11.3202, 104.0606),
-      new GoogleMapsLatLng(11.3116, 104.0599),
-      new GoogleMapsLatLng(11.3099, 104.0734),
-    ];
     // let bounds = [
-    //   new GoogleMapsLatLng(11.3202, 104.0734),
-    //   new GoogleMapsLatLng(11.3202, 104.0599),
-    //   new GoogleMapsLatLng(11.3099, 104.0599),
+    //   new GoogleMapsLatLng(11.3191, 104.0743),
+    //   new GoogleMapsLatLng(11.3202, 104.0606),
+    //   new GoogleMapsLatLng(11.3116, 104.0599),
     //   new GoogleMapsLatLng(11.3099, 104.0734),
     // ];
+    let bounds = [
+      new GoogleMapsLatLng(11.3202, 104.0734),
+      new GoogleMapsLatLng(11.3202, 104.0599),
+      new GoogleMapsLatLng(11.3099, 104.0599),
+      new GoogleMapsLatLng(11.3099, 104.0734),
+    ];
 
 
 

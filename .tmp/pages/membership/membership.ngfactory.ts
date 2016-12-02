@@ -51,11 +51,7 @@ class _View_Membership_Host0 extends import1.AppView<any> {
     this._appEl_0 = new import2.AppElement(0,(null as any),this,this._el_0);
     var compView_0:any = viewFactory_Membership0(this.viewUtils,this.injector(0),this._appEl_0);
     this._Membership_0_4 = new import3.Membership(this.parentInjector.get(import8.NavController));
-<<<<<<< HEAD
-    this._appEl_0.initComponent(this._Membership_0_4,([] as any[]),compView_0);
-=======
     this._appEl_0.initComponent(this._Membership_0_4,[],compView_0);
->>>>>>> 8e5aa51a8049377964deb47ca43440cb97c6360d
     compView_0.create(this._Membership_0_4,this.projectableNodes,(null as any));
     this.init([].concat([this._el_0]),[this._el_0],[],[]);
     return this._appEl_0;
@@ -66,19 +62,11 @@ class _View_Membership_Host0 extends import1.AppView<any> {
   }
 }
 function viewFactory_Membership_Host0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
-<<<<<<< HEAD
-  if ((renderType_Membership_Host === (null as any))) { (renderType_Membership_Host = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,([] as any[]),{})); }
-  return new _View_Membership_Host0(viewUtils,parentInjector,declarationEl);
-}
-export const MembershipNgFactory:import10.ComponentFactory<import3.Membership> = new import10.ComponentFactory<import3.Membership>('page-membership',viewFactory_Membership_Host0,import3.Membership);
-const styles_Membership:any[] = ([] as any[]);
-=======
   if ((renderType_Membership_Host === (null as any))) { (renderType_Membership_Host = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,[],{})); }
   return new _View_Membership_Host0(viewUtils,parentInjector,declarationEl);
 }
 export const MembershipNgFactory:import10.ComponentFactory<import3.Membership> = new import10.ComponentFactory<import3.Membership>('page-membership',viewFactory_Membership_Host0,import3.Membership);
 const styles_Membership:any[] = [];
->>>>>>> 8e5aa51a8049377964deb47ca43440cb97c6360d
 var renderType_Membership:import0.RenderComponentType = (null as any);
 class _View_Membership0 extends import1.AppView<import3.Membership> {
   _text_0:any;
@@ -254,11 +242,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._appEl_5 = new import2.AppElement(5,3,this,this._el_5);
     var compView_5:any = import26.viewFactory_ToolbarTitle0(this.viewUtils,this.injector(5),this._appEl_5);
     this._ToolbarTitle_5_4 = new import13.ToolbarTitle(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_5),this.renderer,this.parentInjector.get(import11.Toolbar,(null as any)),this._Navbar_3_4);
-<<<<<<< HEAD
-    this._appEl_5.initComponent(this._ToolbarTitle_5_4,([] as any[]),compView_5);
-=======
     this._appEl_5.initComponent(this._ToolbarTitle_5_4,[],compView_5);
->>>>>>> 8e5aa51a8049377964deb47ca43440cb97c6360d
     this._text_6 = this.renderer.createText((null as any),'Membership Card',(null as any));
     compView_5.create(this._ToolbarTitle_5_4,[[].concat([this._text_6])],(null as any));
     this._text_7 = this.renderer.createText((null as any),'\n        ',(null as any));
@@ -295,11 +279,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._appEl_15 = new import2.AppElement(15,(null as any),this,this._el_15);
     var compView_15:any = import28.viewFactory_Content0(this.viewUtils,this.injector(15),this._appEl_15);
     this._Content_15_4 = new import18.Content(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_15),this.renderer,this.parentInjector.get(import25.App),this.parentInjector.get(import29.Keyboard),this.parentInjector.get(import30.NgZone),this.parentInjector.get(import23.ViewController,(null as any)),this.parentInjector.get(import31.Tabs,(null as any)));
-<<<<<<< HEAD
-    this._appEl_15.initComponent(this._Content_15_4,([] as any[]),compView_15);
-=======
     this._appEl_15.initComponent(this._Content_15_4,[],compView_15);
->>>>>>> 8e5aa51a8049377964deb47ca43440cb97c6360d
     this._text_16 = this.renderer.createText((null as any),'\n\n    ',(null as any));
     this._el_17 = this.renderer.createElement((null as any),'div',(null as any));
     this.renderer.setElementAttribute(this._el_17,'class','profile-wrapper');
@@ -703,11 +683,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   }
 }
 export function viewFactory_Membership0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<import3.Membership> {
-<<<<<<< HEAD
-  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
-=======
   if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
->>>>>>> 8e5aa51a8049377964deb47ca43440cb97c6360d
   return new _View_Membership0(viewUtils,parentInjector,declarationEl);
 }
 class _View_Membership1 extends import1.AppView<any> {

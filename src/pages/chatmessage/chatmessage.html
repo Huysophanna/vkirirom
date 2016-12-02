@@ -19,19 +19,22 @@
         <ion-list>
 
             <div *ngIf="chatsLength == timeLength">
-                <div class="chat-wrapper" *ngFor="let time of time; let i=index">
-                    <!--<p class="user-status" *ngIf="userStatus && userStatus.length > 1">
-                    {{ userStatus[userStatus.length - 1] }}
-                </p><br>-->
-                    <div class="chat-person-image">
+                <div class="chat-wrapper" *ngFor="let i of time; let j=index;">
+                    <div class="chat-person-image" *ngIf="chats[j].message">
                         <img *ngIf="userPhoto" src="{{userPhoto}}">
                         <img *ngIf="!userPhoto" src="img/photo.jpg">
                     </div>
-                    <div class="chat-bubble me">
-                        <span *ngIf="!userName">Anonymous</span>
-                        <span *ngIf="userName">{{ userName }}</span>
-                        <p>{{chats[i]}}</p>
-                        <b>{{ time }}</b><i>{{ timeStatus }}</i>
+                    <div class="chat-bubble me" *ngIf="chats[j].message">
+                        <span *ngIf="chats[j].message">{{ chats[j].username }}</span>
+                        <p *ngIf="chats[j].message">{{chats[j].message}}</p>
+                        <strong *ngIf="chats[j].status">{{ chats[j].status }}</strong>
+                        <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                    </div>
+                    <div class="chat-bubble-status me" *ngIf="chats[j].status">
+                        <div class="time">
+                            <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                        </div>
+                        <strong *ngIf="chats[j].status">{{ chats[j].status }}</strong>
                     </div>
 
                 </div>
@@ -45,12 +48,5 @@
         <ion-input class="chatinput-field" type="text" [(ngModel)]="chatinp" placeholder="Type a message..."></ion-input>
         <input type="submit" class="chatinput-btn" fab (click)="send(chatinp)" value="Send" />
     </div>
-
-    <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-     <ion-infinite-scroll-content 
-     loadingSpinner="bubbles"
-     loadingText="Loading more data...">
-     </ion-infinite-scroll-content>
-  </ion-infinite-scroll>-->
 
 </ion-content>

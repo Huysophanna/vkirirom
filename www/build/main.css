@@ -21111,9 +21111,25 @@ sub {
   height: 35%;
 }
 
+.site-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .profile {
+  display: block;
+  position: relative;
   margin-top: 10%;
+  margin-bottom: 10%;
   text-align: center;
+  height: auto;
+}
+
+.profile .profile-info {
+  display: block;
+  position: relative;
 }
 
 .profile .profile-info span {
@@ -21122,7 +21138,8 @@ sub {
 }
 
 .profile img {
-  width: 50%;
+  width: 12em;
+  height: 12em;
   margin: 0 auto;
   border: 6px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
@@ -21130,17 +21147,22 @@ sub {
   display: block;
 }
 
-.option-btn {
+.btn-section {
+  display: block;
+  position: relative;
+}
+
+.btn-section .option-btn {
   width: 100%;
   display: inline-block;
   position: relative;
 }
 
-.option-btn .option-icon {
+.btn-section .option-btn .option-icon {
   width: 20%;
 }
 
-.option-btn .option-title {
+.btn-section .option-btn .option-title {
   vertical-align: super;
 }
 
@@ -21264,8 +21286,8 @@ sub {
 
 .chatmessage-container .chat-wrapper .chat-person-image {
   display: inline-block;
-  width: 15%;
-  height: 45px;
+  width: 60px;
+  height: 43px;
   position: relative;
   overflow: hidden;
   border-radius: 100%;
@@ -21321,8 +21343,45 @@ sub {
   font-size: 12px;
 }
 
+.chatmessage-container .chat-wrapper .chat-bubble .none {
+  display: none;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble-status {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  word-break: break-all;
+  width: 100%;
+  padding: 10px 90px;
+  color: #9E9E9E;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble-status b {
+  font-size: 11.5px;
+  vertical-align: bottom;
+  margin: 4px;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble-status i {
+  vertical-align: bottom;
+  font-size: 11.5px;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble-status strong {
+  font-family: "Helvetica Neue", "Roboto", sans-serif;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble-status .none {
+  display: none;
+}
+
+.chatmessage-container .chat-wrapper .chat-bubble-status .time {
+  text-align: center;
+}
+
 .chatmessage-container .chat-wrapper .me {
-  margin: 0px 10px 0px 20px;
+  margin: 0px 10px 0px 30px;
 }
 
 .chatmessage-container .chat-wrapper .me::before {
