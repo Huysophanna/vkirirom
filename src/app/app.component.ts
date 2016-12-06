@@ -88,6 +88,7 @@ export class MyApp {
     if (page.id == 4) {
       //store userProfile object to the phone storage
       Facebook.logout();
+      NativeStorage.setItem('userDetails', "");
       this.nav.setRoot(Login);
       console.log(page.title);
     }

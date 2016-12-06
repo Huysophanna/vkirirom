@@ -110,6 +110,8 @@ export class Login {
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
           this.userProfile = success;
+          alert(this.userProfile);
+          
           this.userExist();
           
           //alert("Firebase success: " + JSON.stringify(success));
