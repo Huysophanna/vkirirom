@@ -7,3 +7,10 @@ cordova plugin add cordova-plugin-nativestorage
 cordova plugin add cordova-plugin-network-information
 npm install angularfire2 --save
 ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"
+
+
+
+
+//For server installation
+npm install socket.io --save
+npm install mongodb --save

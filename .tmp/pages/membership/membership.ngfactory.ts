@@ -51,9 +51,9 @@ class _View_Membership_Host0 extends import1.AppView<any> {
     this._appEl_0 = new import2.AppElement(0,(null as any),this,this._el_0);
     var compView_0:any = viewFactory_Membership0(this.viewUtils,this.injector(0),this._appEl_0);
     this._Membership_0_4 = new import3.Membership(this.parentInjector.get(import8.NavController));
-    this._appEl_0.initComponent(this._Membership_0_4,([] as any[]),compView_0);
+    this._appEl_0.initComponent(this._Membership_0_4,[],compView_0);
     compView_0.create(this._Membership_0_4,this.projectableNodes,(null as any));
-    this.init(([] as any[]).concat([this._el_0]),[this._el_0],([] as any[]),([] as any[]));
+    this.init([].concat([this._el_0]),[this._el_0],[],[]);
     return this._appEl_0;
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -62,11 +62,11 @@ class _View_Membership_Host0 extends import1.AppView<any> {
   }
 }
 function viewFactory_Membership_Host0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
-  if ((renderType_Membership_Host === (null as any))) { (renderType_Membership_Host = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,([] as any[]),{})); }
+  if ((renderType_Membership_Host === (null as any))) { (renderType_Membership_Host = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,[],{})); }
   return new _View_Membership_Host0(viewUtils,parentInjector,declarationEl);
 }
 export const MembershipNgFactory:import10.ComponentFactory<import3.Membership> = new import10.ComponentFactory<import3.Membership>('page-membership',viewFactory_Membership_Host0,import3.Membership);
-const styles_Membership:any[] = ([] as any[]);
+const styles_Membership:any[] = [];
 var renderType_Membership:import0.RenderComponentType = (null as any);
 class _View_Membership0 extends import1.AppView<import3.Membership> {
   _text_0:any;
@@ -236,15 +236,15 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._appEl_3 = new import2.AppElement(3,1,this,this._el_3);
     var compView_3:any = import24.viewFactory_Navbar0(this.viewUtils,this.injector(3),this._appEl_3);
     this._Navbar_3_4 = new import12.Navbar(this.parentInjector.get(import25.App),this.parentInjector.get(import23.ViewController,(null as any)),this.parentInjector.get(import8.NavController,(null as any)),this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_3),this.renderer);
-    this._appEl_3.initComponent(this._Navbar_3_4,([] as any[]),compView_3);
+    this._appEl_3.initComponent(this._Navbar_3_4,[],compView_3);
     this._text_4 = this.renderer.createText((null as any),'\n        ',(null as any));
     this._el_5 = this.renderer.createElement((null as any),'ion-title',(null as any));
     this._appEl_5 = new import2.AppElement(5,3,this,this._el_5);
     var compView_5:any = import26.viewFactory_ToolbarTitle0(this.viewUtils,this.injector(5),this._appEl_5);
     this._ToolbarTitle_5_4 = new import13.ToolbarTitle(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_5),this.renderer,this.parentInjector.get(import11.Toolbar,(null as any)),this._Navbar_3_4);
-    this._appEl_5.initComponent(this._ToolbarTitle_5_4,([] as any[]),compView_5);
+    this._appEl_5.initComponent(this._ToolbarTitle_5_4,[],compView_5);
     this._text_6 = this.renderer.createText((null as any),'Membership Card',(null as any));
-    compView_5.create(this._ToolbarTitle_5_4,[([] as any[]).concat([this._text_6])],(null as any));
+    compView_5.create(this._ToolbarTitle_5_4,[[].concat([this._text_6])],(null as any));
     this._text_7 = this.renderer.createText((null as any),'\n        ',(null as any));
     this._el_8 = this.renderer.createElement((null as any),'ion-buttons',(null as any));
     this.renderer.setElementAttribute(this._el_8,'right','');
@@ -259,10 +259,10 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._text_11 = this.renderer.createText(this._el_8,'\n        ',(null as any));
     this._text_12 = this.renderer.createText((null as any),'\n    ',(null as any));
     compView_3.create(this._Navbar_3_4,[
-      ([] as any[]),
-      ([] as any[]),
-      ([] as any[]).concat([this._el_8]),
-      ([] as any[]).concat([
+      [],
+      [],
+      [].concat([this._el_8]),
+      [].concat([
         this._text_4,
         this._el_5,
         this._text_7,
@@ -279,7 +279,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._appEl_15 = new import2.AppElement(15,(null as any),this,this._el_15);
     var compView_15:any = import28.viewFactory_Content0(this.viewUtils,this.injector(15),this._appEl_15);
     this._Content_15_4 = new import18.Content(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_15),this.renderer,this.parentInjector.get(import25.App),this.parentInjector.get(import29.Keyboard),this.parentInjector.get(import30.NgZone),this.parentInjector.get(import23.ViewController,(null as any)),this.parentInjector.get(import31.Tabs,(null as any)));
-    this._appEl_15.initComponent(this._Content_15_4,([] as any[]),compView_15);
+    this._appEl_15.initComponent(this._Content_15_4,[],compView_15);
     this._text_16 = this.renderer.createText((null as any),'\n\n    ',(null as any));
     this._el_17 = this.renderer.createElement((null as any),'div',(null as any));
     this.renderer.setElementAttribute(this._el_17,'class','profile-wrapper');
@@ -397,14 +397,14 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._text_74 = this.renderer.createText(this._el_17,'\n    ',(null as any));
     this._text_75 = this.renderer.createText((null as any),'\n\n',(null as any));
     compView_15.create(this._Content_15_4,[
-      ([] as any[]),
-      ([] as any[]).concat([
+      [],
+      [].concat([
         this._text_16,
         this._el_17,
         this._text_75
       ]
       ),
-      ([] as any[])
+      []
     ]
     ,(null as any));
     this._expr_0 = import7.UNINITIALIZED;
@@ -432,7 +432,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._expr_19 = import7.UNINITIALIZED;
     this._expr_20 = import7.UNINITIALIZED;
     this._expr_21 = import7.UNINITIALIZED;
-    this.init(([] as any[]),[
+    this.init([],[
       this._text_0,
       this._el_1,
       this._text_2,
@@ -510,7 +510,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
       this._text_74,
       this._text_75
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -638,7 +638,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     }
     this.detectContentChildrenChanges(throwOnChange);
     if (!throwOnChange) { if (this._query_Button_8_0.dirty) {
-      this._query_Button_8_0.reset(([] as any[]));
+      this._query_Button_8_0.reset([]);
       this._ToolbarItem_8_3._buttons = this._query_Button_8_0;
       this._query_Button_8_0.notifyOnChanges();
     } }
@@ -683,7 +683,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   }
 }
 export function viewFactory_Membership0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<import3.Membership> {
-  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
+  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
   return new _View_Membership0(viewUtils,parentInjector,declarationEl);
 }
 class _View_Membership1 extends import1.AppView<any> {
@@ -696,7 +696,7 @@ class _View_Membership1 extends import1.AppView<any> {
     this._el_0 = this.renderer.createElement((null as any),'img',(null as any));
     this.renderer.setElementAttribute(this._el_0,'alt','Profile Picture');
     this._expr_0 = import7.UNINITIALIZED;
-    this.init(([] as any[]).concat([this._el_0]),[this._el_0],([] as any[]),([] as any[]));
+    this.init([].concat([this._el_0]),[this._el_0],[],[]);
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -721,7 +721,7 @@ class _View_Membership2 extends import1.AppView<any> {
     this._el_0 = this.renderer.createElement((null as any),'img',(null as any));
     this.renderer.setElementAttribute(this._el_0,'alt','Profile Picture');
     this.renderer.setElementAttribute(this._el_0,'src','img/profile.svg');
-    this.init(([] as any[]).concat([this._el_0]),[this._el_0],([] as any[]),([] as any[]));
+    this.init([].concat([this._el_0]),[this._el_0],[],[]);
     return (null as any);
   }
 }
@@ -739,11 +739,11 @@ class _View_Membership3 extends import1.AppView<any> {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'',(null as any));
     this._expr_0 = import7.UNINITIALIZED;
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -768,11 +768,11 @@ class _View_Membership4 extends import1.AppView<any> {
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'Username',(null as any));
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
 }
@@ -790,11 +790,11 @@ class _View_Membership5 extends import1.AppView<any> {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'',(null as any));
     this._expr_0 = import7.UNINITIALIZED;
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -819,11 +819,11 @@ class _View_Membership6 extends import1.AppView<any> {
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._text_1 = this.renderer.createText(this._el_0,' 99123912 ',(null as any));
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
 }
@@ -841,11 +841,11 @@ class _View_Membership7 extends import1.AppView<any> {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'',(null as any));
     this._expr_0 = import7.UNINITIALIZED;
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -870,11 +870,11 @@ class _View_Membership8 extends import1.AppView<any> {
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._text_1 = this.renderer.createText(this._el_0,' 168 ',(null as any));
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
 }
@@ -894,12 +894,12 @@ class _View_Membership9 extends import1.AppView<any> {
     this._el_1 = this.renderer.createElement(this._el_0,'b',(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'',(null as any));
     this._expr_0 = import7.UNINITIALIZED;
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._el_1,
       this._text_2
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -926,12 +926,12 @@ class _View_Membership10 extends import1.AppView<any> {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._el_1 = this.renderer.createElement(this._el_0,'b',(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'Gold',(null as any));
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._el_1,
       this._text_2
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
 }
@@ -949,11 +949,11 @@ class _View_Membership11 extends import1.AppView<any> {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'',(null as any));
     this._expr_0 = import7.UNINITIALIZED;
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -978,11 +978,11 @@ class _View_Membership12 extends import1.AppView<any> {
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'10/ Oct/ 2017',(null as any));
-    this.init(([] as any[]).concat([this._el_0]),[
+    this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1
     ]
-    ,([] as any[]),([] as any[]));
+    ,[],[]);
     return (null as any);
   }
 }

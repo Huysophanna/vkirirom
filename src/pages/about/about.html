@@ -98,7 +98,7 @@
 
 		<div class="services" *ngSwitchCase="'service'">
 			<ion-scroll zooming="false" scrollY="true" class="page-scroll">
-				<ion-card class="custom-card">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/pineResort.JPG"/>
 				  <ion-card-content>
 				    <ion-card-title>
@@ -107,7 +107,7 @@
 				    <p>
 				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				      tempor incididunt ut labore.
-				      <button (click)="launchUrl('http://vkirirom.com')">DETAIL</button>
+				    
 				    </p>
 
 				  </ion-card-content>

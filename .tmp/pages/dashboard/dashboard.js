@@ -45,7 +45,13 @@ export var Dashboard = (function () {
             case 4:
                 this.navCtrl.push(Chat);
                 break;
+<<<<<<< HEAD
             case 5: this.navCtrl.push(About);
+=======
+            case 6:
+                this.navCtrl.push(About);
+                break;
+>>>>>>> 9425052068f538133dbad1533c16939fb1e1a547
         }
     };
     Dashboard.prototype.chat = function () {

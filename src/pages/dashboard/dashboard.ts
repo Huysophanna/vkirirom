@@ -47,7 +47,8 @@ export class Dashboard {
       break;
       case 4: this.navCtrl.push(Chat);
       break;
-      case 5: this.navCtrl.push(About);
+      case 6: this.navCtrl.push(About);
+      break;
     }
   }
 

@@ -29,6 +29,7 @@ export class Chatmessage {
   time: any;
   timeObj: any;
   chats: any = [];
+  chatHistory: any = [];
   chatinp: any;
   pkt: any;
   socket: any;
@@ -59,6 +60,17 @@ export class Chatmessage {
         };
         this.time = [];
         this.socket = io.connect('http://110.74.203.152:3000');
+        // console.log(this.timeObj);
+
+        this.socket.on('chatHistory', (chatData) => {
+            // this.chats.push(chatData);
+            this.chatHistory = chatData;
+            console.log(this.chatHistory);
+            console.log(chatData);
+            
+            
+            
+        });
         
         // called when the user send thier message
         this.socket.on(this.pkt.room + 'message', (data) => {

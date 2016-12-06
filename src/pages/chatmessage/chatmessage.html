@@ -18,7 +18,20 @@
     <ion-scroll scrollY="true" class="chat-content">
         <ion-list>
             <div *ngIf="chatsLength == timeLength ">
+                <div *ngFor="let data of chatHistory">
+                    <p>{{data.text}}</p>
+                </div>
                 <div class="chat-wrapper" *ngFor="let i of time; let j=index;">
+                    <div class="chat-person-image" *ngIf="chats[j].message">
+                        <img *ngIf="userPhoto" src="{{userPhoto}}">
+                        <img *ngIf="!userPhoto" src="img/photo.jpg">
+                    </div>
+                    <!--chat history-->
+                    <!--<div class="chat-bubble you" *ngIf="chatHistory">
+                        <span *ngIf="chatHistory">Username</span>
+                        <p *ngIf="chatHistory">{{data.text}}</p>
+                        <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                    </div>-->
                     <!--Me section-->
                     <div class="chat-bubble me" *ngIf="(chats[j].message) && (userName === chats[j].username)">
                         <span *ngIf="chats[j].message">{{ chats[j].username }}</span>
