@@ -6,6 +6,7 @@ import { Geolocation } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
+import { About } from '../about/about';
 import { Storage } from '@ionic/storage';
 import { Push } from '@ionic/cloud-angular';
 import { LocationTracker } from '../../providers/location-tracker';
@@ -44,6 +45,7 @@ export var Dashboard = (function () {
             case 4:
                 this.navCtrl.push(Chat);
                 break;
+            case 5: this.navCtrl.push(About);
         }
     };
     Dashboard.prototype.chat = function () {

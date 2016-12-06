@@ -19,21 +19,25 @@
         <ion-list>
             <div *ngIf="chatsLength == timeLength ">
                 <div class="chat-wrapper" *ngFor="let i of time; let j=index;">
-                    <div class="chat-person-image" *ngIf="chats[j].message">
+                    <!--Me section-->
+                    <div class="chat-bubble me" *ngIf="(chats[j].message) && (userName === chats[j].username)">
+                        <span *ngIf="chats[j].message">{{ chats[j].username }}</span>
+                        <b>{{ i }}<i>{{ timeStatus }}</i></b>
+                        <p *ngIf="chats[j].message">{{chats[j].message}}</p>
+                    </div>
+                    <div class="chat-person-image" *ngIf="(chats[j].message) && (userName === chats[j].username)">
                         <img *ngIf="userPhoto" src="{{userPhoto}}">
                         <img *ngIf="!userPhoto" src="img/photo.jpg">
                     </div>
-                    <!--Me section-->
-                    <div class="chat-bubble you" *ngIf="(chats[j].message) && (userName === chats[j].username)">
-                        <span *ngIf="chats[j].message">{{ chats[j].username }}</span>
-                        <p *ngIf="chats[j].message">{{chats[j].message}}</p>
-                        <b>{{ i }}</b><i>{{ timeStatus }}</i>
-                    </div>
                     <!--You section-->
-                    <div class="chat-bubble me" *ngIf="(chats[j].message) && (userName !== chats[j].username)">
+                    <div class="chat-person-image" *ngIf="(chats[j].message) && (userName !== chats[j].username)">
+                        <img *ngIf="userPhoto" src="{{userPhoto}}">
+                        <img *ngIf="!userPhoto" src="img/photo.jpg">
+                    </div>
+                    <div class="chat-bubble you" *ngIf="(chats[j].message) && (userName !== chats[j].username)">
                         <span *ngIf="chats[j].message">{{ chats[j].username }}</span>
                         <p *ngIf="chats[j].message">{{chats[j].message}}</p>
-                        <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                        <b>{{ i }}<i>{{ timeStatus }}</i></b>
                     </div>
 
                     <div class="chat-bubble-status me" *ngIf="chats[j].status">
