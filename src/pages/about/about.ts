@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
+declare var cordova: any;
 
 
 /*
@@ -43,8 +44,7 @@ export class About {
 
 	launchUrl(url){
 		this.platform.ready().then(()=>{
-			let cordova: any;
-			cordova.InappBrowser.open(url, "_system", "location=true");
+			cordova.InAppBrowser.open(url, "_blank", "location=true", "toolbarposition=top");
 		});
 	}
 
