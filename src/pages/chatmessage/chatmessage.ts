@@ -72,51 +72,25 @@ export class Chatmessage {
             
         });
         
+        // called when the user send thier message
         this.socket.on(this.pkt.room + 'message', (data) => {
             this.isJoined = false;
             this.ngzone.run(() => {
-            this.timeObj = new Date();
-            this.hours = this.timeObj.getHours().toString();
-            if (this.hours >= 1 && this.hours <= 12) {
-              this.timeStatus = "AM";
-            } else if (this.hours > 12 && this.hours <= 24) {
-              this.timeStatus = "PM";
-              this.hours = this.hours - 12;
-            } else {
-              this.timeStatus = "";
-            }
-            
-            this.minute = this.timeObj.getMinutes().toString();
-            if (this.minute < 10) {
-              this.minute = "0" + this.minute;
-            }
-            this.chats.push(data);
-            this.time.push(this.hours +":"+ this.minute);    
-            this.timeLength = this.time.length;
-            this.chatsLength = this.chats.length;
-            this.content.scrollToBottom();
+              this.timeAdjustment(); // used for time adjustment
+              this.chats.push(data);
+              this.time.push(this.hours +":"+ this.minute);    
+              this.timeLength = this.time.length;
+              this.chatsLength = this.chats.length;
+              this.content.scrollToBottom();
           });
           
         }); 
 
+        // called when the user enter the chat room
         this.socket.on(this.pkt.room + 'userentered', (userenter) => {
             this.isJoined = true;
             this.ngzone.run(() => {
-                this.timeObj = new Date();
-                this.hours = this.timeObj.getHours().toString();
-                if (this.hours >=1 && this.hours <= 12) {
-                  this.timeStatus = "AM";
-                } else if (this.hours > 12 && this.hours <= 24) {
-                  this.timeStatus = "PM";
-                  this.hours = this.hours - 12;
-                } else {
-                  this.timeStatus = "";
-                }
-                this.minute = this.timeObj.getMinutes().toString();
-                if (this.minute < 10) {
-                  this.minute = "0" + this.minute;
-                }
-
+                this.timeAdjustment(); // used for time adjustment
                 this.chats.push(userenter);
                 console.log(userenter);          
                 this.time.push(this.hours +":"+this.minute);
@@ -124,25 +98,13 @@ export class Chatmessage {
                 this.chatsLength = this.chats.length;
             });
         });
+
+        // called when the user leave the chat room
         this.socket.on(this.pkt.room + 'userleave', (userleave) => {
             this.isJoined = true;
             this.ngzone.run(() => {
-                this.timeObj = new Date();
-                this.hours = this.timeObj.getHours().toString();
-                if (this.hours >=1 && this.hours <= 12) {
-                  this.timeStatus = "AM";
-                } else if (this.hours > 12 && this.hours <= 24) {
-                  this.timeStatus = "PM";
-                  this.hours = this.hours - 12;
-                } else {
-                  this.timeStatus = "";
-                }
-                this.minute = this.timeObj.getMinutes().toString();
-                if (this.minute < 10) {
-                  this.minute = "0" + this.minute;
-                }
+                this.timeAdjustment(); // used for time adjustment
                 this.chats.push(userleave);
-
                 this.time.push(this.hours+":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
@@ -150,6 +112,7 @@ export class Chatmessage {
             });
         });
 
+      // store user data to local storage
       NativeStorage.getItem('userDetails').then(
         data => {
           this.userName = data.displayName;
@@ -159,7 +122,26 @@ export class Chatmessage {
       );
       
   }
+
+  // Function used for time adjustment
+  timeAdjustment() {
+    this.timeObj = new Date();
+    this.hours = this.timeObj.getHours().toString();
+    if (this.hours >= 1 && this.hours <= 12) {
+      this.timeStatus = "AM";
+    } else if (this.hours > 12 && this.hours <= 24) {
+        this.timeStatus = "PM";
+        this.hours = this.hours - 12;
+    } else {
+        this.timeStatus = "";
+    }
+    this.minute = this.timeObj.getMinutes().toString();
+    if (this.minute < 10) {
+      this.minute = "0" + this.minute;
+    }
+  }
   
+  // called when user send thier message
   send(msg) {
       if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
         let alert = this.alertCtrl.create({
@@ -180,7 +162,7 @@ export class Chatmessage {
       this.content.scrollToBottom(1);
     }
   
-    
+  // ionic life cycle function called when user enter
   ionViewDidEnter(){
     console.log("enteruser");
       this.pkt.status = this.userName  + ' has joined';
@@ -189,11 +171,11 @@ export class Chatmessage {
         this.pkt.username = "Anonymous";
         this.pkt.status = "Anonymous"  + ' has joined';
       }
-      // console.log(this.pkt.message);
       
       this.socket.emit('userentered', this.pkt);
   }
 
+  // ionic life cycle function called when the user leave
   ionViewDidLeave(){
       this.pkt.status = this.userName  + ' has left';
       this.pkt.username = this.userName;
@@ -204,9 +186,9 @@ export class Chatmessage {
       this.socket.emit('userleave', this.pkt);
   }
 
+  // ionic life cycle function called when the page is being loaded
   ionViewDidLoad() {
     console.log('Hello Chatmessage Page');
-    // this.messageTitle = this.navParams.get('messageTitle');
   }
 
 }
