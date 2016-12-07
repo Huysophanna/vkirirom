@@ -23,7 +23,7 @@
                     <!--Me section chat messages-->
                     <div class="chat-bubble me" *ngIf="userName === data.username">
                         <span>{{data.username}}</span>
-                        <b>{{ i }}<i>{{ timeStatus }}</i></b>
+                        <b>{{ data.time }}<i>{{ timeStatus }}</i></b>
                         <p>{{data.text}}</p>
                     </div>
                     <div class="chat-person-image" *ngIf="userName === data.username">
@@ -36,7 +36,7 @@
                     <div class="chat-bubble you" *ngIf="userName !== data.username">
                         <span>{{data.username}}</span>
                         <p>{{data.text}}</p>
-                        <b>{{ i }}<i>{{ timeStatus }}</i></b>
+                        <b>{{ data.time }}<i>{{ timeStatus }}</i></b>
                     </div>
 
                 </div>

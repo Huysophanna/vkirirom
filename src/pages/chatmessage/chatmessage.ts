@@ -57,6 +57,7 @@ export class Chatmessage {
             username: '',
             photo: '',
             status: '',
+            time: '',
             room: 'room1'
         };
         this.time = [];
@@ -154,6 +155,7 @@ export class Chatmessage {
         if (msg != '') {
             this.pkt.message = msg;
             this.pkt.photo = this.userPhoto;
+            this.pkt.time = this.timeObj;
             this.socket.emit('message', this.pkt);
         }
       }
