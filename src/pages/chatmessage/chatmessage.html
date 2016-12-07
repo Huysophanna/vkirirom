@@ -20,47 +20,53 @@
             <div *ngIf="chatsLength == timeLength ">
                 <!--Chat history section-->
                 <div class="chat-wrapper" *ngFor="let data of chatHistory">
-                    <!--Display user photo-->
-                    <div class="chat-person-image">
-                        <img src="{{data.userPhoto}}">
-                    </div>
                     <!--Me section chat messages-->
                     <div class="chat-bubble me" *ngIf="userName === data.username">
                         <span>{{data.username}}</span>
+                        <b>{{ i }}<i>{{ timeStatus }}</i></b>
                         <p>{{data.text}}</p>
-                        <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                    </div>
+                    <div class="chat-person-image" *ngIf="userName === data.username">
+                        <img src="{{data.userPhoto}}">
                     </div>
                     <!--You section chat messages-->
+                    <div class="chat-person-image" *ngIf="userName !== data.username">
+                        <img src="{{data.userPhoto}}">
+                    </div>
                     <div class="chat-bubble you" *ngIf="userName !== data.username">
                         <span>{{data.username}}</span>
                         <p>{{data.text}}</p>
-                        <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                        <b>{{ i }}<i>{{ timeStatus }}</i></b>
                     </div>
+
                 </div>
 
                 <!--Real time chat message section-->
                 <div class="chat-wrapper" *ngFor="let i of time; let j=index;">
-                    <!--Display user photo-->
-                    <div class="chat-person-image" *ngIf="chats[j].message">
-                        <img *ngIf="userPhoto" src="{{userPhoto}}">
-                        <img *ngIf="!userPhoto" src="img/photo.jpg">
-                    </div>
                     <!--Me section chat messages-->
                     <div class="chat-bubble me" *ngIf="(chats[j].message) && (userName === chats[j].username)">
                         <span *ngIf="chats[j].message">{{ chats[j].username }}</span>
+                        <b>{{ i }}<i>{{ timeStatus }}</i></b>
                         <p *ngIf="chats[j].message">{{chats[j].message}}</p>
-                        <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                    </div>
+                    <div class="chat-person-image" *ngIf="(chats[j].message) && (userName === chats[j].username)">
+                        <img *ngIf="userPhoto" src="{{userPhoto}}">
+                        <img *ngIf="!userPhoto" src="img/photo.jpg">
                     </div>
                     <!--You section chat messages-->
+                    <div class="chat-person-image" *ngIf="(chats[j].message) && (userName !== chats[j].username)">
+                        <img *ngIf="userPhoto" src="{{ chats[j].photo}}">
+                        <img *ngIf="!userPhoto" src="img/photo.jpg">
+                    </div>
                     <div class="chat-bubble you" *ngIf="(chats[j].message) && (userName !== chats[j].username)">
                         <span *ngIf="chats[j].message">{{ chats[j].username }}</span>
                         <p *ngIf="chats[j].message">{{chats[j].message}}</p>
-                        <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                        <b>{{ i }}<i>{{ timeStatus }}</i></b>
                     </div>
 
-                    <div class="chat-bubble-status me" *ngIf="chats[j].status">
+                    <div class="chat-bubble-status" *ngIf="chats[j].status">
                         <div class="time">
-                            <b>{{ i }}</b><i>{{ timeStatus }}</i>
+                            <b>{{ i }}<i>{{ timeStatus }}</i></b>
                         </div>
                         <strong *ngIf="chats[j].status">{{ chats[j].status }}</strong>
                     </div>

@@ -19,6 +19,7 @@ export class Chatmessage {
   static get parameters() {
     return [NgZone];
   }
+  
   isJoined: boolean;
   timeStatus: string;
   hours: any;
@@ -34,7 +35,7 @@ export class Chatmessage {
   pkt: any;
   socket: any;
   userName: any;
-  userPhoto: any;
+  userPhoto: any = 'https://s-media-cache-ak0.pinimg.com/564x/20/f2/40/20f240398d8d8235e9b30bdb9b0212a3.jpg';
   messageTitle: any;
   userStatus: any;
 
@@ -81,7 +82,6 @@ export class Chatmessage {
               this.time.push(this.hours +":"+ this.minute);    
               this.timeLength = this.time.length;
               this.chatsLength = this.chats.length;
-              this.content.scrollToBottom();
           });
           
         }); 
@@ -159,7 +159,6 @@ export class Chatmessage {
       }
       this.chatinp = '';
       this.isUser = true;
-      this.content.scrollToBottom(1);
     }
   
   // ionic life cycle function called when user enter
