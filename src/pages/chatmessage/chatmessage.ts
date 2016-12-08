@@ -29,6 +29,8 @@ export class Chatmessage {
   timeLength: number;
   time: any;
   timeObj: any;
+  currentTimeAndStatus: any;
+  year: any; month: any; date: any;
   chats: any = [];
   chatHistory: any = [];
   chatinp: any;
@@ -58,6 +60,9 @@ export class Chatmessage {
             photo: '',
             status: '',
             time: '',
+            year: '',
+            month: '',
+            date: '',
             room: 'room1'
         };
         this.time = [];
@@ -127,6 +132,7 @@ export class Chatmessage {
   // Function used for time adjustment
   timeAdjustment() {
     this.timeObj = new Date();
+
     this.hours = this.timeObj.getHours().toString();
     if (this.hours >= 1 && this.hours <= 12) {
       this.timeStatus = "AM";
@@ -140,6 +146,13 @@ export class Chatmessage {
     if (this.minute < 10) {
       this.minute = "0" + this.minute;
     }
+
+    //get date for pushing to mongodb
+    this.year = this.timeObj.getFullYear();
+    this.month = this.timeObj.getMonth() + 1;
+    this.date = this.timeObj.getDate();
+    //append time with status
+    this.currentTimeAndStatus = this.hours +':'+ this.minute + this.timeStatus; 
   }
   
   // called when user send thier message
@@ -155,7 +168,10 @@ export class Chatmessage {
         if (msg != '') {
             this.pkt.message = msg;
             this.pkt.photo = this.userPhoto;
-            this.pkt.time = this.timeObj;
+            this.pkt.time = this.currentTimeAndStatus;
+            this.pkt.year = this.year;
+            this.pkt.month = this.month;
+            this.pkt.date = this.date;
             this.socket.emit('message', this.pkt);
         }
       }
