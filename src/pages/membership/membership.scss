@@ -1,5 +1,5 @@
 span {
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 .header {
@@ -7,45 +7,35 @@ span {
         color: white;
         font-size: large;
     }
-
     .toolbar-title {
         color: white;
         font-size: x-large;
         margin-top: 3px;
         display: block;
     }
-
-    ion-buttons{
+    ion-buttons {
         font-size: 2.3em;
     }
 }
 
 .member-container {
-    background: linear-gradient(0deg, rgba(26,105,64,1) 0%, rgba(26,105,64,1) 17%, rgba(28,137,84,1) 70%, rgba(28,137,84,1) 100%); /* w3c */ 
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8954', endColorstr='#1a6940',GradientType=0 ); /* ie6-9 */
+    background: linear-gradient(0deg, rgba(26, 105, 64, 1) 0%, rgba(26, 105, 64, 1) 17%, rgba(28, 137, 84, 1) 70%, rgba(28, 137, 84, 1) 100%);
     .profile-wrapper {
-        background: transparent; 
-        height: 25%;       
+        background: transparent;
         display: block;
         margin-top: 20px;
-
         .profile {
             text-align: center;
             margin-top: 5%;
             height: 100%;
-
+            border-radius: 100%;
             img {
-                width: 50%;
-                height: 110%;
                 margin: 0 auto;
                 border: 6px solid rgba(255, 255, 255, 0.4);
-                border-radius: 50%;
                 background: rgba(255, 255, 255, 0.2);
                 display: block;
             }
-
         }
-
         .profile-info {
             text-align: center;
             display: block;
@@ -53,30 +43,25 @@ span {
             color: white;
             margin-top: 40px;
         }
-
         .detail {
             margin-top: 20px;
             text-align: center;
             display: block;
             color: white;
             font-size: xx-large;
-
             .detail-item {
                 border: 1px solid grey;
                 background: white;
                 color: grey;
                 font-size: x-large;
-
                 span {
                     font-size: xx-large;
-
                     b {
                         color: goldenrod;
                     }
                 }
             }
         }
-
         .expire-date {
             margin-top: 20px;
             text-align: center;
@@ -94,12 +79,10 @@ span {
             color: white;
             font-size: 120%;
         }
-
         .toolbar-title {
             font-size: 150%;
         }
-
-        ion-buttons{
+        ion-buttons {
             font-size: 210%;
         }
     }
@@ -111,12 +94,10 @@ span {
         .back-button {
             font-size: 120%;
         }
-
         .toolbar-title {
             font-size: 115%;
         }
-
-        ion-buttons{
+        ion-buttons {
             font-size: 190%;
         }
     }
