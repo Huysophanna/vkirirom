@@ -1,6 +1,6 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import { Nav, Platform, LoadingController } from 'ionic-angular';
-import { StatusBar, Facebook, NativeStorage } from 'ionic-native';
+import { StatusBar, Facebook, NativeStorage, CallNumber } from 'ionic-native';
 import { Api } from '../providers/api';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
@@ -44,8 +44,8 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Setting', component: Dashboard, ionicon: 'ios-settings-outline'},
-      { title: 'Contact Us', component: Dashboard, ionicon: 'ios-call-outline'},
-      { title: 'Log Out', id: 4, ionicon: 'ios-exit-outline'}
+      { title: 'Contact Us', id: 2, ionicon: 'ios-call-outline'},
+      { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline'}
     ];
 
     //firebase configuration
@@ -85,13 +85,25 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     
     //logout function
-    if (page.id == 4) {
-      //store userProfile object to the phone storage
-      Facebook.logout();
-      NativeStorage.setItem('userDetails', "");
-      this.nav.setRoot(Login);
-      console.log(page.title);
+    switch (page.id) {
+      case 2:
+        CallNumber.callNumber("0962304669", true);
+      break;
+      case 3:
+        //store userProfile object to the phone storage
+        Facebook.logout();
+        NativeStorage.setItem('userDetails', "");
+        this.nav.setRoot(Login);
+        console.log(page.title);
+      break;
     }
+    // if (page.id == 3) {
+    //   //store userProfile object to the phone storage
+    //   Facebook.logout();
+    //   NativeStorage.setItem('userDetails', "");
+    //   this.nav.setRoot(Login);
+    //   console.log(page.title);
+    // }
   }
 
   openHome(){

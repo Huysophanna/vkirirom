@@ -12,7 +12,10 @@ declare var io: any;
 */
 @Component({
   selector: 'page-chatmessage',
-  templateUrl: 'chatmessage.html'
+  templateUrl: 'chatmessage.html',
+  queries: {
+    content: new ViewChild(Content)
+  }
 })
 export class Chatmessage {
   @ViewChild(Content) content: Content;
@@ -30,7 +33,7 @@ export class Chatmessage {
   time: any;
   timeObj: any;
   currentTimeAndStatus: any;
-  year: any; month: any; date: any;
+  year: any; month: any; date: any; day: any;
   chats: any = [];
   chatHistory: any = [];
   chatinp: any;
@@ -63,6 +66,7 @@ export class Chatmessage {
             year: '',
             month: '',
             date: '',
+            day: '',
             room: 'room1'
         };
         this.time = [];
@@ -135,9 +139,9 @@ export class Chatmessage {
 
     this.hours = this.timeObj.getHours().toString();
     if (this.hours >= 1 && this.hours <= 12) {
-      this.timeStatus = "AM";
+      this.timeStatus = " AM";
     } else if (this.hours > 12 && this.hours <= 24) {
-        this.timeStatus = "PM";
+        this.timeStatus = " PM";
         this.hours = this.hours - 12;
     } else {
         this.timeStatus = "";
@@ -150,7 +154,53 @@ export class Chatmessage {
     //get date for pushing to mongodb
     this.year = this.timeObj.getFullYear();
     this.month = this.timeObj.getMonth() + 1;
+    this.day = this.timeObj.getDay();
     this.date = this.timeObj.getDate();
+
+    switch (this.day) {
+      case 0: this.day = "Sun";
+        break;
+      case 1: this.day = "Mon";
+        break;
+      case 2: this.day = "Tue";
+        break;
+      case 3: this.day = "Wed";
+        break;
+      case 4: this.day = "Thu";
+        break;
+      case 5: this.day = "Fri";
+        break;
+      case 6: this.day = "Sat";
+        break;
+    }
+
+    switch (this.month) {
+      case 1: this.month = "Jan";
+        break;
+      case 2: this.month = "Feb";
+        break;
+      case 3: this.month = "Mar";
+        break;
+      case 4: this.month = "Apr";
+        break;
+      case 5: this.month = "May";
+        break;
+      case 6: this.month = "Jun";
+        break;
+      case 7: this.month = "Jul";
+        break;
+      case 8: this.month = "Aug";
+        break;
+      case 9: this.month = "Sep";
+        break;
+      case 10: this.month = "Oct";
+        break;
+      case 11: this.month = "Nov";
+        break;
+      case 12: this.month = "Dec";
+        break;
+    }
+
     //append time with status
     this.currentTimeAndStatus = this.hours +':'+ this.minute + this.timeStatus; 
   }
@@ -172,12 +222,18 @@ export class Chatmessage {
             this.pkt.year = this.year;
             this.pkt.month = this.month;
             this.pkt.date = this.date;
+            this.pkt.day = this.day;
             this.socket.emit('message', this.pkt);
         }
       }
       this.chatinp = '';
       this.isUser = true;
     }
+
+  ngAfterViewInit() {
+     let dimensions = this.content.getContentDimensions();
+     this.content.scrollTo(0, dimensions.scrollBottom, 0);
+  }
   
   // ionic life cycle function called when user enter
   ionViewDidEnter(){

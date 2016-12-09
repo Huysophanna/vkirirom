@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content class="chatmessage-container">
+<ion-content #content class="chatmessage-container">
 
     <ion-scroll scrollY="true" class="chat-content">
         <ion-list>
@@ -21,14 +21,23 @@
                 <!--Chat history section-->
                 <div class="chat-history-wrapper" *ngFor="let data of chatHistory; let i=index">
                     <!--Date & time of messages-->
-                    <div class="date-time-chat" *ngIf="i == 0">
-                            <p>{{chatHistory[i].year}}/{{chatHistory[i].month}}/{{chatHistory[i].date}} </p>
-                    </div>
-                    <div *ngIf="i > 0">
-                        <div class="date-time-chat" *ngIf="chatHistory[i].date != chatHistory[i-1].date">
-                            <p>{{chatHistory[i].year}}/{{chatHistory[i].month}}/{{chatHistory[i].date}} </p>
+                    <div class="date-time-chat">
+                        <p *ngIf="i == 0">{{chatHistory[i].day}}, {{chatHistory[i].month}}/{{chatHistory[i].date}}/{{chatHistory[i].year}} </p>
+                        <div *ngIf="i > 0">
+                            <div *ngIf="chatHistory[i].date != chatHistory[i-1].date">
+                                    <div *ngIf="date == chatHistory[i].date">
+                                        <p>Today</p>
+                                    </div>
+                                    <div *ngIf="date-1 == chatHistory[i].date">
+                                        <p>Yesterday</p>
+                                    </div>
+                                    <div *ngIf="(date != chatHistory[i].date) && (date-1 != chatHistory[i].date)">
+                                        <p>{{chatHistory[i].day}}, {{chatHistory[i].month}}/{{chatHistory[i].date}}/{{chatHistory[i].year}}</p>
+                                    </div>
+                            </div>
                         </div>
                     </div>
+
                     <!--Chat messages-->
                     <div class="chat-wrapper">
                         <!--Me section chat messages-->
