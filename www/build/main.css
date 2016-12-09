@@ -21339,10 +21339,19 @@ sub {
   height: 43px;
   position: relative;
   overflow: hidden;
+  border-radius: 100%;
 }
 
 .chatmessage-container .chat-wrapper .chat-person-image img {
-  border-radius: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: -100%;
+  right: -100%;
+  bottom: -100%;
+  left: -100%;
 }
 
 .chatmessage-container .chat-wrapper .chat-bubble {
@@ -21388,11 +21397,7 @@ sub {
   vertical-align: bottom;
   margin: 4px;
   display: inline;
-}
-
-.chatmessage-container .chat-wrapper .chat-bubble i {
   vertical-align: bottom;
-  font-size: 12px;
 }
 
 .chatmessage-container .chat-wrapper .chat-bubble .none {
@@ -21402,11 +21407,11 @@ sub {
 .chatmessage-container .chat-wrapper .chat-bubble-status {
   position: relative;
   display: inline-block;
-  text-align: center;
   vertical-align: top;
+  text-align: center;
   word-break: break-all;
   width: 100%;
-  padding: 10px 18px;
+  padding: 10px 90px;
   color: #9E9E9E;
 }
 
@@ -21414,11 +21419,7 @@ sub {
   font-size: 11.5px;
   vertical-align: bottom;
   margin: 4px;
-}
-
-.chatmessage-container .chat-wrapper .chat-bubble-status i {
   vertical-align: bottom;
-  font-size: 11.5px;
 }
 
 .chatmessage-container .chat-wrapper .chat-bubble-status strong {
@@ -21460,11 +21461,16 @@ sub {
   position: fixed;
   border-top: 1px solid #1C8954;
   width: 100%;
+  padding-right: 10px;
 }
 
 .chatmessage-container .chat-input .chatinput-field {
   display: inline-block;
   width: 80%;
+}
+
+.chatmessage-container .chat-input .chatinput-field input {
+  margin: 15px 8px 10px 0 !important;
 }
 
 .chatmessage-container .chat-input .chatinput-btn {
@@ -21474,9 +21480,7 @@ sub {
   line-height: 2;
   border-radius: 15px;
   transition: 0.5s;
-  position: absolute;
-  top: 25%;
-  right: 10px;
+  vertical-align: middle;
 }
 
 .chatmessage-container .chat-input .chatinput-btn.activated {
@@ -21822,14 +21826,10 @@ span {
 
 .member-container {
   background: linear-gradient(0deg, #1a6940 0%, #1a6940 17%, #1c8954 70%, #1c8954 100%);
-  /* w3c */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8954', endColorstr='#1a6940',GradientType=0 );
-  /* ie6-9 */
 }
 
 .member-container .profile-wrapper {
   background: transparent;
-  height: 25%;
   display: block;
   margin-top: 20px;
 }
@@ -21838,14 +21838,12 @@ span {
   text-align: center;
   margin-top: 5%;
   height: 100%;
+  border-radius: 100%;
 }
 
 .member-container .profile-wrapper .profile img {
-  width: 50%;
-  height: 110%;
   margin: 0 auto;
   border: 6px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
   display: block;
 }
