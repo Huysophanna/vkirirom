@@ -21137,14 +21137,27 @@ sub {
   font-weight: 500;
 }
 
-.profile img {
+.profile .user-profile {
+  background: #49a076;
+  border-radius: 100%;
   width: 12em;
   height: 12em;
-  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
   border: 6px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
-  background: #49a076;
+}
+
+.profile .user-profile img {
   display: block;
+  margin: auto;
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: -100%;
+  bottom: -100%;
+  left: -100%;
+  right: -100%;
 }
 
 .btn-section {
@@ -21846,17 +21859,26 @@ span {
 }
 
 .member-container .profile-wrapper .profile {
-  text-align: center;
-  margin-top: 5%;
-  height: 100%;
   border-radius: 100%;
+  width: 15em;
+  height: 15em;
+  background: rgba(255, 255, 255, 0.2);
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  border: 6px solid rgba(255, 255, 255, 0.4);
 }
 
 .member-container .profile-wrapper .profile img {
-  margin: 0 auto;
-  border: 6px solid rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.2);
+  margin: auto;
+  min-width: 100%;
+  min-height: 100%;
   display: block;
+  position: absolute;
+  top: -100%;
+  right: -100%;
+  left: -100%;
+  bottom: -100%;
 }
 
 .member-container .profile-wrapper .profile-info {

@@ -25,15 +25,24 @@ span {
         display: block;
         margin-top: 20px;
         .profile {
-            text-align: center;
-            margin-top: 5%;
-            height: 100%;
             border-radius: 100%;
+            width: 15em;
+            height: 15em;
+            background: rgba(255, 255, 255, 0.2);
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+            border: 6px solid rgba(255, 255, 255, 0.4);
             img {
-                margin: 0 auto;
-                border: 6px solid rgba(255, 255, 255, 0.4);
-                background: rgba(255, 255, 255, 0.2);
+                margin: auto;
+                min-width: 100%;
+                min-height: 100%;
                 display: block;
+                position: absolute;
+                top: -100%;
+                right: -100%;
+                left: -100%;
+                bottom: -100%;
             }
         }
         .profile-info {
