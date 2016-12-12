@@ -1,7 +1,7 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { NavController, Content, Platform, AlertController} from 'ionic-angular';
 import { NativeStorage, Network } from 'ionic-native';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 declare var io: any;
 
 /*

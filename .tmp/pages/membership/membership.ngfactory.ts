@@ -181,23 +181,28 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   _TemplateRef_63_5:any;
   _NgIf_63_6:import19.NgIf;
   _text_64:any;
-  _text_65:any;
+  _anchor_65:any;
+  /*private*/ _appEl_65:import2.AppElement;
+  _TemplateRef_65_5:any;
+  _NgIf_65_6:import19.NgIf;
   _text_66:any;
   _text_67:any;
-  _el_68:any;
+  _text_68:any;
   _text_69:any;
-  _anchor_70:any;
-  /*private*/ _appEl_70:import2.AppElement;
-  _TemplateRef_70_5:any;
-  _NgIf_70_6:import19.NgIf;
+  _el_70:any;
   _text_71:any;
   _anchor_72:any;
   /*private*/ _appEl_72:import2.AppElement;
   _TemplateRef_72_5:any;
   _NgIf_72_6:import19.NgIf;
   _text_73:any;
-  _text_74:any;
+  _anchor_74:any;
+  /*private*/ _appEl_74:import2.AppElement;
+  _TemplateRef_74_5:any;
+  _NgIf_74_6:import19.NgIf;
   _text_75:any;
+  _text_76:any;
+  _text_77:any;
   /*private*/ _expr_0:any;
   /*private*/ _expr_1:any;
   _map_0:any;
@@ -221,6 +226,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   /*private*/ _expr_19:any;
   /*private*/ _expr_20:any;
   /*private*/ _expr_21:any;
+  /*private*/ _expr_22:any;
   constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement) {
     super(_View_Membership0,renderType_Membership,import6.ViewType.COMPONENT,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
   }
@@ -280,7 +286,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     var compView_15:any = import28.viewFactory_Content0(this.viewUtils,this.injector(15),this._appEl_15);
     this._Content_15_4 = new import18.Content(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_15),this.renderer,this.parentInjector.get(import25.App),this.parentInjector.get(import29.Keyboard),this.parentInjector.get(import30.NgZone),this.parentInjector.get(import23.ViewController,(null as any)),this.parentInjector.get(import31.Tabs,(null as any)));
     this._appEl_15.initComponent(this._Content_15_4,[],compView_15);
-    this._text_16 = this.renderer.createText((null as any),'\n\n    ',(null as any));
+    this._text_16 = this.renderer.createText((null as any),'\n    ',(null as any));
     this._el_17 = this.renderer.createElement((null as any),'div',(null as any));
     this.renderer.setElementAttribute(this._el_17,'class','profile-wrapper');
     this._text_18 = this.renderer.createText(this._el_17,'\n        ',(null as any));
@@ -377,31 +383,36 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._appEl_63 = new import2.AppElement(63,55,this,this._anchor_63);
     this._TemplateRef_63_5 = new import32.TemplateRef_(this._appEl_63,viewFactory_Membership10);
     this._NgIf_63_6 = new import19.NgIf(this._appEl_63.vcRef,this._TemplateRef_63_5);
-    this._text_64 = this.renderer.createText(this._el_55,'\n                ',(null as any));
-    this._text_65 = this.renderer.createText(this._el_42,'\n            ',(null as any));
-    this._text_66 = this.renderer.createText(this._el_40,'\n        ',(null as any));
-    this._text_67 = this.renderer.createText(this._el_17,'\n\n        ',(null as any));
-    this._el_68 = this.renderer.createElement(this._el_17,'div',(null as any));
-    this.renderer.setElementAttribute(this._el_68,'class','expire-date');
-    this._text_69 = this.renderer.createText(this._el_68,'\n            Expire Date: ',(null as any));
-    this._anchor_70 = this.renderer.createTemplateAnchor(this._el_68,(null as any));
-    this._appEl_70 = new import2.AppElement(70,68,this,this._anchor_70);
-    this._TemplateRef_70_5 = new import32.TemplateRef_(this._appEl_70,viewFactory_Membership11);
-    this._NgIf_70_6 = new import19.NgIf(this._appEl_70.vcRef,this._TemplateRef_70_5);
-    this._text_71 = this.renderer.createText(this._el_68,'\n                         ',(null as any));
-    this._anchor_72 = this.renderer.createTemplateAnchor(this._el_68,(null as any));
-    this._appEl_72 = new import2.AppElement(72,68,this,this._anchor_72);
+    this._text_64 = this.renderer.createText(this._el_55,'\n                    ',(null as any));
+    this._anchor_65 = this.renderer.createTemplateAnchor(this._el_55,(null as any));
+    this._appEl_65 = new import2.AppElement(65,55,this,this._anchor_65);
+    this._TemplateRef_65_5 = new import32.TemplateRef_(this._appEl_65,viewFactory_Membership11);
+    this._NgIf_65_6 = new import19.NgIf(this._appEl_65.vcRef,this._TemplateRef_65_5);
+    this._text_66 = this.renderer.createText(this._el_55,'\n                ',(null as any));
+    this._text_67 = this.renderer.createText(this._el_42,'\n            ',(null as any));
+    this._text_68 = this.renderer.createText(this._el_40,'\n        ',(null as any));
+    this._text_69 = this.renderer.createText(this._el_17,'\n\n        ',(null as any));
+    this._el_70 = this.renderer.createElement(this._el_17,'div',(null as any));
+    this.renderer.setElementAttribute(this._el_70,'class','expire-date');
+    this._text_71 = this.renderer.createText(this._el_70,'\n            Expire Date: ',(null as any));
+    this._anchor_72 = this.renderer.createTemplateAnchor(this._el_70,(null as any));
+    this._appEl_72 = new import2.AppElement(72,70,this,this._anchor_72);
     this._TemplateRef_72_5 = new import32.TemplateRef_(this._appEl_72,viewFactory_Membership12);
     this._NgIf_72_6 = new import19.NgIf(this._appEl_72.vcRef,this._TemplateRef_72_5);
-    this._text_73 = this.renderer.createText(this._el_68,'\n        ',(null as any));
-    this._text_74 = this.renderer.createText(this._el_17,'\n    ',(null as any));
-    this._text_75 = this.renderer.createText((null as any),'\n\n',(null as any));
+    this._text_73 = this.renderer.createText(this._el_70,'\n                         ',(null as any));
+    this._anchor_74 = this.renderer.createTemplateAnchor(this._el_70,(null as any));
+    this._appEl_74 = new import2.AppElement(74,70,this,this._anchor_74);
+    this._TemplateRef_74_5 = new import32.TemplateRef_(this._appEl_74,viewFactory_Membership13);
+    this._NgIf_74_6 = new import19.NgIf(this._appEl_74.vcRef,this._TemplateRef_74_5);
+    this._text_75 = this.renderer.createText(this._el_70,'\n        ',(null as any));
+    this._text_76 = this.renderer.createText(this._el_17,'\n    ',(null as any));
+    this._text_77 = this.renderer.createText((null as any),'\n\n',(null as any));
     compView_15.create(this._Content_15_4,[
       [],
       [].concat([
         this._text_16,
         this._el_17,
-        this._text_75
+        this._text_77
       ]
       ),
       []
@@ -432,6 +443,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._expr_19 = import7.UNINITIALIZED;
     this._expr_20 = import7.UNINITIALIZED;
     this._expr_21 = import7.UNINITIALIZED;
+    this._expr_22 = import7.UNINITIALIZED;
     this.init([],[
       this._text_0,
       this._el_1,
@@ -498,17 +510,19 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
       this._text_62,
       this._anchor_63,
       this._text_64,
-      this._text_65,
+      this._anchor_65,
       this._text_66,
       this._text_67,
-      this._el_68,
+      this._text_68,
       this._text_69,
-      this._anchor_70,
+      this._el_70,
       this._text_71,
       this._anchor_72,
       this._text_73,
-      this._text_74,
-      this._text_75
+      this._anchor_74,
+      this._text_75,
+      this._text_76,
+      this._text_77
     ]
     ,[],[]);
     return (null as any);
@@ -543,14 +557,16 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     if (((token === import19.NgIf) && (61 === requestNodeIndex))) { return this._NgIf_61_6; }
     if (((token === import32.TemplateRef) && (63 === requestNodeIndex))) { return this._TemplateRef_63_5; }
     if (((token === import19.NgIf) && (63 === requestNodeIndex))) { return this._NgIf_63_6; }
-    if (((token === import20.Col) && ((55 <= requestNodeIndex) && (requestNodeIndex <= 64)))) { return this._Col_55_3; }
-    if (((token === import20.Row) && ((42 <= requestNodeIndex) && (requestNodeIndex <= 65)))) { return this._Row_42_3; }
-    if (((token === import20.Grid) && ((40 <= requestNodeIndex) && (requestNodeIndex <= 66)))) { return this._Grid_40_3; }
-    if (((token === import32.TemplateRef) && (70 === requestNodeIndex))) { return this._TemplateRef_70_5; }
-    if (((token === import19.NgIf) && (70 === requestNodeIndex))) { return this._NgIf_70_6; }
+    if (((token === import32.TemplateRef) && (65 === requestNodeIndex))) { return this._TemplateRef_65_5; }
+    if (((token === import19.NgIf) && (65 === requestNodeIndex))) { return this._NgIf_65_6; }
+    if (((token === import20.Col) && ((55 <= requestNodeIndex) && (requestNodeIndex <= 66)))) { return this._Col_55_3; }
+    if (((token === import20.Row) && ((42 <= requestNodeIndex) && (requestNodeIndex <= 67)))) { return this._Row_42_3; }
+    if (((token === import20.Grid) && ((40 <= requestNodeIndex) && (requestNodeIndex <= 68)))) { return this._Grid_40_3; }
     if (((token === import32.TemplateRef) && (72 === requestNodeIndex))) { return this._TemplateRef_72_5; }
     if (((token === import19.NgIf) && (72 === requestNodeIndex))) { return this._NgIf_72_6; }
-    if (((token === import18.Content) && ((15 <= requestNodeIndex) && (requestNodeIndex <= 75)))) { return this._Content_15_4; }
+    if (((token === import32.TemplateRef) && (74 === requestNodeIndex))) { return this._TemplateRef_74_5; }
+    if (((token === import19.NgIf) && (74 === requestNodeIndex))) { return this._NgIf_74_6; }
+    if (((token === import18.Content) && ((15 <= requestNodeIndex) && (requestNodeIndex <= 77)))) { return this._Content_15_4; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -616,25 +632,30 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
       this._Icon_57_3.name = currVal_16;
       this._expr_16 = currVal_16;
     }
-    const currVal_18:any = this.context.userCardType;
+    const currVal_18:any = (this.context.userCardType == 'Gold');
     if (import4.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
       this._NgIf_61_6.ngIf = currVal_18;
       this._expr_18 = currVal_18;
     }
-    const currVal_19:boolean = !this.context.userCardType;
+    const currVal_19:any = (this.context.userCardType == 'Silver');
     if (import4.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
       this._NgIf_63_6.ngIf = currVal_19;
       this._expr_19 = currVal_19;
     }
-    const currVal_20:any = this.context.userCardExpire;
+    const currVal_20:boolean = !this.context.userCardType;
     if (import4.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
-      this._NgIf_70_6.ngIf = currVal_20;
+      this._NgIf_65_6.ngIf = currVal_20;
       this._expr_20 = currVal_20;
     }
-    const currVal_21:boolean = !this.context.userCardExpire;
+    const currVal_21:any = this.context.userCardExpire;
     if (import4.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
       this._NgIf_72_6.ngIf = currVal_21;
       this._expr_21 = currVal_21;
+    }
+    const currVal_22:boolean = !this.context.userCardExpire;
+    if (import4.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
+      this._NgIf_74_6.ngIf = currVal_22;
+      this._expr_22 = currVal_22;
     }
     this.detectContentChildrenChanges(throwOnChange);
     if (!throwOnChange) { if (this._query_Button_8_0.dirty) {
@@ -892,6 +913,7 @@ class _View_Membership9 extends import1.AppView<any> {
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
     this._el_1 = this.renderer.createElement(this._el_0,'b',(null as any));
+    this.renderer.setElementAttribute(this._el_1,'style','color: gold');
     this._text_2 = this.renderer.createText(this._el_1,'',(null as any));
     this._expr_0 = import7.UNINITIALIZED;
     this.init([].concat([this._el_0]),[
@@ -919,8 +941,43 @@ class _View_Membership10 extends import1.AppView<any> {
   _el_0:any;
   _el_1:any;
   _text_2:any;
+  /*private*/ _expr_0:any;
   constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement) {
     super(_View_Membership10,renderType_Membership,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
+  }
+  createInternal(rootSelector:string):import2.AppElement {
+    this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
+    this._el_1 = this.renderer.createElement(this._el_0,'b',(null as any));
+    this.renderer.setElementAttribute(this._el_1,'style','color: silver');
+    this._text_2 = this.renderer.createText(this._el_1,'',(null as any));
+    this._expr_0 = import7.UNINITIALIZED;
+    this.init([].concat([this._el_0]),[
+      this._el_0,
+      this._el_1,
+      this._text_2
+    ]
+    ,[],[]);
+    return (null as any);
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    this.detectContentChildrenChanges(throwOnChange);
+    const currVal_0:any = import4.interpolate(1,'',this.parent.context.userCardType,'');
+    if (import4.checkBinding(throwOnChange,this._expr_0,currVal_0)) {
+      this.renderer.setText(this._text_2,currVal_0);
+      this._expr_0 = currVal_0;
+    }
+    this.detectViewChildrenChanges(throwOnChange);
+  }
+}
+function viewFactory_Membership10(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
+  return new _View_Membership10(viewUtils,parentInjector,declarationEl);
+}
+class _View_Membership11 extends import1.AppView<any> {
+  _el_0:any;
+  _el_1:any;
+  _text_2:any;
+  constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement) {
+    super(_View_Membership11,renderType_Membership,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
@@ -935,15 +992,15 @@ class _View_Membership10 extends import1.AppView<any> {
     return (null as any);
   }
 }
-function viewFactory_Membership10(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
-  return new _View_Membership10(viewUtils,parentInjector,declarationEl);
+function viewFactory_Membership11(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
+  return new _View_Membership11(viewUtils,parentInjector,declarationEl);
 }
-class _View_Membership11 extends import1.AppView<any> {
+class _View_Membership12 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   /*private*/ _expr_0:any;
   constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement) {
-    super(_View_Membership11,renderType_Membership,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
+    super(_View_Membership12,renderType_Membership,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
@@ -966,14 +1023,14 @@ class _View_Membership11 extends import1.AppView<any> {
     this.detectViewChildrenChanges(throwOnChange);
   }
 }
-function viewFactory_Membership11(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
-  return new _View_Membership11(viewUtils,parentInjector,declarationEl);
+function viewFactory_Membership12(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
+  return new _View_Membership12(viewUtils,parentInjector,declarationEl);
 }
-class _View_Membership12 extends import1.AppView<any> {
+class _View_Membership13 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement) {
-    super(_View_Membership12,renderType_Membership,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
+    super(_View_Membership13,renderType_Membership,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
@@ -986,6 +1043,6 @@ class _View_Membership12 extends import1.AppView<any> {
     return (null as any);
   }
 }
-function viewFactory_Membership12(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
-  return new _View_Membership12(viewUtils,parentInjector,declarationEl);
+function viewFactory_Membership13(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
+  return new _View_Membership13(viewUtils,parentInjector,declarationEl);
 }

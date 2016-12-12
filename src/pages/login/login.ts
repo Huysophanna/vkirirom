@@ -68,6 +68,7 @@ export class Login {
      });
 
     this.loading = this.loadingCtrl.create({
+      content: 'Authenticating...',
       dismissOnPageChange: true,
     });
       this.loading.present();
@@ -104,25 +105,21 @@ export class Login {
 
       let facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
       this.loading = this.loadingCtrl.create({
+        content: 'Authenticating...',
         dismissOnPageChange: true,
       });
       this.loading.present();
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
           this.userProfile = success;
-          alert(this.userProfile);
-          
           this.userExist();
           
           //alert("Firebase success: " + JSON.stringify(success));
           this.nav.setRoot(Dashboard);
 
           //store userProfile object to the phone storage
-          NativeStorage.setItem('userDetails', this.userProfile)
-            .then(
-              () => console.log('Stored item!'),
-              error => console.error('Error storing item', error)
-          );
+          NativeStorage.setItem('userDetails', this.userProfile);
+          NativeStorage.setItem('userID', response.authResponse.userID);
         })
         .catch((error) => {
           //alert("Firebase failure: " + JSON.stringify(error));

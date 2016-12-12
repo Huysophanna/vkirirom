@@ -26,24 +26,27 @@ export class MyApp {
   userName: any;
   userPhoto: any;
   userEmail: any;
+  fbID: any;
 
   constructor(platform: Platform, public loadingCtrl: LoadingController, public push: Push) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
+      NativeStorage.getItem('userID').then(data => {
+        this.fbID = data;
+        this.userPhoto = "https://graph.facebook.com/" + this.fbID + "/picture?width=320&height=320";
+      });
       NativeStorage.getItem('userDetails')
         .then(
           data => {
             this.userName = data.displayName;
-            this.userPhoto = data.photoURL;
             this.userEmail = data.email;
-          },
-          error => console.error(error)
+          }
         );
     });
 
     // set our app's pages
     this.pages = [
-      { title: 'Setting', component: Dashboard, ionicon: 'ios-settings-outline'},
+      { title: 'Setting', id: 1, ionicon: 'ios-settings-outline'},
       { title: 'Contact Us', id: 2, ionicon: 'ios-call-outline'},
       { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline'}
     ];
