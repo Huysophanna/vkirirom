@@ -1,14 +1,16 @@
 <ion-menu [content]="content">
     <ion-content class="side-container">
         <div class="sidemenu-header profile">
-            <img *ngIf="userPhoto" src="{{userPhoto}}" alt="Profile Picture">
-            <img *ngIf="!userPhoto" src="img/profile.svg" alt="Profile Picture">
+            <div class="user-profile">
+                <img *ngIf="userPhoto" src="{{userPhoto}}" alt="Profile Picture">
+                <img *ngIf="!userPhoto" src="img/photo.jpg" alt="Profile Picture">
+            </div>
             <div class="profile-info">
                 <br>
                 <span *ngIf="userName">{{ userName }}</span>
-                    <span *ngIf="!userName">Username</span><br>
+                <span *ngIf="!userName">Username</span><br>
                 <span *ngIf="userEmail">{{ userEmail }}</span>
-                    <span *ngIf="!userEmail">Someemail@email.com</span>
+                <span *ngIf="!userEmail">Someemail@email.com</span>
             </div>
         </div>
         <div class="btn-section">
