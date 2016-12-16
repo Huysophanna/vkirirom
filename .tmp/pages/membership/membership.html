@@ -20,7 +20,7 @@
     <div class="profile-wrapper">
         <div class="profile">
             <img *ngIf="userPhoto" src="{{userPhoto}}" alt="Profile Picture">
-            <img *ngIf="!userPhoto" src="img/profile.svg" alt="Profile Picture">
+            <img *ngIf="!userPhoto" src="img/photo.svg" alt="Profile Picture">
         </div>
 
         <div class="profile-info">
@@ -30,7 +30,7 @@
 
         <div class="profile-info">
             ID: <span *ngIf="userID"> {{ userID}} </span>
-                <span *ngIf="!userID"> 99123912 </span>
+            <span *ngIf="!userID"> 99123912 </span>
         </div>
 
         <ion-grid class="detail">
@@ -44,6 +44,7 @@
                     <ion-icon name="logo-buffer"></ion-icon>&nbsp;&nbsp;Type<br>
                     <span *ngIf="userCardType == 'Gold'"><b style="color: gold">{{ userCardType }}</b></span>
                     <span *ngIf="userCardType == 'Silver'"><b style="color: silver">{{ userCardType }}</b></span>
+                    <span *ngIf="userCardType == 'Bronze'"><b style="color: #cd7f32">{{ userCardType }}</b></span>
                     <span *ngIf="!userCardType"><b>Gold</b></span>
                 </ion-col>
             </ion-row>
@@ -51,7 +52,7 @@
 
         <div class="expire-date">
             Expire Date: <span *ngIf="userCardExpire">{{ userCardExpire }}</span>
-                         <span *ngIf="!userCardExpire">10/ Oct/ 2017</span>
+            <span *ngIf="!userCardExpire">10/ Oct/ 2017</span>
         </div>
     </div>
 

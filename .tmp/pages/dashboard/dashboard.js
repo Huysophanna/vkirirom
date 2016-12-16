@@ -1,38 +1,29 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { SMS } from 'ionic-native';
-import { Toast } from 'ionic-native';
-import { Geolocation } from 'ionic-native';
+import { NavController, Platform } from 'ionic-angular';
+import { SMS, Toast, Geolocation } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
 import { About } from '../about/about';
 import { Storage } from '@ionic/storage';
-import { Push } from '@ionic/cloud-angular';
 import { LocationTracker } from '../../providers/location-tracker';
-/*
-  Generated class for the Dashboard page.
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 export var Dashboard = (function () {
-    function Dashboard(navCtrl, storage, push, locationTracker) {
-        var _this = this;
+    function Dashboard(navCtrl, storage, locationTracker, platform) {
         this.navCtrl = navCtrl;
         this.storage = storage;
-        this.push = push;
         this.locationTracker = locationTracker;
+        this.platform = platform;
         this.membership = Membership;
-        //Push notification configuration
-        this.push.register().then(function (t) {
-            return _this.push.saveToken(t);
-        }).then(function (t) {
-            console.log('Token saved:', t.token);
-        });
-        this.push.rx.notification().subscribe(function (msg) {
-            //   this.storage.set('push-notification', msg.text);
-            _this.Notification = msg.text;
-        });
+        // //Push notification configuration
+        //   this.push.register().then((t: PushToken) => {
+        //       return this.push.saveToken(t);
+        //   }).then((t: PushToken) => {
+        //       console.log('Token saved:', t.token);
+        //   });
+        //   this.push.rx.notification().subscribe((msg) => {
+        //     //   this.storage.set('push-notification', msg.text);
+        //     this.Notification = msg.text;
+        //   });
     }
     Dashboard.prototype.navigate = function (num) {
         switch (num) {
@@ -100,15 +91,16 @@ export var Dashboard = (function () {
     Dashboard.decorators = [
         { type: Component, args: [{
                     selector: 'page-dashboard',
-                    templateUrl: 'dashboard.html'
+                    templateUrl: 'dashboard.html',
+                    styles: ['.header-md::after { background-image: none; }']
                 },] },
     ];
     /** @nocollapse */
     Dashboard.ctorParameters = [
         { type: NavController, },
         { type: Storage, },
-        { type: Push, },
         { type: LocationTracker, },
+        { type: Platform, },
     ];
     return Dashboard;
 }());

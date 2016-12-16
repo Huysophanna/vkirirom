@@ -13,27 +13,31 @@
 </ion-header>
 
 
-<ion-content #content class="chatmessage-container">
+<ion-content class="chatmessage-container">
 
-    <ion-scroll scrollY="true" class="chat-content">
+    <div class="chat-content" #scrollMe style="overflow: scroll; height: xyz;">
+    <!--<ion-scroll #scrollMe scrollY="true" class="chat-content">-->
         <ion-list>
             <div *ngIf="chatsLength == timeLength ">
                 <!--Chat history section-->
+                <div *ngIf="!chatHistory">
+                    <p>Loading...</p>
+                </div>
                 <div class="chat-history-wrapper" *ngFor="let data of chatHistory; let i=index">
                     <!--Date & time of messages-->
                     <div class="date-time-chat">
                         <p *ngIf="i == 0">{{chatHistory[i].day}}, {{chatHistory[i].month}}/{{chatHistory[i].date}}/{{chatHistory[i].year}} </p>
                         <div *ngIf="i > 0">
                             <div *ngIf="chatHistory[i].date != chatHistory[i-1].date">
-                                    <div *ngIf="date == chatHistory[i].date">
-                                        <p>Today</p>
-                                    </div>
-                                    <div *ngIf="date-1 == chatHistory[i].date">
-                                        <p>Yesterday</p>
-                                    </div>
-                                    <div *ngIf="(date != chatHistory[i].date) && (date-1 != chatHistory[i].date)">
-                                        <p>{{chatHistory[i].day}}, {{chatHistory[i].month}}/{{chatHistory[i].date}}/{{chatHistory[i].year}}</p>
-                                    </div>
+                                <div *ngIf="date == chatHistory[i].date">
+                                    <p>Today</p>
+                                </div>
+                                <div *ngIf="date-1 == chatHistory[i].date">
+                                    <p>Yesterday</p>
+                                </div>
+                                <div *ngIf="(date != chatHistory[i].date) && (date-1 != chatHistory[i].date)">
+                                    <p>{{chatHistory[i].day}}, {{chatHistory[i].month}}/{{chatHistory[i].date}}/{{chatHistory[i].year}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -98,7 +102,8 @@
             </div>
 
         </ion-list>
-    </ion-scroll>
+    </div>
+    <!--</ion-scroll>-->
 
     <div class="chat-input">
         <ion-input class="chatinput-field" type="text" [(ngModel)]="chatinp" placeholder="Type a message..."></ion-input>

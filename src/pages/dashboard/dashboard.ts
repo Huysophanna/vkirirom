@@ -1,42 +1,36 @@
 import { Component, Inject } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { SMS } from 'ionic-native';
-import { Toast } from 'ionic-native';
-import { Geolocation } from 'ionic-native';
+import { NavController, Platform } from 'ionic-angular';
+import { SMS, Toast, Geolocation, Push } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
 import { About } from '../about/about';
 import { Storage } from '@ionic/storage';
-import { Push, PushToken } from '@ionic/cloud-angular';
 import { LocationTracker } from '../../providers/location-tracker';
-
-/*
-  Generated class for the Dashboard page.
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 
 @Component({
   selector: 'page-dashboard',
-  templateUrl: 'dashboard.html'
+  templateUrl: 'dashboard.html',
+  styles: ['.header-md::after { background-image: none; }']
 })
 
 export class Dashboard {
   membership = Membership;
   Notification:any;
 
-  constructor(public navCtrl: NavController, public storage: Storage, public push: Push, public locationTracker: LocationTracker) {
-    //Push notification configuration
-      this.push.register().then((t: PushToken) => {
-          return this.push.saveToken(t);
-      }).then((t: PushToken) => {
-          console.log('Token saved:', t.token);
-      });
-      this.push.rx.notification().subscribe((msg) => {
-        //   this.storage.set('push-notification', msg.text);
-        this.Notification = msg.text;
-      });
+  constructor(public navCtrl: NavController, public storage: Storage,  public locationTracker: LocationTracker, public platform: Platform) {
+
+     
+    // //Push notification configuration
+    //   this.push.register().then((t: PushToken) => {
+    //       return this.push.saveToken(t);
+    //   }).then((t: PushToken) => {
+    //       console.log('Token saved:', t.token);
+    //   });
+    //   this.push.rx.notification().subscribe((msg) => {
+    //     //   this.storage.set('push-notification', msg.text);
+    //     this.Notification = msg.text;
+    //   });
   }
 
   navigate(num) {

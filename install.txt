@@ -5,9 +5,10 @@ ionic plugin add cordova-sms-plugin
 cordova plugin add phonegap-plugin-push --variable SENDER_ID="82070365426"
 cordova plugin add cordova-plugin-nativestorage
 cordova plugin add cordova-plugin-network-information
-npm install angularfire2 --save
-ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"
+ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y" --variable API_KEY_FOR_IOS="AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
 ionic plugin add call-number
+ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1190088291053783" --variable APP_NAME="vkirirom"
+ionic plugin add cordova-plugin-splashscreen
 
 
 
