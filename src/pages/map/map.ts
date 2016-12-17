@@ -6,7 +6,7 @@ declare var navigator: any;
 
 @Component({
 	selector: 'page-map',
- 	templateUrl: 'map.html'
+ 	templateUrl: 'map.html',
 })
 
 export class GoogleMapPage {

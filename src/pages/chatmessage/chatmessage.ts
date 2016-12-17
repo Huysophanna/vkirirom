@@ -39,6 +39,15 @@ export class Chatmessage implements OnInit, AfterViewChecked {
   token: any;
 
   constructor(public navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
+        if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
+          let alert = this.alertCtrl.create({
+              title: "Something went wrong",
+              subTitle: "There was a problem with network connection. Try again in another minutes ...",
+              buttons: ["OK"]
+          });
+          alert.present();
+        }
+        
         NativeStorage.getItem('userDetails')
           .then(
             data => {
