@@ -27,8 +27,102 @@ $green_primary_color: #1C8954;
             box-shadow: inset 0 0 2px #9E9E9E;
             color: #556B2F;
         }
-       
-    }
+        .error-messages {
+            margin-top: 50%;
+            text-align: center;
+            ion-icon {
+                color: green;
+                font-size: -webkit-xxx-large;
+            }
+        }
+        .loading-messages {
+            position: relative;
+            margin-top: 60%;
+            p {
+                text-align: center;
+            }
+            // demo-specific
+            .showbox {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 5%;
+            }
+            // end demo-specific
+
+            .loader {
+                position: relative;
+                margin: 0 auto;
+                width: 30px;
+                &:before {
+                    content: '';
+                    display: block;
+                    padding-top: 100%;
+                }
+            }
+
+            .circular {
+                animation: rotate 2s linear infinite;
+                height: 100%;
+                transform-origin: center center;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            .path {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+                animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+                stroke-linecap: round;
+                }
+
+                @keyframes rotate {
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+
+                @keyframes dash {
+                    0% {
+                        stroke-dasharray: 1, 200;
+                        stroke-dashoffset: 0;
+                    }
+                    50% {
+                        stroke-dasharray: 89, 200;
+                        stroke-dashoffset: -35px;
+                    }
+                    100% {
+                        stroke-dasharray: 89, 200;
+                        stroke-dashoffset: -124px;
+                    }
+                }
+
+                @keyframes color {
+                    100%,
+                    0% {
+                        stroke: #d62d20;
+                    }
+                    40% {
+                        stroke: #0057e7;
+                    }
+                    66% {
+                        stroke: #008744;
+                    }
+                    80%,
+                    90% {
+                        stroke: #ffa700;
+                    }
+                }
+            }  
+        }
+        
     .scroll-content {
         margin-top: 0;
         padding: 5px;
@@ -82,7 +176,7 @@ $green_primary_color: #1C8954;
                 position: absolute;
                 top: 23px;
                 width: 20px;
-                z-index: 1;
+                z-index: 0;
             }
             p {
                 margin: 0;
@@ -93,7 +187,7 @@ $green_primary_color: #1C8954;
                 padding: 10px 18px;
                 position: relative;
                 vertical-align: top;
-                z-index: 0;
+                z-index: -1;
                 max-width: 75%;
             }
             span {
@@ -160,21 +254,39 @@ $green_primary_color: #1C8954;
         border-top: 1px solid $green_primary_color;
         width: 100%;
         padding-right: 10px;
+        //fab button positioning & colors
+        button {
+            box-shadow: 0 4px 6px 0 rgba(0,0,0,.14), 0 4px 5px rgba(0,0,0,.1);
+        }
+        ion-fab[bottom] {
+            bottom: 70px;
+        }
+        ion-fab[right] {
+            right: 25px;
+        }
+        .fab-md.fab-md-light {
+            color: $green_primary_color;
+            background-color: white;
+        }
         .chatinput-field {
+            resize: none;
             display: inline-block;
             width: 80%;
+            margin-top: 1%;
+            border: none;
             input {
                 margin: 15px 8px 10px 0 !important;
             }
         }
         .chatinput-btn {
+            position: absolute;
             width: 18%;
             background: $green_primary_color;
             color: white;
             line-height: 2;
             border-radius: 15px;
             transition: 0.5s;
-            vertical-align: middle;
+            margin-top: 1%;
         }
         .chatinput-btn.activated {
             opacity: 0.2;

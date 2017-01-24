@@ -11,12 +11,12 @@
         <img class="vkirirom-img" src="img/vkirirom_logo.svg">
     </div>
     <div class="noti-bar">
-        <p *ngIf="!Notification">Welcome to vKirirom Mobile App 1</p>
+        <p *ngIf="!Notification">Welcome to vKirirom Mobile App</p>
         <p *ngIf="Notification">{{ Notification }}</p>
     </div>
     <div class="dashboard-action">
         <div class="first-row">
-            <button class="service-btn"><img src="img/service-icon.svg">Service</button>
+            <button (click)="navigate(1)" class="service-btn"><img src="img/service-icon.svg">Service</button>
             <button (click)="navigate(2)" class="member-btn"><img src="img/card-icon.svg">Membership</button>
             <button (click)="navigate(3)" class="map-btn"><img src="img/map-icon.svg">vMap</button>
         </div>

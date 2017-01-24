@@ -6,8 +6,10 @@ import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { Facebook } from 'ionic-native';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Membership } from '../pages/membership/membership';
+import { Services } from '../pages/services/services';
 import { Chat } from '../pages/chat/chat';
 import { About } from '../pages/about/about';
+import { Signup } from '../pages/signup/signup';
 import { GoogleMapPage } from '../pages/map/map';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
@@ -23,7 +25,9 @@ import { LocationTracker } from '../providers/location-tracker';
     Chat,
     Chatmessage,
     About,
-    GoogleMapPage
+    Signup,
+    GoogleMapPage,
+    Services
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -38,7 +42,9 @@ import { LocationTracker } from '../providers/location-tracker';
     Chat,
     Chatmessage,
     About,
-    GoogleMapPage
+    Signup,
+    GoogleMapPage,
+    Services
   ],
   providers: [
     AuthData,

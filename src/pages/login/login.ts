@@ -1,23 +1,18 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, Platform, LoadingController, AlertController, Events } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Keyboard } from 'ionic-native';
 import firebase from 'firebase';
-import { Facebook } from 'ionic-native';
+import { Facebook, Keyboard, NativeStorage } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
+import { Signup } from '../signup/signup';
 import { KeyboardAttachDirective } from '../../app/keyboard-attach.directive';
-import { NativeStorage } from 'ionic-native';
 
-/*
-  Generated class for the Login page.
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
   styles: ['.header-md::after { background-image: none; }'],
+  
 })
 export class Login {
   public loginForm;
@@ -29,7 +24,8 @@ export class Login {
 
   constructor(public platform: Platform, public nav: NavController, public authData: AuthData, 
     public formBuilder: FormBuilder, public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController, public fb: Facebook) {
+    public loadingCtrl: LoadingController, public fb: Facebook, public events: Events) {
+      Keyboard.disableScroll(true);
       this.userProfile;
        this.loginForm = formBuilder.group({
           email: ['', Validators.compose([Validators.required])],
@@ -53,19 +49,16 @@ export class Login {
         console.log(this.loginForm.value);
       } else {
         this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authData => {
+          // alert(JSON.stringify(authData));
+          //store userProfile object to the phone storage
+          this.userProfile = authData;
+              NativeStorage.setItem('userDetails', this.userProfile).then(()=> {
+                this.events.publish('UserLogin', authData.displayName);
+              });
           this.nav.setRoot(Dashboard);
         }, error => {
         this.loading.dismiss().then( () => {
-          let alert = this.alertCtrl.create({
-            message: error.message,
-            buttons: [
-              {
-                text: "Ok",
-                role: 'cancel'
-              }
-            ]
-          });
-          alert.present();
+          this.warningAlert(JSON.stringify(error));
         });
       });
 
@@ -77,6 +70,10 @@ export class Login {
       }
     });
 
+  }
+
+  signUpUser() {
+    this.nav.push(Signup);
   }
 
   createNewUser() {
@@ -96,7 +93,7 @@ export class Login {
       console.log(existed);
     }).catch((err)=>{
       console.log(err);
-      alert(err);
+      this.warningAlert(err + ". Please contact customer support.")
     });
   }
 
@@ -124,16 +121,23 @@ export class Login {
 
               //store userProfile object to the phone storage
               NativeStorage.setItem('userDetails', this.userProfile);
-              NativeStorage.setItem('userID', response.authResponse.userID);
+              // NativeStorage.setItem('userID', response.authResponse.userID);
+              NativeStorage.setItem('userPhoto', "https://graph.facebook.com/" + response.authResponse.userID + "/picture?width=320&height=320").then(() => {
+                //create an event for others to listen
+                this.events.publish('UserLogin', success.displayName);
+              });
             })
             .catch((error) => {
               //alert("Firebase failure: " + JSON.stringify(error));
-              alert("Cannot sign you in, firebase problem");
+              this.warningAlert(error + ". Please contact Customer Service for this issue.");
           });
 
         }).catch((error) => { 
           console.log(error); 
-          alert("Cannot sign you in, facebook problem");
+          if (error.statusCode != 4201) {
+            this.warningAlert("Can't connect to Facebook. Please check your network connection.");
+          }
+          alert(JSON.stringify(error));
         });   
     });
    
@@ -145,6 +149,16 @@ export class Login {
   elementChanged(input){
     let field = input.inputControl.name;
     this[field + "Changed"] = true;
+  }
+
+  warningAlert(message) {
+    this.alertCtrl.create({
+      message: message,
+      buttons: [{
+          text: "Ok",
+          role: 'cancel'
+      }]
+    }).present();
   }
 
 }

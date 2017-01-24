@@ -61,56 +61,59 @@ export class GoogleMapPage {
           }
         });
     map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-    });
+      // create CameraPosition
+      let position: CameraPosition = {
+        target: LatLng,
+        zoom: 18,
+        tilt: 30
+      };
 
-    // create CameraPosition
-    let position: CameraPosition = {
-      target: LatLng,
-      zoom: 18,
-      tilt: 30
-    };
-
-    // move the map's camera to position
-    map.animateCamera({
-      'target': LatLng,
-      'tilt': 60,
-      'zoom': 18,
-      'bearing': 140
-    });
-
-    // create new marker
-    let markerOptions: GoogleMapsMarkerOptions = {
-      position: LatLng,
-      title: 'vKirirom Pine Resort'
-    };
-
-    map.addMarker(markerOptions)
-      .then((marker: GoogleMapsMarker) => {
-        marker.showInfoWindow();
-        marker.setTitle('vKirirom Pine Resort');
+      // move the map's camera to position
+      map.animateCamera({
+        'target': LatLng,
+        'zoom': 16,
+        'bearing': 140
       });
 
-    let bounds = [
-      new GoogleMapsLatLng(11.3191, 104.0743),
-      new GoogleMapsLatLng(11.3202, 104.0606),
-      new GoogleMapsLatLng(11.3116, 104.0599),
-      new GoogleMapsLatLng(11.3099, 104.0734),
-    ];
-    // let bounds = [
-    //   new GoogleMapsLatLng(11.3202, 104.0734),
-    //   new GoogleMapsLatLng(11.3202, 104.0599),
-    //   new GoogleMapsLatLng(11.3099, 104.0599),
-    //   new GoogleMapsLatLng(11.3099, 104.0734),
-    // ];
+      // create new marker
+      let markerOptions: GoogleMapsMarkerOptions = {
+        position: new GoogleMapsLatLng(11.3150, 104.0677),
+        icon: "http://www.google.com/intl/en_us/mapfiles/ms/icons/blue-dot.png",
+        animation: plugin.google.maps.Animation.DROP
+      };
+
+      map.addMarker(markerOptions)
+        .then((marker: GoogleMapsMarker) => {
+          marker.showInfoWindow();
+          marker.addEventListener(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+             alert("Kirirom Institute of Technology - KIT"); 
+          });
+        });
+
+      let bounds = [
+        new GoogleMapsLatLng(11.3191, 104.0743),
+        new GoogleMapsLatLng(11.3202, 104.0606),
+        new GoogleMapsLatLng(11.3116, 104.0599),
+        new GoogleMapsLatLng(11.3099, 104.0734),
+      ];
+      // let bounds = [
+      //   new GoogleMapsLatLng(11.3202, 104.0734),
+      //   new GoogleMapsLatLng(11.3202, 104.0599),
+      //   new GoogleMapsLatLng(11.3099, 104.0599),
+      //   new GoogleMapsLatLng(11.3099, 104.0734),
+      // ];
 
 
 
-    map.addGroundOverlay({
-      'url': "img/vmap.png",
-      'bounds': bounds
-    });
+      map.addGroundOverlay({
+        'url': "img/vmap.png",
+        'bounds': bounds
+      });
 
-    map.setAllGesturesEnabled(true);
+      map.setAllGesturesEnabled(true);
+      });
+
+    
   }
 
 }
