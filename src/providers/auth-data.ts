@@ -22,9 +22,6 @@ export class AuthData {
     //     storageBucket: "vkirirom-809f8.appspot.com",
     //     messagingSenderId: "82070365426"
     //   });
-    //   firebase.auth().onAuthStateChanged((user) => {
-       
-    //   });
     
     this.fireAuth = firebase.auth();
     this.userProfile = firebase.database().ref('/userProfile');

@@ -227,6 +227,27 @@ var _View_Membership0 = (function (_super) {
         this._appEl_63 = new import2.AppElement(63, 55, this, this._anchor_63);
         this._TemplateRef_63_5 = new import32.TemplateRef_(this._appEl_63, viewFactory_Membership9);
         this._NgIf_63_6 = new import19.NgIf(this._appEl_63.vcRef, this._TemplateRef_63_5);
+<<<<<<< HEAD
+        this._text_64 = this.renderer.createText(this._el_55, '\n                ', null);
+        this._text_65 = this.renderer.createText(this._el_42, '\n            ', null);
+        this._text_66 = this.renderer.createText(this._el_40, '\n        ', null);
+        this._text_67 = this.renderer.createText(this._el_17, '\n\n        ', null);
+        this._el_68 = this.renderer.createElement(this._el_17, 'div', null);
+        this.renderer.setElementAttribute(this._el_68, 'class', 'expire-date');
+        this._text_69 = this.renderer.createText(this._el_68, '\n            Expire Date: ', null);
+        this._anchor_70 = this.renderer.createTemplateAnchor(this._el_68, null);
+        this._appEl_70 = new import2.AppElement(70, 68, this, this._anchor_70);
+        this._TemplateRef_70_5 = new import32.TemplateRef_(this._appEl_70, viewFactory_Membership11);
+        this._NgIf_70_6 = new import19.NgIf(this._appEl_70.vcRef, this._TemplateRef_70_5);
+        this._text_71 = this.renderer.createText(this._el_68, '\n            ', null);
+        this._anchor_72 = this.renderer.createTemplateAnchor(this._el_68, null);
+        this._appEl_72 = new import2.AppElement(72, 68, this, this._anchor_72);
+        this._TemplateRef_72_5 = new import32.TemplateRef_(this._appEl_72, viewFactory_Membership12);
+        this._NgIf_72_6 = new import19.NgIf(this._appEl_72.vcRef, this._TemplateRef_72_5);
+        this._text_73 = this.renderer.createText(this._el_68, '\n        ', null);
+        this._text_74 = this.renderer.createText(this._el_17, '\n    ', null);
+        this._text_75 = this.renderer.createText(null, '\n\n', null);
+=======
         this._text_64 = this.renderer.createText(this._el_55, '\n                    ', null);
         this._anchor_65 = this.renderer.createTemplateAnchor(this._el_55, null);
         this._appEl_65 = new import2.AppElement(65, 55, this, this._anchor_65);
@@ -256,6 +277,7 @@ var _View_Membership0 = (function (_super) {
         this._text_77 = this.renderer.createText(this._el_72, '\n        ', null);
         this._text_78 = this.renderer.createText(this._el_17, '\n    ', null);
         this._text_79 = this.renderer.createText(null, '\n\n', null);
+>>>>>>> bdf504739ce210ec2fceeb033e1baf26de1dc2d6
         compView_15.create(this._Content_15_4, [
             [],
             [].concat([
@@ -648,7 +670,7 @@ var _View_Membership0 = (function (_super) {
 }(import1.AppView));
 export function viewFactory_Membership0(viewUtils, parentInjector, declarationEl) {
     if ((renderType_Membership === null)) {
-        (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html', 0, import9.ViewEncapsulation.None, styles_Membership, {}));
+        (renderType_Membership = viewUtils.createRenderComponentType('D:/vkirirom/.tmp/pages/membership/membership.html', 0, import9.ViewEncapsulation.None, styles_Membership, {}));
     }
     return new _View_Membership0(viewUtils, parentInjector, declarationEl);
 }

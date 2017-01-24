@@ -1,14 +1,17 @@
 import { Component, ViewChild, Input, NgZone } from '@angular/core';
 import { Nav, Platform, AlertController, LoadingController, NavController, Events } from 'ionic-angular';
-import { StatusBar, Push, Facebook, NativeStorage, CallNumber, Keyboard } from 'ionic-native';
+import { StatusBar, Facebook, NativeStorage, CallNumber, Keyboard, Geolocation, BackgroundGeolocation, Geoposition, BackgroundMode, Push } from 'ionic-native';
 import { Api } from '../providers/api';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
+import { Setting } from '../pages/setting/setting';
 import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { GoogleMapPage } from '../pages/map/map';
 import { Signup } from '../pages/signup/signup';
 import { AuthData } from '../providers/auth-data';
+
+declare var cordova: any;
 
 @Component({
   templateUrl: 'app.html'
@@ -25,6 +28,8 @@ export class MyApp {
   userPhoto: any;
   userEmail: any;
   fbID: any;
+  pushNotifications: any;
+  pushNotificationTitle: any;
 
   constructor(platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone) {
     platform.ready().then(() => {
@@ -132,8 +137,8 @@ export class MyApp {
       { title: 'Contact Us', id: 2, ionicon: 'ios-call-outline'},
       { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline'}
     ];
-      
   }
+  
 
   getStorageItem() {
       NativeStorage.getItem('userPhoto').then(data => {
@@ -151,6 +156,10 @@ export class MyApp {
     
     //logout function
     switch (page.id) {
+      case 1:
+       this.nav.push(Setting);
+       console.log("Setting is calling");
+       break;
       case 2:
         CallNumber.callNumber("0962304669", true);
       break;
@@ -168,4 +177,6 @@ export class MyApp {
     //this.nav.setRoot(Page1);
     this.isHome = false;
   }
+
+
 }

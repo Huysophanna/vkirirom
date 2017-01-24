@@ -384,6 +384,27 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._appEl_63 = new import2.AppElement(63,55,this,this._anchor_63);
     this._TemplateRef_63_5 = new import32.TemplateRef_(this._appEl_63,viewFactory_Membership9);
     this._NgIf_63_6 = new import19.NgIf(this._appEl_63.vcRef,this._TemplateRef_63_5);
+<<<<<<< HEAD
+    this._text_64 = this.renderer.createText(this._el_55,'\n                ',(null as any));
+    this._text_65 = this.renderer.createText(this._el_42,'\n            ',(null as any));
+    this._text_66 = this.renderer.createText(this._el_40,'\n        ',(null as any));
+    this._text_67 = this.renderer.createText(this._el_17,'\n\n        ',(null as any));
+    this._el_68 = this.renderer.createElement(this._el_17,'div',(null as any));
+    this.renderer.setElementAttribute(this._el_68,'class','expire-date');
+    this._text_69 = this.renderer.createText(this._el_68,'\n            Expire Date: ',(null as any));
+    this._anchor_70 = this.renderer.createTemplateAnchor(this._el_68,(null as any));
+    this._appEl_70 = new import2.AppElement(70,68,this,this._anchor_70);
+    this._TemplateRef_70_5 = new import32.TemplateRef_(this._appEl_70,viewFactory_Membership11);
+    this._NgIf_70_6 = new import19.NgIf(this._appEl_70.vcRef,this._TemplateRef_70_5);
+    this._text_71 = this.renderer.createText(this._el_68,'\n            ',(null as any));
+    this._anchor_72 = this.renderer.createTemplateAnchor(this._el_68,(null as any));
+    this._appEl_72 = new import2.AppElement(72,68,this,this._anchor_72);
+    this._TemplateRef_72_5 = new import32.TemplateRef_(this._appEl_72,viewFactory_Membership12);
+    this._NgIf_72_6 = new import19.NgIf(this._appEl_72.vcRef,this._TemplateRef_72_5);
+    this._text_73 = this.renderer.createText(this._el_68,'\n        ',(null as any));
+    this._text_74 = this.renderer.createText(this._el_17,'\n    ',(null as any));
+    this._text_75 = this.renderer.createText((null as any),'\n\n',(null as any));
+=======
     this._text_64 = this.renderer.createText(this._el_55,'\n                    ',(null as any));
     this._anchor_65 = this.renderer.createTemplateAnchor(this._el_55,(null as any));
     this._appEl_65 = new import2.AppElement(65,55,this,this._anchor_65);
@@ -413,6 +434,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._text_77 = this.renderer.createText(this._el_72,'\n        ',(null as any));
     this._text_78 = this.renderer.createText(this._el_17,'\n    ',(null as any));
     this._text_79 = this.renderer.createText((null as any),'\n\n',(null as any));
+>>>>>>> bdf504739ce210ec2fceeb033e1baf26de1dc2d6
     compView_15.create(this._Content_15_4,[
       [],
       [].concat([
@@ -718,7 +740,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   }
 }
 export function viewFactory_Membership0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<import3.Membership> {
-  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
+  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('D:/vkirirom/.tmp/pages/membership/membership.html',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
   return new _View_Membership0(viewUtils,parentInjector,declarationEl);
 }
 class _View_Membership1 extends import1.AppView<any> {
