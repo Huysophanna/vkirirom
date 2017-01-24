@@ -16,7 +16,7 @@ import { AuthData } from '../providers/auth-data';
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  public rootPage: any = Signup;
+  public rootPage: any = Dashboard;
   isHome: boolean = false;
   pages: any = []
   authData: any = AuthData; 

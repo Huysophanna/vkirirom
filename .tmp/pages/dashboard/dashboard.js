@@ -5,7 +5,6 @@ import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
-import { Signup } from '../signup/signup';
 import { About } from '../about/about';
 import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
@@ -43,9 +42,6 @@ export var Dashboard = (function () {
             case 4:
                 this.navCtrl.push(Chat);
                 break;
-            case 5:
-                this.navCtrl.push(Signup);
-                break;
             case 6:
                 this.navCtrl.push(About);
                 break;
@@ -67,7 +63,7 @@ export var Dashboard = (function () {
                             var lat = resp.coords.latitude;
                             var lng = resp.coords.longitude;
                             var number = "0962304669";
-                            var message = "Please Help! I got an emergency problems. This is my location: http://maps.google.com/?q=" + lat + "," + lng + "";
+                            var message = "http://maps.google.com/?q=" + lat + "," + lng + "";
                             var options = {
                                 replaceLineBreaks: false,
                                 android: {

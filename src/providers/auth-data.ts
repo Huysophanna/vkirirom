@@ -15,16 +15,16 @@ export class AuthData {
 
   constructor() {
     console.log("service constructor");
-    firebase.initializeApp({
-        apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
-        authDomain: "vkirirom-809f8.firebaseapp.com",
-        databaseURL: "https://vkirirom-809f8.firebaseio.com",
-        storageBucket: "vkirirom-809f8.appspot.com",
-        messagingSenderId: "82070365426"
-      });
-      firebase.auth().onAuthStateChanged((user) => {
+    // firebase.initializeApp({
+    //     apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
+    //     authDomain: "vkirirom-809f8.firebaseapp.com",
+    //     databaseURL: "https://vkirirom-809f8.firebaseio.com",
+    //     storageBucket: "vkirirom-809f8.appspot.com",
+    //     messagingSenderId: "82070365426"
+    //   });
+    //   firebase.auth().onAuthStateChanged((user) => {
        
-      });
+    //   });
     
     this.fireAuth = firebase.auth();
     this.userProfile = firebase.database().ref('/userProfile');

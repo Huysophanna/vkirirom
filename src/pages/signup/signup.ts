@@ -14,6 +14,8 @@ export class Signup {
   public signupForm;
   emailChanged: boolean = false;
   passwordChanged: boolean = false;
+  nameChanged: boolean = false;
+  passwordConfirmChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
 
