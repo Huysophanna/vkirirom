@@ -17,7 +17,6 @@
 
 
 <ion-content padding class="member-container">
-
     <div class="profile-wrapper">
         <div class="profile">
             <img *ngIf="userPhoto" src="{{userPhoto}}" alt="Profile Picture">
@@ -43,7 +42,9 @@
                 </ion-col>
                 <ion-col width-50 class="detail-item">
                     <ion-icon name="logo-buffer"></ion-icon>&nbsp;&nbsp;Type<br>
-                    <span *ngIf="userCardType"><b>{{ userCardType }}</b></span>
+                    <span *ngIf="userCardType == 'Gold'"><b style="color: gold">{{ userCardType }}</b></span>
+                    <span *ngIf="userCardType == 'Silver'"><b style="color: silver">{{ userCardType }}</b></span>
+                    <span *ngIf="userCardType == 'Bronze'"><b style="color: #cd7f32">{{ userCardType }}</b></span>
                     <span *ngIf="!userCardType"><b>Gold</b></span>
                 </ion-col>
             </ion-row>

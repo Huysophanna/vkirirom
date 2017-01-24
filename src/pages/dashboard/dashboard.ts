@@ -1,8 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { SMS } from 'ionic-native';
-import { Toast } from 'ionic-native';
-import { Geolocation } from 'ionic-native';
+import { NavController, Platform } from 'ionic-angular';
+import { SMS, Toast, Geolocation } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
@@ -10,15 +8,17 @@ import { Services } from '../services/services';
 import { About } from '../about/about';
 import { Reservation } from '../reservation/reservation';
 import { Storage } from '@ionic/storage';
-import { Push, PushToken } from '@ionic/cloud-angular';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
+import 'rxjs/add/operator/filter';
+import { Push, PushToken } from '@ionic/cloud-angular';
 
 declare var cordova: any;
 
 @Component({
   selector: 'page-dashboard',
-  templateUrl: 'dashboard.html'
+  templateUrl: 'dashboard.html',
+  styles: ['.header-md::after { background-image: none; }']
 })
 
 export class Dashboard {
@@ -27,14 +27,13 @@ export class Dashboard {
 
   constructor(public navCtrl: NavController, public storage: Storage, public push: Push, private locationTracker: LocationTracker, private userScope: Userscope) {
     
-    //Push notification configuration
+      //Push notification configuration
       this.push.register().then((t: PushToken) => {
           return this.push.saveToken(t);
       }).then((t: PushToken) => {
           console.log('Token saved:', t.token);
       });
       this.push.rx.notification().subscribe((msg) => {
-        //   this.storage.set('push-notification', msg.text);
         this.Notification = msg.text;
       });
 

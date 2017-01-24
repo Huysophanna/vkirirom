@@ -3,12 +3,6 @@ import { NavController } from 'ionic-angular';
 import { Chatmessage } from '../chatmessage/chatmessage';
 declare var io: any;
 
-/*
-  Generated class for the Chat page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-chat',
   templateUrl: 'chat.html'

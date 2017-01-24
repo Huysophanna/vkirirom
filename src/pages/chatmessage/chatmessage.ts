@@ -1,24 +1,16 @@
-import { Component, NgZone, ViewChild } from '@angular/core';
+import { Component, NgZone, ViewChild, ElementRef, OnInit, AfterViewChecked } from '@angular/core';
 import { NavController, Content, Platform, AlertController} from 'ionic-angular';
 import { NativeStorage, Network } from 'ionic-native';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 declare var io: any;
 
-/*
-  Generated class for the Chatmessage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-chatmessage',
-  templateUrl: 'chatmessage.html',
-  queries: {
-    content: new ViewChild(Content)
-  }
+  templateUrl: 'chatmessage.html'
 })
-export class Chatmessage {
-  @ViewChild(Content) content: Content;
+export class Chatmessage implements OnInit, AfterViewChecked {
+   @ViewChild('scrollMe') myScrollContainer: ElementRef;
+
   static get parameters() {
     return [NgZone];
   }
@@ -44,11 +36,30 @@ export class Chatmessage {
   messageTitle: any;
   userStatus: any;
 
+  token: any;
+
   constructor(public navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
+        if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
+          let alert = this.alertCtrl.create({
+              title: "Something went wrong",
+              subTitle: "There was a problem with network connection. Try again in another minutes ...",
+              buttons: ["OK"]
+          });
+          alert.present();
+        }
+        
         NativeStorage.getItem('userDetails')
           .then(
             data => {
               this.userName = data.displayName;
+            },
+            error => console.error(error)
+        );
+
+        NativeStorage.getItem('deviceToken')
+          .then(
+            data => {
+              this.token = data;
             },
             error => console.error(error)
         );
@@ -67,6 +78,7 @@ export class Chatmessage {
             month: '',
             date: '',
             day: '',
+            deviceToken: '',
             room: 'room1'
         };
         this.time = [];
@@ -75,12 +87,7 @@ export class Chatmessage {
 
         this.socket.on('chatHistory', (chatData) => {
             // this.chats.push(chatData);
-            this.chatHistory = chatData;
-            console.log(this.chatHistory);
-            console.log(chatData);
-            
-            
-            
+            this.chatHistory = chatData;    
         });
         
         // called when the user send thier message
@@ -102,7 +109,6 @@ export class Chatmessage {
             this.ngzone.run(() => {
                 this.timeAdjustment(); // used for time adjustment
                 this.chats.push(userenter);
-                console.log(userenter);          
                 this.time.push(this.hours +":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
@@ -216,6 +222,7 @@ export class Chatmessage {
         alert.present();
       } else {
         if (msg != '') {
+            this.scrollToBottom();
             this.pkt.message = msg;
             this.pkt.photo = this.userPhoto;
             this.pkt.time = this.currentTimeAndStatus;
@@ -223,17 +230,13 @@ export class Chatmessage {
             this.pkt.month = this.month;
             this.pkt.date = this.date;
             this.pkt.day = this.day;
+            this.pkt.deviceToken = this.token;
             this.socket.emit('message', this.pkt);
         }
       }
       this.chatinp = '';
       this.isUser = true;
     }
-
-  ngAfterViewInit() {
-     let dimensions = this.content.getContentDimensions();
-     this.content.scrollTo(0, dimensions.scrollBottom, 0);
-  }
   
   // ionic life cycle function called when user enter
   ionViewDidEnter(){
@@ -257,6 +260,20 @@ export class Chatmessage {
         this.pkt.status = "Anonymous"  + ' has left';
       }
       this.socket.emit('userleave', this.pkt);
+  }
+
+  ngOnInit() {
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }
   }
 
   // ionic life cycle function called when the page is being loaded

@@ -1,13 +1,13 @@
 import { Component, ViewChild, Input, NgZone } from '@angular/core';
-import { Nav, Platform, LoadingController } from 'ionic-angular';
+import { Nav, Platform, LoadingController,AlertController } from 'ionic-angular';
 import { StatusBar, Facebook, NativeStorage, CallNumber } from 'ionic-native';
 import { Api } from '../providers/api';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Setting } from '../pages/setting/setting';
+import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { GoogleMapPage } from '../pages/map/map';
-import { Category } from '../pages/category/category';
 import { AuthData } from '../providers/auth-data';
 import { Push, PushToken } from '@ionic/cloud-angular';
 import { Geolocation, BackgroundGeolocation, Geoposition, BackgroundMode } from 'ionic-native';
@@ -26,27 +26,119 @@ export class MyApp {
   pages: any = []
   authData: any = AuthData; 
   loading: any;
-  pushNotifications: any;
-  pushNotificationTitle: any;
   userName: any;
   userPhoto: any;
   userEmail: any;
+  fbID: any;
+  pushNotifications: any;
+  pushNotificationTitle: any;
 
-  private zone: NgZone;
-
-  constructor(platform: Platform, public loadingCtrl: LoadingController, public push: Push) {
+  constructor(platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public push: Push) {
     platform.ready().then(() => {
-      StatusBar.styleDefault();
-      console.log("App loaded");
+      //push configuration
+      let push = Push.init({
+        android: {
+          senderID: "82070365426"
+        },
+        ios: {
+          alert: "true",
+          badge: false,
+          sound: "true"
+        },
+        windows: {}
+      });
 
+
+        push.on('registration', (data) => {
+          NativeStorage.setItem('deviceToken', data.registrationId);
+          //TODO - send device token to server
+        });
+        push.on('notification', (data) => {
+          let self = this;
+          let confirmAlert: any;
+          //if user using app and push notification comes
+          if (data.additionalData.foreground) {
+            // if application open on foreground, show popup
+            if (data.title == 'New message') {
+              //alert notification for chat messages
+              confirmAlert = this.alertCtrl.create({
+                title: "New message",
+                message: data.message,
+                buttons: [{
+                  text: 'Ignore',
+                  role: 'cancel'
+                }, {
+                  text: 'View',
+                  handler: () => {
+                    //TODO: Your logic here
+                    self.nav.push(Chatmessage, {message: data.message});
+                  }
+                }]
+              });
+            } else {
+              confirmAlert = this.alertCtrl.create( {
+                title: "Hi, " + this.userName,
+                message: data.message,
+                buttons: [{
+                  text: 'Ignore',
+                  role: 'cancel'
+                }, {
+                  text: 'View',
+                  handler: () => {
+                    //TODO: Your logic here
+                    self.nav.push(Dashboard, {message: data.message});
+                  }
+                }]
+              });
+            }
+            
+            confirmAlert.present();
+          } else {
+            //if user NOT using app and push notification comes
+            //TODO: Your logic on click of push notification directly
+            if (data.title == 'New message') {
+              self.nav.push(Chatmessage, {message: data.message});
+            } else {
+              self.nav.push(Dashboard, {message: data.message});
+            }
+          }
+        });
+        push.on('error', (e) => {
+          console.log(e.message);
+          alert(e.message);
+        });
+
+
+      //firebase configuration
+      firebase.initializeApp({
+        apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
+        authDomain: "vkirirom-809f8.firebaseapp.com",
+        databaseURL: "https://vkirirom-809f8.firebaseio.com",
+        storageBucket: "vkirirom-809f8.appspot.com",
+        messagingSenderId: "82070365426"
+      });
+      firebase.auth().onAuthStateChanged((user) => {
+        this.loading = this.loadingCtrl.create({
+          dismissOnPageChange: true,
+        });
+        if (!user) {
+          this.loading.present();
+          this.loading.dismiss();
+          this.rootPage = Login;
+        }
+      });
+      StatusBar.styleDefault();
+      NativeStorage.getItem('userID').then(data => {
+        this.fbID = data;
+        this.userPhoto = "https://graph.facebook.com/" + this.fbID + "/picture?width=320&height=320";
+      });
       NativeStorage.getItem('userDetails')
+
         .then(
           data => {
             this.userName = data.displayName;
-            this.userPhoto = data.photoURL;
             this.userEmail = data.email;
-          },
-          error => console.error(error)
+          }
         );
     });
 
@@ -113,13 +205,6 @@ export class MyApp {
         console.log(page.title);
       break;
     }
-    // if (page.id == 3) {
-    //   //store userProfile object to the phone storage
-    //   Facebook.logout();
-    //   NativeStorage.setItem('userDetails', "");
-    //   this.nav.setRoot(Login);
-    //   console.log(page.title);
-    // }
   }
 
   openHome(){

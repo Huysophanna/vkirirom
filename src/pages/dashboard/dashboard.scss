@@ -6,11 +6,6 @@ $blue_fb_color: #3956A0;
     overflow-y: hidden;
 }
 
-//remove header line in android
-.header-md::after {
-    background-image: none;
-}
-
 .header {
     button {
         font-size: xx-large;
