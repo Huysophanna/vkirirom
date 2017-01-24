@@ -134,7 +134,10 @@
             "id": "call-number"
         },
         "is_top_level": true,
-        "variables": {}
+        "variables": {
+            "API_KEY_FOR_ANDROID": "AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y",
+            "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
+        }
     },
     "cordova-plugin-inappbrowser": {
         "source": {
@@ -150,8 +153,44 @@
             "id": "phonegap-plugin-push@~1.8.4"
         },
         "is_top_level": true,
+<<<<<<< HEAD
+        "variables": {}
+    },
+    "com.transistorsoft.cordova.background-geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-background-geolocation-lt"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-dialogs": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-dialogs"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-background-fetch": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-background-fetch"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-background-mode": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-background-mode"
+        },
+        "is_top_level": true,
+        "variables": {}
+=======
         "variables": {
             "SENDER_ID": "82070365426"
         }
+>>>>>>> bdf504739ce210ec2fceeb033e1baf26de1dc2d6
     }
 }

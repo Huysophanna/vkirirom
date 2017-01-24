@@ -6,15 +6,19 @@ import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { Facebook } from 'ionic-native';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Membership } from '../pages/membership/membership';
-import { Services } from '../pages/services/services';
 import { Chat } from '../pages/chat/chat';
 import { About } from '../pages/about/about';
+import { Services } from '../pages/services/services';
+import { Setting } from '../pages/setting/setting';
 import { Signup } from '../pages/signup/signup';
 import { GoogleMapPage } from '../pages/map/map';
+import { Reservation } from '../pages/reservation/reservation';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
 import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../providers/location-tracker';
+import { SettingService } from '../providers/setting-service';
+import { Userscope } from '../providers/userscope';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,10 @@ import { LocationTracker } from '../providers/location-tracker';
     Chat,
     Chatmessage,
     About,
+    GoogleMapPage,
+    Services,
+    Setting,
+    Reservation,
     Signup,
     GoogleMapPage,
     Services
@@ -42,15 +50,19 @@ import { LocationTracker } from '../providers/location-tracker';
     Chat,
     Chatmessage,
     About,
-    Signup,
     GoogleMapPage,
-    Services
+    Services,
+    Setting,
+    Reservation,
+    Signup,
   ],
   providers: [
     AuthData,
     Facebook,
     Storage,
-    LocationTracker
+    LocationTracker,
+    SettingService,
+    Userscope
   ]
 })
 export class AppModule {}

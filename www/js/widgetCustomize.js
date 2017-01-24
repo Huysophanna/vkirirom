@@ -1,0 +1,33 @@
+jQuery(document).ready(function() {
+    $widget("#hbe-bws-wrapper").roomTypes({
+        id: "ea3bbb2b-8b09-45cb-b465-7d4d5c9c6626",
+        currency: "USD",
+        lang: "en",
+        iFrame: 0,
+        background: "transparent",
+        filter_bar_background: "#4A4444",
+        filter_bar_text: "#FFFFFF",
+        divider_background: "#F8F8F8",
+        divider_text: "#000000",
+        elements: "#C5C5C5",
+        call_action: "#F27A4E",
+        free_cancellation: "#0E6232",
+        bodyBackgroundType: 1,
+        bodyBackground: "#FFFFFF",
+        bodyText: "#000000",
+        bookNowBackground: "#BD7F1C",
+        bookNowColor: "#FFFFFF",
+        showPromoCode: 1,
+        daysOut: 1,
+        nightsSelected: 1,
+        promoteSpecial: 0,
+        hideRoom: '[]',
+        maxRatePlanDisplay: 0,
+        showPlanRequest: 0,
+        isBestRate: 0,
+        embedded: 1,
+        showLanguageEmbed: 0,
+        widgetType: "Widget",
+        urlS3Json: "new-hls"
+    });
+});

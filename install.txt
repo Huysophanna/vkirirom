@@ -7,8 +7,15 @@ cordova plugin add cordova-plugin-nativestorage
 cordova plugin add cordova-plugin-network-information
 ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y" --variable API_KEY_FOR_IOS="AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
 ionic plugin add call-number
+<<<<<<< HEAD
+ionic plugin add cordova-plugin-mauron85-background-geolocation
+npm install jquery --save
+npm install -g typings
+typings install dt~jquery --global --save
+=======
 ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1190088291053783" --variable APP_NAME="vkirirom"
 ionic plugin add cordova-plugin-splashscreen
+>>>>>>> bdf504739ce210ec2fceeb033e1baf26de1dc2d6
 
 
 

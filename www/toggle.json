@@ -1,0 +1,9 @@
+[{
+        "title": "location",
+        "isCheck": true
+    },
+    {
+        "title": "notification",
+        "isCheck": false
+    }
+]
