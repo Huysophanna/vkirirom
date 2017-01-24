@@ -1,79 +1,72 @@
-import { Injectable, NgZone } from '@angular/core';
-import { Geolocation, Geoposition, BackgroundGeolocation } from 'ionic-native';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Injectable } from '@angular/core';
+import { Geolocation } from 'ionic-native';
 
-/*
-  Generated class for the LocationTracker provider.
+declare var cordova: any;
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class LocationTracker {
-
-  public watch:any;
-  public lat:number = 0;
-  public lng:number = 0;
-
-  constructor(public http: Http, public zone: NgZone) {
-    console.log('Hello LocationTracker Provider');
-  }
-
-  startTracking() {
-      //Background Tracking
-      let Config = {
-        desiredAccuracy: 0,
-        stationaryRadius: 20,
-        distanceFilter: 10,
-        debug: true,
-        interval: 0
-      };
-
-      BackgroundGeolocation.configure((location) => {
+  public lat: any = 0;
+  public lng: any = 0;
   
-        console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
-    
-        // Run update inside of Angular's zone
-        this.zone.run(() => {
-          console.log("Not watch is running");
-          this.lat = location.latitude;
-          this.lng = location.longitude;
-        });
-  
-    }, (err) => {
-        console.log(err);
-    }, Config);
-
-    // Turn ON the background-geolocation system.
-    BackgroundGeolocation.start();
-    console.log(BackgroundGeolocation.start());
- 
- 
-    // Foreground Tracking
-    let options = {
-      frequency: 3000, 
-      enableHighAccuracy: true
-    };
-
-    this.watch = Geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
- 
-      console.log(position);
-  
-      // Run update inside of Angular's zone
-      this.zone.run(() => {        
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        alert("Watch is running :" + this.lat + " " + this.lng);
-      });
- 
+  public BackgroundTracker() {
+    cordova.plugins.backgroundMode.enable();
+    cordova.plugins.backgroundMode.setDefaults({
+      title: 'Chain vKirirom',
+      text: 'vKirirom is running in the background'
     });
-  }
 
-  stopTracking() {
-    console.log("stopTracking");
-    BackgroundGeolocation.finish();
-    this.watch.unsubscribe();
-  }
+    if (cordova.plugins.backgroundMode.isEnabled()){
+      alert("enable");
+    } else {
+      alert("unenable");
+    }
 
+    alert("K na");
+
+    cordova.plugins.backgroundMode.onactivate();
+    this.lat = cordova.plugins.backgroundMode.onactivate(this.lat);
+    this.lng = cordova.plugins.backgroundMode.onactivate(this.lng);
+    cordova.plugins.backgroundMode.onactivate = function(lati) {
+      alert("On activate in Latitute function");
+      setInterval(() => {
+        Geolocation.getCurrentPosition().then(resp => {
+          lati = resp.coords.latitude;
+          alert("Geolocation get Latitute" + lati);
+        }, (Error)=> {
+          alert("Error" + Error);
+        })
+      }, 5000);
+      cordova.plugins.backgroundMode.configure({
+        text: 'configured',
+        title: 'Chain'
+      });
+      return lati;
+    }
+
+    cordova.plugins.backgroundMode.onactivate = function(longi) {
+      alert("On activate");
+      setInterval(() => {
+        Geolocation.getCurrentPosition().then(resp => {
+          longi = resp.coords.longitude;
+          alert("Geolocation get longitude" + longi);
+        }, (Error) => {
+          alert("Error" + Error);
+        })
+      }, 5000);
+      return longi;
+    }
+
+    alert("Latitute: " + this.lat);
+    alert("Longitute: " + this.lng);
+
+    cordova.plugins.backgroundMode.ondeactivate(this.lat, this.lng)
+    cordova.plugins.backgroundMode.ondeactivate = function(lat, lng) {
+      Geolocation.getCurrentPosition().then(resp => {
+        lat = resp.coords.latitude;
+        lng = resp.coords.longitude;
+        alert("On deactivate" + lat + lng);
+      })
+    }
+  }
+  
 }

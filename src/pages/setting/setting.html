@@ -1,0 +1,32 @@
+<ion-header class="header">
+    <ion-navbar>
+        <ion-title>Setting</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="container">
+    <div class="setting-content">
+        <ion-list>
+            <div *ngFor="let item of toggle">
+                <ion-item *ngIf="item.title == loc">
+                    <ion-label class="custom-setting-label">Location</ion-label>
+                    <ion-toggle [(ngModel)]="item.isCheck" (click)="getValue(item.isCheck)"></ion-toggle>
+                </ion-item>
+                <ion-item *ngIf="item.title == noti">
+                    <ion-label class="custom-setting-label">Notification</ion-label>
+                    <ion-toggle [(ngModel)]="item.isCheck" (click)="test()"></ion-toggle>
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <ion-list>
+            <ion-item>
+                <ion-label class="custom-setting-label">Help</ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div *ngFor="let item of toggle">
+        <p>{{ item.title }}</p>
+        <i>{{ item.isCheck }}</i>
+    </div>
+</ion-content>

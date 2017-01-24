@@ -1,14 +1,19 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, NgZone } from '@angular/core';
 import { Nav, Platform, LoadingController } from 'ionic-angular';
 import { StatusBar, Facebook, NativeStorage, CallNumber } from 'ionic-native';
 import { Api } from '../providers/api';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
+import { Setting } from '../pages/setting/setting';
 import { GoogleMapPage } from '../pages/map/map';
 import { Category } from '../pages/category/category';
 import { AuthData } from '../providers/auth-data';
 import { Push, PushToken } from '@ionic/cloud-angular';
+import { Geolocation, BackgroundGeolocation, Geoposition, BackgroundMode } from 'ionic-native';
+import 'rxjs/add/operator/filter';
+
+declare var cordova: any;
 
 @Component({
   templateUrl: 'app.html'
@@ -27,9 +32,13 @@ export class MyApp {
   userPhoto: any;
   userEmail: any;
 
+  private zone: NgZone;
+
   constructor(platform: Platform, public loadingCtrl: LoadingController, public push: Push) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
+      console.log("App loaded");
+
       NativeStorage.getItem('userDetails')
         .then(
           data => {
@@ -43,7 +52,7 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Setting', component: Dashboard, ionicon: 'ios-settings-outline'},
+      { title: 'Setting', id: 1, ionicon: 'ios-settings-outline'},
       { title: 'Contact Us', id: 2, ionicon: 'ios-call-outline'},
       { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline'}
     ];
@@ -64,6 +73,8 @@ export class MyApp {
         this.loading.present();
         this.loading.dismiss();
         this.rootPage = Login;
+      } else {
+        console.log("Else :" + JSON.stringify(user));
       }
     });
 
@@ -79,6 +90,7 @@ export class MyApp {
         alert(this.pushNotifications + ': ' + this.pushNotificationTitle);
       });
   }
+  
 
   openPage(page) {
     // Reset the content nav to have just this page
@@ -86,6 +98,10 @@ export class MyApp {
     
     //logout function
     switch (page.id) {
+      case 1:
+       this.nav.push(Setting);
+       console.log("Setting is calling");
+       break;
       case 2:
         CallNumber.callNumber("0962304669", true);
       break;
@@ -110,4 +126,6 @@ export class MyApp {
     //this.nav.setRoot(Page1);
     this.isHome = false;
   }
+
+
 }

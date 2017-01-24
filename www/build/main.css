@@ -21579,9 +21579,6 @@ sub {
   height: 66%;
   text-align: center;
   background: linear-gradient(0deg, #1a6940 0%, #1a6940 17%, #1c8954 70%, #1c8954 100%);
-  /* w3c */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8954', endColorstr='#1a6940',GradientType=0 );
-  /* ie6-9 */
 }
 
 .container .dashboard-action img {
@@ -21946,4 +21943,23 @@ span {
   .member-container .profile-wrapper .profile-info {
     font-size: x-large;
   }
+}
+
+label {
+  margin: 0;
+}
+
+.setting-content {
+  padding: 30px 15px;
+}
+
+.setting-content .custom-setting-label {
+  font-size: x-large;
+  font-weight: bold;
+  color: #9e9e9e;
+  display: inline-block;
+}
+
+.toggle-checked {
+  background-color: #1C8954 !important;
 }

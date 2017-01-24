@@ -319,7 +319,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._appEl_35 = new import2.AppElement(35,33,this,this._anchor_35);
     this._TemplateRef_35_5 = new import32.TemplateRef_(this._appEl_35,viewFactory_Membership5);
     this._NgIf_35_6 = new import19.NgIf(this._appEl_35.vcRef,this._TemplateRef_35_5);
-    this._text_36 = this.renderer.createText(this._el_33,'\n                ',(null as any));
+    this._text_36 = this.renderer.createText(this._el_33,'\n            ',(null as any));
     this._anchor_37 = this.renderer.createTemplateAnchor(this._el_33,(null as any));
     this._appEl_37 = new import2.AppElement(37,33,this,this._anchor_37);
     this._TemplateRef_37_5 = new import32.TemplateRef_(this._appEl_37,viewFactory_Membership6);
@@ -388,7 +388,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._appEl_70 = new import2.AppElement(70,68,this,this._anchor_70);
     this._TemplateRef_70_5 = new import32.TemplateRef_(this._appEl_70,viewFactory_Membership11);
     this._NgIf_70_6 = new import19.NgIf(this._appEl_70.vcRef,this._TemplateRef_70_5);
-    this._text_71 = this.renderer.createText(this._el_68,'\n                         ',(null as any));
+    this._text_71 = this.renderer.createText(this._el_68,'\n            ',(null as any));
     this._anchor_72 = this.renderer.createTemplateAnchor(this._el_68,(null as any));
     this._appEl_72 = new import2.AppElement(72,68,this,this._anchor_72);
     this._TemplateRef_72_5 = new import32.TemplateRef_(this._appEl_72,viewFactory_Membership12);
@@ -683,7 +683,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   }
 }
 export function viewFactory_Membership0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<import3.Membership> {
-  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
+  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('D:/vkirirom/.tmp/pages/membership/membership.html',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
   return new _View_Membership0(viewUtils,parentInjector,declarationEl);
 }
 class _View_Membership1 extends import1.AppView<any> {
@@ -720,7 +720,7 @@ class _View_Membership2 extends import1.AppView<any> {
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'img',(null as any));
     this.renderer.setElementAttribute(this._el_0,'alt','Profile Picture');
-    this.renderer.setElementAttribute(this._el_0,'src','img/profile.svg');
+    this.renderer.setElementAttribute(this._el_0,'src','img/photo.svg');
     this.init([].concat([this._el_0]),[this._el_0],[],[]);
     return (null as any);
   }

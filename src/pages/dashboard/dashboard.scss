@@ -2,7 +2,6 @@ $green_primary_color: #1C8954;
 $light_green_color: #669F42;
 $dark_green_color: #1A6940;
 $blue_fb_color: #3956A0;
-
 .scroll-content {
     overflow-y: hidden;
 }
@@ -29,19 +28,16 @@ $blue_fb_color: #3956A0;
     height: 100%;
     margin: auto;
     background: $green_primary_color;
-
     .top-bar {
-        width: 100%; 
+        width: 100%;
         height: 25%;
         display: block;
-
         .vkirirom-img {
-                display: block;
-                width: 45%;
-                margin: 0 auto;
+            display: block;
+            width: 45%;
+            margin: 0 auto;
         }
     }
-
     .noti-bar {
         display: inline-table;
         width: 100%;
@@ -57,9 +53,8 @@ $blue_fb_color: #3956A0;
         display: block;
         width: 100%;
         height: 66%;
-        text-align: center; 
-        background: linear-gradient(0deg, rgba(26,105,64,1) 0%, rgba(26,105,64,1) 17%, rgba(28,137,84,1) 70%, rgba(28,137,84,1) 100%); /* w3c */ 
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c8954', endColorstr='#1a6940',GradientType=0 ); /* ie6-9 */
+        text-align: center;
+        background: linear-gradient(0deg, rgba(26, 105, 64, 1) 0%, rgba(26, 105, 64, 1) 17%, rgba(28, 137, 84, 1) 70%, rgba(28, 137, 84, 1) 100%);
         img {
             width: 100%;
         }
@@ -89,15 +84,12 @@ $blue_fb_color: #3956A0;
                 width: 80%;
                 height: 4.5em;
                 font-size: 120%;
-                border-radius: 15px; 
+                border-radius: 15px;
                 color: red;
                 background: white;
-                
             }
         }
-        
     }
-
 }
 
 //for android when there is home button below
@@ -114,12 +106,12 @@ $blue_fb_color: #3956A0;
                 margin-top: 4%;
             }
         }
-    }    
+    }
 }
 
 //iphone 5 screen
 @media only screen and (max-device-width: 320px) {
-   .container {
+    .container {
         .dashboard-action {
             .first-row {
                 margin-top: 4%;
@@ -136,4 +128,3 @@ $blue_fb_color: #3956A0;
         }
     }
 }
-

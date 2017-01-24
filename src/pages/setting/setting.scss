@@ -1,0 +1,17 @@
+label {
+    margin: 0;
+}
+
+.setting-content {
+    padding: 30px 15px;
+    .custom-setting-label {
+        font-size: x-large;
+        font-weight: bold;
+        color: #9e9e9e;
+        display: inline-block;
+    }
+}
+
+.toggle-checked {
+    background-color: #1C8954 !important;
+}

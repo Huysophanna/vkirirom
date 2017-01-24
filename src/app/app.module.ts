@@ -9,13 +9,18 @@ import { Category } from '../pages/category/category';
 import { Membership } from '../pages/membership/membership';
 import { Chat } from '../pages/chat/chat';
 import { About } from '../pages/about/about';
+import { Services } from '../pages/services/services';
+import { Setting } from '../pages/setting/setting';
 import { GoogleMapPage } from '../pages/map/map';
+import { Reservation } from '../pages/reservation/reservation';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
 import { Storage } from '@ionic/storage';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Push, PushToken } from '@ionic/cloud-angular';
 import { LocationTracker } from '../providers/location-tracker';
+import { SettingService } from '../providers/setting-service';
+import { Userscope } from '../providers/userscope';
 
 const CloudSettings: CloudSettings = {
   'core': {
@@ -46,7 +51,10 @@ const CloudSettings: CloudSettings = {
     Chat,
     Chatmessage,
     About,
-    GoogleMapPage
+    GoogleMapPage,
+    Services,
+    Setting,
+    Reservation
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -62,13 +70,18 @@ const CloudSettings: CloudSettings = {
     Chat,
     Chatmessage,
     About,
-    GoogleMapPage
+    GoogleMapPage,
+    Services,
+    Setting,
+    Reservation
   ],
   providers: [
     AuthData,
     Facebook,
     Storage,
-    LocationTracker
+    LocationTracker,
+    SettingService,
+    Userscope
   ]
 })
 export class AppModule {}
