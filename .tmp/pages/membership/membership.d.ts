@@ -10,7 +10,6 @@ export declare class Membership {
     userCardExpire: any;
     profilePicture: any;
     userData: any;
-    fbID: any;
     constructor(navCtrl: NavController);
     ionViewDidLoad(): void;
     pointSys(): void;

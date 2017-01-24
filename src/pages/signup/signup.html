@@ -1,0 +1,56 @@
+<ion-header class="header">
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="container">
+  <div class="vtop-bar">
+    <img class="vkirirom-img" src="img/vkirirom_logo.svg">
+  </div>
+
+  <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
+    <div class="input-login">
+
+      <ion-item>
+        <ion-label stacked>Name</ion-label>
+        <ion-input #name formControlName="name" type="text" (change)="elementChanged(name)"
+          placeholder="Your full name"
+          [class.invalid]="!signupForm.controls.name.valid && (nameChanged || submitAttempt)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message">
+        <p *ngIf="!signupForm.controls.name.valid  && (nameChanged || submitAttempt)">Please enter your full name</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)"
+          placeholder="Your email address"
+          [class.invalid]="!signupForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message">
+        <p  *ngIf="!signupForm.controls.email.valid  && (emailChanged || submitAttempt)">Please enter a valid email.</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Password</ion-label>
+        <ion-input #password formControlName="password" type="password" (change)="elementChanged(password)"
+          placeholder="Your password"
+          [class.invalid]="!signupForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
+        <ion-input #passwordConfirm formControlName="passwordConfirm" type="password" (change)="elementChanged(passwordConfirm)"
+          placeholder="Confirm password"
+          [class.invalid]="!signupForm.controls.passwordConfirm.valid && (passwordConfirmChanged || submitAttempt)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message">
+        <p *ngIf="!signupForm.controls.passwordConfirm.valid  && (passwordConfirmChanged || submitAttempt)">Your password needs more than 6 characters.</p>
+      </ion-item>
+
+
+
+    </div>
+    <div class="submit-login">
+      <button ion-button type="submit" class="signin-btn">Sign Up</button>
+    </div>
+
+  </form>
+</ion-content>

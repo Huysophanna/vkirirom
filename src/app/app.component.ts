@@ -1,6 +1,6 @@
 import { Component, ViewChild, Input, NgZone } from '@angular/core';
-import { Nav, Platform, LoadingController,AlertController } from 'ionic-angular';
-import { StatusBar, Facebook, NativeStorage, CallNumber } from 'ionic-native';
+import { Nav, Platform, AlertController, LoadingController, NavController, Events } from 'ionic-angular';
+import { StatusBar, Facebook, NativeStorage, CallNumber, Keyboard, Geolocation, BackgroundGeolocation, Geoposition, BackgroundMode, Push } from 'ionic-native';
 import { Api } from '../providers/api';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
@@ -8,10 +8,8 @@ import { Dashboard } from '../pages/dashboard/dashboard';
 import { Setting } from '../pages/setting/setting';
 import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { GoogleMapPage } from '../pages/map/map';
+import { Signup } from '../pages/signup/signup';
 import { AuthData } from '../providers/auth-data';
-import { Push, PushToken } from '@ionic/cloud-angular';
-import { Geolocation, BackgroundGeolocation, Geoposition, BackgroundMode } from 'ionic-native';
-import 'rxjs/add/operator/filter';
 
 declare var cordova: any;
 
@@ -33,17 +31,20 @@ export class MyApp {
   pushNotifications: any;
   pushNotificationTitle: any;
 
-  constructor(platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public push: Push) {
+  constructor(platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone) {
     platform.ready().then(() => {
+      this.getStorageItem();
       //push configuration
       let push = Push.init({
         android: {
           senderID: "82070365426"
         },
         ios: {
-          alert: "true",
-          badge: false,
-          sound: "true"
+          alert: 'true',
+          badge: 'true',
+          sound: 'true',
+          senderID: "82070365426",
+          gcmSandbox:"true"
         },
         windows: {}
       });
@@ -59,10 +60,11 @@ export class MyApp {
           //if user using app and push notification comes
           if (data.additionalData.foreground) {
             // if application open on foreground, show popup
-            if (data.title == 'New message') {
+            if (data.title.indexOf('New message') >= 0) {
               //alert notification for chat messages
+              
               confirmAlert = this.alertCtrl.create({
-                title: "New message",
+                title: data.title,
                 message: data.message,
                 buttons: [{
                   text: 'Ignore',
@@ -70,24 +72,18 @@ export class MyApp {
                 }, {
                   text: 'View',
                   handler: () => {
-                    //TODO: Your logic here
                     self.nav.push(Chatmessage, {message: data.message});
                   }
                 }]
               });
             } else {
+              // this.events.publish('foreground-marketing-notification', data.message);
               confirmAlert = this.alertCtrl.create( {
                 title: "Hi, " + this.userName,
                 message: data.message,
                 buttons: [{
-                  text: 'Ignore',
+                  text: 'Okay',
                   role: 'cancel'
-                }, {
-                  text: 'View',
-                  handler: () => {
-                    //TODO: Your logic here
-                    self.nav.push(Dashboard, {message: data.message});
-                  }
                 }]
               });
             }
@@ -96,12 +92,11 @@ export class MyApp {
           } else {
             //if user NOT using app and push notification comes
             //TODO: Your logic on click of push notification directly
-            if (data.title == 'New message') {
+            if (data.title.indexOf('New message') >= 0) {
               self.nav.push(Chatmessage, {message: data.message});
-            } else {
-              self.nav.push(Dashboard, {message: data.message});
             }
           }
+
         });
         push.on('error', (e) => {
           console.log(e.message);
@@ -128,18 +123,12 @@ export class MyApp {
         }
       });
       StatusBar.styleDefault();
-      NativeStorage.getItem('userID').then(data => {
-        this.fbID = data;
-        this.userPhoto = "https://graph.facebook.com/" + this.fbID + "/picture?width=320&height=320";
-      });
-      NativeStorage.getItem('userDetails')
 
-        .then(
-          data => {
-            this.userName = data.displayName;
-            this.userEmail = data.email;
-          }
-        );
+      //listen for events
+      this.events.subscribe("UserLogin", name => {
+         this.getStorageItem();
+      });
+
     });
 
     // set our app's pages
@@ -148,41 +137,18 @@ export class MyApp {
       { title: 'Contact Us', id: 2, ionicon: 'ios-call-outline'},
       { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline'}
     ];
-
-    //firebase configuration
-    firebase.initializeApp({
-      apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
-      authDomain: "vkirirom-809f8.firebaseapp.com",
-      databaseURL: "https://vkirirom-809f8.firebaseio.com",
-      storageBucket: "vkirirom-809f8.appspot.com",
-      messagingSenderId: "82070365426"
-    });
-    firebase.auth().onAuthStateChanged((user) => {
-      this.loading = this.loadingCtrl.create({
-        dismissOnPageChange: true,
-      });
-      if (!user) {
-        this.loading.present();
-        this.loading.dismiss();
-        this.rootPage = Login;
-      } else {
-        console.log("Else :" + JSON.stringify(user));
-      }
-    });
-
-     //Push notification configuration
-      this.push.register().then((t: PushToken) => {
-          return this.push.saveToken(t);
-      }).then((t: PushToken) => {
-          console.log('Token saved:', t.token);
-      });
-      this.push.rx.notification().subscribe((msg) => {
-        this.pushNotifications = msg.text;
-        this.pushNotificationTitle = msg.title;
-        alert(this.pushNotifications + ': ' + this.pushNotificationTitle);
-      });
   }
   
+
+  getStorageItem() {
+      NativeStorage.getItem('userPhoto').then(data => {
+          this.userPhoto = data;
+      });
+      NativeStorage.getItem('userDetails').then(data => {
+          this.userName = data.displayName;
+          this.userEmail = data.email;
+      });
+  }
 
   openPage(page) {
     // Reset the content nav to have just this page

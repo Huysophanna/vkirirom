@@ -14,26 +14,38 @@ export class AuthData {
   public userProfile: any;
 
   constructor() {
+    console.log("service constructor");
+    // firebase.initializeApp({
+    //     apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
+    //     authDomain: "vkirirom-809f8.firebaseapp.com",
+    //     databaseURL: "https://vkirirom-809f8.firebaseio.com",
+    //     storageBucket: "vkirirom-809f8.appspot.com",
+    //     messagingSenderId: "82070365426"
+    //   });
+      // firebase.auth().onAuthStateChanged((user) => {
+       
+      // });
+    
     this.fireAuth = firebase.auth();
     this.userProfile = firebase.database().ref('/userProfile');
   }
 
   //login function
   loginUser(email: string, password: string): any {
+    console.log("service login");
     return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
 
   //logout function
   logoutUser(): any {
+    console.log("service logout");
     return this.fireAuth.signOut();
   }
 
   //signup function
   signupUser(email: string, password: string): any {
-    return this.fireAuth.createUserWithEmailAndPassword(email, password)
-      .then((newUser) => {
-        this.userProfile.child(newUser.uid).set({email: email});
-    });
+    console.log("service signup");
+    return this.fireAuth.createUserWithEmailAndPassword(email, password);
   }
 
   //reset password function

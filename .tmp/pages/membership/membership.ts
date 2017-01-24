@@ -10,12 +10,11 @@ import firebase from 'firebase';
 export class Membership {
   userProfile: any;
   userPoint: number; userName: any; userPhoto: any; userID: any; userCardType: any; 
-  userCardExpire: any; profilePicture: any; userData: any; fbID: any;
+  userCardExpire: any; profilePicture: any; userData: any;
 
   constructor(public navCtrl: NavController) {
-    NativeStorage.getItem('userID').then(data => {
-      this.fbID = data;
-      this.userPhoto = "https://graph.facebook.com/" + this.fbID + "/picture?width=320&height=320";
+    NativeStorage.getItem('userPhoto').then(data => {
+      this.userPhoto = data;
     });
     NativeStorage.getItem('userDetails')
       .then(

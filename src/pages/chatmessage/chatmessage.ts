@@ -1,20 +1,22 @@
-import { Component, NgZone, ViewChild, ElementRef, OnInit, AfterViewChecked } from '@angular/core';
-import { NavController, Content, Platform, AlertController} from 'ionic-angular';
-import { NativeStorage, Network } from 'ionic-native';
+import { Component, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ViewController, PopoverController, NavController, Content, Platform, AlertController} from 'ionic-angular';
+import { NativeStorage, Network, Keyboard } from 'ionic-native';
 import { Observable } from 'rxjs/Observable';
 declare var io: any;
+declare var window: any;
 
 @Component({
   selector: 'page-chatmessage',
   templateUrl: 'chatmessage.html'
 })
-export class Chatmessage implements OnInit, AfterViewChecked {
+export class Chatmessage implements AfterViewInit {
    @ViewChild('scrollMe') myScrollContainer: ElementRef;
+   @ViewChild('chatinput') chatinput: ElementRef;
 
   static get parameters() {
     return [NgZone];
   }
-  
+
   isJoined: boolean;
   timeStatus: string;
   hours: any;
@@ -35,19 +37,35 @@ export class Chatmessage implements OnInit, AfterViewChecked {
   userPhoto: any = 'https://s-media-cache-ak0.pinimg.com/564x/20/f2/40/20f240398d8d8235e9b30bdb9b0212a3.jpg';
   messageTitle: any;
   userStatus: any;
-
+  checkConnection: any;
+  connectionStatus: any;
   token: any;
+  checkKeyboardValue = false;
+  keyboardSubscribe: any; 
+  chatContentHeight: any;
+  chatInputHeight: any;
+  keyboardShownValue: any;
+  i=0;
+  notificationType: any = "OFF";
 
-  constructor(public navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
-        if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
-          let alert = this.alertCtrl.create({
-              title: "Something went wrong",
-              subTitle: "There was a problem with network connection. Try again in another minutes ...",
-              buttons: ["OK"]
-          });
-          alert.present();
-        }
-        
+
+  constructor(public popoverCtrl: PopoverController, private navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
+        Keyboard.disableScroll(true);
+        this.checkNetworkConnection();
+
+        this.keyboardSubscribe = Keyboard.onKeyboardShow().subscribe((success) => {
+          let CONST_FIX_VALUE = 100;
+          this.keyboardShownValue = this.chatContentHeight + this.chatInputHeight - success.keyboardHeight - CONST_FIX_VALUE;
+            this.ngzone.run(() => {
+              this.checkKeyboardValue = true;
+            });
+        });
+        this.keyboardSubscribe = Keyboard.onKeyboardHide().subscribe((success) => {
+            this.ngzone.run(() => {
+              this.checkKeyboardValue = false;
+            });  
+        });
+
         NativeStorage.getItem('userDetails')
           .then(
             data => {
@@ -83,11 +101,9 @@ export class Chatmessage implements OnInit, AfterViewChecked {
         };
         this.time = [];
         this.socket = io.connect('http://110.74.203.152:3000');
-        // console.log(this.timeObj);
 
         this.socket.on('chatHistory', (chatData) => {
-            // this.chats.push(chatData);
-            this.chatHistory = chatData;    
+            this.chatHistory = chatData;
         });
         
         // called when the user send thier message
@@ -99,8 +115,8 @@ export class Chatmessage implements OnInit, AfterViewChecked {
               this.time.push(this.hours +":"+ this.minute);    
               this.timeLength = this.time.length;
               this.chatsLength = this.chats.length;
-          });
-          
+            });
+            this.checkNetworkConnection();
         }); 
 
         // called when the user enter the chat room
@@ -112,7 +128,18 @@ export class Chatmessage implements OnInit, AfterViewChecked {
                 this.time.push(this.hours +":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
+                console.log(userenter.username);
+                console.log(this.pkt.username);
+                //this is used to show whether the notification of user is set to ON or OFF from server
+                if ((userenter.username==this.pkt.username) && (userenter.tag == false)) {
+                  this.notificationType = "ON";
+                } else if ((userenter.username==this.pkt.username) && (userenter.tag == true)) {
+                  this.notificationType = "OFF";
+                }
+
             });
+            console.log(userenter.tag);
+            
         });
 
         // called when the user leave the chat room
@@ -126,6 +153,11 @@ export class Chatmessage implements OnInit, AfterViewChecked {
                 this.chatsLength = this.chats.length;
                 
             });
+        });
+
+        // called when the user turn off notification
+        this.socket.on('userNotification', () => {
+            
         });
 
       // store user data to local storage
@@ -210,19 +242,34 @@ export class Chatmessage implements OnInit, AfterViewChecked {
     //append time with status
     this.currentTimeAndStatus = this.hours +':'+ this.minute + this.timeStatus; 
   }
+
+  ngAfterContentChecked() {
+    if (this.chatHistory!='') {
+      //let it checks for 5 times only and scroll chat content to bottom
+      if (this.i<5) {
+        this.scrollToBottom();
+      } this.i++;
+    } 
+  }
+
+  ngAfterViewInit() {
+    //set value when keyboard is shown
+    this.chatContentHeight = this.myScrollContainer.nativeElement.offsetHeight;
+    this.chatInputHeight = this.chatinput.nativeElement.offsetHeight;
+    console.log(this.chatContentHeight + 'px '+ ' =>  ' + this.chatInputHeight + 'px');
+  }
   
   // called when user send thier message
   send(msg) {
-      if ((<string> Network.connection === 'none') || (<string> Network.connection === 'ethernet')) {
+      if ((<string> Network.connection === 'none')) {
         let alert = this.alertCtrl.create({
             title: "Something went wrong",
-            subTitle: "There was a problem with network connection. Try again in another minutes ...",
+            subTitle: "There was a problem with network connection. Please make sure you have internet access and try again in another minutes ...",
             buttons: ["OK"]
         });
         alert.present();
       } else {
         if (msg != '') {
-            this.scrollToBottom();
             this.pkt.message = msg;
             this.pkt.photo = this.userPhoto;
             this.pkt.time = this.currentTimeAndStatus;
@@ -232,6 +279,7 @@ export class Chatmessage implements OnInit, AfterViewChecked {
             this.pkt.day = this.day;
             this.pkt.deviceToken = this.token;
             this.socket.emit('message', this.pkt);
+            this.scrollToBottom();
         }
       }
       this.chatinp = '';
@@ -239,15 +287,67 @@ export class Chatmessage implements OnInit, AfterViewChecked {
     }
   
   // ionic life cycle function called when user enter
+
+  notificationOff() {
+    let alert = this.alertCtrl.create({
+        title: "Mute Notification",
+        message: "Are you sure to mute incoming alert notification for the chat messages?",
+        buttons: [{
+            text: 'Cancel',
+            role: 'cancel'
+          }, {
+            text: "Confirm",
+            handler: confirm => {
+              let data = {
+                username: this.userName,
+                token: this.token,
+                tag: false
+              }
+              //this code is to update the button type in view
+              this.ngzone.run(()=> {
+                this.notificationType = "ON";
+              })
+              this.socket.emit('userNotification', data);
+          }
+        }]
+    });
+    alert.present();
+  }
+  notificationOn() {
+    let alert = this.alertCtrl.create({
+        title: "Turn On Notification",
+        message: "Are you sure to turn on incoming alert notification for the chat messages?",
+        buttons: [{
+            text: 'Cancel',
+            role: 'cancel'
+          }, {
+            text: "Confirm",
+            handler: confirm => {
+              let data = {
+                username: this.userName,
+                token: this.token,
+                tag: true
+              }
+              //this code is to update the button type in view
+              this.ngzone.run(()=> {
+                this.notificationType = "OFF";
+              })
+              this.socket.emit('userNotification', data);
+          }
+        }]
+    });
+    alert.present();
+  }
+  
   ionViewDidEnter(){
     console.log("enteruser");
       this.pkt.status = this.userName  + ' has joined';
       this.pkt.username = this.userName;
+      this.pkt.deviceToken = this.token;
       if(this.userName==null) {
         this.pkt.username = "Anonymous";
         this.pkt.status = "Anonymous"  + ' has joined';
       }
-      
       this.socket.emit('userentered', this.pkt);
   }
 
@@ -260,14 +360,15 @@ export class Chatmessage implements OnInit, AfterViewChecked {
         this.pkt.status = "Anonymous"  + ' has left';
       }
       this.socket.emit('userleave', this.pkt);
+
   }
 
-  ngOnInit() {
-    this.scrollToBottom();
-  }
-
-  ngAfterViewChecked() {
-    this.scrollToBottom();
+  checkNetworkConnection() {
+    if ((<string> Network.connection === 'none')) {
+        this.connectionStatus = "No internet";
+    } else {
+        this.connectionStatus = "";
+    }
   }
 
   scrollToBottom() {
