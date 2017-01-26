@@ -1,0 +1,29 @@
+<ion-header class="header">
+    <ion-navbar>
+    </ion-navbar>
+</ion-header>
+<ion-content padding class="container">
+  <div class="vtop-bar">
+    <img class="vkirirom-img" src="img/vkirirom_logo.svg">
+  </div>
+
+  <form [formGroup]="resetForm" (submit)="resetPassword()" novalidate>
+    <div class="page-label">
+      <p>Reset Password</p>
+    </div>
+    <div class="input-signup">
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)"
+          [class.invalid]="!resetForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message">
+        <p  *ngIf="!resetForm.controls.email.valid  && (emailChanged || submitAttempt)">Please enter a valid email.</p>
+      </ion-item>
+    </div>
+    <div class="submit-login">
+      <button ion-button type="submit" class="signin-btn">Send Reset Confirmation</button>
+    </div>
+
+  </form>
+</ion-content>

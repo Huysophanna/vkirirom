@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { Facebook, Keyboard, NativeStorage } from 'ionic-native';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
+import { Resetpw } from '../resetpw/resetpw';
 import { Signup } from '../signup/signup';
 import { KeyboardAttachDirective } from '../../app/keyboard-attach.directive';
 
@@ -37,10 +38,6 @@ export class Login {
       
   }
 
-  ionViewDidLoad() {
-    console.log('Hello Login Page');
-  }
-
   loginUser() {
     this.submitAttempt = true;
     this.platform.ready().then(()=> {
@@ -48,6 +45,11 @@ export class Login {
       if (!this.loginForm.valid){
         console.log(this.loginForm.value);
       } else {
+        this.loading = this.loadingCtrl.create({
+            content: 'Authenticating...',
+            dismissOnPageChange: true,
+        });
+        this.loading.present();
         this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authData => {
           // alert(JSON.stringify(authData));
           //store userProfile object to the phone storage
@@ -61,12 +63,6 @@ export class Login {
           this.warningAlert(JSON.stringify(error));
         });
       });
-
-      this.loading = this.loadingCtrl.create({
-        content: 'Authenticating...',
-        dismissOnPageChange: true,
-      });
-        this.loading.present();
       }
     });
 
@@ -74,6 +70,10 @@ export class Login {
 
   signUpUser() {
     this.nav.push(Signup);
+  }
+  
+  resetPassword() {
+    this.nav.push(Resetpw);
   }
 
   createNewUser() {

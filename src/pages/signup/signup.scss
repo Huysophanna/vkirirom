@@ -14,15 +14,15 @@ $blue_fb_color: #3956A0;
     }
 }
 
-.scroll-content {
-    overflow-y: hidden;
-}
 .container {
     position: relative;
     width: 100%;
     height: 100%;
     margin: auto;
     background: $green_primary_color;
+    .scroll-content {
+        margin-top: 0;
+    }
 }
 .vtop-bar {
     width: 100%; 
@@ -36,21 +36,30 @@ $blue_fb_color: #3956A0;
         margin: 0 auto;
     }
 }
-.input-login {
+.input-signup {
     width: 100%;
     height: 15%;
     margin-top: 5%;
+    input {
+        border-bottom: 1px solid white;
+        color: white;
+    }
+    ion-item {
+        background-color: transparent;
+    }
+    ion-label {
+        color: white !important;
+        margin-top: -3px;
+        padding: 0 0 10px 0;
+    }
     .input-cover {
         position: static;
     }
 
-    .input-field {
-        border: 1px solid white;
-    }
     .error-message {
         background: transparent;
         p {
-            color: white;
+            color: firebrick;
             text-align: center;
             transition: 1s;
         }
@@ -66,89 +75,12 @@ $blue_fb_color: #3956A0;
     }
 }
 
-.submit-login {
-    width: 100%;
-    height: 40%;
-    display: block;
-    position: relative;
-    margin-bottom: 0px;
-    margin-top: 10%;
-    button {
-        line-height: 2;
-    }
-    .button-inner {
-        display: block;
-        font-weight: initial;
-    }
-    .button-md {
-        text-transform: none;
-    }
-    .forgot-btn {
-        width: 100%;
-        height: 10%;
-        display: block;
-        margin: 0 auto;
-        padding: 3%;
-        border-radius: 0;
-        font-size: 100%;
-        color: white;
-        background-color: transparent;
-        transition: 0.3s;
-
-    }
-    .forgot-btn.activated {
-        color: transparent;
-    }
-    .signin-btn {
-        display: block;
-        width: 100%;
-        height: 17%;
-        margin-top: 3%;
-        font-size: 150%;
-        color: white;
-        background-color: transparent;
-        border: 1px solid white;
-        transition: 0.3s;
-
-    }
-    .signin-btn.activated {
-        color: transparent;
-        border: 1px solid transparent;
-    }
-    .signin-fb-btn {
-        display: block;
-        width: 100%;
-        height: 17%;
-        margin-top: 3%;
-        font-size: 150%;
-        color: white;
-        background-color: $blue_fb_color;
-        border: 1px solid $blue_fb_color;
-        transition: 0.3s;
-
-        .fb-logo-in-btn {
-            position: absolute;
-            margin-top: 5px;
-            display: block;
-            width: 8%;
-        }
-    }
-    .signin-fb-btn.activated {
-        color: transparent;
-        background-color: transparent;
-    }
-}
-
 //iphone 5 screen
 @media only screen and (max-device-width: 320px) {
-    .container {
-        .submit-login {
-            font-size: 80%;
-        }
-        .scroll-content {
-            margin-top: 0;
-        }
-    }
-    
+
 }
 
+//for android when there is home button below
+.platform-android {
+
+}

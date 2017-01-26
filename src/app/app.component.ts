@@ -9,6 +9,7 @@ import { Setting } from '../pages/setting/setting';
 import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { GoogleMapPage } from '../pages/map/map';
 import { Signup } from '../pages/signup/signup';
+import { Resetpw } from '../pages/resetpw/resetpw';
 import { AuthData } from '../providers/auth-data';
 
 declare var cordova: any;
@@ -75,7 +76,7 @@ export class MyApp {
                     self.nav.push(Chatmessage, {message: data.message});
                   }
                 }]
-              });
+              }).present();
             } else {
               // this.events.publish('foreground-marketing-notification', data.message);
               confirmAlert = this.alertCtrl.create( {
@@ -142,11 +143,16 @@ export class MyApp {
 
   getStorageItem() {
       NativeStorage.getItem('userPhoto').then(data => {
+        this.ngzone.run(() => {
           this.userPhoto = data;
+        }); 
+          
       });
       NativeStorage.getItem('userDetails').then(data => {
+        this.ngzone.run(() => {
           this.userName = data.displayName;
           this.userEmail = data.email;
+        }); 
       });
   }
 

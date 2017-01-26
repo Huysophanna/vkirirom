@@ -22,9 +22,10 @@ declare var cordova: any;
 export class Dashboard {
   membership = Membership;
   Notification:any;
+  test: any;
 
   constructor(public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController) {
-      setInterval(() => {
+      this.test = setInterval(() => {
         this.kiriromScope();
       }, 2000);
   }
@@ -61,7 +62,9 @@ export class Dashboard {
       break;
       case 3: this.navCtrl.push(GoogleMapPage);
       break;
-      case 4: this.navCtrl.push(Chat);
+      case 4:
+      clearInterval(this.test); 
+      this.navCtrl.push(Chat);
       break;
       case 6: this.navCtrl.push(About);
       break;

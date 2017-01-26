@@ -46,7 +46,7 @@ export class Chatmessage implements AfterViewInit {
   chatInputHeight: any;
   keyboardShownValue: any;
   i=0;
-  notificationType: any = "OFF";
+  notificationType: any;
 
 
   constructor(public popoverCtrl: PopoverController, private navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
