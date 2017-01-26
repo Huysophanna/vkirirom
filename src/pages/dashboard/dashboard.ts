@@ -1,5 +1,5 @@
 import { Component, Inject, NgZone } from '@angular/core';
-import { NavController, Platform, AlertController, Events } from 'ionic-angular';
+import { NavController, Platform, AlertController, Events, ModalController } from 'ionic-angular';
 import { SMS, Toast, Geolocation, Push } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
@@ -10,6 +10,7 @@ import { Reservation } from '../reservation/reservation';
 import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
+import { Modal } from '../modal/modal';
 
 declare var cordova: any;
 
@@ -23,11 +24,20 @@ export class Dashboard {
   membership = Membership;
   Notification:any;
 
-  constructor(public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController) {
+  isKirirom: boolean;
+  isUnknown: boolean = false;
+
+  constructor(public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController) {
       setInterval(() => {
         this.kiriromScope();
       }, 2000);
   }
+
+showNoti() {
+  console.log("Show Click");
+  let notiModal = this.modalCtrl.create(Modal, { userId: 8675309 });
+  notiModal.present();
+}
 
   kiriromScope() {
     console.log("testing scope");
@@ -40,31 +50,39 @@ export class Dashboard {
       if (distance < 1) {
         var test = distance * 1000;
         console.log("Distance is less than 1 :" + test + "m");
+        this.isKirirom = true;
       } else {
         console.log("The Distance is : " + distance + "km");
         if (distance <= 17) {
           console.log("User in kirirom");
+          this.isKirirom = true;
         } else {
           console.log("User out kirirom");
+          this.isKirirom = false;
         }
       }
     }, (Error) => {
-      console.log("Geolocation Error");
+      console.log("Geolocation Error :" + this.isKirirom);
+      this.isUnknown = true;
     });
   }
 
   navigate(num) {
-    switch (num) {
-      case 1: this.navCtrl.push(Reservation);
-      break;
-      case 2: this.navCtrl.push(Membership);
-      break;
-      case 3: this.navCtrl.push(GoogleMapPage);
-      break;
-      case 4: this.navCtrl.push(Chat);
-      break;
-      case 6: this.navCtrl.push(About);
-      break;
+    if (this.isKirirom == false) {
+      alert("Outdoor user");
+    } else {
+      switch (num) {
+        case 1: this.navCtrl.push(Reservation);
+        break;
+        case 2: this.navCtrl.push(Membership);
+        break;
+        case 3: this.navCtrl.push(GoogleMapPage);
+        break;
+        case 4: this.navCtrl.push(Chat);
+        break;
+        case 6: this.navCtrl.push(About);
+        break;
+      }
     }
   }
 

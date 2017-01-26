@@ -12,6 +12,7 @@ import { Services } from '../pages/services/services';
 import { Setting } from '../pages/setting/setting';
 import { Signup } from '../pages/signup/signup';
 import { GoogleMapPage } from '../pages/map/map';
+import { Modal } from '../pages/modal/modal';
 import { Reservation } from '../pages/reservation/reservation';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
@@ -35,7 +36,8 @@ import { Userscope } from '../providers/userscope';
     Reservation,
     Signup,
     GoogleMapPage,
-    Services
+    Services,
+    Modal
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -55,6 +57,7 @@ import { Userscope } from '../providers/userscope';
     Setting,
     Reservation,
     Signup,
+    Modal
   ],
   providers: [
     AuthData,

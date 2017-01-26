@@ -21700,6 +21700,19 @@ sub {
   background: #1C8954;
 }
 
+.header .header-title {
+  padding-left: 145px;
+}
+
+.header .header-title .toolbar-title {
+  font-size: large !important;
+  color: #1A6940;
+  background: #EFEBE9;
+  padding: 0px 10px;
+  border-radius: 50px;
+  width: auto;
+}
+
 .container {
   position: relative;
   width: 100%;
@@ -21712,6 +21725,7 @@ sub {
   width: 100%;
   height: 25%;
   display: block;
+  padding-top: 20px;
 }
 
 .container .top-bar .vkirirom-img {

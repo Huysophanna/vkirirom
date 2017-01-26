@@ -1,7 +1,14 @@
 <ion-header class="header">
     <ion-navbar>
+        <ion-title class="header-title">
+            <span *ngIf="isKirirom == true">Indoor Mode</span>
+            <span *ngIf="isKirirom == false" style="color: #827717;">Outdoor Mode</span>
+            <span *ngIf="isUnknown == true && isKirirom == undefined" style="color: #F44336;">No Connection</span>
+        </ion-title>
         <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
-        <button right menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="ios-notifications"></ion-icon></button>
+        <ion-buttons end>
+            <button (click)="showNoti()"><ion-icon [ngStyle]="{'color': 'white'}" name="ios-notifications"></ion-icon></button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
