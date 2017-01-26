@@ -15,6 +15,17 @@ $blue_fb_color: #3956A0;
         border-color: transparent;
         background: $green_primary_color;
     }
+    .header-title {
+        padding-left: 145px;
+    }
+    .header-title .toolbar-title {
+        font-size: large !important;
+        color: #1A6940;
+        background: #EFEBE9;
+        padding: 0px 10px;
+        border-radius: 50px;
+        width: auto;
+    }
 }
 
 .container {
@@ -27,6 +38,7 @@ $blue_fb_color: #3956A0;
         width: 100%;
         height: 25%;
         display: block;
+        padding-top: 20px;
         .vkirirom-img {
             display: block;
             width: 45%;

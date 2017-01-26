@@ -13,6 +13,7 @@ import { Setting } from '../pages/setting/setting';
 import { Signup } from '../pages/signup/signup';
 import { Resetpw } from '../pages/resetpw/resetpw';
 import { GoogleMapPage } from '../pages/map/map';
+import { Modal } from '../pages/modal/modal';
 import { Reservation } from '../pages/reservation/reservation';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
@@ -37,7 +38,8 @@ import { Userscope } from '../providers/userscope';
     Signup,
     GoogleMapPage,
     Services,
-    Resetpw
+    Resetpw,
+    Modal
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -57,7 +59,8 @@ import { Userscope } from '../providers/userscope';
     Setting,
     Reservation,
     Signup,
-    Resetpw
+    Resetpw,
+    Modal
   ],
   providers: [
     AuthData,
