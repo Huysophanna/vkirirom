@@ -1,6 +1,7 @@
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 export declare class Membership {
     navCtrl: NavController;
+    private alertCtrl;
     userProfile: any;
     userPoint: number;
     userName: any;
@@ -10,7 +11,7 @@ export declare class Membership {
     userCardExpire: any;
     profilePicture: any;
     userData: any;
-    constructor(navCtrl: NavController);
-    ionViewDidLoad(): void;
+    constructor(navCtrl: NavController, alertCtrl: AlertController);
     pointSys(): void;
+    warningAlert(title: any, message: any): void;
 }

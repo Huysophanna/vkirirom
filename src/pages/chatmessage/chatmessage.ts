@@ -108,7 +108,6 @@ export class Chatmessage implements AfterViewInit {
         
         // called when the user send thier message
         this.socket.on(this.pkt.room + 'message', (data) => {
-            this.isJoined = false;
             this.ngzone.run(() => {
               this.timeAdjustment(); // used for time adjustment
               this.chats.push(data);
@@ -144,7 +143,6 @@ export class Chatmessage implements AfterViewInit {
 
         // called when the user leave the chat room
         this.socket.on(this.pkt.room + 'userleave', (userleave) => {
-            this.isJoined = true;
             this.ngzone.run(() => {
                 this.timeAdjustment(); // used for time adjustment
                 this.chats.push(userleave);
@@ -375,11 +373,6 @@ export class Chatmessage implements AfterViewInit {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch(err) { }
-  }
-
-  // ionic life cycle function called when the page is being loaded
-  ionViewDidLoad() {
-    console.log('Hello Chatmessage Page');
   }
 
 }

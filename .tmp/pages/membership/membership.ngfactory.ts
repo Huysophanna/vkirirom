@@ -13,31 +13,32 @@ import * as import5 from '@angular/core/src/di/injector';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/change_detection';
 import * as import8 from 'ionic-angular/navigation/nav-controller';
-import * as import9 from '@angular/core/src/metadata/view';
-import * as import10 from '@angular/core/src/linker/component_factory';
-import * as import11 from 'ionic-angular/components/toolbar/toolbar';
-import * as import12 from 'ionic-angular/components/navbar/navbar';
-import * as import13 from 'ionic-angular/components/toolbar/toolbar-title';
-import * as import14 from 'ionic-angular/components/toolbar/toolbar-item';
-import * as import15 from '@angular/core/src/linker/query_list';
-import * as import16 from '@angular/common/src/directives/ng_style';
-import * as import17 from 'ionic-angular/components/icon/icon';
-import * as import18 from 'ionic-angular/components/content/content';
-import * as import19 from '@angular/common/src/directives/ng_if';
-import * as import20 from 'ionic-angular/components/grid/grid';
-import * as import21 from 'ionic-angular/config/config';
-import * as import22 from '@angular/core/src/linker/element_ref';
-import * as import23 from 'ionic-angular/navigation/view-controller';
-import * as import24 from '../../node_modules/ionic-angular/components/navbar/navbar.ngfactory';
-import * as import25 from 'ionic-angular/components/app/app';
-import * as import26 from '../../node_modules/ionic-angular/components/toolbar/toolbar-title.ngfactory';
-import * as import27 from '@angular/core/src/change_detection/differs/keyvalue_differs';
-import * as import28 from '../../node_modules/ionic-angular/components/content/content.ngfactory';
-import * as import29 from 'ionic-angular/util/keyboard';
-import * as import30 from '@angular/core/src/zone/ng_zone';
-import * as import31 from 'ionic-angular/components/tabs/tabs';
-import * as import32 from '@angular/core/src/linker/template_ref';
-import * as import33 from '@angular/core/src/security';
+import * as import9 from 'ionic-angular/components/alert/alert';
+import * as import10 from '@angular/core/src/metadata/view';
+import * as import11 from '@angular/core/src/linker/component_factory';
+import * as import12 from 'ionic-angular/components/toolbar/toolbar';
+import * as import13 from 'ionic-angular/components/navbar/navbar';
+import * as import14 from 'ionic-angular/components/toolbar/toolbar-title';
+import * as import15 from 'ionic-angular/components/toolbar/toolbar-item';
+import * as import16 from '@angular/core/src/linker/query_list';
+import * as import17 from '@angular/common/src/directives/ng_style';
+import * as import18 from 'ionic-angular/components/icon/icon';
+import * as import19 from 'ionic-angular/components/content/content';
+import * as import20 from '@angular/common/src/directives/ng_if';
+import * as import21 from 'ionic-angular/components/grid/grid';
+import * as import22 from 'ionic-angular/config/config';
+import * as import23 from '@angular/core/src/linker/element_ref';
+import * as import24 from 'ionic-angular/navigation/view-controller';
+import * as import25 from '../../node_modules/ionic-angular/components/navbar/navbar.ngfactory';
+import * as import26 from 'ionic-angular/components/app/app';
+import * as import27 from '../../node_modules/ionic-angular/components/toolbar/toolbar-title.ngfactory';
+import * as import28 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import29 from '../../node_modules/ionic-angular/components/content/content.ngfactory';
+import * as import30 from 'ionic-angular/util/keyboard';
+import * as import31 from '@angular/core/src/zone/ng_zone';
+import * as import32 from 'ionic-angular/components/tabs/tabs';
+import * as import33 from '@angular/core/src/linker/template_ref';
+import * as import34 from '@angular/core/src/security';
 var renderType_Membership_Host:import0.RenderComponentType = (null as any);
 class _View_Membership_Host0 extends import1.AppView<any> {
   _el_0:any;
@@ -50,7 +51,7 @@ class _View_Membership_Host0 extends import1.AppView<any> {
     this._el_0 = this.selectOrCreateHostElement('page-membership',rootSelector,(null as any));
     this._appEl_0 = new import2.AppElement(0,(null as any),this,this._el_0);
     var compView_0:any = viewFactory_Membership0(this.viewUtils,this.injector(0),this._appEl_0);
-    this._Membership_0_4 = new import3.Membership(this.parentInjector.get(import8.NavController));
+    this._Membership_0_4 = new import3.Membership(this.parentInjector.get(import8.NavController),this.parentInjector.get(import9.AlertController));
     this._appEl_0.initComponent(this._Membership_0_4,[],compView_0);
     compView_0.create(this._Membership_0_4,this.projectableNodes,(null as any));
     this.init([].concat([this._el_0]),[this._el_0],[],[]);
@@ -62,39 +63,39 @@ class _View_Membership_Host0 extends import1.AppView<any> {
   }
 }
 function viewFactory_Membership_Host0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<any> {
-  if ((renderType_Membership_Host === (null as any))) { (renderType_Membership_Host = viewUtils.createRenderComponentType('',0,import9.ViewEncapsulation.None,[],{})); }
+  if ((renderType_Membership_Host === (null as any))) { (renderType_Membership_Host = viewUtils.createRenderComponentType('',0,import10.ViewEncapsulation.None,[],{})); }
   return new _View_Membership_Host0(viewUtils,parentInjector,declarationEl);
 }
-export const MembershipNgFactory:import10.ComponentFactory<import3.Membership> = new import10.ComponentFactory<import3.Membership>('page-membership',viewFactory_Membership_Host0,import3.Membership);
+export const MembershipNgFactory:import11.ComponentFactory<import3.Membership> = new import11.ComponentFactory<import3.Membership>('page-membership',viewFactory_Membership_Host0,import3.Membership);
 const styles_Membership:any[] = [];
 var renderType_Membership:import0.RenderComponentType = (null as any);
 class _View_Membership0 extends import1.AppView<import3.Membership> {
   _el_0:any;
-  _Header_0_3:import11.Header;
+  _Header_0_3:import12.Header;
   _text_1:any;
   _el_2:any;
   /*private*/ _appEl_2:import2.AppElement;
-  _Navbar_2_4:import12.Navbar;
+  _Navbar_2_4:import13.Navbar;
   _text_3:any;
   _el_4:any;
   /*private*/ _appEl_4:import2.AppElement;
-  _ToolbarTitle_4_4:import13.ToolbarTitle;
+  _ToolbarTitle_4_4:import14.ToolbarTitle;
   _text_5:any;
   _text_6:any;
   _el_7:any;
-  _ToolbarItem_7_3:import14.ToolbarItem;
-  _query_Button_7_0:import15.QueryList<any>;
+  _ToolbarItem_7_3:import15.ToolbarItem;
+  _query_Button_7_0:import16.QueryList<any>;
   _text_8:any;
   _el_9:any;
-  _NgStyle_9_3:import16.NgStyle;
-  _Icon_9_4:import17.Icon;
+  _NgStyle_9_3:import17.NgStyle;
+  _Icon_9_4:import18.Icon;
   _text_10:any;
   _text_11:any;
   _text_12:any;
   _text_13:any;
   _el_14:any;
   /*private*/ _appEl_14:import2.AppElement;
-  _Content_14_4:import18.Content;
+  _Content_14_4:import19.Content;
   _text_15:any;
   _el_16:any;
   _text_17:any;
@@ -103,7 +104,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   _anchor_20:any;
   /*private*/ _appEl_20:import2.AppElement;
   _TemplateRef_20_5:any;
-  _NgIf_20_6:import19.NgIf;
+  _NgIf_20_6:import20.NgIf;
   _text_21:any;
   _el_22:any;
   _text_23:any;
@@ -113,12 +114,12 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   _anchor_27:any;
   /*private*/ _appEl_27:import2.AppElement;
   _TemplateRef_27_5:any;
-  _NgIf_27_6:import19.NgIf;
+  _NgIf_27_6:import20.NgIf;
   _text_28:any;
   _anchor_29:any;
   /*private*/ _appEl_29:import2.AppElement;
   _TemplateRef_29_5:any;
-  _NgIf_29_6:import19.NgIf;
+  _NgIf_29_6:import20.NgIf;
   _text_30:any;
   _text_31:any;
   _el_32:any;
@@ -126,66 +127,66 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   _anchor_34:any;
   /*private*/ _appEl_34:import2.AppElement;
   _TemplateRef_34_5:any;
-  _NgIf_34_6:import19.NgIf;
+  _NgIf_34_6:import20.NgIf;
   _text_35:any;
   _anchor_36:any;
   /*private*/ _appEl_36:import2.AppElement;
   _TemplateRef_36_5:any;
-  _NgIf_36_6:import19.NgIf;
+  _NgIf_36_6:import20.NgIf;
   _text_37:any;
   _text_38:any;
   _el_39:any;
-  _Grid_39_3:import20.Grid;
+  _Grid_39_3:import21.Grid;
   _text_40:any;
   _el_41:any;
-  _Row_41_3:import20.Row;
+  _Row_41_3:import21.Row;
   _text_42:any;
   _el_43:any;
-  _Col_43_3:import20.Col;
+  _Col_43_3:import21.Col;
   _text_44:any;
   _el_45:any;
-  _Icon_45_3:import17.Icon;
+  _Icon_45_3:import18.Icon;
   _text_46:any;
   _el_47:any;
   _text_48:any;
   _anchor_49:any;
   /*private*/ _appEl_49:import2.AppElement;
   _TemplateRef_49_5:any;
-  _NgIf_49_6:import19.NgIf;
+  _NgIf_49_6:import20.NgIf;
   _text_50:any;
   _anchor_51:any;
   /*private*/ _appEl_51:import2.AppElement;
   _TemplateRef_51_5:any;
-  _NgIf_51_6:import19.NgIf;
+  _NgIf_51_6:import20.NgIf;
   _text_52:any;
   _text_53:any;
   _el_54:any;
-  _Col_54_3:import20.Col;
+  _Col_54_3:import21.Col;
   _text_55:any;
   _el_56:any;
-  _Icon_56_3:import17.Icon;
+  _Icon_56_3:import18.Icon;
   _text_57:any;
   _el_58:any;
   _text_59:any;
   _anchor_60:any;
   /*private*/ _appEl_60:import2.AppElement;
   _TemplateRef_60_5:any;
-  _NgIf_60_6:import19.NgIf;
+  _NgIf_60_6:import20.NgIf;
   _text_61:any;
   _anchor_62:any;
   /*private*/ _appEl_62:import2.AppElement;
   _TemplateRef_62_5:any;
-  _NgIf_62_6:import19.NgIf;
+  _NgIf_62_6:import20.NgIf;
   _text_63:any;
   _anchor_64:any;
   /*private*/ _appEl_64:import2.AppElement;
   _TemplateRef_64_5:any;
-  _NgIf_64_6:import19.NgIf;
+  _NgIf_64_6:import20.NgIf;
   _text_65:any;
   _anchor_66:any;
   /*private*/ _appEl_66:import2.AppElement;
   _TemplateRef_66_5:any;
-  _NgIf_66_6:import19.NgIf;
+  _NgIf_66_6:import20.NgIf;
   _text_67:any;
   _text_68:any;
   _text_69:any;
@@ -195,12 +196,12 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   _anchor_73:any;
   /*private*/ _appEl_73:import2.AppElement;
   _TemplateRef_73_5:any;
-  _NgIf_73_6:import19.NgIf;
+  _NgIf_73_6:import20.NgIf;
   _text_74:any;
   _anchor_75:any;
   /*private*/ _appEl_75:import2.AppElement;
   _TemplateRef_75_5:any;
-  _NgIf_75_6:import19.NgIf;
+  _NgIf_75_6:import20.NgIf;
   _text_76:any;
   _text_77:any;
   _text_78:any;
@@ -236,33 +237,33 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.declarationAppElement.nativeElement);
     this._el_0 = this.renderer.createElement(parentRenderNode,'ion-header',(null as any));
     this.renderer.setElementAttribute(this._el_0,'class','header');
-    this._Header_0_3 = new import11.Header(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_0),this.renderer,this.parentInjector.get(import23.ViewController,(null as any)));
+    this._Header_0_3 = new import12.Header(this.parentInjector.get(import22.Config),new import23.ElementRef(this._el_0),this.renderer,this.parentInjector.get(import24.ViewController,(null as any)));
     this._text_1 = this.renderer.createText(this._el_0,'\n\n    ',(null as any));
     this._el_2 = this.renderer.createElement(this._el_0,'ion-navbar',(null as any));
     this.renderer.setElementAttribute(this._el_2,'class','toolbar');
     this._appEl_2 = new import2.AppElement(2,0,this,this._el_2);
-    var compView_2:any = import24.viewFactory_Navbar0(this.viewUtils,this.injector(2),this._appEl_2);
-    this._Navbar_2_4 = new import12.Navbar(this.parentInjector.get(import25.App),this.parentInjector.get(import23.ViewController,(null as any)),this.parentInjector.get(import8.NavController,(null as any)),this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_2),this.renderer);
+    var compView_2:any = import25.viewFactory_Navbar0(this.viewUtils,this.injector(2),this._appEl_2);
+    this._Navbar_2_4 = new import13.Navbar(this.parentInjector.get(import26.App),this.parentInjector.get(import24.ViewController,(null as any)),this.parentInjector.get(import8.NavController,(null as any)),this.parentInjector.get(import22.Config),new import23.ElementRef(this._el_2),this.renderer);
     this._appEl_2.initComponent(this._Navbar_2_4,[],compView_2);
     this._text_3 = this.renderer.createText((null as any),'\n        ',(null as any));
     this._el_4 = this.renderer.createElement((null as any),'ion-title',(null as any));
     this._appEl_4 = new import2.AppElement(4,2,this,this._el_4);
-    var compView_4:any = import26.viewFactory_ToolbarTitle0(this.viewUtils,this.injector(4),this._appEl_4);
-    this._ToolbarTitle_4_4 = new import13.ToolbarTitle(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_4),this.renderer,this.parentInjector.get(import11.Toolbar,(null as any)),this._Navbar_2_4);
+    var compView_4:any = import27.viewFactory_ToolbarTitle0(this.viewUtils,this.injector(4),this._appEl_4);
+    this._ToolbarTitle_4_4 = new import14.ToolbarTitle(this.parentInjector.get(import22.Config),new import23.ElementRef(this._el_4),this.renderer,this.parentInjector.get(import12.Toolbar,(null as any)),this._Navbar_2_4);
     this._appEl_4.initComponent(this._ToolbarTitle_4_4,[],compView_4);
     this._text_5 = this.renderer.createText((null as any),'Membership Card',(null as any));
     compView_4.create(this._ToolbarTitle_4_4,[[].concat([this._text_5])],(null as any));
     this._text_6 = this.renderer.createText((null as any),'\n        ',(null as any));
     this._el_7 = this.renderer.createElement((null as any),'ion-buttons',(null as any));
     this.renderer.setElementAttribute(this._el_7,'right','');
-    this._ToolbarItem_7_3 = new import14.ToolbarItem(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_7),this.renderer,this.parentInjector.get(import11.Toolbar,(null as any)),this._Navbar_2_4);
-    this._query_Button_7_0 = new import15.QueryList<any>();
+    this._ToolbarItem_7_3 = new import15.ToolbarItem(this.parentInjector.get(import22.Config),new import23.ElementRef(this._el_7),this.renderer,this.parentInjector.get(import12.Toolbar,(null as any)),this._Navbar_2_4);
+    this._query_Button_7_0 = new import16.QueryList<any>();
     this._text_8 = this.renderer.createText(this._el_7,'\n            ',(null as any));
     this._el_9 = this.renderer.createElement(this._el_7,'ion-icon',(null as any));
     this.renderer.setElementAttribute(this._el_9,'name','ios-notifications');
     this.renderer.setElementAttribute(this._el_9,'role','img');
-    this._NgStyle_9_3 = new import16.NgStyle(this.parentInjector.get(import27.KeyValueDiffers),new import22.ElementRef(this._el_9),this.renderer);
-    this._Icon_9_4 = new import17.Icon(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_9),this.renderer);
+    this._NgStyle_9_3 = new import17.NgStyle(this.parentInjector.get(import28.KeyValueDiffers),new import23.ElementRef(this._el_9),this.renderer);
+    this._Icon_9_4 = new import18.Icon(this.parentInjector.get(import22.Config),new import23.ElementRef(this._el_9),this.renderer);
     this._text_10 = this.renderer.createText(this._el_7,'\n        ',(null as any));
     this._text_11 = this.renderer.createText((null as any),'\n    ',(null as any));
     compView_2.create(this._Navbar_2_4,[
@@ -284,8 +285,8 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this.renderer.setElementAttribute(this._el_14,'class','member-container');
     this.renderer.setElementAttribute(this._el_14,'padding','');
     this._appEl_14 = new import2.AppElement(14,(null as any),this,this._el_14);
-    var compView_14:any = import28.viewFactory_Content0(this.viewUtils,this.injector(14),this._appEl_14);
-    this._Content_14_4 = new import18.Content(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_14),this.renderer,this.parentInjector.get(import25.App),this.parentInjector.get(import29.Keyboard),this.parentInjector.get(import30.NgZone),this.parentInjector.get(import23.ViewController,(null as any)),this.parentInjector.get(import31.Tabs,(null as any)));
+    var compView_14:any = import29.viewFactory_Content0(this.viewUtils,this.injector(14),this._appEl_14);
+    this._Content_14_4 = new import19.Content(this.parentInjector.get(import22.Config),new import23.ElementRef(this._el_14),this.renderer,this.parentInjector.get(import26.App),this.parentInjector.get(import30.Keyboard),this.parentInjector.get(import31.NgZone),this.parentInjector.get(import24.ViewController,(null as any)),this.parentInjector.get(import32.Tabs,(null as any)));
     this._appEl_14.initComponent(this._Content_14_4,[],compView_14);
     this._text_15 = this.renderer.createText((null as any),'\n    ',(null as any));
     this._el_16 = this.renderer.createElement((null as any),'div',(null as any));
@@ -296,8 +297,8 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._text_19 = this.renderer.createText(this._el_18,'\n            ',(null as any));
     this._anchor_20 = this.renderer.createTemplateAnchor(this._el_18,(null as any));
     this._appEl_20 = new import2.AppElement(20,18,this,this._anchor_20);
-    this._TemplateRef_20_5 = new import32.TemplateRef_(this._appEl_20,viewFactory_Membership1);
-    this._NgIf_20_6 = new import19.NgIf(this._appEl_20.vcRef,this._TemplateRef_20_5);
+    this._TemplateRef_20_5 = new import33.TemplateRef_(this._appEl_20,viewFactory_Membership1);
+    this._NgIf_20_6 = new import20.NgIf(this._appEl_20.vcRef,this._TemplateRef_20_5);
     this._text_21 = this.renderer.createText(this._el_18,'\n            ',(null as any));
     this._el_22 = this.renderer.createElement(this._el_18,'img',(null as any));
     this.renderer.setElementAttribute(this._el_22,'alt','Profile Picture');
@@ -308,13 +309,13 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._text_26 = this.renderer.createText(this._el_25,'\n            ',(null as any));
     this._anchor_27 = this.renderer.createTemplateAnchor(this._el_25,(null as any));
     this._appEl_27 = new import2.AppElement(27,25,this,this._anchor_27);
-    this._TemplateRef_27_5 = new import32.TemplateRef_(this._appEl_27,viewFactory_Membership2);
-    this._NgIf_27_6 = new import19.NgIf(this._appEl_27.vcRef,this._TemplateRef_27_5);
+    this._TemplateRef_27_5 = new import33.TemplateRef_(this._appEl_27,viewFactory_Membership2);
+    this._NgIf_27_6 = new import20.NgIf(this._appEl_27.vcRef,this._TemplateRef_27_5);
     this._text_28 = this.renderer.createText(this._el_25,'\n            ',(null as any));
     this._anchor_29 = this.renderer.createTemplateAnchor(this._el_25,(null as any));
     this._appEl_29 = new import2.AppElement(29,25,this,this._anchor_29);
-    this._TemplateRef_29_5 = new import32.TemplateRef_(this._appEl_29,viewFactory_Membership3);
-    this._NgIf_29_6 = new import19.NgIf(this._appEl_29.vcRef,this._TemplateRef_29_5);
+    this._TemplateRef_29_5 = new import33.TemplateRef_(this._appEl_29,viewFactory_Membership3);
+    this._NgIf_29_6 = new import20.NgIf(this._appEl_29.vcRef,this._TemplateRef_29_5);
     this._text_30 = this.renderer.createText(this._el_25,'\n        ',(null as any));
     this._text_31 = this.renderer.createText(this._el_16,'\n\n        ',(null as any));
     this._el_32 = this.renderer.createElement(this._el_16,'div',(null as any));
@@ -322,76 +323,76 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._text_33 = this.renderer.createText(this._el_32,'\n            ID: ',(null as any));
     this._anchor_34 = this.renderer.createTemplateAnchor(this._el_32,(null as any));
     this._appEl_34 = new import2.AppElement(34,32,this,this._anchor_34);
-    this._TemplateRef_34_5 = new import32.TemplateRef_(this._appEl_34,viewFactory_Membership4);
-    this._NgIf_34_6 = new import19.NgIf(this._appEl_34.vcRef,this._TemplateRef_34_5);
+    this._TemplateRef_34_5 = new import33.TemplateRef_(this._appEl_34,viewFactory_Membership4);
+    this._NgIf_34_6 = new import20.NgIf(this._appEl_34.vcRef,this._TemplateRef_34_5);
     this._text_35 = this.renderer.createText(this._el_32,'\n            ',(null as any));
     this._anchor_36 = this.renderer.createTemplateAnchor(this._el_32,(null as any));
     this._appEl_36 = new import2.AppElement(36,32,this,this._anchor_36);
-    this._TemplateRef_36_5 = new import32.TemplateRef_(this._appEl_36,viewFactory_Membership5);
-    this._NgIf_36_6 = new import19.NgIf(this._appEl_36.vcRef,this._TemplateRef_36_5);
+    this._TemplateRef_36_5 = new import33.TemplateRef_(this._appEl_36,viewFactory_Membership5);
+    this._NgIf_36_6 = new import20.NgIf(this._appEl_36.vcRef,this._TemplateRef_36_5);
     this._text_37 = this.renderer.createText(this._el_32,'\n        ',(null as any));
     this._text_38 = this.renderer.createText(this._el_16,'\n\n        ',(null as any));
     this._el_39 = this.renderer.createElement(this._el_16,'ion-grid',(null as any));
     this.renderer.setElementAttribute(this._el_39,'class','detail');
-    this._Grid_39_3 = new import20.Grid();
+    this._Grid_39_3 = new import21.Grid();
     this._text_40 = this.renderer.createText(this._el_39,'\n            ',(null as any));
     this._el_41 = this.renderer.createElement(this._el_39,'ion-row',(null as any));
-    this._Row_41_3 = new import20.Row();
+    this._Row_41_3 = new import21.Row();
     this._text_42 = this.renderer.createText(this._el_41,'\n                ',(null as any));
     this._el_43 = this.renderer.createElement(this._el_41,'ion-col',(null as any));
     this.renderer.setElementAttribute(this._el_43,'class','detail-item');
     this.renderer.setElementAttribute(this._el_43,'width-50','');
-    this._Col_43_3 = new import20.Col();
+    this._Col_43_3 = new import21.Col();
     this._text_44 = this.renderer.createText(this._el_43,'\n                    ',(null as any));
     this._el_45 = this.renderer.createElement(this._el_43,'ion-icon',(null as any));
     this.renderer.setElementAttribute(this._el_45,'name','basket');
     this.renderer.setElementAttribute(this._el_45,'role','img');
-    this._Icon_45_3 = new import17.Icon(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_45),this.renderer);
+    this._Icon_45_3 = new import18.Icon(this.parentInjector.get(import22.Config),new import23.ElementRef(this._el_45),this.renderer);
     this._text_46 = this.renderer.createText(this._el_43,'  vPoint',(null as any));
     this._el_47 = this.renderer.createElement(this._el_43,'br',(null as any));
     this._text_48 = this.renderer.createText(this._el_43,'\n                    ',(null as any));
     this._anchor_49 = this.renderer.createTemplateAnchor(this._el_43,(null as any));
     this._appEl_49 = new import2.AppElement(49,43,this,this._anchor_49);
-    this._TemplateRef_49_5 = new import32.TemplateRef_(this._appEl_49,viewFactory_Membership6);
-    this._NgIf_49_6 = new import19.NgIf(this._appEl_49.vcRef,this._TemplateRef_49_5);
+    this._TemplateRef_49_5 = new import33.TemplateRef_(this._appEl_49,viewFactory_Membership6);
+    this._NgIf_49_6 = new import20.NgIf(this._appEl_49.vcRef,this._TemplateRef_49_5);
     this._text_50 = this.renderer.createText(this._el_43,'\n                    ',(null as any));
     this._anchor_51 = this.renderer.createTemplateAnchor(this._el_43,(null as any));
     this._appEl_51 = new import2.AppElement(51,43,this,this._anchor_51);
-    this._TemplateRef_51_5 = new import32.TemplateRef_(this._appEl_51,viewFactory_Membership7);
-    this._NgIf_51_6 = new import19.NgIf(this._appEl_51.vcRef,this._TemplateRef_51_5);
+    this._TemplateRef_51_5 = new import33.TemplateRef_(this._appEl_51,viewFactory_Membership7);
+    this._NgIf_51_6 = new import20.NgIf(this._appEl_51.vcRef,this._TemplateRef_51_5);
     this._text_52 = this.renderer.createText(this._el_43,'\n                ',(null as any));
     this._text_53 = this.renderer.createText(this._el_41,'\n                ',(null as any));
     this._el_54 = this.renderer.createElement(this._el_41,'ion-col',(null as any));
     this.renderer.setElementAttribute(this._el_54,'class','detail-item');
     this.renderer.setElementAttribute(this._el_54,'width-50','');
-    this._Col_54_3 = new import20.Col();
+    this._Col_54_3 = new import21.Col();
     this._text_55 = this.renderer.createText(this._el_54,'\n                    ',(null as any));
     this._el_56 = this.renderer.createElement(this._el_54,'ion-icon',(null as any));
     this.renderer.setElementAttribute(this._el_56,'name','logo-buffer');
     this.renderer.setElementAttribute(this._el_56,'role','img');
-    this._Icon_56_3 = new import17.Icon(this.parentInjector.get(import21.Config),new import22.ElementRef(this._el_56),this.renderer);
+    this._Icon_56_3 = new import18.Icon(this.parentInjector.get(import22.Config),new import23.ElementRef(this._el_56),this.renderer);
     this._text_57 = this.renderer.createText(this._el_54,'  Type',(null as any));
     this._el_58 = this.renderer.createElement(this._el_54,'br',(null as any));
     this._text_59 = this.renderer.createText(this._el_54,'\n                    ',(null as any));
     this._anchor_60 = this.renderer.createTemplateAnchor(this._el_54,(null as any));
     this._appEl_60 = new import2.AppElement(60,54,this,this._anchor_60);
-    this._TemplateRef_60_5 = new import32.TemplateRef_(this._appEl_60,viewFactory_Membership8);
-    this._NgIf_60_6 = new import19.NgIf(this._appEl_60.vcRef,this._TemplateRef_60_5);
+    this._TemplateRef_60_5 = new import33.TemplateRef_(this._appEl_60,viewFactory_Membership8);
+    this._NgIf_60_6 = new import20.NgIf(this._appEl_60.vcRef,this._TemplateRef_60_5);
     this._text_61 = this.renderer.createText(this._el_54,'\n                    ',(null as any));
     this._anchor_62 = this.renderer.createTemplateAnchor(this._el_54,(null as any));
     this._appEl_62 = new import2.AppElement(62,54,this,this._anchor_62);
-    this._TemplateRef_62_5 = new import32.TemplateRef_(this._appEl_62,viewFactory_Membership9);
-    this._NgIf_62_6 = new import19.NgIf(this._appEl_62.vcRef,this._TemplateRef_62_5);
+    this._TemplateRef_62_5 = new import33.TemplateRef_(this._appEl_62,viewFactory_Membership9);
+    this._NgIf_62_6 = new import20.NgIf(this._appEl_62.vcRef,this._TemplateRef_62_5);
     this._text_63 = this.renderer.createText(this._el_54,'\n                    ',(null as any));
     this._anchor_64 = this.renderer.createTemplateAnchor(this._el_54,(null as any));
     this._appEl_64 = new import2.AppElement(64,54,this,this._anchor_64);
-    this._TemplateRef_64_5 = new import32.TemplateRef_(this._appEl_64,viewFactory_Membership10);
-    this._NgIf_64_6 = new import19.NgIf(this._appEl_64.vcRef,this._TemplateRef_64_5);
+    this._TemplateRef_64_5 = new import33.TemplateRef_(this._appEl_64,viewFactory_Membership10);
+    this._NgIf_64_6 = new import20.NgIf(this._appEl_64.vcRef,this._TemplateRef_64_5);
     this._text_65 = this.renderer.createText(this._el_54,'\n                    ',(null as any));
     this._anchor_66 = this.renderer.createTemplateAnchor(this._el_54,(null as any));
     this._appEl_66 = new import2.AppElement(66,54,this,this._anchor_66);
-    this._TemplateRef_66_5 = new import32.TemplateRef_(this._appEl_66,viewFactory_Membership11);
-    this._NgIf_66_6 = new import19.NgIf(this._appEl_66.vcRef,this._TemplateRef_66_5);
+    this._TemplateRef_66_5 = new import33.TemplateRef_(this._appEl_66,viewFactory_Membership11);
+    this._NgIf_66_6 = new import20.NgIf(this._appEl_66.vcRef,this._TemplateRef_66_5);
     this._text_67 = this.renderer.createText(this._el_54,'\n                ',(null as any));
     this._text_68 = this.renderer.createText(this._el_41,'\n            ',(null as any));
     this._text_69 = this.renderer.createText(this._el_39,'\n        ',(null as any));
@@ -401,13 +402,13 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     this._text_72 = this.renderer.createText(this._el_71,'\n            Expire Date: ',(null as any));
     this._anchor_73 = this.renderer.createTemplateAnchor(this._el_71,(null as any));
     this._appEl_73 = new import2.AppElement(73,71,this,this._anchor_73);
-    this._TemplateRef_73_5 = new import32.TemplateRef_(this._appEl_73,viewFactory_Membership12);
-    this._NgIf_73_6 = new import19.NgIf(this._appEl_73.vcRef,this._TemplateRef_73_5);
+    this._TemplateRef_73_5 = new import33.TemplateRef_(this._appEl_73,viewFactory_Membership12);
+    this._NgIf_73_6 = new import20.NgIf(this._appEl_73.vcRef,this._TemplateRef_73_5);
     this._text_74 = this.renderer.createText(this._el_71,'\n            ',(null as any));
     this._anchor_75 = this.renderer.createTemplateAnchor(this._el_71,(null as any));
     this._appEl_75 = new import2.AppElement(75,71,this,this._anchor_75);
-    this._TemplateRef_75_5 = new import32.TemplateRef_(this._appEl_75,viewFactory_Membership13);
-    this._NgIf_75_6 = new import19.NgIf(this._appEl_75.vcRef,this._TemplateRef_75_5);
+    this._TemplateRef_75_5 = new import33.TemplateRef_(this._appEl_75,viewFactory_Membership13);
+    this._NgIf_75_6 = new import20.NgIf(this._appEl_75.vcRef,this._TemplateRef_75_5);
     this._text_76 = this.renderer.createText(this._el_71,'\n        ',(null as any));
     this._text_77 = this.renderer.createText(this._el_16,'\n    ',(null as any));
     this._text_78 = this.renderer.createText((null as any),'\n\n',(null as any));
@@ -534,45 +535,45 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import13.ToolbarTitle) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._ToolbarTitle_4_4; }
-    if (((token === import16.NgStyle) && (9 === requestNodeIndex))) { return this._NgStyle_9_3; }
-    if (((token === import17.Icon) && (9 === requestNodeIndex))) { return this._Icon_9_4; }
-    if (((token === import14.ToolbarItem) && ((7 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._ToolbarItem_7_3; }
-    if (((token === import12.Navbar) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._Navbar_2_4; }
-    if (((token === import11.Header) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._Header_0_3; }
-    if (((token === import32.TemplateRef) && (20 === requestNodeIndex))) { return this._TemplateRef_20_5; }
-    if (((token === import19.NgIf) && (20 === requestNodeIndex))) { return this._NgIf_20_6; }
-    if (((token === import32.TemplateRef) && (27 === requestNodeIndex))) { return this._TemplateRef_27_5; }
-    if (((token === import19.NgIf) && (27 === requestNodeIndex))) { return this._NgIf_27_6; }
-    if (((token === import32.TemplateRef) && (29 === requestNodeIndex))) { return this._TemplateRef_29_5; }
-    if (((token === import19.NgIf) && (29 === requestNodeIndex))) { return this._NgIf_29_6; }
-    if (((token === import32.TemplateRef) && (34 === requestNodeIndex))) { return this._TemplateRef_34_5; }
-    if (((token === import19.NgIf) && (34 === requestNodeIndex))) { return this._NgIf_34_6; }
-    if (((token === import32.TemplateRef) && (36 === requestNodeIndex))) { return this._TemplateRef_36_5; }
-    if (((token === import19.NgIf) && (36 === requestNodeIndex))) { return this._NgIf_36_6; }
-    if (((token === import17.Icon) && (45 === requestNodeIndex))) { return this._Icon_45_3; }
-    if (((token === import32.TemplateRef) && (49 === requestNodeIndex))) { return this._TemplateRef_49_5; }
-    if (((token === import19.NgIf) && (49 === requestNodeIndex))) { return this._NgIf_49_6; }
-    if (((token === import32.TemplateRef) && (51 === requestNodeIndex))) { return this._TemplateRef_51_5; }
-    if (((token === import19.NgIf) && (51 === requestNodeIndex))) { return this._NgIf_51_6; }
-    if (((token === import20.Col) && ((43 <= requestNodeIndex) && (requestNodeIndex <= 52)))) { return this._Col_43_3; }
-    if (((token === import17.Icon) && (56 === requestNodeIndex))) { return this._Icon_56_3; }
-    if (((token === import32.TemplateRef) && (60 === requestNodeIndex))) { return this._TemplateRef_60_5; }
-    if (((token === import19.NgIf) && (60 === requestNodeIndex))) { return this._NgIf_60_6; }
-    if (((token === import32.TemplateRef) && (62 === requestNodeIndex))) { return this._TemplateRef_62_5; }
-    if (((token === import19.NgIf) && (62 === requestNodeIndex))) { return this._NgIf_62_6; }
-    if (((token === import32.TemplateRef) && (64 === requestNodeIndex))) { return this._TemplateRef_64_5; }
-    if (((token === import19.NgIf) && (64 === requestNodeIndex))) { return this._NgIf_64_6; }
-    if (((token === import32.TemplateRef) && (66 === requestNodeIndex))) { return this._TemplateRef_66_5; }
-    if (((token === import19.NgIf) && (66 === requestNodeIndex))) { return this._NgIf_66_6; }
-    if (((token === import20.Col) && ((54 <= requestNodeIndex) && (requestNodeIndex <= 67)))) { return this._Col_54_3; }
-    if (((token === import20.Row) && ((41 <= requestNodeIndex) && (requestNodeIndex <= 68)))) { return this._Row_41_3; }
-    if (((token === import20.Grid) && ((39 <= requestNodeIndex) && (requestNodeIndex <= 69)))) { return this._Grid_39_3; }
-    if (((token === import32.TemplateRef) && (73 === requestNodeIndex))) { return this._TemplateRef_73_5; }
-    if (((token === import19.NgIf) && (73 === requestNodeIndex))) { return this._NgIf_73_6; }
-    if (((token === import32.TemplateRef) && (75 === requestNodeIndex))) { return this._TemplateRef_75_5; }
-    if (((token === import19.NgIf) && (75 === requestNodeIndex))) { return this._NgIf_75_6; }
-    if (((token === import18.Content) && ((14 <= requestNodeIndex) && (requestNodeIndex <= 78)))) { return this._Content_14_4; }
+    if (((token === import14.ToolbarTitle) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._ToolbarTitle_4_4; }
+    if (((token === import17.NgStyle) && (9 === requestNodeIndex))) { return this._NgStyle_9_3; }
+    if (((token === import18.Icon) && (9 === requestNodeIndex))) { return this._Icon_9_4; }
+    if (((token === import15.ToolbarItem) && ((7 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._ToolbarItem_7_3; }
+    if (((token === import13.Navbar) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._Navbar_2_4; }
+    if (((token === import12.Header) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._Header_0_3; }
+    if (((token === import33.TemplateRef) && (20 === requestNodeIndex))) { return this._TemplateRef_20_5; }
+    if (((token === import20.NgIf) && (20 === requestNodeIndex))) { return this._NgIf_20_6; }
+    if (((token === import33.TemplateRef) && (27 === requestNodeIndex))) { return this._TemplateRef_27_5; }
+    if (((token === import20.NgIf) && (27 === requestNodeIndex))) { return this._NgIf_27_6; }
+    if (((token === import33.TemplateRef) && (29 === requestNodeIndex))) { return this._TemplateRef_29_5; }
+    if (((token === import20.NgIf) && (29 === requestNodeIndex))) { return this._NgIf_29_6; }
+    if (((token === import33.TemplateRef) && (34 === requestNodeIndex))) { return this._TemplateRef_34_5; }
+    if (((token === import20.NgIf) && (34 === requestNodeIndex))) { return this._NgIf_34_6; }
+    if (((token === import33.TemplateRef) && (36 === requestNodeIndex))) { return this._TemplateRef_36_5; }
+    if (((token === import20.NgIf) && (36 === requestNodeIndex))) { return this._NgIf_36_6; }
+    if (((token === import18.Icon) && (45 === requestNodeIndex))) { return this._Icon_45_3; }
+    if (((token === import33.TemplateRef) && (49 === requestNodeIndex))) { return this._TemplateRef_49_5; }
+    if (((token === import20.NgIf) && (49 === requestNodeIndex))) { return this._NgIf_49_6; }
+    if (((token === import33.TemplateRef) && (51 === requestNodeIndex))) { return this._TemplateRef_51_5; }
+    if (((token === import20.NgIf) && (51 === requestNodeIndex))) { return this._NgIf_51_6; }
+    if (((token === import21.Col) && ((43 <= requestNodeIndex) && (requestNodeIndex <= 52)))) { return this._Col_43_3; }
+    if (((token === import18.Icon) && (56 === requestNodeIndex))) { return this._Icon_56_3; }
+    if (((token === import33.TemplateRef) && (60 === requestNodeIndex))) { return this._TemplateRef_60_5; }
+    if (((token === import20.NgIf) && (60 === requestNodeIndex))) { return this._NgIf_60_6; }
+    if (((token === import33.TemplateRef) && (62 === requestNodeIndex))) { return this._TemplateRef_62_5; }
+    if (((token === import20.NgIf) && (62 === requestNodeIndex))) { return this._NgIf_62_6; }
+    if (((token === import33.TemplateRef) && (64 === requestNodeIndex))) { return this._TemplateRef_64_5; }
+    if (((token === import20.NgIf) && (64 === requestNodeIndex))) { return this._NgIf_64_6; }
+    if (((token === import33.TemplateRef) && (66 === requestNodeIndex))) { return this._TemplateRef_66_5; }
+    if (((token === import20.NgIf) && (66 === requestNodeIndex))) { return this._NgIf_66_6; }
+    if (((token === import21.Col) && ((54 <= requestNodeIndex) && (requestNodeIndex <= 67)))) { return this._Col_54_3; }
+    if (((token === import21.Row) && ((41 <= requestNodeIndex) && (requestNodeIndex <= 68)))) { return this._Row_41_3; }
+    if (((token === import21.Grid) && ((39 <= requestNodeIndex) && (requestNodeIndex <= 69)))) { return this._Grid_39_3; }
+    if (((token === import33.TemplateRef) && (73 === requestNodeIndex))) { return this._TemplateRef_73_5; }
+    if (((token === import20.NgIf) && (73 === requestNodeIndex))) { return this._NgIf_73_6; }
+    if (((token === import33.TemplateRef) && (75 === requestNodeIndex))) { return this._TemplateRef_75_5; }
+    if (((token === import20.NgIf) && (75 === requestNodeIndex))) { return this._NgIf_75_6; }
+    if (((token === import19.Content) && ((14 <= requestNodeIndex) && (requestNodeIndex <= 78)))) { return this._Content_14_4; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -691,7 +692,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
     }
     const currVal_7:any = import4.interpolate(1,'',this.context.userPhoto,'');
     if (import4.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
-      this.renderer.setElementProperty(this._el_22,'src',this.viewUtils.sanitizer.sanitize(import33.SecurityContext.URL,currVal_7));
+      this.renderer.setElementProperty(this._el_22,'src',this.viewUtils.sanitizer.sanitize(import34.SecurityContext.URL,currVal_7));
       this._expr_7 = currVal_7;
     }
     const currVal_13:any = this._Icon_45_3._hidden;
@@ -715,7 +716,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   }
 }
 export function viewFactory_Membership0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<import3.Membership> {
-  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html',0,import9.ViewEncapsulation.None,styles_Membership,{})); }
+  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html',0,import10.ViewEncapsulation.None,styles_Membership,{})); }
   return new _View_Membership0(viewUtils,parentInjector,declarationEl);
 }
 class _View_Membership1 extends import1.AppView<any> {
@@ -1054,7 +1055,7 @@ class _View_Membership13 extends import1.AppView<any> {
   }
   createInternal(rootSelector:string):import2.AppElement {
     this._el_0 = this.renderer.createElement((null as any),'span',(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'10/ Oct/ 2017',(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'01/01/2018',(null as any));
     this.init([].concat([this._el_0]),[
       this._el_0,
       this._text_1

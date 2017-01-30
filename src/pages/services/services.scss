@@ -1,3 +1,25 @@
-page-services {
+$green_primary_color: #1C8954;
 
+.item-booking {
+    margin: 0 auto;
+    text-align: center;
+    p {
+        color: black;
+        font-size: 90%;
+    }
+    button {
+        background: $green_primary_color;
+        color: white;
+        line-height: 2;
+        width: 60%;
+    }
+}
+
+@media only screen and (max-device-width: 320px) {
+    .item-booking {
+        text-align: initial;
+        button {
+            width: 85%;
+        }
+    }
 }

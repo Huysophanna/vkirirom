@@ -10,7 +10,7 @@ import firebase from 'firebase';
 @Component({
   selector: 'page-resetpw',
   templateUrl: 'resetpw.html',
-  styles: ['.page-label { margin-top: 14%; }']
+  styles: ['.header-md::after { background-image: none;} .page-label { margin-top: 14%; }']
 })
 export class Resetpw {
   public resetForm;

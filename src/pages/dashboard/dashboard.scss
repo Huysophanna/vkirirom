@@ -15,8 +15,13 @@ $blue_fb_color: #3956A0;
         border-color: transparent;
         background: $green_primary_color;
     }
+    .toolbar-title {
+        font-size: 140% !important;
+        margin-top: 0px !important;
+    }
     .header-title {
-        padding-left: 145px;
+        display: block;
+        margin-top: 8px;
     }
     .header-title .toolbar-title {
         font-size: large !important;
@@ -25,6 +30,21 @@ $blue_fb_color: #3956A0;
         padding: 0px 10px;
         border-radius: 50px;
         width: auto;
+    }
+    .showNotiBtn {
+        transition: 0.2s;
+    }
+    .showNotiBtn.activated {
+        opacity: 0.2;
+        animation: bounce 1s .5s;
+        transform: scale(0.85);
+    }
+    @keyframes bounce {
+        0% { transform: scale(1.1); opacity: 1 }
+        50% { transform: scale(1.6); opacity: .7; }
+        60% { transform: scale(0.6); opacity: 1 }
+        80% { transform: scale(0.95) }
+        100% { transform: scale(0.85) }
     }
 }
 
@@ -38,7 +58,7 @@ $blue_fb_color: #3956A0;
         width: 100%;
         height: 25%;
         display: block;
-        padding-top: 20px;
+        padding-top: 10px;
         .vkirirom-img {
             display: block;
             width: 45%;

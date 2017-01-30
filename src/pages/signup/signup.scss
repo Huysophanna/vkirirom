@@ -14,6 +14,12 @@ $blue_fb_color: #3956A0;
     }
 }
 
+.header {
+    .header-md::after {
+        background-image: none;
+    }
+}
+
 .container {
     position: relative;
     width: 100%;
@@ -77,7 +83,15 @@ $blue_fb_color: #3956A0;
 
 //iphone 5 screen
 @media only screen and (max-device-width: 320px) {
-
+    .submit-login {
+        margin-top: 0;
+    }
+    .input-signup {
+        .item {
+            //make each field decrease the line height, smaller
+            line-height: 10px;
+        }
+    }
 }
 
 //for android when there is home button below

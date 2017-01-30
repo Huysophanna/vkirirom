@@ -1,3 +1,16 @@
-page-modal {
+$green_primary_color: #1C8954;
 
+.viewButton {
+    color: $green_primary_color;
+}
+.noNotification {
+    font-size: large;
+    color: $green_primary_color;
+    text-align: center;
+    margin-top: 50%;
+    text-align: center;
+    ion-icon {
+        color: green;
+        font-size: -webkit-xxx-large;
+    }
 }

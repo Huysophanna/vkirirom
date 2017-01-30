@@ -10,7 +10,7 @@ import firebase from 'firebase';
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
-  styles: ['.vtop-bar { height: 20%; }']
+  styles: ['.header-md::after { background-image: none;} .vtop-bar { height: 20%; };']
 })
 export class Signup {
 

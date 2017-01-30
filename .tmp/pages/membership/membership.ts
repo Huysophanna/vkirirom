@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 import firebase from 'firebase';
 
@@ -12,7 +12,8 @@ export class Membership {
   userPoint: number; userName: any; userPhoto: any; userID: any; userCardType: any; 
   userCardExpire: any; profilePicture: any; userData: any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
+
     NativeStorage.getItem('userPhoto').then(data => {
       this.userPhoto = data;
     });
@@ -33,16 +34,25 @@ export class Membership {
 
   }
 
-  ionViewDidLoad() {
-    console.log('Hello Membership Page');
-  }
-
   pointSys() {
     if (this.userPoint == 0) {
       console.log("Out of vPoint!!!!!");
     } else {
       console.log("Point is here!!!!");
     }
+  }
+
+  warningAlert(title, message) {
+    this.alertCtrl.create( {
+        title: title,
+        message: message,
+        buttons: [{
+          text: 'Back',
+          handler: data => {
+            this.navCtrl.pop();
+          }
+        }]
+    }).present();
   }
 
 }
