@@ -1,0 +1,27 @@
+$green_primary_color: #1C8954;
+$blue_fb_color: #3956A0;
+
+//for android platform 
+.platform-android {
+    //forgot btn no shadow on android
+    .forgot-btn.button-md {
+        box-shadow: none;
+    }
+    .error-message {
+        .label-md {
+            margin: 0;
+        }
+    }
+}
+
+.scroll-content {
+    overflow-y: hidden;
+    margin-top: 0;
+}
+.container {
+    .page-label {
+        text-align: center;
+        color: white;
+        font-size: large;
+    }
+}

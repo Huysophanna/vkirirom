@@ -21215,19 +21215,36 @@ sub {
   background: #f1f1f1 !important;
 }
 
+.content .about-container .page-scroll .custom-card {
+  /* opacity: 0;
+				transform: rotate(5deg); */
+  transition: opacity, -webkit-transform 0.3s ease-out;
+  transition: opacity, transform 0.3s ease-out;
+  transition: opacity, transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+}
+
 .content .about-container .accommodation,
 .content .about-container .property,
 .content .about-container .services {
-  position: relative;
+  position: absolute;
   width: 100%;
   float: left;
-  height: 100%;
-  margin-top: 40px;
-  margin-bottom: 90px;
+  background: #f1f1f1 !important;
+  padding-top: 56px;
+  top: 0;
+  bottom: 50px;
   box-sizing: border-box;
+  left: -100%;
+  transition: left 1s ease-out;
 }
 
-.tab_bar {
+.content .about-container .accommodation.active,
+.content .about-container .property.active,
+.content .about-container .services.active {
+  left: 0;
+}
+
+.content .tab_bar {
   width: 100%;
   min-height: 50px;
   float: left;
@@ -21235,29 +21252,29 @@ sub {
   bottom: -1px;
   left: 0;
   right: 0;
-  z-index: 5;
+  z-index: 2;
   background: #fff;
 }
 
-.tab_bar .inner {
+.content .tab_bar .inner {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.tab_bar .inner .btn {
+.content .tab_bar .inner .btn {
   width: 33.33%;
   padding: 19px 5px;
   float: left;
   box-sizing: border-box;
-  background: #ecf0f1;
+  background: transparent;
   color: #2a2e3e;
   font-size: 12px;
   text-transform: uppercase;
 }
 
-.tab_bar .inner .btn.active {
-  background: #2ecc71;
+.content .tab_bar .inner .btn.active {
+  background: #1C8954;
   color: #fff;
 }
 
@@ -21536,7 +21553,7 @@ sub {
   position: absolute;
   top: 23px;
   width: 20px;
-  z-index: 0;
+  z-index: 0.5;
 }
 
 .chatmessage-container .chat-wrapper .chat-bubble p {
@@ -21548,7 +21565,7 @@ sub {
   padding: 10px 18px;
   position: relative;
   vertical-align: top;
-  z-index: -1;
+  z-index: 0;
   max-width: 75%;
 }
 
@@ -21700,8 +21717,18 @@ sub {
   background: #1C8954;
 }
 
+.header .toolbar-title {
+  font-size: 140% !important;
+  margin-top: 0px !important;
+}
+
 .header .header-title {
+<<<<<<< HEAD
   padding-left: 100px;
+=======
+  display: block;
+  margin-top: 8px;
+>>>>>>> e127660b2aa794d296b27ab6812d7f4002aa372d
 }
 
 .header .header-title .toolbar-title {
@@ -21711,6 +21738,70 @@ sub {
   padding: 0px 10px;
   border-radius: 50px;
   width: auto;
+}
+
+.header .showNotiBtn {
+  transition: 0.2s;
+}
+
+.header .showNotiBtn.activated {
+  opacity: 0.2;
+  -webkit-animation: bounce 1s .5s;
+  animation: bounce 1s .5s;
+  -webkit-transform: scale(0.85);
+  transform: scale(0.85);
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(1.6);
+    transform: scale(1.6);
+    opacity: .7;
+  }
+  60% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(0.85);
+    transform: scale(0.85);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(1.6);
+    transform: scale(1.6);
+    opacity: .7;
+  }
+  60% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(0.85);
+    transform: scale(0.85);
+  }
 }
 
 .container {
@@ -21725,7 +21816,7 @@ sub {
   width: 100%;
   height: 25%;
   display: block;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .container .top-bar .vkirirom-img {
@@ -21989,6 +22080,7 @@ sub {
   background-color: transparent;
   transition: 0.3s;
   top: -10px;
+  box-shadow: none;
 }
 
 @media only screen and (max-device-width: 320px) {
@@ -22136,6 +22228,68 @@ span {
   }
 }
 
+.viewButton {
+  color: #1C8954;
+}
+
+.noNotification {
+  font-size: large;
+  color: #1C8954;
+  text-align: center;
+  margin-top: 50%;
+  text-align: center;
+}
+
+.noNotification ion-icon {
+  color: green;
+  font-size: -webkit-xxx-large;
+}
+
+.platform-android .forgot-btn.button-md {
+  box-shadow: none;
+}
+
+.platform-android .error-message .label-md {
+  margin: 0;
+}
+
+.scroll-content {
+  overflow-y: hidden;
+  margin-top: 0;
+}
+
+.container .page-label {
+  text-align: center;
+  color: white;
+  font-size: large;
+}
+
+.item-booking {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.item-booking p {
+  color: black;
+  font-size: 90%;
+}
+
+.item-booking button {
+  background: #1C8954;
+  color: white;
+  line-height: 2;
+  width: 60%;
+}
+
+@media only screen and (max-device-width: 320px) {
+  .item-booking {
+    text-align: initial;
+  }
+  .item-booking button {
+    width: 85%;
+  }
+}
+
 label {
   margin: 0;
 }
@@ -22163,8 +22317,8 @@ label {
   margin: 0;
 }
 
-.scroll-content {
-  overflow-y: hidden;
+.header .header-md::after {
+  background-image: none;
 }
 
 .container {
@@ -22173,6 +22327,10 @@ label {
   height: 100%;
   margin: auto;
   background: #1C8954;
+}
+
+.container .scroll-content {
+  margin-top: 0;
 }
 
 .vtop-bar {
@@ -22194,127 +22352,58 @@ label {
   margin: 0 auto;
 }
 
-.input-login {
+.input-signup {
   width: 100%;
   height: 15%;
   margin-top: 5%;
 }
 
-.input-login .input-cover {
+.input-signup input {
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.input-signup ion-item {
+  background-color: transparent;
+}
+
+.input-signup ion-label {
+  color: white !important;
+  margin-top: -3px;
+  padding: 0 0 10px 0;
+}
+
+.input-signup .input-cover {
   position: static;
 }
 
-.input-login .input-field {
-  border: 1px solid white;
-}
-
-.input-login .error-message {
+.input-signup .error-message {
   background: transparent;
 }
 
-.input-login .error-message p {
-  color: white;
+.input-signup .error-message p {
+  color: firebrick;
   text-align: center;
   transition: 1s;
 }
 
-.input-login .error-message .label-ios {
+.input-signup .error-message .label-ios {
   margin: 0;
 }
 
-.input-login .item-block {
+.input-signup .item-block {
   min-height: 1.5em;
 }
 
-.input-login .item-inner {
+.input-signup .item-inner {
   border-bottom: transparent !important;
 }
 
-.submit-login {
-  width: 100%;
-  height: 40%;
-  display: block;
-  position: relative;
-  margin-bottom: 0px;
-  margin-top: 10%;
-}
-
-.submit-login button {
-  line-height: 2;
-}
-
-.submit-login .button-inner {
-  display: block;
-  font-weight: initial;
-}
-
-.submit-login .button-md {
-  text-transform: none;
-}
-
-.submit-login .forgot-btn {
-  width: 100%;
-  height: 10%;
-  display: block;
-  margin: 0 auto;
-  padding: 3%;
-  border-radius: 0;
-  font-size: 100%;
-  color: white;
-  background-color: transparent;
-  transition: 0.3s;
-}
-
-.submit-login .forgot-btn.activated {
-  color: transparent;
-}
-
-.submit-login .signin-btn {
-  display: block;
-  width: 100%;
-  height: 17%;
-  margin-top: 3%;
-  font-size: 150%;
-  color: white;
-  background-color: transparent;
-  border: 1px solid white;
-  transition: 0.3s;
-}
-
-.submit-login .signin-btn.activated {
-  color: transparent;
-  border: 1px solid transparent;
-}
-
-.submit-login .signin-fb-btn {
-  display: block;
-  width: 100%;
-  height: 17%;
-  margin-top: 3%;
-  font-size: 150%;
-  color: white;
-  background-color: #3956A0;
-  border: 1px solid #3956A0;
-  transition: 0.3s;
-}
-
-.submit-login .signin-fb-btn .fb-logo-in-btn {
-  position: absolute;
-  margin-top: 5px;
-  display: block;
-  width: 8%;
-}
-
-.submit-login .signin-fb-btn.activated {
-  color: transparent;
-  background-color: transparent;
-}
-
 @media only screen and (max-device-width: 320px) {
-  .container .submit-login {
-    font-size: 80%;
-  }
-  .container .scroll-content {
+  .submit-login {
     margin-top: 0;
+  }
+  .input-signup .item {
+    line-height: 10px;
   }
 }

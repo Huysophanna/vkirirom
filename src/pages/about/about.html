@@ -2,7 +2,7 @@
 <ion-header class="header">
 
     <ion-navbar>
-        <ion-title>About Us</ion-title>
+        <ion-title>About us</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -10,93 +10,99 @@
 <div class="content">
 	<ion-content class="about-container" ([ngModel])="service" [ngSwitch]="service">
 	
-		<div class="accommodation" *ngSwitchCase="'accom'">
+		<div class="accommodation" *ngSwitchCase="'accom'" [ngClass]="{active: service == 'accom'}">
 			<ion-scroll zooming="false" scrollY="true" class="page-scroll" [ngSwitch]="service">
-				<ion-card class="custom-card">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/bungalow.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
 				      Bungalow
-				      </ion-card-title>
-				    <p>
-				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				      tempor incididunt ut labore.
-				    </p>
+				    </ion-card-title>
+				   	<p>
+				   		Stay in one of our specially designed bungalows and experience the invigorating fresh air and peaceful life in the pine forests of kirirom. Relax in our king size or twin-bed bungalows
+				   	</p>
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/camping.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
 				      Camping
-				      </ion-card-title>
+				    </ion-card-title>
 				    <p>
-					  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				      tempor incididunt ut labore.
+				    	Experience a fun and safe camping under the moon light and the twinkling stars in our camping ground or book one of our luxury tents with an en suite bathroom.
 				    </p>
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/khmercottage.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
 				      Khmer Cottage
-				      </ion-card-title>
+				    </ion-card-title>
 				    <p>
-				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				      tempor incididunt ut labore.
+				    	Experience a real Khmer traditional hut with the fresh and cool breeze. Stay in a Khmer farmer's open-style house nicely decorated with natural materials
 				    </p>
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/luxurytent.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
 				 	  Luxury Tent
-				      </ion-card-title>
+				    </ion-card-title>
 				    <p>
-				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				      tempor incididunt ut labore.
+				    	Luxury Tent-Stay in style and comfort in a high quality tent with the comfort of a hotel room. The tents come with a king size bed and en suite bathroom
 				    </p>
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/piperoom.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
 				      Pipe Room
-				      </ion-card-title>
+				    </ion-card-title>
 				    <p>
-				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				      tempor incididunt ut labore.
+				    	A unique design to Cambodia and other Asian countries, the Pipe Rooms are affordable and cozy option. Ideal for students and couples who want to experience a creatively.
 				    </p>
 				  </ion-card-content>
 				</ion-card>
 			</ion-scroll>
 		</div>
 
-		<div class="property" *ngSwitchCase="'prop'">
+		<div class="property" *ngSwitchCase="'prop'" [ngClass]="{active: service == 'prop'}">
 			<ion-scroll zooming="false" scrollY="true" class="page-scroll">
-				<ion-card class="custom-card">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/boreyA.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
 				      Borey A
 				    </ion-card-title>
 				    <p>
-					  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				      tempor incididunt ut labore.
+				    	Our resort provides this special house for a big family and it is suitable for a holiday party.
+				    </p>
+				  </ion-card-content>
+				</ion-card>
+
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				  <img src="img/aboutus/boreyR.JPG"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Villa Jasmine
+				    </ion-card-title>
+				    <p>
+				    	Studio designed holiday homes for everyone. With a spacious built up area of 36 sqaure meters, these units are perfect for couples or small families wanting a private retreat away from the city
 				    </p>
 				  </ion-card-content>
 				</ion-card>
 			</ion-scroll>
 		</div>
 
-		<div class="services" *ngSwitchCase="'service'">
+		<div class="services" *ngSwitchCase="'service'" [ngClass]="{active: service == 'service'}">
 			<ion-scroll zooming="false" scrollY="true" class="page-scroll">
 				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/pineResort.JPG"/>
@@ -104,34 +110,54 @@
 				    <ion-card-title>
 				      Pine View Restaurant
 				    </ion-card-title>
-				    <p>
-				      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				      tempor incididunt ut labore.
 				    
-				    </p>
+				  </ion-card-content>
+				</ion-card>
 
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				  <img src="img/aboutus/conferenceroom.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Conference Room
+				    </ion-card-title>
+				    <p>
+				    	For seminar, meeting, conference...Share your ideas in the mountain.
+				    </p>
+				  </ion-card-content>
+				</ion-card>
+
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				  <img src="img/aboutus/banquet.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Banquet
+				    </ion-card-title>
+				    <p>
+				    	Pine View Kitchen has around 160 seats, where you can have a big party. Buffet can also be available.
+				    </p>
 				  </ion-card-content>
 				</ion-card>
 			</ion-scroll>
 		</div>
 		
+		<div class="tab_bar">
+			<div class="inner">
+
+				<button class="btn" [ngClass]="{active: service == 'accom'}" (click)="catagorize(1)">
+					Accommodation
+				</button>
+
+				<button class="btn" [ngClass]="{active: service == 'service'}" (click)="catagorize(2)">
+					Service
+				</button>
+
+				<button class="btn" [ngClass]="{active: service == 'prop'}" (click)="catagorize(3)">
+					Property
+				</button>
+
+			</div>
+		</div>
+
 	</ion-content>
 </div>
 
-<div class="tab_bar">
-	<div class="inner">
-
-		<button class="btn" [ngClass]="{active: service == 'accom'}" (click)="catagorize(1)">
-			Accommodation
-		</button>
-
-		<button class="btn" [ngClass]="{active: service == 'service'}" (click)="catagorize(2)">
-			Service
-		</button>
-
-		<button class="btn" [ngClass]="{active: service == 'prop'}" (click)="catagorize(3)">
-			Property
-		</button>
-
-	</div>
-</div>

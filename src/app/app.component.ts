@@ -9,6 +9,7 @@ import { Setting } from '../pages/setting/setting';
 import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { GoogleMapPage } from '../pages/map/map';
 import { Signup } from '../pages/signup/signup';
+import { Resetpw } from '../pages/resetpw/resetpw';
 import { AuthData } from '../providers/auth-data';
 
 declare var cordova: any;
@@ -30,6 +31,7 @@ export class MyApp {
   fbID: any;
   pushNotifications: any;
   pushNotificationTitle: any;
+  storeNotificationsArray: any = [];
 
   constructor(platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone) {
     platform.ready().then(() => {
@@ -55,6 +57,10 @@ export class MyApp {
           //TODO - send device token to server
         });
         push.on('notification', (data) => {
+          //store all notifications to local storage for the notification panel
+          this.storeNotificationsArray.push(data);
+          NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
+
           let self = this;
           let confirmAlert: any;
           //if user using app and push notification comes
@@ -62,7 +68,6 @@ export class MyApp {
             // if application open on foreground, show popup
             if (data.title.indexOf('New message') >= 0) {
               //alert notification for chat messages
-              
               confirmAlert = this.alertCtrl.create({
                 title: data.title,
                 message: data.message,
@@ -75,23 +80,14 @@ export class MyApp {
                     self.nav.push(Chatmessage, {message: data.message});
                   }
                 }]
-              });
+              }).present();
             } else {
               // this.events.publish('foreground-marketing-notification', data.message);
-              confirmAlert = this.alertCtrl.create( {
-                title: "Hi, " + this.userName,
-                message: data.message,
-                buttons: [{
-                  text: 'Okay',
-                  role: 'cancel'
-                }]
-              });
+              let title = "Hi, " + this.userName;
+              this.warningAlert(title, data.message);
             }
-            
-            confirmAlert.present();
           } else {
             //if user NOT using app and push notification comes
-            //TODO: Your logic on click of push notification directly
             if (data.title.indexOf('New message') >= 0) {
               self.nav.push(Chatmessage, {message: data.message});
             }
@@ -100,7 +96,6 @@ export class MyApp {
         });
         push.on('error', (e) => {
           console.log(e.message);
-          alert(e.message);
         });
 
 
@@ -142,11 +137,19 @@ export class MyApp {
 
   getStorageItem() {
       NativeStorage.getItem('userPhoto').then(data => {
+        this.ngzone.run(() => {
           this.userPhoto = data;
+        }); 
+          
       });
       NativeStorage.getItem('userDetails').then(data => {
+        this.ngzone.run(() => {
           this.userName = data.displayName;
           this.userEmail = data.email;
+        }); 
+      });
+      NativeStorage.getItem('storeNotificationsArray').then(notifications => {
+          this.storeNotificationsArray = notifications;
       });
   }
 
@@ -158,9 +161,9 @@ export class MyApp {
     switch (page.id) {
       case 1:
        this.nav.push(Setting);
-       console.log("Setting is calling");
        break;
       case 2:
+        
         CallNumber.callNumber("0962304669", true);
       break;
       case 3:
@@ -176,6 +179,17 @@ export class MyApp {
   openHome(){
     //this.nav.setRoot(Page1);
     this.isHome = false;
+  }
+
+  warningAlert(title, message) {
+    this.alertCtrl.create( {
+        title: title,
+        message: message,
+        buttons: [{
+          text: 'Okay',
+          role: 'cancel'
+        }]
+    }).present();
   }
 
 

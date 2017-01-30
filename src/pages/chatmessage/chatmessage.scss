@@ -176,7 +176,7 @@ $green_primary_color: #1C8954;
                 position: absolute;
                 top: 23px;
                 width: 20px;
-                z-index: 0;
+                z-index: 0.5;
             }
             p {
                 margin: 0;
@@ -187,7 +187,7 @@ $green_primary_color: #1C8954;
                 padding: 10px 18px;
                 position: relative;
                 vertical-align: top;
-                z-index: -1;
+                z-index: 0;
                 max-width: 75%;
             }
             span {
