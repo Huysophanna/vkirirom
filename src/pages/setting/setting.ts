@@ -1,61 +1,66 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { SettingService } from '../../providers/setting-service';
-import { NativeStorage } from 'ionic-native';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {Observable} from "rxjs/Rx";
-import 'rxjs/add/operator/map';
-import { Toggle } from './toggle';
+import { Storage } from '@ionic/storage';
+
+declare var cordova: any;
 
 @Component({
   selector: 'page-setting',
   templateUrl: 'setting.html'
 })
-export class Setting {  
-  public dataObj = {
-    location: true,
-    notofication: true
-  };
-  public toggle: Toggle[];
-  public loc = "location";
-  public noti = "notification";
+export class Setting {
+  public location:any = [];
+  public notification:any = [];
+  public loc: any;
+  public noti: any;
 
-  constructor(public navCtrl: NavController, public settingService: SettingService, public alertCtrl: AlertController, private http: Http) {
-    
-  }
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private storage: Storage) {}
 
   ionViewWillEnter() {
-    this.http.get('./toggle.json')
-    .map(res => res.json())
-    .subscribe((data) => {
-      this.toggle = data;
-      console.log("in observable :" + JSON.stringify(this.toggle));
-    }, (err) => {
-      console.error("Error" + err);
+    this.locationData();
+    this.notificationData();
+  }
+
+  locationData() {
+    this.storage.get('location').then((val) => {
+      var parseData = JSON.parse(val);
+      this.loc = parseData[parseData.length - 1];
+      this.turnLoc(this.loc);
     });
   }
 
-  getValue(k) {
-    console.log("Get value" + k);
-    this.http.delete('./toggle.json').subscribe((data) => {
-      console.log("deleted" + data);
-    }, (err) => {
-      console.log("deletion error" + err);
+  notificationData() {
+    this.storage.get('notification').then((val) => {
+      var parseData = JSON.parse(val);
+      this.noti = parseData[parseData.length - 1];
+      this.turnNoti(this.noti);
     });
   }
 
-  test() {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    let body = JSON.stringify(this.dataObj);
-
-    this.http.put('./toggle.json', body, headers)
-    .map(res => res.json())
-    .subscribe((data) => {
-      console.log("Put data " + data);
-    }, (err) => {
-      console.log("put error" + err);
-    });
+  turnLoc(location) {
+    if (location == true) {
+      cordova.plugins.backgroundMode.enable();
+    } else {
+      cordova.plugins.backgroundMode.disable();
+    }
   }
-  
+
+  turnNoti(notification) {
+    if (notification == true) {
+      console.log("Turn on the notification");
+    } else {
+      console.log("Turn off the notification");
+    }
+  }
+
+  getLocation(data) {
+    this.location.push(data);
+    this.storage.set('location', JSON.stringify(this.location));
+  }
+
+  getNotification(data) {
+    this.notification.push(data);
+    this.storage.set('notification', JSON.stringify(this.notification));
+  }
+
 }

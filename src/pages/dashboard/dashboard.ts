@@ -42,24 +42,17 @@ showNoti() {
 }
 
   kiriromScope() {
-    console.log("testing scope");
     Geolocation.getCurrentPosition().then(resp => {
       let latitute = resp.coords.latitude;
       let longitude = resp.coords.longitude;
-      console.log("My Current Location :" + latitute + " " + longitude);
       var distance = this.userScope.distanceCal(latitute, longitude);
-      console.log("Distance in dashboard :" + distance);
       if (distance < 1) {
         var test = distance * 1000;
-        console.log("Distance is less than 1 :" + test + "m");
         this.isKirirom = true;
       } else {
-        console.log("The Distance is : " + distance + "km");
         if (distance <= 17) {
-          console.log("User in kirirom");
           this.isKirirom = true;
         } else {
-          console.log("User out kirirom");
           this.isKirirom = false;
         }
       }
