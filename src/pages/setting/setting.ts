@@ -53,12 +53,12 @@ export class Setting {
     }
   }
 
-  getLocation(data) {
+  setLocation(data) {
     this.location.push(data);
     this.storage.set('location', JSON.stringify(this.location));
   }
 
-  getNotification(data) {
+  setNotification(data) {
     this.notification.push(data);
     this.storage.set('notification', JSON.stringify(this.notification));
   }

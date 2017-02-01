@@ -9,12 +9,12 @@
         <ion-list>
             <div>
                 <ion-item>
-                    <ion-label class="custom-setting-label">Background Location</ion-label>
-                    <ion-toggle [(ngModel)]="loc" (click)="getLocation(loc)"></ion-toggle>
+                    <ion-label class="custom-setting-label">Location</ion-label>
+                    <ion-toggle [(ngModel)]="loc" (click)="setLocation(loc)"></ion-toggle>
                 </ion-item>
                 <ion-item>
                     <ion-label class="custom-setting-label">Notification</ion-label>
-                    <ion-toggle [(ngModel)]="noti" (click)="getNotification(noti)"></ion-toggle>
+                    <ion-toggle [(ngModel)]="noti" (click)="setNotification(noti)"></ion-toggle>
                 </ion-item>
             </div>
         </ion-list>

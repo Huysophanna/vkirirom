@@ -1,6 +1,6 @@
 import { Component, Inject, NgZone } from '@angular/core';
 import { NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
-import { SMS, Toast, Geolocation, Push, Network } from 'ionic-native';
+import { SMS, Toast, Geolocation, Push, Network, Geoposition } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
@@ -11,6 +11,8 @@ import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
 import { Modal } from '../modal/modal';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 declare var cordova: any;
 
@@ -24,47 +26,50 @@ export class Dashboard {
   membership = Membership;
   Notification:any;
   test: any;
-  isKirirom: boolean;
+  isKirirom: any;
   isUnknown: boolean = false;
   connectionStatus: boolean;
   loading;
+  testing = true;
 
-  constructor(public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController) {
-      setInterval(() => {
-        this.checkNetworkConnection();
-        this.kiriromScope();
-      }, 2000);
+  constructor(public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public event: Events) {
+    setInterval(() => {
+      this.checkNetworkConnection();
+      this.kiriromScope();
+    }, 2000);
+  } 
+
+  showNoti() {
+    let notiModal = this.modalCtrl.create(Modal, { userId: 8675309 });
+    notiModal.present();
   }
 
-showNoti() {
-  let notiModal = this.modalCtrl.create(Modal, { userId: 8675309 });
-  notiModal.present();
-}
+  ngOnInit() {
+    console.log("Showing the first page!");
+  }
 
   kiriromScope() {
-    console.log("testing scope");
     Geolocation.getCurrentPosition().then(resp => {
       let latitute = resp.coords.latitude;
       let longitude = resp.coords.longitude;
-      console.log("My Current Location :" + latitute + " " + longitude);
+      console.log("My location :" + latitute + " " + longitude);
       var distance = this.userScope.distanceCal(latitute, longitude);
-      console.log("Distance in dashboard :" + distance);
       if (distance < 1) {
         var test = distance * 1000;
-        console.log("Distance is less than 1 :" + test + "m");
         this.isKirirom = true;
+        this.isUnknown = false;
       } else {
-        console.log("The Distance is : " + distance + "km");
         if (distance <= 17) {
-          console.log("User in kirirom");
           this.isKirirom = true;
+          this.isUnknown = false;
         } else {
-          console.log("User out kirirom");
           this.isKirirom = false;
+          this.isUnknown = false;
         }
       }
     }, (Error) => {
       console.log("Geolocation Error :" + this.isKirirom);
+      console.log("Error code :" + Error.code);
       this.isUnknown = true;
     });
   }
@@ -80,10 +85,19 @@ showNoti() {
         case 3: this.navCtrl.push(GoogleMapPage);
         break;
         case 4:
-            if (this.isKirirom == false) {
-              this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
+            if (this.isKirirom === undefined) {
+              // this.warningAlert("Identifying", "Identifying your current location");
+              let loader = this.loadingCtrl.create({
+                content: "Identifying your current location.....",
+                duration: 1000
+              });
+              loader.present();
             } else {
-              this.navCtrl.push(Chat);
+              if (this.isKirirom == false) {
+                this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
+              } else {
+                this.navCtrl.push(Chat);
+              }
             }
         break;
         case 5: this.warningAlert("Coming Soon!", "Introducing vKirirom Media, will be available soon.");
@@ -119,54 +133,11 @@ showNoti() {
                       Geolocation.getCurrentPosition().then(resp => {
                         let latitude = resp.coords.latitude;
                         let longitude = resp.coords.longitude;
-                        pass(latitude, longitude);
-                      })
-                    }, 5000);
-
-                    function pass(latitude, longitude) {
-                      var lat = [];
-                      var lng = [];
-                      lat.push(latitude);
-                      lng.push(longitude);
-
-                      if (lat.length == 10 && lng.length == 10) {
-                        lat = [];
-                        lng = [];
-                      } else if (lat.length == 0 && lng.length == 0) {
-                        lat.push(latitude);
-                        lng.push(longitude);
-                      } else {
-                        alert("Ooupp! Something went wrong.");
-                      }
-
-                      var number = "0962304669";
-                      var message = "http://maps.google.com/?q=" + lat[lat.length-1] + "," + lng[lng.length-1] + "";
-                      var options = {
-                      replaceLineBreaks: false, // true to replace \n by a new line, false by default
-                      android: {
-                          //  intent: 'INTENT'  // Opens Default sms app
-                          intent: '' // Sends sms without opening default sms app
-                        }
-                      }
-
-                      SMS.send(number, message, options)
-                        .then(() => {
-                          alert("Please stay safe. Our team will be there so soon!");
-                          Toast.show("Please stay safe. Our team will be there so soon!", '5000', 'bottom').subscribe(
-                            toast => {
-                              console.log(toast);
-                            }
-                          );
-                      }, (error) => {
-                        alert(error);
-                        Toast.show("You cancelled the action", '5000', 'bottom').subscribe(
-                          toast => {
-                            console.log(toast);
-                          }
-                        );
+                        alert("Testing :" + this.testing);
+                      }, err => {
+                        console.log("Geolocation error :" + err);
                       });
-
-                    }
+                    }, 5000);
                   }
                 }
                 console.log("Sending SMS");
@@ -179,11 +150,12 @@ showNoti() {
                     Geolocation.getCurrentPosition().then(resp => {
                       let latitude = resp.coords.latitude;
                       let longitude = resp.coords.longitude;
+                      this.locationTracker.lastLocationTracker(latitude, longitude);
                       let number = "0962304669";
-                      let message = "http://maps.google.com/?q=" + latitude + "," + longitude + "";
+                      let message = "http://maps.google.com/?q=" + this.locationTracker.latitute[this.locationTracker.latitute.length - 1] + "," + this.locationTracker.longitute[this.locationTracker.longitute.length - 1] + "";
                       var options = {
-                      replaceLineBreaks: false, // true to replace \n by a new line, false by default
-                      android: {
+                        replaceLineBreaks: false, // true to replace \n by a new line, false by default
+                        android: {
                           //  intent: 'INTENT'  // Opens Default sms app
                           intent: '' // Sends sms without opening default sms app
                         }
@@ -197,15 +169,15 @@ showNoti() {
                             toast => {
                               console.log(toast);
                             }
-                          );
+                        );
                       }, (error) => {
                         alert(error);
                         Toast.show("You cancelled the action", '5000', 'bottom').subscribe(
-                          toast => {
-                            console.log(toast);
-                          }
-                        );
-                      });
+                        toast => {
+                          console.log(toast);
+                        }
+                      );
+                    });
                     }, (Error) => {
                       alert("Geolocation Error" + Error);
                     })
@@ -232,8 +204,10 @@ showNoti() {
     if ((<string> Network.connection === 'none')) {
         this.connectionStatus = false;
         this.isKirirom = false;
+        this.isUnknown = false;
     } else {
         this.connectionStatus = true;
+        this.isUnknown = false;
     }
   }
 

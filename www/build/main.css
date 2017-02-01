@@ -21712,6 +21712,11 @@ sub {
   background: transparent;
 }
 
+.header .toolbar-content {
+  display: block;
+  padding: 0 50px;
+}
+
 .header .toolbar-background {
   border-color: transparent;
   background: #1C8954;
@@ -21723,12 +21728,8 @@ sub {
 }
 
 .header .header-title {
-<<<<<<< HEAD
-  padding-left: 100px;
-=======
   display: block;
-  margin-top: 8px;
->>>>>>> e127660b2aa794d296b27ab6812d7f4002aa372d
+  top: 15px;
 }
 
 .header .header-title .toolbar-title {
@@ -21738,6 +21739,7 @@ sub {
   padding: 0px 10px;
   border-radius: 50px;
   width: auto;
+  text-align: center;
 }
 
 .header .showNotiBtn {
