@@ -1,5 +1,5 @@
 import { Component, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ViewController, PopoverController, NavController, Content, Platform, AlertController} from 'ionic-angular';
+import { Events, ViewController, PopoverController, NavController, Content, Platform, AlertController} from 'ionic-angular';
 import { NativeStorage, Network, Keyboard } from 'ionic-native';
 import { Observable } from 'rxjs/Observable';
 declare var io: any;
@@ -49,7 +49,7 @@ export class Chatmessage implements AfterViewInit {
   notificationType: any;
 
 
-  constructor(public popoverCtrl: PopoverController, private navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
+  constructor(public events: Events, public popoverCtrl: PopoverController, private navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
         Keyboard.disableScroll(true);
         this.checkNetworkConnection();
 
@@ -127,7 +127,7 @@ export class Chatmessage implements AfterViewInit {
                 this.time.push(this.hours +":"+this.minute);
                 this.timeLength = this.time.length;
                 this.chatsLength = this.chats.length;
-                console.log(userenter.username);
+                console.log(this.pkt.deviceToken);
                 console.log(this.pkt.username);
                 //this is used to show whether the notification of user is set to ON or OFF from server
                 if ((userenter.username==this.pkt.username) && (userenter.tag == false)) {
@@ -162,9 +162,13 @@ export class Chatmessage implements AfterViewInit {
       NativeStorage.getItem('userDetails').then(
         data => {
           this.userName = data.displayName;
-          this.userPhoto = data.photoURL;
         },
         error => console.error(error)
+      );
+      NativeStorage.getItem('userPhoto').then(
+        photo => {
+          this.userPhoto = photo
+        }
       );
       
   }
@@ -339,25 +343,27 @@ export class Chatmessage implements AfterViewInit {
   
   ionViewDidEnter(){
     console.log("enteruser");
+      if(this.userName==null) {
+          this.userName = "Anonymous";
+      }
       this.pkt.status = this.userName  + ' has joined';
       this.pkt.username = this.userName;
       this.pkt.deviceToken = this.token;
-      if(this.userName==null) {
-        this.pkt.username = "Anonymous";
-        this.pkt.status = "Anonymous"  + ' has joined';
-      }
       this.socket.emit('userentered', this.pkt);
+
+      //emit events to turn off alert push notification
+      this.events.publish("isChatMessageScreen", "true");
   }
 
   // ionic life cycle function called when the user leave
   ionViewDidLeave(){
       this.pkt.status = this.userName  + ' has left';
       this.pkt.username = this.userName;
-      if(this.userName==null) {
-        this.pkt.username = "Anonymous";
-        this.pkt.status = "Anonymous"  + ' has left';
-      }
+      
       this.socket.emit('userleave', this.pkt);
+
+      //emit events to turn off alert push notification
+      this.events.publish("isChatMessageScreen", "false");
 
   }
 

@@ -13,13 +13,7 @@ import { LocationTracker } from '../../providers/location-tracker';
   templateUrl: 'services.html'
 })
 export class Services {
-
-  public lat: any;
-  public lng: any;
-
   constructor(public navCtrl: NavController, public locationTracker: LocationTracker) {
-    // this.lat = locationTracker.lat;
-    // this.lng = locationTracker.lng;
   }
 
   ionViewDidLoad() {

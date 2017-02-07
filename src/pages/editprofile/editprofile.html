@@ -1,0 +1,51 @@
+<ion-header class="header">
+
+    <ion-navbar>
+        <ion-title>Edit Profile</ion-title>
+        <ion-buttons end>
+            <button (click)="dismiss()"><ion-icon [ngStyle]="{'color': 'white'}" name="close"></ion-icon></button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="editForm" (submit)="editConfirmPressed()" novalidate>
+        <div class="input-edit">
+            <ion-item>
+                <ion-label floating>Name</ion-label>
+                <ion-input #name formControlName="name" type="text" (change)="elementChanged(name)"
+                [class.invalid]="!editForm.controls.name.valid && (nameChanged || submitAttempt)"></ion-input>
+            </ion-item>
+            <ion-item class="error-message">
+                <p *ngIf="!editForm.controls.name.valid  && (nameChanged || submitAttempt)">Please enter your full name</p>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label floating>Email</ion-label>
+                <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)"
+                [class.invalid]="!editForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
+            </ion-item>
+            <ion-item class="error-message">
+                <p  *ngIf="!editForm.controls.email.valid  && (emailChanged || submitAttempt)">Please enter a valid email.</p>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Current Password</ion-label>
+                <ion-input #password formControlName="password" type="password" (change)="elementChanged(password)"
+                [class.invalid]="!editForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
+            </ion-item>
+            <ion-item class="error-message">
+                <p  *ngIf="!editForm.controls.email.valid  && (emailChanged || submitAttempt)">Please enter a valid email.</p>
+            </ion-item>
+        </div>
+
+        <div class="submit-edit">
+            <button ion-button type="submit" class="edit-btn-submit">Update Profile</button>
+        </div>
+        
+
+    </form>
+    
+</ion-content>

@@ -3,17 +3,17 @@ import { NavController, AlertController, ViewController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 
 /*
-  Generated class for the Modal page.
+  Generated class for the Notificationpanel page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-modal',
-  templateUrl: 'modal.html'
+  selector: 'page-notificationpanel',
+  templateUrl: 'notificationpanel.html'
   // styles: ['.scroll-content { overflow-y: auto }']
 })
-export class Modal {
+export class Notificationpanel {
   storeNotificationsArray: any = [];
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertCtrl: AlertController) {

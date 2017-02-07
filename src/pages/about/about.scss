@@ -69,7 +69,6 @@
 				color: #2a2e3e;
 				font-size: 12px;
 				text-transform: uppercase;
-
 				&.active{
 					background: #1C8954;
 					color: #fff;
@@ -81,4 +80,16 @@
 }
 
 
-
+//iphone 5 screen
+@media only screen and (max-device-width: 320px) {
+    .tab_bar {
+		.inner {
+			.btn {
+				&.active {
+					font-size: x-small;
+				}
+			}
+		}
+	}
+    
+}

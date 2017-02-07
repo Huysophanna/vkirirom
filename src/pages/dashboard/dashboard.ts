@@ -1,6 +1,6 @@
 import { Component, Inject, NgZone } from '@angular/core';
 import { NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
-import { SMS, Toast, Geolocation, Push, Network } from 'ionic-native';
+import { NativeStorage, SMS, Toast, Geolocation, Push, Network } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
@@ -10,7 +10,7 @@ import { Reservation } from '../reservation/reservation';
 import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
-import { Modal } from '../modal/modal';
+import { Notificationpanel } from '../notificationpanel/notificationpanel';
 
 declare var cordova: any;
 
@@ -28,16 +28,23 @@ export class Dashboard {
   isUnknown: boolean = false;
   connectionStatus: boolean;
   loading;
+  deviceToken: any;
 
-  constructor(public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController) {
+  constructor(public events: Events, public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController) {
       setInterval(() => {
         this.checkNetworkConnection();
         this.kiriromScope();
       }, 2000);
+
+      NativeStorage.getItem('deviceToken').then(data => {
+        this.deviceToken = data;
+      });
+
   }
 
+
 showNoti() {
-  let notiModal = this.modalCtrl.create(Modal, { userId: 8675309 });
+  let notiModal = this.modalCtrl.create(Notificationpanel);
   notiModal.present();
 }
 

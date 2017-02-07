@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ModalController, LoadingController } from 'ionic-angular';
-import { SMS, Toast, Geolocation, Network } from 'ionic-native';
+import { NavController, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
+import { NativeStorage, SMS, Toast, Geolocation, Network } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
@@ -9,10 +9,11 @@ import { About } from '../about/about';
 import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
-import { Modal } from '../modal/modal';
+import { Notificationpanel } from '../notificationpanel/notificationpanel';
 export var Dashboard = (function () {
-    function Dashboard(navCtrl, storage, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl) {
+    function Dashboard(events, navCtrl, storage, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl) {
         var _this = this;
+        this.events = events;
         this.navCtrl = navCtrl;
         this.storage = storage;
         this.locationTracker = locationTracker;
@@ -26,33 +27,29 @@ export var Dashboard = (function () {
             _this.checkNetworkConnection();
             _this.kiriromScope();
         }, 2000);
+        NativeStorage.getItem('deviceToken').then(function (data) {
+            _this.deviceToken = data;
+        });
     }
     Dashboard.prototype.showNoti = function () {
-        var notiModal = this.modalCtrl.create(Modal, { userId: 8675309 });
+        var notiModal = this.modalCtrl.create(Notificationpanel);
         notiModal.present();
     };
     Dashboard.prototype.kiriromScope = function () {
         var _this = this;
-        console.log("testing scope");
         Geolocation.getCurrentPosition().then(function (resp) {
             var latitute = resp.coords.latitude;
             var longitude = resp.coords.longitude;
-            console.log("My Current Location :" + latitute + " " + longitude);
             var distance = _this.userScope.distanceCal(latitute, longitude);
-            console.log("Distance in dashboard :" + distance);
             if (distance < 1) {
                 var test = distance * 1000;
-                console.log("Distance is less than 1 :" + test + "m");
                 _this.isKirirom = true;
             }
             else {
-                console.log("The Distance is : " + distance + "km");
                 if (distance <= 17) {
-                    console.log("User in kirirom");
                     _this.isKirirom = true;
                 }
                 else {
-                    console.log("User out kirirom");
                     _this.isKirirom = false;
                 }
             }
@@ -230,6 +227,7 @@ export var Dashboard = (function () {
     ];
     /** @nocollapse */
     Dashboard.ctorParameters = [
+        { type: Events, },
         { type: NavController, },
         { type: Storage, },
         { type: LocationTracker, },
