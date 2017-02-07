@@ -7,6 +7,9 @@ declare var cordova: any;
 export class LocationTracker {
   public lat: any = 0;
   public lng: any = 0;
+
+  public latitute = [];
+  public longitute = [];
   
   public BackgroundTracker() {
     cordova.plugins.backgroundMode.enable();
@@ -66,6 +69,22 @@ export class LocationTracker {
         lng = resp.coords.longitude;
         alert("On deactivate" + lat + lng);
       })
+    }
+  }
+
+  lastLocationTracker(latitute, longitute) {
+    console.log("lastLocationTracker");
+    this.latitute.push(latitute);
+    this.longitute.push(longitute);
+
+    if (this.latitute.length == 10 && this.longitute.length == 10) {
+      this.latitute = [];
+      this.longitute = [];
+    } else if (this.latitute.length == 0 && this.longitute.length == 0) {
+      this.latitute.push(latitute);
+      this.longitute.push(longitute);
+    } else {
+      alert("Ooupp! Something went wrong.");
     }
   }
   

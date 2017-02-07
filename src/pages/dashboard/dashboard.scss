@@ -11,6 +11,10 @@ $blue_fb_color: #3956A0;
         font-size: xx-large;
         background: transparent;
     }
+    .toolbar-content {
+        display: block;
+        padding: 0 50px;
+    }
     .toolbar-background {
         border-color: transparent;
         background: $green_primary_color;
@@ -21,7 +25,7 @@ $blue_fb_color: #3956A0;
     }
     .header-title {
         display: block;
-        margin-top: 8px;
+        top: 15px;
     }
     .header-title .toolbar-title {
         font-size: large !important;
@@ -30,6 +34,7 @@ $blue_fb_color: #3956A0;
         padding: 0px 10px;
         border-radius: 50px;
         width: auto;
+        text-align: center;
     }
     .showNotiBtn {
         transition: 0.2s;
