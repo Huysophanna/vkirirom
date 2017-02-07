@@ -35,11 +35,6 @@ export class Dashboard {
         this.checkNetworkConnection();
         this.kiriromScope();
       }, 2000);
-
-      NativeStorage.getItem('deviceToken').then(data => {
-        this.deviceToken = data;
-      });
-
   }
 
 
