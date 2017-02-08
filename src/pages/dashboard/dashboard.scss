@@ -2,6 +2,10 @@ $green_primary_color: #1C8954;
 $light_green_color: #669F42;
 $dark_green_color: #1A6940;
 $blue_fb_color: #3956A0;
+$circle-size: 100px;
+$outside-circle-size: $circle-size+10px;
+$outside-circle-border: 2px;
+$outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * -1;
 .scroll-content {
     overflow-y: hidden;
 }
@@ -121,17 +125,34 @@ $blue_fb_color: #3956A0;
         }
         .emergency {
             position: relative;
-            margin-top: 10%;
+            margin-top: 5%;
             width: 100%;
-            height: auto;
-            button {
-                position: relative;
-                width: 80%;
-                height: 4.5em;
-                font-size: 120%;
-                border-radius: 15px;
-                color: red;
-                background: white;
+            height: 100%;
+            .button {
+                text-align: center;
+                text-transform: uppercase;
+                text-decoration: none;
+                font-size: large;
+                font-weight: bold;
+                letter-spacing: 1px;
+                &.circle {
+                    background: white;
+                    border: none;
+                    border-radius: 900px;
+                    color: red;
+                    cursor: pointer;
+                    display: block;
+                    width: $circle-size;
+                    height: $circle-size;
+                    line-height: $circle-size;
+                    position: relative;
+                    margin: auto;
+                    margin-top: 25px;
+                }
+            }
+            p {
+                margin: 1% 0;
+                color: white;
             }
         }
     }

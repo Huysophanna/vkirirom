@@ -14,6 +14,7 @@ import { Signup } from '../pages/signup/signup';
 import { Resetpw } from '../pages/resetpw/resetpw';
 import { GoogleMapPage } from '../pages/map/map';
 import { Modal } from '../pages/modal/modal';
+import { ContactModal } from '../pages/contact-modal/contact-modal';
 import { Reservation } from '../pages/reservation/reservation';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
@@ -39,7 +40,8 @@ import { Userscope } from '../providers/userscope';
     GoogleMapPage,
     Services,
     Resetpw,
-    Modal
+    Modal,
+    ContactModal
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -60,7 +62,8 @@ import { Userscope } from '../providers/userscope';
     Reservation,
     Signup,
     Resetpw,
-    Modal
+    Modal,
+    ContactModal
   ],
   providers: [
     AuthData,

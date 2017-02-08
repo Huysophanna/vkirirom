@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { NativeStorage } from 'ionic-native';
+import { SettingService } from '../../providers/setting-service';
 
 declare var cordova: any;
 
@@ -14,26 +15,27 @@ export class Setting {
   public loc: any;
   public noti: any;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private storage: Storage) {}
-
-  ionViewWillEnter() {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService) {
     this.locationData();
     this.notificationData();
   }
 
   locationData() {
-    this.storage.get('location').then((val) => {
-      var parseData = JSON.parse(val);
+    NativeStorage.getItem('location').then(data => {
+      var parseData = JSON.parse(data);
       this.loc = parseData[parseData.length - 1];
-      this.turnLoc(this.loc);
+    }, err => {
+      console.log("NativeStorage error " + err);
     });
   }
 
   notificationData() {
-    this.storage.get('notification').then((val) => {
-      var parseData = JSON.parse(val);
+    NativeStorage.getItem('notification').then(data => {
+      var parseData = JSON.parse(data);
       this.noti = parseData[parseData.length - 1];
       this.turnNoti(this.noti);
+    }, err => {
+      console.log("NativeStorage error " + err);
     });
   }
 
@@ -55,12 +57,20 @@ export class Setting {
 
   setLocation(data) {
     this.location.push(data);
-    this.storage.set('location', JSON.stringify(this.location));
+    NativeStorage.setItem('location', JSON.stringify(this.location)).then(() => {
+      console.log("Stored Item");
+    }, error => {
+      console.log("NativeStorage error");
+    });
   }
 
   setNotification(data) {
     this.notification.push(data);
-    this.storage.set('notification', JSON.stringify(this.notification));
+    NativeStorage.setItem('notification', JSON.stringify(this.notification)).then(() => {
+      console.log("Stored Item");
+    }, error => {
+      console.log("NativeStorage error!" + error);
+    });
   }
 
 }

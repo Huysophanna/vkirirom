@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input, NgZone } from '@angular/core';
-import { Nav, Platform, AlertController, LoadingController, NavController, Events } from 'ionic-angular';
+import { Nav, Platform, AlertController, LoadingController, NavController, Events, ActionSheetController } from 'ionic-angular';
 import { StatusBar, Facebook, NativeStorage, CallNumber, Keyboard, Geolocation, BackgroundGeolocation, Geoposition, BackgroundMode, Push } from 'ionic-native';
 import { Api } from '../providers/api';
 import firebase from 'firebase';
@@ -33,7 +33,7 @@ export class MyApp {
   pushNotificationTitle: any;
   storeNotificationsArray: any = [];
 
-  constructor(platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone) {
+  constructor(platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
     platform.ready().then(() => {
       this.getStorageItem();
       //push configuration
@@ -163,8 +163,43 @@ export class MyApp {
        this.nav.push(Setting);
        break;
       case 2:
-        
-        CallNumber.callNumber("0962304669", true);
+        let actionSheet = this.actionsheetController.create({
+          title: 'Contact',
+            buttons: [
+              {
+                text: 'Room Reservation',
+                handler: () => {
+                  console.log('Reservation clicked');
+                  CallNumber.callNumber("0962304669", true);
+                }
+              },{
+                text: 'Security & Safety',
+                handler: () => {
+                  console.log('Security clicked');
+                  CallNumber.callNumber("0962304669", true);
+                }
+              },{
+                text: 'Regular Shuttle Bus',
+                handler: () => {
+                  console.log('Suttle Bus clicked');
+                  CallNumber.callNumber("0962304669", true);
+                }
+              },{
+                text: 'Restaurant',
+                handler: () => {
+                  console.log('Restaurant clicked');
+                  CallNumber.callNumber("0962304669", true);
+                }
+              },{
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                  console.log("cancel clicked");
+                }
+              }
+            ]
+        });
+        actionSheet.present();
       break;
       case 3:
         //store userProfile object to the phone storage

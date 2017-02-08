@@ -14,7 +14,7 @@ import { NativeStorage } from 'ionic-native';
   // styles: ['.scroll-content { overflow-y: auto }']
 })
 export class Modal {
-  storeNotificationsArray: any = [];
+  storeNotificationsArray: any;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertCtrl: AlertController) {
     this.getStorageItem();

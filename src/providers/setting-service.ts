@@ -12,24 +12,4 @@ export class SettingService {
     console.log('Hello SettingService Provider');
   }
 
-  public setSetting(val, switchval) {
-    switch(switchval) {
-      case 1:
-        NativeStorage.setItem('location', val).then(() => {
-          alert("location stored");
-        }, (Error) => {
-          alert("Error storing location :" + Error);
-        });
-      break;
-
-      case 2:
-        NativeStorage.setItem('notification', val).then(() => {
-          alert("notification stored");
-        }, (Error) => {
-          alert("Error storing notification :" + Error);
-        })
-      break;
-    }
-  }
-
 }
