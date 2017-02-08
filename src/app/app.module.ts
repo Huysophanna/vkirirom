@@ -14,6 +14,7 @@ import { Setting } from '../pages/setting/setting';
 import { Signup } from '../pages/signup/signup';
 import { Resetpw } from '../pages/resetpw/resetpw';
 import { GoogleMapPage } from '../pages/map/map';
+import { ContactModal } from '../pages/contact-modal/contact-modal';
 import { Notificationpanel } from '../pages/notificationpanel/notificationpanel';
 import { Editprofile } from '../pages/editprofile/editprofile';
 import { Reservation } from '../pages/reservation/reservation';
@@ -41,6 +42,7 @@ import { Userscope } from '../providers/userscope';
     GoogleMapPage,
     Services,
     Resetpw,
+    ContactModal,
     Notificationpanel,
     Editprofile,
     Introslides
@@ -64,6 +66,7 @@ import { Userscope } from '../providers/userscope';
     Reservation,
     Signup,
     Resetpw,
+    ContactModal,
     Notificationpanel,
     Editprofile,
     Introslides

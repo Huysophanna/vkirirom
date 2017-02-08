@@ -41,7 +41,7 @@ export class MyApp {
   isEmailUser: boolean;
   isChatMessageScreen: any;
 
-  constructor(public modalCtrl: ModalController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone) {
+  constructor(public modalCtrl: ModalController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
     platform.ready().then(() => {
       //hide the splash screen only when decided the root page
       Splashscreen.hide();
@@ -335,9 +335,44 @@ export class MyApp {
         this.nav.push(Setting);
         break;
       case 2:
-
-        CallNumber.callNumber("0962304669", true);
-        break;
+        let actionSheet = this.actionsheetController.create({
+          title: 'Contact',
+            buttons: [
+              {
+                text: 'Room Reservation',
+                handler: () => {
+                  console.log('Reservation clicked');
+                  CallNumber.callNumber("0962304669", true);
+                }
+              },{
+                text: 'Security & Safety',
+                handler: () => {
+                  console.log('Security clicked');
+                  CallNumber.callNumber("0962304669", true);
+                }
+              },{
+                text: 'Regular Shuttle Bus',
+                handler: () => {
+                  console.log('Suttle Bus clicked');
+                  CallNumber.callNumber("0962304669", true);
+                }
+              },{
+                text: 'Restaurant',
+                handler: () => {
+                  console.log('Restaurant clicked');
+                  CallNumber.callNumber("0962304669", true);
+                }
+              },{
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                  console.log("cancel clicked");
+                }
+              }
+            ]
+        });
+        actionSheet.present();
+      break;
       case 3:
         //store userProfile object to the phone storage
         Facebook.logout();

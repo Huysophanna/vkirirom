@@ -1,0 +1,36 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'watch' ]
+2 info using npm@3.10.8
+3 info using node@v6.8.0
+4 verbose run-script [ 'prewatch', 'watch', 'postwatch' ]
+5 info lifecycle ionic-hello-world@~prewatch: ionic-hello-world@
+6 silly lifecycle ionic-hello-world@~prewatch: no script for prewatch, continuing
+7 info lifecycle ionic-hello-world@~watch: ionic-hello-world@
+8 verbose lifecycle ionic-hello-world@~watch: unsafe-perm in lifecycle true
+9 verbose lifecycle ionic-hello-world@~watch: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;D:\vkirirom\node_modules\.bin;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Python27;C:\Python27\Lib\site-packages;C:\Python27\Scripts;C:\Program Files (x86)\Skype\Phone\;C:\caddy\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files\nodejs\;C:\Program Files\Microsoft\Web Platform Installer\;C:\wamp64\bin\php\php7.0.4;C:\Users\phanith\AppData\Local\Android\sdk\platform-tools\;C:\Program Files\MongoDB\Server\3.4\bin;C:\ProgramData\ComposerSetup\bin;C:\RailsInstaller\Git\cmd;C:\RailsInstaller\Ruby2.2.0\bin;C:\Ruby23-x64\bin;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\phanith\AppData\Roaming\npm;C:\Users\phanith\AppData\Roaming\Composer\vendor\bin
+10 verbose lifecycle ionic-hello-world@~watch: CWD: D:\vkirirom
+11 silly lifecycle ionic-hello-world@~watch: Args: [ '/d /s /c', 'ionic-app-scripts watch' ]
+12 verbose stack Error: kill ENOSYS
+12 verbose stack     at exports._errnoException (util.js:1026:11)
+12 verbose stack     at process.kill (internal/process.js:172:13)
+12 verbose stack     at process.listener (C:\Program Files\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
+12 verbose stack     at emitNone (events.js:91:20)
+12 verbose stack     at process.emit (events.js:185:7)
+12 verbose stack     at processEmit (C:\Program Files\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at processEmit (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:199:44)
+13 verbose cwd D:\vkirirom
+14 error Windows_NT 10.0.10586
+15 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "watch"
+16 error node v6.8.0
+17 error npm  v3.10.8
+18 error code ENOSYS
+19 error errno ENOSYS
+20 error syscall kill
+21 error kill ENOSYS
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]

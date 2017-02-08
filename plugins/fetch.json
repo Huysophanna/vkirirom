@@ -189,14 +189,35 @@
         "is_top_level": true,
         "variables": {}
     },
+<<<<<<< HEAD
+    "cordova-plugin-geofence": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-geofence"
+=======
     "cordova-plugin-file": {
         "source": {
             "type": "registry",
             "id": "cordova-plugin-file"
+>>>>>>> 9acb07410c709512e67af579b5e0e7d3b44f18af
         },
         "is_top_level": true,
         "variables": {}
     },
+<<<<<<< HEAD
+    "es6-promise-plugin": {
+        "source": {
+            "type": "registry",
+            "id": "es6-promise-plugin"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-mauron85-background-geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-mauron85-background-geolocation"
+=======
     "cordova-plugin-camera": {
         "source": {
             "type": "registry",
@@ -225,6 +246,7 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-x-toast"
+>>>>>>> 9acb07410c709512e67af579b5e0e7d3b44f18af
         },
         "is_top_level": true,
         "variables": {}
