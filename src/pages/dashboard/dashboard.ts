@@ -11,7 +11,7 @@ import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
 import { SettingService } from '../../providers/setting-service';
-import { Modal } from '../modal/modal';
+import { Notificationpanel } from '../notificationpanel/notificationpanel';
 
 declare var cordova: any;
 
@@ -31,8 +31,9 @@ export class Dashboard {
   loading;
   lastLat: any;
   lastLng: any;
+  deviceToken: any;
 
-  constructor(private platform: Platform, public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService) {
+  constructor(private platform: Platform, public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events) {
       document.addEventListener('deviceready', function () {
           cordova.plugins.backgroundMode.setDefaults({ 
               title:  'TheTitleOfYourProcess',
@@ -79,10 +80,11 @@ export class Dashboard {
       }, 2000);
   }
 
-  showNoti() {
-    let notiModal = this.modalCtrl.create(Modal, { userId: 8675309 });
-    notiModal.present();
-  }
+
+showNoti() {
+  let notiModal = this.modalCtrl.create(Notificationpanel);
+  notiModal.present();
+}
 
   kiriromScope() {
     Geolocation.getCurrentPosition().then(resp => {
@@ -124,11 +126,7 @@ export class Dashboard {
               });
               loader.present();
             } else {
-              if (this.isKirirom == false) {
-                this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
-              } else {
-                this.navCtrl.push(Chat);
-              }
+              this.navCtrl.push(Chat);
             }
         break;
         case 5: this.warningAlert("Coming Soon!", "Introducing vKirirom Media, will be available soon.");

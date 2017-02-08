@@ -21138,6 +21138,7 @@ sub {
 }
 
 .profile .user-profile {
+  z-index: 1;
   background: #49a076;
   border-radius: 100%;
   width: 12em;
@@ -21158,6 +21159,138 @@ sub {
   bottom: -100%;
   left: -100%;
   right: -100%;
+}
+
+.profile .user-profile p {
+  margin-top: 10%;
+}
+
+.profile .user-profile .loader {
+  position: relative;
+  margin: 0 auto;
+  width: 30px;
+  margin-top: 42%;
+}
+
+.profile .user-profile .loader:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.profile .user-profile .circular {
+  -webkit-animation: rotate 2s linear infinite;
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.profile .user-profile .path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@-webkit-keyframes color {
+  100%,
+  0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%,
+  90% {
+    stroke: #ffa700;
+  }
+}
+
+@keyframes color {
+  100%,
+  0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%,
+  90% {
+    stroke: #ffa700;
+  }
+}
+
+.profile .edit-btn {
+  color: #1C8954;
+  border-color: #1C8954;
+  height: 100%;
+  transition: 0.2s;
+  font-size: 85%;
+}
+
+.profile .edit-btn.activated {
+  color: transparent;
+  border-color: transparent;
+  background-color: transparent;
 }
 
 .btn-section {
@@ -21276,6 +21409,12 @@ sub {
 .content .tab_bar .inner .btn.active {
   background: #1C8954;
   color: #fff;
+}
+
+@media only screen and (max-device-width: 320px) {
+  .tab_bar .inner .btn.active {
+    font-size: x-small;
+  }
 }
 
 .header ion-fab {
@@ -21411,32 +21550,10 @@ sub {
   stroke-linecap: round;
 }
 
-@-webkit-keyframes rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35px;
-  }
-  100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -124px;
   }
 }
 
@@ -21452,23 +21569,6 @@ sub {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
-  }
-}
-
-@-webkit-keyframes color {
-  100%,
-  0% {
-    stroke: #d62d20;
-  }
-  40% {
-    stroke: #0057e7;
-  }
-  66% {
-    stroke: #008744;
-  }
-  80%,
-  90% {
-    stroke: #ffa700;
   }
 }
 
@@ -21934,6 +22034,81 @@ sub {
   }
 }
 
+.input-edit {
+  width: 100%;
+  height: 15%;
+  margin-top: 5%;
+}
+
+.input-edit input {
+  border-bottom: 1px solid #1C8954;
+  color: black;
+}
+
+.input-edit ion-item {
+  background-color: transparent;
+}
+
+.input-edit ion-label {
+  color: #1C8954 !important;
+  margin-top: -3px;
+  padding: 0 0 10px 0;
+}
+
+.input-edit .input-cover {
+  position: static;
+}
+
+.input-edit .error-message {
+  background: transparent;
+}
+
+.input-edit .error-message p {
+  color: firebrick;
+  text-align: center;
+  transition: 1s;
+}
+
+.input-edit .error-message .label-ios {
+  margin: 0;
+}
+
+.input-edit .item-block {
+  min-height: 1.5em;
+}
+
+.input-edit .item-inner {
+  border-bottom: transparent !important;
+}
+
+.submit-edit {
+  margin-top: 10%;
+  height: auto;
+}
+
+.edit-btn-submit {
+  width: 100%;
+  background-color: transparent;
+  color: #1C8954;
+  border: 1px solid #1C8954;
+  transition: 0.2s;
+}
+
+.edit-btn-submit.activated {
+  color: transparent;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.ios page-introslides ion-slide, .md page-introslides ion-slide {
+  background-color: #32db64;
+}
+
+.ios page-introslides ion-slide img, .md page-introslides ion-slide img {
+  height: 70vh !important;
+  width: auto !important;
+}
+
 .platform-android .forgot-btn.button-md {
   box-shadow: none;
 }
@@ -22291,6 +22466,7 @@ span {
 }
 
 .item-booking p {
+  width: 35%;
   color: black;
   font-size: 90%;
 }

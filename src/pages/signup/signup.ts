@@ -75,7 +75,7 @@ export class Signup {
 
   createNewUser(signUpData) {
     let user = firebase.database().ref('/Users');
-    user.child(signUpData.uid).set({"name": this.signupForm.value.name , "cardid": "", "email": this.signupForm.value.email, "vpoint": "", "type": "", "joined": "", "expire": ""});
+    user.child(signUpData.uid).set({ "name": signUpData.displayName, "cardid": "", "email": signUpData.email, "vpoint": "", "type": "", "joined": "", "expire": "", "location": "", "platform": "", "deviceToken": "", "group": "default" });
   }
 
   warningAlert(message) {

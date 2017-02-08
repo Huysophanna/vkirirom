@@ -1,9 +1,16 @@
 <ion-menu [content]="content">
     <ion-content class="side-container">
         <div class="sidemenu-header profile">
-            <div class="user-profile">
-                <img *ngIf="userPhoto" src="{{userPhoto}}" alt="Profile Picture">
-                <img *ngIf="!userPhoto" src="img/photo.jpg" alt="Profile Picture">
+            <div class="user-profile" (click)="presentActionSheet()">
+                <div class="loader">
+                    <svg class="circular" viewBox="25 25 50 50">
+                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                    </svg>
+                </div>
+                <!--<p>Edit</p>-->
+                <img *ngIf="userPhoto" src="{{userPhoto}}">
+                <img *ngIf="!userPhoto" src="img/profile.svg">
+
             </div>
             <div class="profile-info">
                 <br>
@@ -12,6 +19,8 @@
                 <span *ngIf="userEmail">{{ userEmail }}</span>
                 <span *ngIf="!userEmail">Someemail@email.com</span>
             </div>
+            <button *ngIf="isEmailUser == true" (click)="editProfilePressed()" class="edit-btn" ion-button outline>Edit</button>
+            <button *ngIf="isFacebookUser == true" (click)="editProfilePressed()" class="edit-btn" ion-button outline>FB Linked</button>
         </div>
         <div class="btn-section">
             <ion-list>

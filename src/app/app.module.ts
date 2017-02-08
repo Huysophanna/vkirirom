@@ -5,6 +5,7 @@ import { Login } from '../pages/login/login';
 import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { Facebook } from 'ionic-native';
 import { Dashboard } from '../pages/dashboard/dashboard';
+import { Introslides } from '../pages/introslides/introslides';
 import { Membership } from '../pages/membership/membership';
 import { Chat } from '../pages/chat/chat';
 import { About } from '../pages/about/about';
@@ -13,8 +14,9 @@ import { Setting } from '../pages/setting/setting';
 import { Signup } from '../pages/signup/signup';
 import { Resetpw } from '../pages/resetpw/resetpw';
 import { GoogleMapPage } from '../pages/map/map';
-import { Modal } from '../pages/modal/modal';
 import { ContactModal } from '../pages/contact-modal/contact-modal';
+import { Notificationpanel } from '../pages/notificationpanel/notificationpanel';
+import { Editprofile } from '../pages/editprofile/editprofile';
 import { Reservation } from '../pages/reservation/reservation';
 import { AuthData } from '../providers/auth-data';
 import { Api } from '../providers/api';
@@ -40,8 +42,10 @@ import { Userscope } from '../providers/userscope';
     GoogleMapPage,
     Services,
     Resetpw,
-    Modal,
-    ContactModal
+    ContactModal,
+    Notificationpanel,
+    Editprofile,
+    Introslides
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -62,8 +66,10 @@ import { Userscope } from '../providers/userscope';
     Reservation,
     Signup,
     Resetpw,
-    Modal,
-    ContactModal
+    ContactModal,
+    Notificationpanel,
+    Editprofile,
+    Introslides
   ],
   providers: [
     AuthData,

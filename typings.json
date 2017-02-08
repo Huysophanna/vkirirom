@@ -1,7 +1,10 @@
 {
   "globalDependencies": {
+    "core-js": "registry:dt/core-js#0.9.7+20161130133742",
     "firebase3": "file:node_modules/angularfire2/firebase3.d.ts",
     "google.maps": "registry:dt/google.maps#3.25.0+20161019131407",
-    "jquery": "registry:dt/jquery#1.10.0+20170104155652"
+    "jquery": "registry:dt/jquery#1.10.0+20170104155652",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20161120230953",
+    "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20161214010628"
   }
 }

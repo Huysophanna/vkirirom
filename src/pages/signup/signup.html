@@ -17,7 +17,7 @@
       <ion-item class="error-message">
         <p *ngIf="!signupForm.controls.name.valid  && (nameChanged || submitAttempt)">Please enter your full name</p>
       </ion-item>
-
+      
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)"
@@ -33,7 +33,7 @@
           [class.invalid]="!signupForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
       </ion-item>
       <ion-item class="error-message">
-        <p  *ngIf="!signupForm.controls.email.valid  && (emailChanged || submitAttempt)">Please enter a valid email.</p>
+        <p  *ngIf="!signupForm.controls.email.valid  && (emailChanged || submitAttempt)">Your password needs more than 6 characters.</p>
       </ion-item>
       <ion-item>
         <ion-label floating>Confirm Password</ion-label>
