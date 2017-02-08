@@ -156,6 +156,11 @@ $blue_fb_color: #3956A0;
 
 //iphone 5 screen
 @media only screen and (max-device-width: 320px) {
+    .header {
+        .app-mode {
+            font-size: large;
+        }
+    }
     .container {
         .dashboard-action {
             .first-row {

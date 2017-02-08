@@ -64,6 +64,10 @@ export class Login {
           //store user device token and other details to firebase after creating the user account
           this.storeDeviceTokenToFirebase();
 
+          if (this.userProfile.photoURL == '') {
+            this.userProfile.photoURL = "img/profile.svg";
+          }
+
           NativeStorage.setItem('userDetails', this.userProfile);
           NativeStorage.setItem('userPhoto', this.userProfile.photoURL).then(() => {
             this.events.publish('UserLogin', authData.displayName);

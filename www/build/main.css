@@ -22001,6 +22001,9 @@ sub {
 }
 
 @media only screen and (max-device-width: 320px) {
+  .header .app-mode {
+    font-size: large;
+  }
   .container .dashboard-action .first-row {
     margin-top: 4%;
   }
