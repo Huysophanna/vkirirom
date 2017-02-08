@@ -66,13 +66,13 @@ export class Chatmessage implements AfterViewInit {
             });  
         });
 
-        NativeStorage.getItem('userDetails')
-          .then(
-            data => {
-              this.userName = data.displayName;
-            },
-            error => console.error(error)
-        );
+        // NativeStorage.getItem('userDetails')
+        //   .then(
+        //     data => {
+        //       this.userName = data.displayName;
+        //     },
+        //     error => console.error(error)
+        // );
 
         NativeStorage.getItem('deviceToken')
           .then(

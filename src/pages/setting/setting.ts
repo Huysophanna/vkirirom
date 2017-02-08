@@ -4,6 +4,7 @@ import { NativeStorage } from 'ionic-native';
 import { SettingService } from '../../providers/setting-service';
 
 declare var cordova: any;
+declare var io: any;
 
 @Component({
   selector: 'page-setting',
@@ -14,8 +15,23 @@ export class Setting {
   public notification:any = [];
   public loc: any;
   public noti: any;
+  public socket: any;
+  public username: any;
+  public token: any;
+  public locationTag: any;
+  public data = {
+        username: "",
+        token: "",
+        locationTag: false
+  }
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService) {
+    this.socket = io.connect('http://110.74.203.152:3000');
+    this.socket.on('backgroundLocation', (data) => {
+
+    });
+
+    this.getItemStorage();
     this.locationData();
     this.notificationData();
   }
@@ -42,9 +58,13 @@ export class Setting {
   turnLoc(location) {
     if (location == true) {
       cordova.plugins.backgroundMode.enable();
+      this.data.locationTag = true;
     } else {
       cordova.plugins.backgroundMode.disable();
+      this.data.locationTag = false;
     }
+    //emit user data to server
+    this.socket.emit('backgroundLocation', (this.data));
   }
 
   turnNoti(notification) {
@@ -57,11 +77,16 @@ export class Setting {
 
   setLocation(data) {
     this.location.push(data);
-    NativeStorage.setItem('location', JSON.stringify(this.location)).then(() => {
-      console.log("Stored Item");
-    }, error => {
-      console.log("NativeStorage error");
-    });
+
+    //emit user data to server
+    this.data.locationTag = data;
+    this.socket.emit('backgroundLocation', (this.data));
+
+    // NativeStorage.setItem('location', JSON.stringify(this.location)).then(() => {
+    //   console.log("Stored Item");
+    // }, error => {
+    //   console.log("NativeStorage error");
+    // });
   }
 
   setNotification(data) {
@@ -71,6 +96,24 @@ export class Setting {
     }, error => {
       console.log("NativeStorage error!" + error);
     });
+  }
+
+  getItemStorage() {
+    NativeStorage.getItem('userDetails')
+          .then(
+            data => {
+              this.data.username = data.displayName;
+            },
+            error => console.error(error)
+        );
+
+        NativeStorage.getItem('deviceToken')
+          .then(
+            data => {
+              this.data.token = data;
+            },
+            error => console.error(error)
+        );
   }
 
 }

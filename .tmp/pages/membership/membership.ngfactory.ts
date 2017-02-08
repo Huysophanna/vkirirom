@@ -716,7 +716,7 @@ class _View_Membership0 extends import1.AppView<import3.Membership> {
   }
 }
 export function viewFactory_Membership0(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import2.AppElement):import1.AppView<import3.Membership> {
-  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('D:/vkirirom/.tmp/pages/membership/membership.html',0,import10.ViewEncapsulation.None,styles_Membership,{})); }
+  if ((renderType_Membership === (null as any))) { (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html',0,import10.ViewEncapsulation.None,styles_Membership,{})); }
   return new _View_Membership0(viewUtils,parentInjector,declarationEl);
 }
 class _View_Membership1 extends import1.AppView<any> {
