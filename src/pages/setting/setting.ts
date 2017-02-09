@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { Platform, NavController, AlertController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 import { SettingService } from '../../providers/setting-service';
+import { FirebaseUserData } from '../../providers/firebase-user-data';
+import firebase from 'firebase';
 
 declare var cordova: any;
 declare var io: any;
@@ -16,22 +18,18 @@ export class Setting {
   public loc: any;
   public noti: any;
   public socket: any;
-  public username: any;
   public token: any;
   public locationTag: any;
-  public data = {
-        username: "",
-        token: "",
-        locationTag: false
-  }
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService) {
-    this.socket = io.connect('http://110.74.203.152:3000');
-    this.socket.on('backgroundLocation', (data) => {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform) {
+
+    platform.ready().then(() => {
+      NativeStorage.getItem('bgLocationTag').then(val => {
+        this.loc = val;
+      });
 
     });
 
-    this.getItemStorage();
     this.locationData();
     this.notificationData();
   }
@@ -58,13 +56,13 @@ export class Setting {
   turnLoc(location) {
     if (location == true) {
       cordova.plugins.backgroundMode.enable();
-      this.data.locationTag = true;
+      // this.data.bgLocationTag = true;
     } else {
       cordova.plugins.backgroundMode.disable();
-      this.data.locationTag = false;
+      // this.data.bgLocationTag = false;
     }
     //emit user data to server
-    this.socket.emit('backgroundLocation', (this.data));
+    // this.socket.emit('backgroundLocation', (this.data));
   }
 
   turnNoti(notification) {
@@ -78,9 +76,11 @@ export class Setting {
   setLocation(data) {
     this.location.push(data);
 
-    //emit user data to server
-    this.data.locationTag = data;
-    this.socket.emit('backgroundLocation', (this.data));
+    //update bgLocationTag to firebase using provider
+    this.firebaseUserData.updateBgLocationTag(data);
+
+    // this.data.locationTag = data;
+    // this.socket.emit('backgroundLocation', (this.data));
 
     // NativeStorage.setItem('location', JSON.stringify(this.location)).then(() => {
     //   console.log("Stored Item");
@@ -96,24 +96,6 @@ export class Setting {
     }, error => {
       console.log("NativeStorage error!" + error);
     });
-  }
-
-  getItemStorage() {
-    NativeStorage.getItem('userDetails')
-          .then(
-            data => {
-              this.data.username = data.displayName;
-            },
-            error => console.error(error)
-        );
-
-        NativeStorage.getItem('deviceToken')
-          .then(
-            data => {
-              this.data.token = data;
-            },
-            error => console.error(error)
-        );
   }
 
 }

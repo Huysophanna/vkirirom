@@ -7,7 +7,6 @@ import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
 import { About } from '../about/about';
 import { Reservation } from '../reservation/reservation';
-import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
 import { SettingService } from '../../providers/setting-service';
@@ -33,7 +32,7 @@ export class Dashboard {
   lastLng: any;
   deviceToken: any;
 
-  constructor(private platform: Platform, public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events) {
+  constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events) {
       document.addEventListener('deviceready', function () {
           cordova.plugins.backgroundMode.setDefaults({ 
               title:  'TheTitleOfYourProcess',
@@ -73,16 +72,19 @@ export class Dashboard {
           }
       }, false);
       this.locationTracker.lastLocationTracker();
+
       setInterval(() => {
         this.checkNetworkConnection();
         this.kiriromScope();
       }, 2000);
+
   }
 
 
 showNoti() {
   let notiModal = this.modalCtrl.create(Notificationpanel);
   notiModal.present();
+
 }
 
   kiriromScope() {
@@ -204,6 +206,13 @@ showNoti() {
     } else {
         this.connectionStatus = true;
     }
+  }
+
+  ionViewDidEnter() {
+    //get firebase user data from provider, like name, details, bgLocationTag etc
+    // setTimeout(() => {
+    //   this.firebaseUserData.retrieveUserData();
+    // }, 2000);
   }
 
 }

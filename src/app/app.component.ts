@@ -10,6 +10,7 @@ import { Setting } from '../pages/setting/setting';
 import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { Introslides } from '../pages/introslides/introslides';
 import { GoogleMapPage } from '../pages/map/map';
+import { FirebaseUserData } from '../providers/firebase-user-data';
 import { Signup } from '../pages/signup/signup';
 import { Resetpw } from '../pages/resetpw/resetpw';
 import { AuthData } from '../providers/auth-data';
@@ -41,11 +42,12 @@ export class MyApp {
   isEmailUser: boolean;
   isChatMessageScreen: any;
 
-  constructor(public modalCtrl: ModalController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
+  constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
     platform.ready().then(() => {
       //hide the splash screen only when decided the root page
       Splashscreen.hide();
       this.getStorageItem();
+      this.firebaseUserData.retrieveUserData();
       //push configuration
       let push = Push.init({
         android: {
