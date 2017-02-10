@@ -12,7 +12,7 @@
 
 <ion-content padding>
     <div style="overflow: scroll; height: 100%;">
-        <div class="noNotification" *ngIf="!storeNotificationsArray">
+        <div class="noNotification" *ngIf="!storeNotificationsArray || storeNotificationsArray == ''">
             <ion-icon name="md-checkmark-circle-outline"></ion-icon>
             <p>Notifications Cleaned</p>
         </div>
@@ -20,13 +20,13 @@
             <ion-item-sliding>
                 <ion-item *ngFor="let notiIndex of storeNotificationsArray; let i=index">
                     <ion-thumbnail item-left>
-                        <img *ngIf="notiIndex.title == 'New message'" src="img/chat-icon.svg">
-                        <img *ngIf="notiIndex.title != 'New message'" src="img/media-icon.svg">
+                        <img *ngIf="storeNotificationsArray[storeNotificationsArray.length - (i+1)].title == 'New message'" src="img/chat-icon.svg">
+                        <img *ngIf="storeNotificationsArray[storeNotificationsArray.length - (i+1)].title != 'New message'" src="img/media-icon.svg">
                     </ion-thumbnail>
-                    <h2 *ngIf="notiIndex.title == 'New message'">Chat Message</h2>
-                    <h2 *ngIf="notiIndex.title != 'New message'">{{ storeNotificationsArray[storeNotificationsArray.length - (i+1)].title }}</h2>
+                    <h2 *ngIf="storeNotificationsArray[storeNotificationsArray.length - (i+1)].title == 'New message'">Chat Message</h2>
+                    <h2 *ngIf="storeNotificationsArray[storeNotificationsArray.length - (i+1)].title != 'New message'">{{ storeNotificationsArray[storeNotificationsArray.length - (i+1)].title }}</h2>
                     <p>{{ storeNotificationsArray[storeNotificationsArray.length - (i+1)].message }}</p>
-                    <button class="viewButton" (click)="viewBtnPressed(notiIndex)" ion-button clear item-right>View</button>
+                    <button class="viewButton" (click)="viewBtnPressed(storeNotificationsArray[storeNotificationsArray.length - (i+1)])" ion-button clear item-right>View</button>
                 </ion-item>
                 <ion-item-options side="left">
                     <button ion-button color="primary"><ion-icon name="text"></ion-icon>Text</button>

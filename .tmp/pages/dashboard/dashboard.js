@@ -6,17 +6,19 @@ import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
 import { Chat } from '../chat/chat';
 import { About } from '../about/about';
-import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
 import { SettingService } from '../../providers/setting-service';
 import { Notificationpanel } from '../notificationpanel/notificationpanel';
 export var Dashboard = (function () {
+<<<<<<< HEAD
     function Dashboard(platform, navCtrl, storage, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events) {
+=======
+    function Dashboard(platform, navCtrl, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events) {
+>>>>>>> 46cf9a6ea5909f17bb82f648b5b1f2c9dc4f78c9
         var _this = this;
         this.platform = platform;
         this.navCtrl = navCtrl;
-        this.storage = storage;
         this.locationTracker = locationTracker;
         this.userScope = userScope;
         this.alertCtrl = alertCtrl;
@@ -188,18 +190,20 @@ export var Dashboard = (function () {
                                 };
                                 SMS.send(number, message, options)
                                     .then(function () {
-                                    alert("Please stay safe. Our team will be there so soon!");
                                     Toast.show("Please stay safe. Our team will be there so soon!", '5000', 'bottom').subscribe(function (toast) {
                                         console.log(toast);
                                     });
                                 }, function (error) {
-                                    alert(error);
                                     Toast.show("You cancelled the action", '5000', 'bottom').subscribe(function (toast) {
                                         console.log(toast);
                                     });
                                 });
                             }, function (err) {
+<<<<<<< HEAD
                                 alert("Get user location from storage failed : " + err);
+=======
+                                _this.warningAlert("Get user location failed", err);
+>>>>>>> 46cf9a6ea5909f17bb82f648b5b1f2c9dc4f78c9
                             });
                         }
                     }]
@@ -226,6 +230,12 @@ export var Dashboard = (function () {
             this.connectionStatus = true;
         }
     };
+    Dashboard.prototype.ionViewDidEnter = function () {
+        //get firebase user data from provider, like name, details, bgLocationTag etc
+        // setTimeout(() => {
+        //   this.firebaseUserData.retrieveUserData();
+        // }, 2000);
+    };
     Dashboard.decorators = [
         { type: Component, args: [{
                     selector: 'page-dashboard',
@@ -237,7 +247,6 @@ export var Dashboard = (function () {
     Dashboard.ctorParameters = [
         { type: Platform, },
         { type: NavController, },
-        { type: Storage, },
         { type: LocationTracker, },
         { type: Userscope, },
         { type: AlertController, },

@@ -20,10 +20,6 @@ export class Notificationpanel {
     this.getStorageItem();
   }
 
-  ionViewDidLoad() {
-    console.log('Hello Modal Page');
-  }
-
   dismiss() {
     this.viewCtrl.dismiss();
   }

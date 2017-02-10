@@ -62,7 +62,11 @@ export class Login {
           this.userProfile = authData;
 
           //store user device token and other details to firebase after creating the user account
-          this.storeDeviceTokenToFirebase();
+          // this.storeDeviceTokenToFirebase();
+
+          if (this.userProfile.photoURL == '') {
+            this.userProfile.photoURL = "img/profile.svg";
+          }
 
           NativeStorage.setItem('userDetails', this.userProfile);
           NativeStorage.setItem('userPhoto', this.userProfile.photoURL).then(() => {
@@ -89,7 +93,7 @@ export class Login {
 
   createNewUser() {
     let user = firebase.database().ref('/Users');
-    user.child(this.userProfile.uid).set({ "name": this.userProfile.displayName, "cardid": "", "email": this.userProfile.email, "vpoint": "", "type": "", "joined": "", "expire": "", "location": "", "platform": "", "deviceToken": "", "group": "default" });
+    user.child(this.userProfile.uid).set({ "name": this.userProfile.displayName, "cardid": "", "email": this.userProfile.email, "vpoint": "", "type": "", "joined": "", "expire": "", "location": "", "platform": "", "deviceToken": "", "group": "default", "bgLocationTag": true });
   }
 
   userExist() {
@@ -127,7 +131,7 @@ export class Login {
             this.userProfile = success;
             this.userExist();
             //store user device token and other details to firebase after creating the user account
-            this.storeDeviceTokenToFirebase();
+            // this.storeDeviceTokenToFirebase();
             //alert("Firebase success: " + JSON.stringify(success));
             this.nav.setRoot(Dashboard);
 
@@ -158,9 +162,7 @@ export class Login {
 
   storeDeviceTokenToFirebase() {
     let user = firebase.database().ref('/Users/' + this.userProfile.uid);
-    user.update({"deviceToken": this.deviceToken}).then(success => {
-      alert(success);
-    });
+    user.update({"deviceToken": this.deviceToken});
   }
 
   /**

@@ -14,8 +14,8 @@ export class LocationTracker {
   public longitute = [];
 
   lastLocationTracker() {
-    alert("lastLocationTracker");
     setInterval(() => {
+      
       Geolocation.getCurrentPosition().then(resp => {
         alert("In Geolocation");
         let latitute = resp.coords.latitude;

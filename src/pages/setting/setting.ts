@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { Platform, NavController, AlertController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 import { SettingService } from '../../providers/setting-service';
+import { FirebaseUserData } from '../../providers/firebase-user-data';
+import firebase from 'firebase';
 
 declare var cordova: any;
+declare var io: any;
 
 @Component({
   selector: 'page-setting',
@@ -14,8 +17,19 @@ export class Setting {
   public notification:any = [];
   public loc: any;
   public noti: any;
+  public socket: any;
+  public token: any;
+  public locationTag: any;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform) {
+
+    platform.ready().then(() => {
+      NativeStorage.getItem('bgLocationTag').then(val => {
+        this.loc = val;
+      });
+
+    });
+
     this.locationData();
     this.notificationData();
   }
@@ -42,9 +56,13 @@ export class Setting {
   turnLoc(location) {
     if (location == true) {
       cordova.plugins.backgroundMode.enable();
+      // this.data.bgLocationTag = true;
     } else {
       cordova.plugins.backgroundMode.disable();
+      // this.data.bgLocationTag = false;
     }
+    //emit user data to server
+    // this.socket.emit('backgroundLocation', (this.data));
   }
 
   turnNoti(notification) {
@@ -57,11 +75,18 @@ export class Setting {
 
   setLocation(data) {
     this.location.push(data);
-    NativeStorage.setItem('location', JSON.stringify(this.location)).then(() => {
-      console.log("Stored Item");
-    }, error => {
-      console.log("NativeStorage error");
-    });
+
+    //update bgLocationTag to firebase using provider
+    this.firebaseUserData.updateBgLocationTag(data);
+
+    // this.data.locationTag = data;
+    // this.socket.emit('backgroundLocation', (this.data));
+
+    // NativeStorage.setItem('location', JSON.stringify(this.location)).then(() => {
+    //   console.log("Stored Item");
+    // }, error => {
+    //   console.log("NativeStorage error");
+    // });
   }
 
   setNotification(data) {

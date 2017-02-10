@@ -157,9 +157,20 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
         }
     }
 }
+.platform-ios {
+    .header-title {
+        display: block;
+        top: 8px;
+    }
+}
 
 //iphone 5 screen
 @media only screen and (max-device-width: 320px) {
+    .header {
+        .app-mode {
+            font-size: large;
+        }
+    }
     .container {
         .dashboard-action {
             .first-row {
