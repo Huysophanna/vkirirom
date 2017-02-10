@@ -28,7 +28,6 @@ public data = {
       //retrieve data from firebase 
       firebase.database().ref('Users/' + data.uid).on('value', (snapshot) => {
         this.data.bgLocationTag = snapshot.child('bgLocationTag').val();
-        NativeStorage.setItem('bgLocationTag', this.data.bgLocationTag);
       });
 
     });
@@ -41,9 +40,8 @@ public data = {
   updateBgLocationTag(value) {
     //update bgLocationTag to firebase
     let user = firebase.database().ref('/Users/' + this.userProfile.uid);
-    user.update({"bgLocationTag": value}).then(success => {
-      alert("Updated!" + value);
-    });
+    user.update({"bgLocationTag": value});
+    NativeStorage.setItem('bgLocationTag', value);
   }
 
 }

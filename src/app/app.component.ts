@@ -221,16 +221,16 @@ export class MyApp {
       // this.warningAlert("Success blob", "Path: " + _imageBlob);
       //upload the blob
       return this.uploadToFirebase(_imageBlob);
+    }, error => {
+      alert(error);
     }).then((_uploadSnapShot: any) => {
       // this.warningAlert("Success", _uploadSnapShot.downloadURL);
 
       //store reference to storage in database
       return this.saveToDatabaseAssetList(_uploadSnapShot);
 
-    }).then((_uploadSnapShot: any) => {
-      this.makeToast("Success! New profile picture is updated.");
     }, error => {
-      this.makeToast("Uploaded profile picture failed! There is a problem with network connection.");
+      alert(error);
     });
   }
 
@@ -268,19 +268,20 @@ export class MyApp {
       var uploadTask = profilePhotoRef.put(_imageBlob);
 
       profilePhotoRef.delete().then(success => {
-        //success callback
+        //upload image to firebase storage after current image is deleted
+        uploadTask.on('state_changed', _snapshot => {
+          console.log("snapshot progress" + _snapshot);
+        }, _error => {
+          reject(_error);
+          alert(_error);
+        }, () => {
+          //completion
+          resolve(uploadTask.snapshot);
+          // });
+        });
+
       }, error => {
         //error callback
-      });
-
-      uploadTask.on('state_changed', _snapshot => {
-        console.log("snapshot progress" + _snapshot);
-      }, _error => {
-        reject(_error);
-      }, () => {
-        //completion
-        resolve(uploadTask.snapshot);
-        // });
       });
     });
   }
@@ -298,7 +299,10 @@ export class MyApp {
         //replace new profile photo to the storage item
         NativeStorage.setItem("userPhoto", _uploadSnapShot.downloadURL);
       });
-      // alert(JSON.stringify(this.currentUser));
+
+      this.makeToast("Success! New profile picture is now updated.");
+    }, error => {
+      alert(error);
     });
   }
 
