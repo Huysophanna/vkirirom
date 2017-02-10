@@ -1,15 +1,6 @@
 import { Component } from '@angular/core';
-<<<<<<< HEAD
-import { NavController, Platform, AlertController, ModalController, LoadingController } from 'ionic-angular';
+import { NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { SMS, Toast, Geolocation, Network, NativeStorage } from 'ionic-native';
-=======
-import { NavController, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
-<<<<<<< HEAD
-import { NativeStorage, SMS, Toast, Geolocation, Network } from 'ionic-native';
-=======
-import { SMS, Toast, Geolocation, Network } from 'ionic-native';
->>>>>>> bc0bed54c85b05159ea702e9fba2e7f5b3464e99
->>>>>>> 9acb07410c709512e67af579b5e0e7d3b44f18af
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
@@ -18,27 +9,12 @@ import { About } from '../about/about';
 import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../../providers/location-tracker';
 import { Userscope } from '../../providers/userscope';
-<<<<<<< HEAD
 import { SettingService } from '../../providers/setting-service';
-=======
-<<<<<<< HEAD
 import { Notificationpanel } from '../notificationpanel/notificationpanel';
 export var Dashboard = (function () {
-    function Dashboard(events, navCtrl, storage, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl) {
-=======
->>>>>>> 9acb07410c709512e67af579b5e0e7d3b44f18af
-import { Modal } from '../modal/modal';
-export var Dashboard = (function () {
-<<<<<<< HEAD
-    function Dashboard(platform, navCtrl, storage, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService) {
+    function Dashboard(platform, navCtrl, storage, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events) {
         var _this = this;
         this.platform = platform;
-=======
-    function Dashboard(navCtrl, storage, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, event) {
->>>>>>> bc0bed54c85b05159ea702e9fba2e7f5b3464e99
-        var _this = this;
-        this.events = events;
->>>>>>> 9acb07410c709512e67af579b5e0e7d3b44f18af
         this.navCtrl = navCtrl;
         this.storage = storage;
         this.locationTracker = locationTracker;
@@ -47,30 +23,17 @@ export var Dashboard = (function () {
         this.modalCtrl = modalCtrl;
         this.loadingCtrl = loadingCtrl;
         this.settingService = settingService;
+        this.events = events;
         this.membership = Membership;
         this.isUnknown = false;
-        NativeStorage.getItem('location').then(function (data) {
-            var parseData = JSON.parse(data);
-            var loc = parseData[parseData.length - 1];
-            alert("user location :" + loc);
-        }, function (error) {
-            alert("NativeStorage error :" + error);
-        });
-        // if (this.settingService.isLocation == true) {
-        //   alert("background user location true");
-        // } else {
-        //   alert("background user location false");
-        // }
         document.addEventListener('deviceready', function () {
             cordova.plugins.backgroundMode.setDefaults({
-                title: 'TheTitleOfYourProcess',
-                text: 'Executing background tasks.'
+                title: 'Chain',
+                text: 'BackgroundGeolocation'
             });
-            cordova.plugins.backgroundMode.enable();
             cordova.plugins.backgroundMode.onactivate = function () {
-                var _this = this;
+                alert("background Mode");
                 setInterval(function () {
-                    alert("backgroundMode");
                     Geolocation.getCurrentPosition().then(function (resp) {
                         var latitute = resp.coords.latitude;
                         var longitute = resp.coords.longitude;
@@ -84,7 +47,7 @@ export var Dashboard = (function () {
                                     console.log("Set userlocation failed :" + err);
                                 });
                             }
-                            else if (_this.userlocation.length >= 0) {
+                            else if (JSON.parse(data).length >= 0) {
                                 userlocation.push({
                                     lat: latitute,
                                     lng: longitute
@@ -98,6 +61,16 @@ export var Dashboard = (function () {
                             else {
                                 console.log("Oupp something went wrong!!!");
                             }
+                        }, function (err) {
+                            userlocation.push({
+                                lat: latitute,
+                                lng: longitute
+                            });
+                            NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
+                                console.log("Set user location success :" + data);
+                            }, function (err) {
+                                console.log("Set user location failed :" + err);
+                            });
                         });
                     });
                 }, 2000);
@@ -108,9 +81,6 @@ export var Dashboard = (function () {
             _this.checkNetworkConnection();
             _this.kiriromScope();
         }, 2000);
-        NativeStorage.getItem('deviceToken').then(function (data) {
-            _this.deviceToken = data;
-        });
     }
     Dashboard.prototype.showNoti = function () {
         var notiModal = this.modalCtrl.create(Notificationpanel);
@@ -121,14 +91,7 @@ export var Dashboard = (function () {
         Geolocation.getCurrentPosition().then(function (resp) {
             var latitute = resp.coords.latitude;
             var longitude = resp.coords.longitude;
-<<<<<<< HEAD
             console.log("My location :" + latitute + longitude);
-=======
-<<<<<<< HEAD
-=======
-            console.log("My location :" + latitute + " " + longitude);
->>>>>>> bc0bed54c85b05159ea702e9fba2e7f5b3464e99
->>>>>>> 9acb07410c709512e67af579b5e0e7d3b44f18af
             var distance = _this.userScope.distanceCal(latitute, longitude);
             if (distance < 1) {
                 var test = distance * 1000;
@@ -160,20 +123,21 @@ export var Dashboard = (function () {
                 this.navCtrl.push(GoogleMapPage);
                 break;
             case 4:
-                if (this.isKirirom === undefined) {
+                if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
                     var loader = this.loadingCtrl.create({
                         content: 'Identifying your current location....',
                         duration: 1000
                     });
                     loader.present();
                 }
+                else if ((this.isKirirom == undefined) && (this.isUnknown == true)) {
+                    this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+                }
+                else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+                    this.warningAlert("Outdoor Mode", "Sorry, this function is not accessible outside kirirom area.");
+                }
                 else {
-                    if (this.isKirirom == false) {
-                        this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
-                    }
-                    else {
-                        this.navCtrl.push(Chat);
-                    }
+                    this.navCtrl.push(Chat);
                 }
                 break;
             case 5:
@@ -186,7 +150,17 @@ export var Dashboard = (function () {
     };
     Dashboard.prototype.sos = function () {
         var _this = this;
-        if (this.isKirirom == false) {
+        if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
+            var loader = this.loadingCtrl.create({
+                content: 'Identifying your current location....',
+                duration: 1000
+            });
+            loader.present();
+        }
+        else if ((this.isKirirom == undefined) && (this.isKirirom == true)) {
+            this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+        }
+        else if ((this.isKirirom == false) && (this.isUnknown == false)) {
             this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
         }
         else {
@@ -225,7 +199,7 @@ export var Dashboard = (function () {
                                     });
                                 });
                             }, function (err) {
-                                alert("Get user location failed : " + err);
+                                alert("Get user location from storage failed : " + err);
                             });
                         }
                     }]
@@ -261,11 +235,7 @@ export var Dashboard = (function () {
     ];
     /** @nocollapse */
     Dashboard.ctorParameters = [
-<<<<<<< HEAD
         { type: Platform, },
-=======
-        { type: Events, },
->>>>>>> 9acb07410c709512e67af579b5e0e7d3b44f18af
         { type: NavController, },
         { type: Storage, },
         { type: LocationTracker, },
@@ -274,6 +244,7 @@ export var Dashboard = (function () {
         { type: ModalController, },
         { type: LoadingController, },
         { type: SettingService, },
+        { type: Events, },
     ];
     return Dashboard;
 }());

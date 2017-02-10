@@ -17,31 +17,44 @@ export class LocationTracker {
     alert("lastLocationTracker");
     setInterval(() => {
       Geolocation.getCurrentPosition().then(resp => {
+        alert("In Geolocation");
         let latitute = resp.coords.latitude;
         let longitute = resp.coords.longitude;
         NativeStorage.getItem('userlocation').then(data => {
+          alert("In normal : " + JSON.parse(data).length);
           if (JSON.parse(data).length == 5) {
             this.userlocation = [];
             this.setUserlocation(this.userlocation);
-          } else if (this.userlocation.length >= 0) {
+            alert("in if :" + this.userlocation);
+          } else if (JSON.parse(data) >= 0) {
             this.userlocation.push({
               lat: latitute,
               lng: longitute
-            });
+            });            
             this.setUserlocation(this.userlocation);
+            alert("in else if :" + this.userlocation);
           } else {
             console.log("Oupp something went wrong!!!");
           }
+        }, err => {
+          console.log("Cannot getItem");
+          this.userlocation.push({
+            lat: latitute,
+            lng: longitute
+          });
+          this.setUserlocation(this.userlocation);
+          alert("set In err :" + this.userlocation);
         });
       });
     }, 2000);
   }
 
   setUserlocation(location) {
+    alert("In setUserlocation");
     NativeStorage.setItem('userlocation', JSON.stringify(location)).then(data => {
-      console.log("Set user location success :" + data);
+      alert("Set user location success :" + data);
     }, err => {
-      console.log("Set userlocation failed :" + err);
+      alert("Set userlocation failed :" + err);
     });
   }
 

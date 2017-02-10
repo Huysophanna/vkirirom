@@ -2,10 +2,10 @@
     <ion-navbar>
         <ion-title class="header-title">
             <span *ngIf="(isKirirom == undefined) && (isUnknown == false)" style="color: goldenrod">Identifying</span>
-            <span *ngIf="(isKirirom == undefined) && (isUnknown == true)" style="color: goldenrod">Error</span>
-            <span *ngIf="isKirirom == true">Indoor Mode</span>
-            <span *ngIf="isKirirom == false" style="color: #827717;">Outdoor Mode</span>
-            <span *ngIf="connectionStatus == false" style="color: maroon;">No Connection</span>
+            <span *ngIf="(isKirirom == undefined) && (isUnknown == true)" style="color: #795548">Unidentify</span>
+            <span *ngIf="(isKirirom == true) && (isUnknown == false)">Indoor Mode</span>
+            <span *ngIf="(isKirirom == false) && (isUnknown == false)" style="color: #827717;">Outdoor Mode</span>
+            <!--<span *ngIf="connectionStatus == false" style="color: maroon;">No Connection</span>-->
         </ion-title>
         <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
         <ion-buttons end>
@@ -35,8 +35,7 @@
             <button (click)="navigate(6)" class=" map-btn "><img src="img/about-icon.svg ">About Us</button>
         </div>
         <div class="emergency ">
-            <button class="button circle" (click)="sos() ">SOS</button>
-            <p>Emergency</p>
+            <button class="button circle" (click)="sos() ">Emergency SOS</button>
         </div>
     </div>
 </ion-content>

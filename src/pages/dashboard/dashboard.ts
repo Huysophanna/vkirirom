@@ -36,13 +36,12 @@ export class Dashboard {
   constructor(private platform: Platform, public navCtrl: NavController, public storage: Storage, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events) {
       document.addEventListener('deviceready', function () {
           cordova.plugins.backgroundMode.setDefaults({ 
-              title:  'TheTitleOfYourProcess',
-              text:   'Executing background tasks.'
+              title:  'Chain',
+              text:   'BackgroundGeolocation'
           });
-          cordova.plugins.backgroundMode.enable();
           cordova.plugins.backgroundMode.onactivate = function () {
+            alert("background Mode");
               setInterval(() => {
-                alert("backgroundMode");
                 Geolocation.getCurrentPosition().then(resp => {
                   let latitute = resp.coords.latitude;
                   let longitute = resp.coords.longitude;
@@ -55,7 +54,7 @@ export class Dashboard {
                       }, err => {
                         console.log("Set userlocation failed :" + err);
                       });
-                    } else if (this.userlocation.length >= 0) {
+                    } else if (JSON.parse(data).length >= 0) {
                       userlocation.push({
                         lat: latitute,
                         lng: longitute
@@ -68,6 +67,16 @@ export class Dashboard {
                     } else {
                       console.log("Oupp something went wrong!!!");
                     }
+                  }, err => {
+                    userlocation.push({
+                      lat: latitute,
+                      lng: longitute
+                    });
+                    NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
+                      console.log("Set user location success :" + data);
+                    }, err => {
+                      console.log("Set user location failed :" + err);
+                    });
                   });
                 });
               }, 2000);
@@ -119,12 +128,16 @@ showNoti() {
         case 3: this.navCtrl.push(GoogleMapPage);
         break;
         case 4:
-            if (this.isKirirom === undefined) {
+            if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
               let loader = this.loadingCtrl.create({
                 content: 'Identifying your current location....',
                 duration: 1000
               });
               loader.present();
+            } else if ((this.isKirirom == undefined) && (this.isUnknown == true)){
+              this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+            } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+              this.warningAlert("Outdoor Mode", "Sorry, this function is not accessible outside kirirom area.");
             } else {
               this.navCtrl.push(Chat);
             }
@@ -137,7 +150,15 @@ showNoti() {
   }
 
   sos() {
-    if (this.isKirirom == false) {
+    if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
+      let loader = this.loadingCtrl.create({
+        content: 'Identifying your current location....',
+        duration: 1000
+      });
+      loader.present();
+    } else if ((this.isKirirom == undefined) && (this.isKirirom == true)) {
+      this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+    } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
         this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
     } else {
         let confirmAlert = this.alertCtrl.create({
@@ -180,7 +201,7 @@ showNoti() {
                       );
                     });
                 }, err => {
-                  alert("Get user location failed : " + err);
+                  alert("Get user location from storage failed : " + err);
                 });
               }
             }]
