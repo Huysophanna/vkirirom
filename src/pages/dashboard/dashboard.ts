@@ -1,5 +1,5 @@
 import { Component, Inject, NgZone } from '@angular/core';
-import { NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
+import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { SMS, Toast, Geolocation, Push, Network, NativeStorage, BackgroundGeolocation, Geofence } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
@@ -32,7 +32,7 @@ export class Dashboard {
   lastLng: any;
   deviceToken: any;
 
-  constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events) {
+  constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController) {
       document.addEventListener('deviceready', function () {
           cordova.plugins.backgroundMode.setDefaults({ 
               title:  'TheTitleOfYourProcess',
@@ -72,6 +72,9 @@ export class Dashboard {
           }
       }, false);
       this.locationTracker.lastLocationTracker();
+      
+      //show side menu if it's not login screen
+      this.menuCtrl.enable(true);
 
       setInterval(() => {
         this.checkNetworkConnection();
@@ -117,7 +120,9 @@ showNoti() {
           this.warningAlert("Coming Soon!", "Introducing vKirirom Membership Card with vPoints, will be available soon.");
           // this.navCtrl.push(Membership);
         break;
-        case 3: this.navCtrl.push(GoogleMapPage);
+        case 3: 
+          this.navCtrl.push(GoogleMapPage);
+        
         break;
         case 4:
             if (this.isKirirom === undefined) {
@@ -188,6 +193,23 @@ showNoti() {
     }
   }
 
+  //show app mode description when it's clicked
+  modeClicked(_val) {
+    let message;
+    switch (_val) {
+      case 1: message = 'Identifying your location to determine application mode.';
+      break;
+      case 2: message = 'vKapp could not identify app mode. Please ensure the location service is on.'
+      break;
+      case 3: message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
+      break;
+      case 4: message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
+      break;
+    }
+
+    this.makeToast(message);
+  }
+
   warningAlert(title, message) {
     this.alertCtrl.create( {
         title: title,
@@ -208,11 +230,12 @@ showNoti() {
     }
   }
 
-  ionViewDidEnter() {
-    //get firebase user data from provider, like name, details, bgLocationTag etc
-    // setTimeout(() => {
-    //   this.firebaseUserData.retrieveUserData();
-    // }, 2000);
+  makeToast(message) {
+    Toast.show(message, '5000', 'bottom').subscribe(
+        toast => {
+          console.log(toast);
+        }
+    );
   }
 
 }

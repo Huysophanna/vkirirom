@@ -15,6 +15,7 @@ import { Login } from '../login/login';
 })
 
 export class Introslides {
+  @ViewChild(Slides) slides: Slides;
   sliderOptions: any;
  
   constructor(public navCtrl: NavController) {
@@ -25,12 +26,12 @@ export class Introslides {
  
   }
  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad IntroPage');
+  nextSlide() {
+    this.slides.slideNext();
   }
  
   goToHome(){
-    this.navCtrl.setRoot(Login);
+    this.navCtrl.setRoot(Login, {}, {animate: true, direction: 'forward'});
   }
  
 

@@ -10,7 +10,7 @@ declare var io: any;
 export class Chat {
 
   socket: any;
-  Name = ["Room One"]
+  groupChat = [{name: 'Open Discussion', description: 'Open for all discussion'}];
 
   constructor(public navCtrl: NavController) {
 
@@ -21,7 +21,6 @@ export class Chat {
   }
 
   navtochatsms(name) {
-    console.log("clicked");
     this.navCtrl.push(Chatmessage, {
       messageTitle: name
     });

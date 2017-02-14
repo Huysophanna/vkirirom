@@ -41,11 +41,12 @@ export class MyApp {
   isFacebookUser: boolean;
   isEmailUser: boolean;
   isChatMessageScreen: any;
+  isAuthenticated: any;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
+
     platform.ready().then(() => {
-      //hide the splash screen only when decided the root page
-      Splashscreen.hide();
+
       this.getStorageItem();
       this.firebaseUserData.retrieveUserData();
       //push configuration
@@ -64,12 +65,63 @@ export class MyApp {
       });
 
 
+      //firebase configuration
+        firebase.initializeApp({
+          apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
+          authDomain: "vkirirom-809f8.firebaseapp.com",
+          databaseURL: "https://vkirirom-809f8.firebaseio.com",
+          storageBucket: "vkirirom-809f8.appspot.com",
+          messagingSenderId: "82070365426"
+        });
+        firebase.auth().onAuthStateChanged((user) => {
+          this.loading = this.loadingCtrl.create({
+            dismissOnPageChange: true,
+          });
+          if (user) {
+            Splashscreen.hide();
+            // NativeStorage.setItem('userAuthService', true);
+            this.currentUser = firebase.auth().currentUser;
+
+            //identify whether the user is signed in using Facebook or Email
+            firebase.auth().currentUser.providerData.forEach(element => {
+              this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
+              this.isEmailUser = element.providerId == 'password' ? true : false;
+            });
+          } else {
+            
+            // NativeStorage.setItem('userAuthService', false);
+            this.loading.present();
+            // this.rootPage = Login;
+
+            //logic for intro slides
+            NativeStorage.getItem("introShown").then(success => {
+                //intro slider is already shown before
+                this.rootPage = Login;
+            }, error => {
+                //first time, need to show intro slides
+                this.rootPage = Introslides;
+                NativeStorage.setItem("introShown", true);
+            });
+
+            this.loading.dismiss().then(() => {
+              Splashscreen.hide();
+            });
+          }
+        });
+
+      //Android splash screen needs to be delayed longer than iOS to prevent -
+      //showing Dashboard screen as rootpage before Login screen
+      
+
+
       push.on('registration', (data) => {
         NativeStorage.setItem('deviceToken', data.registrationId);
       });
       push.on('notification', (data) => {
+
         //store all notifications to local storage for the notification panel
         this.storeNotificationsArray.push(data);
+
         NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
 
         let self = this;
@@ -121,45 +173,7 @@ export class MyApp {
       push.on('error', (e) => {
         console.log(e.message);
       });
-
-
-      //firebase configuration
-      firebase.initializeApp({
-        apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
-        authDomain: "vkirirom-809f8.firebaseapp.com",
-        databaseURL: "https://vkirirom-809f8.firebaseio.com",
-        storageBucket: "vkirirom-809f8.appspot.com",
-        messagingSenderId: "82070365426"
-      });
-      firebase.auth().onAuthStateChanged((user) => {
-        this.loading = this.loadingCtrl.create({
-          dismissOnPageChange: true,
-        });
-        if (!user) {
-          this.loading.present();
-          this.loading.dismiss();
-          // this.rootPage = Login;
-
-          //logic for intro slides
-          NativeStorage.getItem("introShown").then(success => {
-              //intro slider is already shown before
-              this.rootPage = Login;
-          }, error => {
-              //first time, need to show intro slides
-              this.rootPage = Introslides;
-              NativeStorage.setItem("introShown", true);
-          });
-        } else if (user) {
-          this.currentUser = firebase.auth().currentUser.providerData;
-
-          //identify whether the user is signed in using Facebook or Email
-          firebase.auth().currentUser.providerData.forEach(element => {
-            this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
-            this.isEmailUser = element.providerId == 'password' ? true : false;
-          });
-        }
-
-      });
+      
       StatusBar.styleDefault();
 
       //listen for events
@@ -176,7 +190,7 @@ export class MyApp {
       { title: 'Contact Us', id: 2, ionicon: 'ios-call-outline' },
       { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline' }
     ];
-  }
+  } 
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -214,23 +228,13 @@ export class MyApp {
       sourceType: imageSource,
       correctOrientation: true,
     }).then(_imagePath => {
-      // this.warningAlert("Success", "Path: " + _imagePath);
       //convert picture to blob
       return this.makeFileIntoBlob(_imagePath);
     }).then(_imageBlob => {
-      // this.warningAlert("Success blob", "Path: " + _imageBlob);
       //upload the blob
       return this.uploadToFirebase(_imageBlob);
     }, error => {
-      alert(error);
-    }).then((_uploadSnapShot: any) => {
-      // this.warningAlert("Success", _uploadSnapShot.downloadURL);
-
-      //store reference to storage in database
-      return this.saveToDatabaseAssetList(_uploadSnapShot);
-
-    }, error => {
-      alert(error);
+      //user cancelled, not selecting any photos
     });
   }
 
@@ -260,52 +264,38 @@ export class MyApp {
     });
   }
 
-
   uploadToFirebase(_imageBlob) {
-    var fileName = this.userName + '.jpg';
+    var fileName = this.userName + "_" + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + "_" + new Date().toLocaleTimeString() +'.jpg';
     return new Promise((resolve, reject) => {
       let profilePhotoRef = firebase.storage().ref('profile_photo/' + fileName);
       var uploadTask = profilePhotoRef.put(_imageBlob);
 
-      profilePhotoRef.delete().then(success => {
-        //upload image to firebase storage after current image is deleted
+      //upload image to firebase storage after current image is deleted
         uploadTask.on('state_changed', _snapshot => {
           console.log("snapshot progress" + _snapshot);
         }, _error => {
           reject(_error);
-          alert(_error);
+
+          if (_error.message.indexOf('Max retry time for operation exceeded') >= 0) {
+            this.makeToast("Uploaded failed! Poor network connection. Please try again.");
+          }
         }, () => {
-          //completion
-          resolve(uploadTask.snapshot);
-          // });
+          //completion, update imgURL of the user in firebase and set to device storage
+          this.currentUser.updateProfile({
+            displayName: this.userName,
+            photoURL: uploadTask.snapshot.downloadURL
+          }).then(() => {
+            this.ngzone.run(() => {
+              this.userPhoto = uploadTask.snapshot.downloadURL;
+              //replace new profile photo to the storage item
+              NativeStorage.setItem("userPhoto", uploadTask.snapshot.downloadURL);
+            });
+
+            this.makeToast("Success! New profile picture is now updated.");
+          });
         });
-
-      }, error => {
-        //error callback
-      });
     });
   }
-
-
-  saveToDatabaseAssetList(_uploadSnapShot) {
-    // alert(_uploadSnapShot.downloadURL);
-    // alert(JSON.stringify(this.currentUser));
-    this.currentUser.updateProfile({
-      displayName: this.userName,
-      photoURL: _uploadSnapShot.downloadURL
-    }).then(() => {
-      this.ngzone.run(() => {
-        this.userPhoto = _uploadSnapShot.downloadURL;
-        //replace new profile photo to the storage item
-        NativeStorage.setItem("userPhoto", _uploadSnapShot.downloadURL);
-      });
-
-      this.makeToast("Success! New profile picture is now updated.");
-    }, error => {
-      alert(error);
-    });
-  }
-
 
   getStorageItem() {
     NativeStorage.getItem('userPhoto').then(data => {
@@ -330,7 +320,7 @@ export class MyApp {
       let editModal = this.modalCtrl.create(Editprofile);
       editModal.present();
     } else if (this.isFacebookUser) {
-      this.warningAlert("Facebook Linked","You are currently linked your profile with Facebook account.");
+      this.makeToast("You are currently linked your profile with Facebook account.");
     }
   }
 
@@ -338,7 +328,8 @@ export class MyApp {
     //logout function
     switch (page.id) {
       case 1:
-        this.nav.push(Setting);
+        let presentModal = this.modalCtrl.create(Setting);
+        presentModal.present();
         break;
       case 2:
         let actionSheet = this.actionsheetController.create({
@@ -383,8 +374,9 @@ export class MyApp {
         //store userProfile object to the phone storage
         Facebook.logout();
         NativeStorage.setItem('userDetails', "");
+        //reset notification panel items
+        NativeStorage.setItem('storeNotificationsArray', "");
         this.nav.setRoot(Login);
-        console.log(page.title);
         break;
     }
   }

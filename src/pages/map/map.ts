@@ -19,7 +19,7 @@ export class GoogleMapPage {
   icon: any;
   marker: any;
 
-  constructor(public events: Events, public navCtrl: NavController, public platform: Platform) {
+  constructor(public events: Events, public navCtrl: NavController, public platform: Platform, public loadingCtrl: LoadingController) {
     platform.ready().then(() => {
         this.initMap();
         this.watchPosition();
@@ -69,6 +69,7 @@ export class GoogleMapPage {
           }
         });
 
+
       let bounds = [
         new GoogleMapsLatLng(11.3191, 104.0743),
         new GoogleMapsLatLng(11.3202, 104.0606),
@@ -81,10 +82,23 @@ export class GoogleMapPage {
       //   new GoogleMapsLatLng(11.3099, 104.0599),
       //   new GoogleMapsLatLng(11.3099, 104.0734),
       // ];
-      this.map.addGroundOverlay({
-        'url': "img/vmap.png",
-        'bounds': bounds
+
+        
+      let loader = this.loadingCtrl.create({
+          content: 'Initializing Map ...',
       });
+      loader.present();
+
+      let addedOverlayInterval = setInterval(() => {
+        this.map.addGroundOverlay({
+          'url': "img/vmap.png",
+          'bounds': bounds
+        }).then(_success => {
+          clearInterval(addedOverlayInterval);
+          loader.dismiss();
+        });
+      }, 1000);
+
 
       this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           // create CameraPosition
@@ -138,14 +152,14 @@ export class GoogleMapPage {
         title: [title].join("\n"),
         snippet: snippet,
         
-        icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
         styles: {
             "text-align": "center",
             "maxWidth": "80%", // This can be percentage (%) or just a numeric value from 0.0 to 1.0 for percentile representation, or the numeric width in pixels.
             "color": "#1C8954"
         },
         
-        animation: plugin.google.maps.Animation.DROP
+        // animation: plugin.google.maps.Animation.DROP
       };
 
       this.map.addMarker(markerOptions)
@@ -158,7 +172,10 @@ export class GoogleMapPage {
   }
 
   ionViewDidLeave() {
+    //remove all markers and clear the map after leaving the screen
+    //avoid duplicated markers being initialized
     this.map.clear();
+    this.map.remove();
   }
 
 }

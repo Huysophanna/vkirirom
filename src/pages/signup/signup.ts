@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, MenuController, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { Keyboard } from 'ionic-native';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
@@ -24,7 +24,8 @@ export class Signup {
 
 
   constructor(public nav: NavController, public authData: AuthData, public formBuilder: FormBuilder,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public menuCtrl: MenuController, public platform: Platform) {
+
     Keyboard.disableScroll(true);
     this.signupForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
@@ -48,7 +49,8 @@ export class Signup {
       this.authData.signupUser(this.signupForm.value.email, this.signupForm.value.password).then((signUpData) => {
         //set user details into firebase user profile
         signUpData.updateProfile({
-          displayName: this.signupForm.value.name
+          displayName: this.signupForm.value.name,
+          photoURL: "img/man.svg"
         });
         this.nav.setRoot(Login);
         this.warningAlert("Success! You can now proceed logging in to your new account.");

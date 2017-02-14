@@ -176,7 +176,7 @@ $green_primary_color: #1C8954;
                 position: absolute;
                 top: 23px;
                 width: 20px;
-                z-index: 0.5;
+                z-index: 1;
             }
             p {
                 margin: 0;
@@ -254,6 +254,7 @@ $green_primary_color: #1C8954;
         border-top: 1px solid $green_primary_color;
         width: 100%;
         padding-right: 10px;
+        z-index: 2;
         //fab button positioning & colors
         button {
             box-shadow: 0 4px 6px 0 rgba(0,0,0,.14), 0 4px 5px rgba(0,0,0,.1);

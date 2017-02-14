@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
+import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { SMS, Toast, Geolocation, Network, NativeStorage } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
@@ -11,7 +11,7 @@ import { Userscope } from '../../providers/userscope';
 import { SettingService } from '../../providers/setting-service';
 import { Notificationpanel } from '../notificationpanel/notificationpanel';
 export var Dashboard = (function () {
-    function Dashboard(platform, navCtrl, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events) {
+    function Dashboard(platform, navCtrl, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events, menuCtrl) {
         var _this = this;
         this.platform = platform;
         this.navCtrl = navCtrl;
@@ -22,6 +22,7 @@ export var Dashboard = (function () {
         this.loadingCtrl = loadingCtrl;
         this.settingService = settingService;
         this.events = events;
+        this.menuCtrl = menuCtrl;
         this.membership = Membership;
         this.isUnknown = false;
         document.addEventListener('deviceready', function () {
@@ -66,6 +67,8 @@ export var Dashboard = (function () {
             };
         }, false);
         this.locationTracker.lastLocationTracker();
+        //show side menu if it's not login screen
+        this.menuCtrl.enable(true);
         setInterval(function () {
             _this.checkNetworkConnection();
             _this.kiriromScope();
@@ -178,6 +181,25 @@ export var Dashboard = (function () {
             confirmAlert.present();
         }
     };
+    //show app mode description when it's clicked
+    Dashboard.prototype.modeClicked = function (_val) {
+        var message;
+        switch (_val) {
+            case 1:
+                message = 'Identifying your location to determine application mode.';
+                break;
+            case 2:
+                message = 'vKapp could not identify app mode. Please ensure the location service is on.';
+                break;
+            case 3:
+                message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
+                break;
+            case 4:
+                message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
+                break;
+        }
+        this.makeToast(message);
+    };
     Dashboard.prototype.warningAlert = function (title, message) {
         this.alertCtrl.create({
             title: title,
@@ -197,11 +219,10 @@ export var Dashboard = (function () {
             this.connectionStatus = true;
         }
     };
-    Dashboard.prototype.ionViewDidEnter = function () {
-        //get firebase user data from provider, like name, details, bgLocationTag etc
-        // setTimeout(() => {
-        //   this.firebaseUserData.retrieveUserData();
-        // }, 2000);
+    Dashboard.prototype.makeToast = function (message) {
+        Toast.show(message, '5000', 'bottom').subscribe(function (toast) {
+            console.log(toast);
+        });
     };
     Dashboard.decorators = [
         { type: Component, args: [{
@@ -221,6 +242,7 @@ export var Dashboard = (function () {
         { type: LoadingController, },
         { type: SettingService, },
         { type: Events, },
+        { type: MenuController, },
     ];
     return Dashboard;
 }());

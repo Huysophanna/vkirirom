@@ -1,7 +1,12 @@
 $green_primary_color: #1C8954;
 
-.viewButton {
+.view-btn {
     color: $green_primary_color;
+}
+.delete-btn {
+    span {
+        font-weight: normal;
+    }
 }
 .noNotification {
     font-size: large;

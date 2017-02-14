@@ -125,34 +125,17 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
         }
         .emergency {
             position: relative;
-            margin-top: 5%;
+            margin-top: 10%;
             width: 100%;
-            height: 100%;
-            .button {
-                text-align: center;
-                text-transform: uppercase;
-                text-decoration: none;
-                font-size: large;
-                font-weight: bold;
-                letter-spacing: 1px;
-                &.circle {
-                    background: white;
-                    border: none;
-                    border-radius: 900px;
-                    color: red;
-                    cursor: pointer;
-                    display: block;
-                    width: $circle-size;
-                    height: $circle-size;
-                    line-height: $circle-size;
-                    position: relative;
-                    margin: auto;
-                    margin-top: 25px;
-                }
-            }
-            p {
-                margin: 1% 0;
-                color: white;
+            height: auto;
+            button {
+                position: relative;
+                width: 80%;
+                height: 4.5em;
+                font-size: 120%;
+                border-radius: 15px;
+                color: red;
+                background: white;
             }
         }
     }
@@ -160,6 +143,17 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
 
 //for android when there is home button below
 .platform-android {
+    @media only screen and (device-width: 360px) {
+        .container {
+            .dashboard-action {
+                .emergency {
+                    button {
+                       height: 4.1em;
+                    }
+                }
+            }
+        }
+    }
     .container {
         .dashboard-action {
             .first-row {
@@ -169,7 +163,7 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
                 margin-top: 3%;
             }
             .emergency {
-                margin-top: 4%;
+                margin-top: 5%;
             }
         }
     }

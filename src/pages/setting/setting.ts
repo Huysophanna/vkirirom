@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, NavController, AlertController } from 'ionic-angular';
+import { ViewController, Platform, NavController, AlertController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 import { SettingService } from '../../providers/setting-service';
 import { FirebaseUserData } from '../../providers/firebase-user-data';
@@ -21,7 +21,7 @@ export class Setting {
   public token: any;
   public locationTag: any;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController) {
 
     platform.ready().then(() => {
       NativeStorage.getItem('bgLocationTag').then(val => {
@@ -71,6 +71,10 @@ export class Setting {
     } else {
       console.log("Turn off the notification");
     }
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 
   setLocation(data) {
