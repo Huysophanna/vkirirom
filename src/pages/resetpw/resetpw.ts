@@ -40,10 +40,19 @@ export class Resetpw {
       this.loading.present();
       // this.loading.dismiss();
       this.authData.resetPassword(this.resetForm.value.email).then((user) => {
-      this.loading.dismiss();
-          this.warningAlert("Success! We just sent you a reset link to your email address.");
+      this.loading.dismiss().then(success => {
+        this.warningAlert("Success! We just sent you a reset link to your email address.");
+      });
       }, (error) => {
-          this.warningAlert(error.message);
+        this.loading.dismiss().then(() => {
+          if (error.code.indexOf('auth/user-not-found') >= 0) {
+              this.warningAlert('The email you entered did not match our records. Please double-check and try again.');
+          } else if (error.code.indexOf('auth/invalid-email') >= 0) {
+              this.warningAlert('Please provide a valid form of email address.');
+          } else {
+              this.warningAlert('There is a problem with network connection. Please try again later.');
+          }
+        });
       });
     }
   }

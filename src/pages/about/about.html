@@ -2,7 +2,7 @@
 <ion-header class="header">
 
     <ion-navbar>
-        <ion-title>About us</ion-title>
+        <ion-title>About Us</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -12,7 +12,33 @@
 	
 		<div class="accommodation" *ngSwitchCase="'accom'" [ngClass]="{active: service == 'accom'}">
 			<ion-scroll zooming="false" scrollY="true" class="page-scroll" [ngSwitch]="service">
-				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/details.php#BoreyA')">
+				  <img src="img/aboutus/accom-boreyA.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+							Villa Suite
+				    </ion-card-title>
+				   	<p>
+				   		This two-bedroom villa with a mezzanine level is suitable for bigger families or group. This modern designed building has a bath and shower room, a wide living room and an open roof deck for BBQ party.
+							 
+				   	</p>
+				  </ion-card-content>
+				</ion-card>
+
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/details.php#BoreyR')">
+				  <img src="img/aboutus/accom-boreyR.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Villa Jasmine
+				    </ion-card-title>
+				   	<p>
+				   		Comprising of a combined bedroom, living, dining, kitchen area and an attached toilet, these versatile homes promises lots of many pleasant experiences in the cool Kiririom mountain.
+				   	</p>
+				  </ion-card-content>
+				</ion-card>
+
+
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/details.php#Bungalow')">
 				  <img src="img/aboutus/bungalow.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
@@ -24,7 +50,7 @@
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/details.php#Camping')">
 				  <img src="img/aboutus/camping.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
@@ -36,7 +62,7 @@
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/details.php#Khmercottage')">
 				  <img src="img/aboutus/khmercottage.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
@@ -48,7 +74,7 @@
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/details.php#Luxurytent')">
 				  <img src="img/aboutus/luxurytent.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
@@ -60,7 +86,7 @@
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/details.php#Piperoom')">
 				  <img src="img/aboutus/piperoom.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
@@ -76,11 +102,11 @@
 
 		<div class="property" *ngSwitchCase="'prop'" [ngClass]="{active: service == 'prop'}">
 			<ion-scroll zooming="false" scrollY="true" class="page-scroll">
-				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				<ion-card class="custom-card" (click)="launchUrl('http://property.vkirirom.com/type_a.php')">
 				  <img src="img/aboutus/boreyA.jpg"/>
 				  <ion-card-content>
 				    <ion-card-title>
-				      Borey A
+				      Orchid Hills
 				    </ion-card-title>
 				    <p>
 				    	Our resort provides this special house for a big family and it is suitable for a holiday party.
@@ -88,7 +114,7 @@
 				  </ion-card-content>
 				</ion-card>
 
-				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
+				<ion-card class="custom-card" (click)="launchUrl('http://property.vkirirom.com/type_r.php')">
 				  <img src="img/aboutus/boreyR.JPG"/>
 				  <ion-card-content>
 				    <ion-card-title>
@@ -116,6 +142,31 @@
 				  </ion-card-content>
 				</ion-card>
 
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/detailsFacilities.php')">
+				  <img src="img/aboutus/vkirirombus.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Shuttle Bus
+				    </ion-card-title>
+						<p>
+							Resort also provides transportation service to customers with an acceptable and reasonal price rate.
+						</p>
+				  </ion-card-content>
+				</ion-card>
+
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/')">
+				  <img src="img/aboutus/massage-service.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Massage
+				    </ion-card-title>
+						<p>
+							You can feel the traditional massage from our professional staffs on top of Kirirom mountain. Available only in vKirirom.
+						</p>
+				  </ion-card-content>
+				</ion-card>
+
+
 				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com')">
 				  <img src="img/aboutus/conferenceroom.jpg"/>
 				  <ion-card-content>
@@ -125,6 +176,18 @@
 				    <p>
 				    	For seminar, meeting, conference etc. Share your ideas in the mountain.
 				    </p>
+				  </ion-card-content>
+				</ion-card>
+
+				<ion-card class="custom-card" (click)="launchUrl('http://vkirirom.com/en/services.php#')">
+				  <img src="img/aboutus/moto-rental.jpg"/>
+				  <ion-card-content>
+				    <ion-card-title>
+				      Moto Rental
+				    </ion-card-title>
+						<p>
+							Do you prefer riding a car, motorbike or a mountain bike to see the sights around vKirirom? You can rent vehicles here.
+						</p>
 				  </ion-card-content>
 				</ion-card>
 

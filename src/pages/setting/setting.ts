@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, Platform, NavController, AlertController } from 'ionic-angular';
+import { ViewController, Platform, NavController, AlertController, Events } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 import { SettingService } from '../../providers/setting-service';
 import { FirebaseUserData } from '../../providers/firebase-user-data';
@@ -21,85 +21,26 @@ export class Setting {
   public token: any;
   public locationTag: any;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController, public events: Events) {
 
-    platform.ready().then(() => {
-      NativeStorage.getItem('bgLocationTag').then(val => {
-        this.loc = val;
+  }
+
+  ionViewWillEnter() {
+    this.platform.ready().then(() => {
+      NativeStorage.getItem('settingToggleNotification').then(_val => {
+        this.noti = _val;
       });
-
     });
-
-    this.locationData();
-    this.notificationData();
-  }
-
-  locationData() {
-    NativeStorage.getItem('location').then(data => {
-      var parseData = JSON.parse(data);
-      this.loc = parseData[parseData.length - 1];
-    }, err => {
-      console.log("NativeStorage error " + err);
-    });
-  }
-
-  notificationData() {
-    NativeStorage.getItem('notification').then(data => {
-      var parseData = JSON.parse(data);
-      this.noti = parseData[parseData.length - 1];
-      this.turnNoti(this.noti);
-    }, err => {
-      console.log("NativeStorage error " + err);
-    });
-  }
-
-  turnLoc(location) {
-    if (location == true) {
-      cordova.plugins.backgroundMode.enable();
-      // this.data.bgLocationTag = true;
-    } else {
-      cordova.plugins.backgroundMode.disable();
-      // this.data.bgLocationTag = false;
-    }
-    //emit user data to server
-    // this.socket.emit('backgroundLocation', (this.data));
-  }
-
-  turnNoti(notification) {
-    if (notification == true) {
-      console.log("Turn on the notification");
-    } else {
-      console.log("Turn off the notification");
-    }
+    alert(this.noti);
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
   }
 
-  setLocation(data) {
-    this.location.push(data);
-
-    //update bgLocationTag to firebase using provider
-    this.firebaseUserData.updateBgLocationTag(data);
-
-    // this.data.locationTag = data;
-    // this.socket.emit('backgroundLocation', (this.data));
-
-    // NativeStorage.setItem('location', JSON.stringify(this.location)).then(() => {
-    //   console.log("Stored Item");
-    // }, error => {
-    //   console.log("NativeStorage error");
-    // });
-  }
-
   setNotification(data) {
-    this.notification.push(data);
-    NativeStorage.setItem('notification', JSON.stringify(this.notification)).then(() => {
-      console.log("Stored Item");
-    }, error => {
-      console.log("NativeStorage error!" + error);
-    });
+    //emit events to turn off alert push notification
+    this.events.publish("settingToggleNotification", data);
   }
 
 }

@@ -1,9 +1,12 @@
 <ion-header class="header">
 
     <ion-navbar>
-        <ion-title>Notifications</ion-title>
-        <ion-buttons end>
+        <ion-buttons start>
             <button (click)="dismiss()"><ion-icon [ngStyle]="{'color': 'white'}" name="close"></ion-icon></button>
+        </ion-buttons>
+        <ion-title>Notifications</ion-title>
+        <ion-buttons end class="clearNoti">
+            <button class="clearNoti" (click)="clearNotification()">Clear</button>
         </ion-buttons>
     </ion-navbar>
 
@@ -14,7 +17,7 @@
     <div style="overflow: scroll; height: 100%;">
         <div class="noNotification" *ngIf="!storeNotificationsArray || storeNotificationsArray == ''">
             <ion-icon name="md-checkmark-circle-outline"></ion-icon>
-            <p>Notifications Cleaned</p>
+            <p>No Notifications</p>
         </div>
         <ion-list>
             <ion-item-sliding *ngFor="let notiIndex of storeNotificationsArray; let i=index">

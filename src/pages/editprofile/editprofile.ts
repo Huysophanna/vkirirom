@@ -75,17 +75,25 @@ export class Editprofile {
     //reauthenticate the user in order to make changes to the details
     this.currentUser.reauthenticate(this.credential).then(() => {
       // User re-authenticated.
-      this.currentUser.updateProfile({
-          displayName: this.editForm.value.name,
-          email: this.editForm.value.email
-      }).then(success => {
-          NativeStorage.setItem('userDetails', this.currentUser).then(() => {
-            this.loading.dismiss();
-            this.events.publish('UserLogin', this.currentUser.displayName);
-            this.makeToast("Success! Your details are now updated.");
-            this.dismiss();
-          });
+      this.currentUser.updateEmail(this.editForm.value.email).then(() => {
+        //success updating email
+        this.currentUser.updateProfile({
+          displayName: this.editForm.value.name
+        }).then(success => {
+          //success updating username
+            NativeStorage.setItem('userDetails', this.currentUser).then(() => {
+              this.loading.dismiss();
+              this.events.publish('UserLogin', this.currentUser.displayName);
+              this.makeToast("Success! Your details are now updated.");
+              this.dismiss();
+            });
+        });
+      }, _error => {
+        this.loading.dismiss().then(success => {
+          this.makeToast(_error.message);
+        });
       });
+      
       
     }, error => {
         this.loading.dismiss().then(success => {

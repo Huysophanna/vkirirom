@@ -10,15 +10,9 @@ declare var io: any;
 export class Chat {
 
   socket: any;
-  groupChat = [{name: 'Open Discussion', description: 'Open for all discussion'}];
+  groupChat = [{name: 'Open Discussion', description: 'Join a free topic conversation'}];
 
-  constructor(public navCtrl: NavController) {
-
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello Chat Page');
-  }
+  constructor(public navCtrl: NavController) {}
 
   navtochatsms(name) {
     this.navCtrl.push(Chatmessage, {

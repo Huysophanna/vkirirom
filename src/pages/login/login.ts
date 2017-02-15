@@ -81,7 +81,13 @@ export class Login {
           this.nav.setRoot(Dashboard);
         }, error => {
           this.loading.dismiss().then(() => {
-            this.warningAlert(JSON.stringify(error));
+            if (error.code.indexOf('auth/user-not-found') >= 0) {
+              this.warningAlert('The username and password you entered did not match our records. Please double-check and try again.');
+            } else if (error.code.indexOf('auth/invalid-email') >= 0) {
+              this.warningAlert('Please provide a valid form of email address.');
+            } else {
+              this.warningAlert('There is a problem with network connection. Please try again later.');
+            }
           });
         });
       }
@@ -157,17 +163,18 @@ export class Login {
               });
             }
 
-          })
-          .catch((error) => {
+          }).catch((error) => {
             //alert("Firebase failure: " + JSON.stringify(error));
-            this.warningAlert(error + ". Please contact Customer Service for this issue.");
+            this.loading.dismiss().then(() => {
+              this.warningAlert(error + ". Please contact Customer Service for this issue.");
+            });
           });
 
       }).catch((error) => {
-        console.log(error);
-        if (error.statusCode != 4201) {
+        // console.log(error);
+        this.loading.dismiss().then(() => {
           this.warningAlert("Can't connect to Facebook. Please check your network connection.");
-        }
+        });
       });
     });
 

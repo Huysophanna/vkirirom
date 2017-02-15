@@ -1,9 +1,9 @@
 <ion-header class="header">
     <ion-navbar>
-        <ion-title>Setting</ion-title>
-        <ion-buttons end>
+        <ion-buttons start>
             <button (click)="dismiss()"><ion-icon [ngStyle]="{'color': 'white'}" name="close"></ion-icon></button>
         </ion-buttons>
+        <ion-title>Setting</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
             <div>
                 <ion-item>
                     <ion-label class="custom-setting-label">Location</ion-label>
-                    <ion-toggle [(ngModel)]="loc" (click)="setLocation(loc)"></ion-toggle>
+                    <ion-toggle [(ngModel)]="loc" ></ion-toggle>
                 </ion-item>
                 <ion-item>
                     <ion-label class="custom-setting-label">Notification</ion-label>
