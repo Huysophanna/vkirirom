@@ -1,7 +1,7 @@
 <ion-header class="header">
     <ion-navbar>
         <ion-title class="header-title">
-            <span (click)="modeClicked(1)" *ngIf="(isKirirom == undefined) && (isUnknown == false)" style="color: goldenrod">Identifying</span>
+            <span (click)="modeClicked(1)" *ngIf="(isKirirom == undefined) && (isUnknown == false)" style="color: goldenrod">Identifying...</span>
             <span (click)="modeClicked(2)" *ngIf="(isKirirom == undefined) && (isUnknown == true)" style="color: #795548">Unidentified</span>
             <span (click)="modeClicked(3)" *ngIf="(isKirirom == true) && (isUnknown == false)">OnSite Mode</span>
             <span (click)="modeClicked(4)" *ngIf="(isKirirom == false) && (isUnknown == false)" style="color: #827717;">OffSite Mode</span>

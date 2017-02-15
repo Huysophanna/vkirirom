@@ -144,7 +144,10 @@ this.menuCtrl.enable(true);
           }, 2000);
         };
         cordova.plugins.backgroundMode.ondeactivate = function() {
-          alert("On ondeactivate");
+          this.locationTracker.lastLocationTracker(latitute, longitute);
+            setInterval(() => {
+              this.kiriromScope(latitute, longitute);
+          }, 2000);
         }
       }, false);
       this.locationTracker.lastLocationTracker(latitute, longitute);
@@ -158,7 +161,21 @@ this.menuCtrl.enable(true);
   }
 
   ionViewWillEnter() {
-    alert("ionViewWillEnter");
+    Diagnostic.isLocationEnabled().then(enabled => {
+      if (enabled) {
+        Geolocation.getCurrentPosition().then(resp => {
+          let latitute = resp.coords.latitude;
+          let longitute = resp.coords.longitude;
+          this.locationTracker.lastLocationTracker(latitute, longitute);
+          setInterval(() => {
+            this.kiriromScope(latitute, longitute);
+          }, 2000);
+        }, err => console.error(err));
+      } else {
+        this.isKirirom = undefined;
+        this.isUnknown = true;
+      }
+    }, err => console.error(err));
   }
 
   showNoti() {

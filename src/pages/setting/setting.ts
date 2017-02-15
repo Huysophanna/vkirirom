@@ -22,36 +22,53 @@ export class Setting {
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController) {
 
     platform.ready().then(() => {
-      // document.addEventListener('deviceready', function() {
-      //   cordova.plugins.backgroundMode.ondeactivate = function() {
-      //     alert("backgroundMode in setting");
-      //   };
-      // });
+      document.addEventListener('deviceready', function() {
+        cordova.plugins.backgroundMode.enable();
+        cordova.plugins.backgroundMode.ondeactivate = function() {
+          alert("ondeactivate");
+          Diagnostic.isLocationEnabled().then(enabled => {
+            alert("enabled value : " + enabled);
+            this.loc = enabled;
+            let user = firebase.database().ref('/Users/' + this.userProfile.uid);
+            user.update({"bgLocationTag": enabled});
+            NativeStorage.setItem('bgLocationTag', enabled);
+          })
+        }
+      });
       NativeStorage.getItem('bgLocationTag').then(val => {
         Diagnostic.isLocationEnabled().then((enabled) => {
-          if (enabled && val) {
-            this.loc = enabled;
-            this.firebaseUserData.updateBgLocationTag(enabled);
-          } else {
-            if (enabled) {
-              // user location service is turned on and bgLocationTag is false
-              // Turn off location service
-              this.loc = val;
-              this.firebaseUserData.updateBgLocationTag(val);
-              this.forceUser();
-            } else {
-              // user location service is turned off and bgLocationTag is true
-              // solution : set bgLocationTag to false
-              this.loc = enabled;
-              this.firebaseUserData.updateBgLocationTag(enabled);
-            }
-          }
+          // if (enabled && val) {
+          //   this.loc = enabled;
+          //   this.firebaseUserData.updateBgLocationTag(enabled);
+          // } else {
+          //   if (enabled) {
+          //     // user location service is turned on and bgLocationTag is false
+          //     // Turn off location service
+          //     this.loc = enabled;
+          //     this.firebaseUserData.updateBgLocationTag(enabled);
+          //     this.forceUser();
+          //   } else {
+          //     // user location service is turned off and bgLocationTag is true
+          //     // solution : set bgLocationTag to false
+          //     this.loc = enabled;
+          //     this.firebaseUserData.updateBgLocationTag(enabled);
+          //   }
+          // }
+          this.loc = enabled;
+          this.firebaseUserData.updateBgLocationTag(enabled);
         }, err => console.error(err));
         this.loc = val;
       }, err => {
         console.error("bgLocationTag error : " + err);
       });
     });
+  }
+
+  ionViewWillEnter() {
+    Diagnostic.isLocationEnabled().then(enabled => {
+      this.loc = enabled;
+      this.firebaseUserData.updateBgLocationTag(enabled);
+    }, err => console.error(err));
   }
 
   forceUser() {

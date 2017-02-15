@@ -141,7 +141,11 @@ export var Dashboard = (function () {
                     }, 2000);
                 };
                 cordova.plugins.backgroundMode.ondeactivate = function () {
-                    alert("On ondeactivate");
+                    var _this = this;
+                    this.locationTracker.lastLocationTracker(latitute, longitute);
+                    setInterval(function () {
+                        _this.kiriromScope(latitute, longitute);
+                    }, 2000);
                 };
             }, false);
             _this.locationTracker.lastLocationTracker(latitute, longitute);
@@ -154,7 +158,23 @@ export var Dashboard = (function () {
         });
     };
     Dashboard.prototype.ionViewWillEnter = function () {
-        alert("ionViewWillEnter");
+        var _this = this;
+        Diagnostic.isLocationEnabled().then(function (enabled) {
+            if (enabled) {
+                Geolocation.getCurrentPosition().then(function (resp) {
+                    var latitute = resp.coords.latitude;
+                    var longitute = resp.coords.longitude;
+                    _this.locationTracker.lastLocationTracker(latitute, longitute);
+                    setInterval(function () {
+                        _this.kiriromScope(latitute, longitute);
+                    }, 2000);
+                }, function (err) { return console.error(err); });
+            }
+            else {
+                _this.isKirirom = undefined;
+                _this.isUnknown = true;
+            }
+        }, function (err) { return console.error(err); });
     };
     Dashboard.prototype.showNoti = function () {
         var notiModal = this.modalCtrl.create(Notificationpanel);
