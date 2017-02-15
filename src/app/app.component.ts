@@ -69,7 +69,6 @@ export class MyApp {
       //event listens to check if the user turn OFF/ON notification in Setting
       this.events.subscribe('settingToggleNotification', val => {
         this.settingToggleNotification = val;
-        alert(this.settingToggleNotification);
         NativeStorage.setItem('settingToggleNotification', val);
       });
       //event listens to check if chat message screen is active
@@ -127,8 +126,7 @@ export class MyApp {
         NativeStorage.setItem('deviceToken', data.registrationId);
       });
       push.on('notification', (data) => {
-        alert(this.settingToggleNotification);
-        if (this.settingToggleNotification == 'false') {
+        if (this.settingToggleNotification == 'true') {
 
           //store all notifications to local storage for the notification panel
           this.storeNotificationsArray.push(data);

@@ -18,81 +18,99 @@ export class Setting {
   public socket: any;
   public token: any;
   public locationTag: any;
+  public test: any;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController, public events: Events) {
     platform.ready().then(() => {
+      this.noti = this.test;
+      console.log('constructor ------------------------------------------------------');
+      
+      // this.noti = false;
+      // NativeStorage.getItem('settingToggleNotification').then(_val => {
+      //   this.noti = _val;
+      //   console.log(this.noti + '----------------------------------------------------------------------------');
+        
+      // });
       // document.addEventListener('deviceready', function() {
       //   cordova.plugins.backgroundMode.ondeactivate = function() {
       //     alert("backgroundMode in setting");
       //   };
       // });
-      NativeStorage.getItem('bgLocationTag').then(val => {
-        Diagnostic.isLocationEnabled().then((enabled) => {
-          if (enabled && val) {
-            this.loc = enabled;
-            this.firebaseUserData.updateBgLocationTag(enabled);
-          } else {
-            if (enabled) {
-              // user location service is turned on and bgLocationTag is false
-              // Turn off location service
-              this.loc = val;
-              this.firebaseUserData.updateBgLocationTag(val);
-              this.forceUser();
-            } else {
-              // user location service is turned off and bgLocationTag is true
-              // solution : set bgLocationTag to false
-              this.loc = enabled;
-              this.firebaseUserData.updateBgLocationTag(enabled);
-            }
-          }
-        }, err => console.error(err));
-        this.loc = val;
-      }, err => {
-        console.error("bgLocationTag error : " + err);
-      });
+      // NativeStorage.getItem('bgLocationTag').then(val => {
+      //   Diagnostic.isLocationEnabled().then((enabled) => {
+      //     if (enabled && val) {
+      //       this.loc = enabled;
+      //       this.firebaseUserData.updateBgLocationTag(enabled);
+      //     } else {
+      //       if (enabled) {
+      //         // user location service is turned on and bgLocationTag is false
+      //         // Turn off location service
+      //         this.loc = val;
+      //         this.firebaseUserData.updateBgLocationTag(val);
+      //         // this.forceUser();
+      //       } else {
+      //         // user location service is turned off and bgLocationTag is true
+      //         // solution : set bgLocationTag to false
+      //         this.loc = enabled;
+      //         this.firebaseUserData.updateBgLocationTag(enabled);
+      //       }
+      //     }
+      //   }, err => console.error(err));
+      //   this.loc = val;
+      // }, err => {
+      //   console.error("bgLocationTag error : " + err);
+      // });
     });
+    console.log(this.noti);
   }
 
-  forceUser() {
-    let confirm = this.alertCtrl.create({
-      title: 'Switch to Location Setting',
-      message: 'To use setting, Please turn off your location service',
-      buttons: [
-        {
-          text: 'Disagree',
-          handler: () => {
-            console.log('Disagree clicked');
-            setTimeout(() => {
-              this.forceUser();
-            }, 200);
-          }
-        },
-        {
-          text: 'Agree',
-          handler: () => {
-          Diagnostic.switchToLocationSettings();
-          Diagnostic.isLocationEnabled().then((enabled) => {
-            if (enabled) {
-              this.forceUser();
-            } else {
-              this.loc = enabled;
-              this.firebaseUserData.updateBgLocationTag(enabled);
-            }
-          })
-        }
-      }
-    ]
-  });
-  confirm.present();
-}
+  ngOnInit() {
+    this.test = true;
+        console.log(this.test + ' On Init ----------------------------------------------------------------------------');
+    // NativeStorage.getItem('settingToggleNotification').then(_val => {
+    //     this.test = _val;
+    //     console.log(this.noti + '----------------------------------------------------------------------------');
+        
+    //   }, error => {
+    //     console.log(this.noti + '----------------------------------------------------------------------------');
+    //   });
+  }
 
-  ionViewWillEnter() {
-      this.platform.ready().then(() => {
-        NativeStorage.getItem('settingToggleNotification').then(_val => {
-          this.noti = _val;
-        });
-      });
-      alert(this.noti);
+//   forceUser() {
+//     let confirm = this.alertCtrl.create({
+//       title: 'Switch to Location Setting',
+//       message: 'To use setting, Please turn off your location service',
+//       buttons: [
+//         {
+//           text: 'Disagree',
+//           handler: () => {
+//             console.log('Disagree clicked');
+//             setTimeout(() => {
+//               this.forceUser();
+//             }, 200);
+//           }
+//         },
+//         {
+//           text: 'Agree',
+//           handler: () => {
+//           Diagnostic.switchToLocationSettings();
+//           Diagnostic.isLocationEnabled().then((enabled) => {
+//             if (enabled) {
+//               this.forceUser();
+//             } else {
+//               this.loc = enabled;
+//               this.firebaseUserData.updateBgLocationTag(enabled);
+//             }
+//           })
+//         }
+//       }
+//     ]
+//   });
+//   confirm.present();
+// }
+
+  clickHelp() {
+    this.warningAlert('Help', 'Notification: Turn OFF/ON all incoming alert notification including Digital News Content as well as Chat Messaging.');
   }
 
 
@@ -103,7 +121,19 @@ export class Setting {
   setNotification(data) {
     //emit events to turn off alert push notification
     this.events.publish("settingToggleNotification", data);
+    // alert(data);
   }
+
+   warningAlert(title, message) {
+      this.alertCtrl.create( {
+          title: title,
+          message: message,
+          buttons: [{
+            text: 'Okay',
+            role: 'cancel'
+          }]
+      }).present();
+    }
 
   setLocation(data) {
     this.firebaseUserData.updateBgLocationTag(data);

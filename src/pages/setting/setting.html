@@ -11,21 +11,19 @@
     <div class="setting-content">
         <ion-list>
             <div>
-                <ion-item>
+                <!--<ion-item>
                     <ion-label class="custom-setting-label">Location</ion-label>
-                    <ion-toggle [(ngModel)]="loc" ></ion-toggle>
-                </ion-item>
+                    <ion-toggle [(ngModel)]="loc" (click)="setLocation(loc)"></ion-toggle>
+                </ion-item>-->
                 <ion-item>
                     <ion-label class="custom-setting-label">Notification</ion-label>
-                    <ion-toggle [(ngModel)]="noti"></ion-toggle>
+                    <ion-toggle [(ngModel)]="noti" (click)="setNotification(noti)"></ion-toggle>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label class="custom-setting-label">Help</ion-label>
                 </ion-item>
             </div>
-        </ion-list>
-
-        <ion-list>
-            <ion-item>
-                <ion-label class="custom-setting-label">Help</ion-label>
-            </ion-item>
         </ion-list>
     </div>
 </ion-content>

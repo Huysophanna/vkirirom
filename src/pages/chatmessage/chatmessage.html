@@ -111,7 +111,7 @@
 
     <div class="chat-input" #chatinput>
         <!-- Real floating action button, fixed. It will not scroll with the content -->
-            <ion-fab right bottom *ngIf="notificationType != undefined">  
+            <ion-fab right bottom *ngIf="notificationType != undefined && settingToggleNotification == 'true'">
                 <button ion-fab color="light"><ion-icon [ngStyle]="{'color': '#1C8954'}" name="md-add"></ion-icon></button>
                 <ion-fab-list side="top">
                     <button *ngIf="notificationType == 'ON'" (click)="notificationOn()" ion-fab><ion-icon [ngStyle]="{'color': 'black'}" name="notifications"></ion-icon></button>
