@@ -96,5 +96,13 @@ $blue_fb_color: #3956A0;
 
 //for android when there is home button below
 .platform-android {
-
+    .submit-login {
+        margin-top: 5%;
+    }
+    .input-signup {
+        .item {
+            //make each field decrease the line height, smaller
+            line-height: 10px;
+        }
+    }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ViewController } from 'ionic-angular';
+import { Events, NavController, AlertController, ViewController } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
 
 /*
@@ -14,15 +14,22 @@ import { NativeStorage } from 'ionic-native';
   // styles: ['.scroll-content { overflow-y: auto }']
 })
 export class Notificationpanel {
-  storeNotificationsArray: any = [];
+  storeNotificationsArray: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertCtrl: AlertController, public events: Events) {
     this.getStorageItem();
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
   }
+
+  // deleteItem(notiIndex) {
+  //   this.storeNotificationsArray.splice(notiIndex, 1);
+  //   this.events.publish('deleteNotification', this.storeNotificationsArray);
+  //   // NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
+  //   // this.getStorageItem();
+  // }
 
   viewBtnPressed(notiIndex) {
     let notiTitle;

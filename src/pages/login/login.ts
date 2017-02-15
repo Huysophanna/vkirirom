@@ -28,6 +28,12 @@ export class Login {
   constructor(public menuCtrl: MenuController, public platform: Platform, public nav: NavController, public authData: AuthData,
     public formBuilder: FormBuilder, public alertCtrl: AlertController,
     public loadingCtrl: LoadingController, public fb: Facebook, public events: Events) {
+
+    platform.ready().then(() => {
+      //hide side mneu on login screen
+      this.menuCtrl.enable(false);
+    });
+
     Keyboard.disableScroll(true);
     this.userProfile;
     this.loginForm = formBuilder.group({
@@ -62,7 +68,7 @@ export class Login {
           this.userProfile = authData;
 
           //store user device token and other details to firebase after creating the user account
-        //  this.storeDeviceTokenToFirebase();
+          //  this.storeDeviceTokenToFirebase();
 
           if (this.userProfile.photoURL == '') {
             this.userProfile.photoURL = "img/profile.svg";
@@ -131,18 +137,27 @@ export class Login {
             this.userProfile = success;
             this.userExist();
             //store user device token and other details to firebase after creating the user account
-          //  this.storeDeviceTokenToFirebase();
+            //  this.storeDeviceTokenToFirebase();
             //alert("Firebase success: " + JSON.stringify(success));
             this.nav.setRoot(Dashboard);
 
             //store userProfile object to the phone storage
             NativeStorage.setItem('userDetails', this.userProfile);
-            // NativeStorage.setItem('userID', response.authResponse.userID);
-            NativeStorage.setItem('userPhoto', this.userProfile.photoURL).then(() => {
-              //"https://graph.facebook.com/" + response.authResponse.userID + "/picture?width=320&height=320"
-              //create an event for others to listen
-              this.events.publish('UserLogin', success.displayName);
-            });
+
+            //profile picture link from Facebook, so we improve photo quality from graph.facebook.com
+            if (this.userProfile.photoURL.indexOf('scontent.xx.fbcdn.net') >= 0) {
+              NativeStorage.setItem('userPhoto', "https://graph.facebook.com/" + response.authResponse.userID + "/picture?width=320&height=320").then(() => {
+                //create an event for others to listen
+                this.events.publish('UserLogin', success.displayName);
+              });
+            //else if the user upload their own photo to our firebase storage, just store the default one
+            } else if (this.userProfile.photoURL.indexOf('firebasestorage.googleapis.com') >= 0) {
+              NativeStorage.setItem('userPhoto', this.userProfile.photoURL).then(() => {
+                //create an event for others to listen
+                this.events.publish('UserLogin', success.displayName);
+              });
+            }
+
           })
           .catch((error) => {
             //alert("Firebase failure: " + JSON.stringify(error));
@@ -151,10 +166,10 @@ export class Login {
 
       }).catch((error) => {
         console.log(error);
+        alert("Facebook Error : " + error.statusCode);
         if (error.statusCode != 4201) {
           this.warningAlert("Can't connect to Facebook. Please check your network connection.");
         }
-        alert(JSON.stringify(error));
       });
     });
 
@@ -181,16 +196,6 @@ export class Login {
         role: 'cancel'
       }]
     }).present();
-  }
-
-  ionViewDidEnter() {
-    //hide side mneu on login screen
-    this.menuCtrl.enable(false);
-  }
-
-  ionViewDidLeave() {
-    //show side menu if it's not login screen
-    this.menuCtrl.enable(true);
   }
 
 }

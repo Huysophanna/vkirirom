@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
-import { SMS, Toast, Geolocation, NativeStorage, Diagnostic } from 'ionic-native';
+import { SMS, Toast, Geolocation, Network, NativeStorage, Diagnostic } from 'ionic-native';
+import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
@@ -11,7 +11,7 @@ import { Userscope } from '../../providers/userscope';
 import { SettingService } from '../../providers/setting-service';
 import { Notificationpanel } from '../notificationpanel/notificationpanel';
 export var Dashboard = (function () {
-    function Dashboard(platform, navCtrl, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events) {
+    function Dashboard(platform, navCtrl, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events, menuCtrl) {
         var _this = this;
         this.platform = platform;
         this.navCtrl = navCtrl;
@@ -22,11 +22,11 @@ export var Dashboard = (function () {
         this.loadingCtrl = loadingCtrl;
         this.settingService = settingService;
         this.events = events;
+        this.menuCtrl = menuCtrl;
         this.membership = Membership;
         this.isUnknown = false;
         this.launchCount = 0;
         platform.ready().then(function () {
-            alert("Testing purpose only : " + Diagnostic.locationMode.LOCATION_OFF);
             _this.launchCount = _this.launchCount + 1;
             NativeStorage.getItem('launchCount').then(function (data) {
                 data = data + 1;
@@ -48,7 +48,6 @@ export var Dashboard = (function () {
     Dashboard.prototype.diagnosticFunction = function () {
         var _this = this;
         Diagnostic.isLocationEnabled().then(function (enabled) {
-            alert("Location Service is :" + (enabled ? "Enabled" : "Disabled"));
             if (enabled) {
                 _this.geolocationFunction();
             }
@@ -86,12 +85,14 @@ export var Dashboard = (function () {
                     console.error("Get launchCount error : " + err);
                 });
             }
-        }).catch(function (e) { return alert("Get Location Service Error : " + e); });
+        });
+        this.geolocationFunction();
+        //show side menu if it's not login screen
+        this.menuCtrl.enable(true);
     };
     Dashboard.prototype.geolocationFunction = function () {
         var _this = this;
         Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(function (resp) {
-            alert("In Geolocation Dashboard");
             var latitute = resp.coords.latitude;
             var longitute = resp.coords.longitude;
             document.addEventListener('deviceready', function () {
@@ -99,8 +100,8 @@ export var Dashboard = (function () {
                     title: 'Chain',
                     text: 'BackgroundGeolocation'
                 });
+                cordova.plugins.backgroundMode.enable();
                 cordova.plugins.backgroundMode.onactivate = function () {
-                    alert("background Mode");
                     setInterval(function () {
                         var userlocation = [];
                         NativeStorage.getItem('userlocation').then(function (data) {
@@ -139,6 +140,9 @@ export var Dashboard = (function () {
                         });
                     }, 2000);
                 };
+                cordova.plugins.backgroundMode.ondeactivate = function () {
+                    alert("On ondeactivate");
+                };
             }, false);
             _this.locationTracker.lastLocationTracker(latitute, longitute);
             setInterval(function () {
@@ -149,12 +153,14 @@ export var Dashboard = (function () {
             _this.isUnknown = true;
         });
     };
+    Dashboard.prototype.ionViewWillEnter = function () {
+        alert("ionViewWillEnter");
+    };
     Dashboard.prototype.showNoti = function () {
         var notiModal = this.modalCtrl.create(Notificationpanel);
         notiModal.present();
     };
     Dashboard.prototype.kiriromScope = function (latitute, longitute) {
-        // alert("kiriromScope :" + latitute + longitute);
         var distance = this.userScope.distanceCal(latitute, longitute);
         if (distance < 1) {
             var test = distance * 1000;
@@ -264,6 +270,25 @@ export var Dashboard = (function () {
             confirmAlert.present();
         }
     };
+    //show app mode description when it's clicked
+    Dashboard.prototype.modeClicked = function (_val) {
+        var message;
+        switch (_val) {
+            case 1:
+                message = 'Identifying your location to determine application mode.';
+                break;
+            case 2:
+                message = 'vKapp could not identify app mode. Please ensure the location service is on.';
+                break;
+            case 3:
+                message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
+                break;
+            case 4:
+                message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
+                break;
+        }
+        this.makeToast(message);
+    };
     Dashboard.prototype.warningAlert = function (title, message) {
         this.alertCtrl.create({
             title: title,
@@ -274,14 +299,20 @@ export var Dashboard = (function () {
                 }]
         }).present();
     };
-    // checkNetworkConnection() {
-    //   if ((<string> Network.connection === 'none')) {
-    //       this.connectionStatus = false;
-    //       this.isKirirom = false;
-    //   } else {
-    //       this.connectionStatus = true;
-    //   }
-    // }
+    Dashboard.prototype.checkNetworkConnection = function () {
+        if ((Network.connection === 'none')) {
+            this.connectionStatus = false;
+            this.isKirirom = false;
+        }
+        else {
+            this.connectionStatus = true;
+        }
+    };
+    Dashboard.prototype.makeToast = function (message) {
+        Toast.show(message, '5000', 'bottom').subscribe(function (toast) {
+            console.log(toast);
+        });
+    };
     Dashboard.decorators = [
         { type: Component, args: [{
                     selector: 'page-dashboard',
@@ -300,6 +331,7 @@ export var Dashboard = (function () {
         { type: LoadingController, },
         { type: SettingService, },
         { type: Events, },
+        { type: MenuController, },
     ];
     return Dashboard;
 }());

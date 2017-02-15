@@ -1,10 +1,10 @@
 <ion-header class="header">
     <ion-navbar>
         <ion-title class="header-title">
-            <span *ngIf="(isKirirom == undefined) && (isUnknown == false)" style="color: goldenrod">Fetching...</span>
-            <span *ngIf="(isKirirom == undefined) && (isUnknown == true)" style="color: #795548">Unidentify</span>
-            <span *ngIf="(isKirirom == true) && (isUnknown == false)">Indoor Mode</span>
-            <span *ngIf="(isKirirom == false) && (isUnknown == false)" style="color: #827717;">Outdoor Mode</span>
+            <span (click)="modeClicked(1)" *ngIf="(isKirirom == undefined) && (isUnknown == false)" style="color: goldenrod">Identifying</span>
+            <span (click)="modeClicked(2)" *ngIf="(isKirirom == undefined) && (isUnknown == true)" style="color: #795548">Unidentified</span>
+            <span (click)="modeClicked(3)" *ngIf="(isKirirom == true) && (isUnknown == false)">OnSite Mode</span>
+            <span (click)="modeClicked(4)" *ngIf="(isKirirom == false) && (isUnknown == false)" style="color: #827717;">OffSite Mode</span>
             <!--<span *ngIf="connectionStatus == false" style="color: maroon;">No Connection</span>-->
         </ion-title>
         <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
@@ -27,7 +27,7 @@
         <div class="first-row">
             <button (click)="navigate(1)" class="service-btn"><img src="img/service-icon.svg">Service</button>
             <button (click)="navigate(2)" class="member-btn"><img src="img/card-icon.svg">Membership</button>
-            <button (click)="navigate(3)" class="map-btn"><img src="img/map-icon.svg">vMap</button>
+            <button (click)="navigate(3)" class="map-btn"><img src="img/map-icon.svg">Map</button>
         </div>
         <div class="second-row">
             <button (click)="navigate(4)" class="service-btn"><img src="img/chat-icon.svg">Chat</button>

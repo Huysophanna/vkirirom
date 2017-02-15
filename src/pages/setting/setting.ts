@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Platform, NavController, AlertController } from 'ionic-angular';
 import { NativeStorage, LocationAccuracy, Diagnostic } from 'ionic-native';
+import { ViewController, Platform, NavController, AlertController } from 'ionic-angular';
 import { SettingService } from '../../providers/setting-service';
 import { FirebaseUserData } from '../../providers/firebase-user-data';
 import firebase from 'firebase';
@@ -19,16 +19,20 @@ export class Setting {
   public token: any;
   public locationTag: any;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController) {
 
     platform.ready().then(() => {
+      // document.addEventListener('deviceready', function() {
+      //   cordova.plugins.backgroundMode.ondeactivate = function() {
+      //     alert("backgroundMode in setting");
+      //   };
+      // });
       NativeStorage.getItem('bgLocationTag').then(val => {
         Diagnostic.isLocationEnabled().then((enabled) => {
           if (enabled && val) {
             this.loc = enabled;
             this.firebaseUserData.updateBgLocationTag(enabled);
           } else {
-            alert("Some logical error occur!");
             if (enabled) {
               // user location service is turned on and bgLocationTag is false
               // Turn off location service
@@ -44,7 +48,6 @@ export class Setting {
           }
         }, err => console.error(err));
         this.loc = val;
-        this.turnLoc(this.loc);
       }, err => {
         console.error("bgLocationTag error : " + err);
       });
@@ -52,7 +55,6 @@ export class Setting {
   }
 
   forceUser() {
-    alert("In force user function");
     let confirm = this.alertCtrl.create({
       title: 'Switch to Location Setting',
       message: 'To use setting, Please turn off your location service',
@@ -85,25 +87,15 @@ export class Setting {
   confirm.present();
   }
 
-  turnLoc(location) {
-    
-    if (location == true) {
-      alert("location :" + location);
-      cordova.plugins.backgroundMode.enable();
-    } else {
-      alert("location :" + location);
-      cordova.plugins.backgroundMode.disable();
-    }
-  }
 
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
 
   setLocation(data) {
     this.firebaseUserData.updateBgLocationTag(data);
 
-
-
     Diagnostic.isLocationEnabled().then((enabled) => {
-      alert("Enabled : " +  enabled);
       if ((enabled == true) && (data == false)) {
         // turn the location off
         let confirm = this.alertCtrl.create({
@@ -131,19 +123,15 @@ export class Setting {
         });
         confirm.present();
       } else if ((enabled == false) && (data == true)) {
-        alert("Enabled : " + enabled);
         // turn the location on
         LocationAccuracy.canRequest().then((canRequest: boolean) => {
-          alert("canRequest : " + canRequest);
           if(canRequest) {
             LocationAccuracy.request(LocationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
               () => {
-                alert('Request successful');
                 this.loc = data;
                 this.firebaseUserData.updateBgLocationTag(data);
               },
               error => {
-                alert('Request Failed');
                 if (error) {
                   console.error("error code="+error.code+"; error message="+error.message);
                   if (error.code !== LocationAccuracy.ERROR_USER_DISAGREED) {

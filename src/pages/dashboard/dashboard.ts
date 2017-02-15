@@ -1,6 +1,6 @@
 import { Component, Inject, NgZone } from '@angular/core';
-import { NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { SMS, Toast, Geolocation, Push, Network, NativeStorage, BackgroundGeolocation, Diagnostic } from 'ionic-native';
+import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
@@ -33,9 +33,8 @@ export class Dashboard {
   deviceToken: any;
   launchCount: number = 0;
 
-  constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events) {
+  constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController) {
       platform.ready().then(() => {
-        alert("Testing purpose only : " + Diagnostic.locationMode.LOCATION_OFF)
         this.launchCount = this.launchCount + 1;
         NativeStorage.getItem('launchCount').then(data => {
           data = data + 1;
@@ -56,49 +55,49 @@ export class Dashboard {
   }
 
   diagnosticFunction() {
-    Diagnostic.isLocationEnabled().then((enabled) => {
-          alert("Location Service is :" + (enabled ? "Enabled" : "Disabled"));
-          if (enabled) {
-            this.geolocationFunction();
-          } else {
-            NativeStorage.getItem('launchCount').then(data => {
-              if (data === 1) {
-                setTimeout(() => {
-                  let confirm = this.alertCtrl.create({
-                    title: 'Your location service is turned off',
-                    message: 'Enable to continue using the application, you can disable in setting.',
-                    buttons: [
-                      {
-                        text: 'Disagree',
-                        handler: () => {
-                          console.log('Disagree clicked');
-                        }
-                      },
-                      {
-                        text: 'Agree',
-                        handler: () => {
-                          Diagnostic.switchToLocationSettings();
-                          this.geolocationFunction();
-                        }
-                      }
-                    ]
-                  });
-                  confirm.present();
-                }, 500);             
-              } else {
-                console.log("Not the first launch");
-                return;
-              }
-            }, err => {
-              console.error("Get launchCount error : " + err);
+    Diagnostic.isLocationEnabled().then(enabled => {
+      if (enabled) {
+        this.geolocationFunction();
+      } else {
+        NativeStorage.getItem('launchCount').then(data => {
+          if (data === 1) {
+            setTimeout(() => {
+              let confirm = this.alertCtrl.create({
+                title: 'Your location service is turned off',
+                message: 'Enable to continue using the application, you can disable in setting.',
+                buttons: [
+                  {
+                    text: 'Disagree',
+                    handler: () => {
+                      console.log('Disagree clicked');
+                    }
+                  },
+                  {
+                    text: 'Agree',
+                    handler: () => {
+                    Diagnostic.switchToLocationSettings();
+                    this.geolocationFunction();
+                  }
+                }
+              ]
             });
-          }
-        }).catch(e => alert("Get Location Service Error : " + e));
+          confirm.present();
+        }, 500);             
+      } else {
+        console.log("Not the first launch");
+        return;
+      }
+    }, err => {
+      console.error("Get launchCount error : " + err);
+    });
   }
-
+});
+this.geolocationFunction();
+//show side menu if it's not login screen
+this.menuCtrl.enable(true);
+  }
   geolocationFunction() {
     Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
-      alert("In Geolocation Dashboard");
       let latitute = resp.coords.latitude;
       let longitute = resp.coords.longitude;
       document.addEventListener('deviceready', function () {
@@ -106,8 +105,8 @@ export class Dashboard {
           title: 'Chain',
           text: 'BackgroundGeolocation'
         });
+        cordova.plugins.backgroundMode.enable();
         cordova.plugins.backgroundMode.onactivate = function () {
-          alert("background Mode");
           setInterval(() => {
             let userlocation = [];
             NativeStorage.getItem('userlocation').then(data => {
@@ -143,16 +142,40 @@ export class Dashboard {
               });
             });
           }, 2000);
+        };
+        cordova.plugins.backgroundMode.ondeactivate = function() {
+          this.locationTracker.lastLocationTracker(latitute, longitute);
+            setInterval(() => {
+              this.kiriromScope(latitute, longitute);
+          }, 2000);
         }
       }, false);
       this.locationTracker.lastLocationTracker(latitute, longitute);
       setInterval(() => {
         this.kiriromScope(latitute, longitute);
       }, 2000);
-    }, err => {
+     }, err => {
       console.log("Geolocation Error :" + this.isKirirom);
       this.isUnknown = true;
     });
+  }
+
+  ionViewWillEnter() {
+    Diagnostic.isLocationEnabled().then(enabled => {
+      if (enabled) {
+        Geolocation.getCurrentPosition().then(resp => {
+          let latitute = resp.coords.latitude;
+          let longitute = resp.coords.longitude;
+          this.locationTracker.lastLocationTracker(latitute, longitute);
+          setInterval(() => {
+            this.kiriromScope(latitute, longitute);
+          }, 2000);
+        }, err => console.error(err));
+      } else {
+        this.isKirirom = undefined;
+        this.isUnknown = true;
+      }
+    }, err => console.error(err));
   }
 
   showNoti() {
@@ -161,7 +184,6 @@ export class Dashboard {
   }
 
   kiriromScope(latitute, longitute) {
-    // alert("kiriromScope :" + latitute + longitute);
     var distance = this.userScope.distanceCal(latitute, longitute);
     if (distance < 1) {
       var test = distance * 1000;
@@ -169,10 +191,8 @@ export class Dashboard {
     } else {
       if (distance <= 17) {
         this.isKirirom = true;
-        // alert("isKirirom :" + this.isKirirom);
       } else {
         this.isKirirom = false;
-        // alert("isKirirom :" + this.isKirirom);
       }
     }
   }
@@ -185,7 +205,9 @@ export class Dashboard {
           this.warningAlert("Coming Soon!", "Introducing vKirirom Membership Card with vPoints, will be available soon.");
           // this.navCtrl.push(Membership);
         break;
-        case 3: this.navCtrl.push(GoogleMapPage);
+        case 3: 
+          this.navCtrl.push(GoogleMapPage);
+        
         break;
         case 4:
             if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
@@ -268,6 +290,23 @@ export class Dashboard {
     }
   }
 
+  //show app mode description when it's clicked
+  modeClicked(_val) {
+    let message;
+    switch (_val) {
+      case 1: message = 'Identifying your location to determine application mode.';
+      break;
+      case 2: message = 'vKapp could not identify app mode. Please ensure the location service is on.'
+      break;
+      case 3: message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
+      break;
+      case 4: message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
+      break;
+    }
+
+    this.makeToast(message);
+  }
+
   warningAlert(title, message) {
     this.alertCtrl.create( {
         title: title,
@@ -279,13 +318,21 @@ export class Dashboard {
     }).present();
   }
 
-  // checkNetworkConnection() {
-  //   if ((<string> Network.connection === 'none')) {
-  //       this.connectionStatus = false;
-  //       this.isKirirom = false;
-  //   } else {
-  //       this.connectionStatus = true;
-  //   }
-  // }
+  checkNetworkConnection() {
+    if ((<string> Network.connection === 'none')) {
+        this.connectionStatus = false;
+        this.isKirirom = false;
+    } else {
+        this.connectionStatus = true;
+    }
+  }
+
+  makeToast(message) {
+    Toast.show(message, '5000', 'bottom').subscribe(
+        toast => {
+          console.log(toast);
+        }
+    );
+  }
 
 }

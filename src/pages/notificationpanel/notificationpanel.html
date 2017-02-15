@@ -17,8 +17,8 @@
             <p>Notifications Cleaned</p>
         </div>
         <ion-list>
-            <ion-item-sliding>
-                <ion-item *ngFor="let notiIndex of storeNotificationsArray; let i=index">
+            <ion-item-sliding *ngFor="let notiIndex of storeNotificationsArray; let i=index">
+                <ion-item>
                     <ion-thumbnail item-left>
                         <img *ngIf="storeNotificationsArray[storeNotificationsArray.length - (i+1)].title == 'New message'" src="img/chat-icon.svg">
                         <img *ngIf="storeNotificationsArray[storeNotificationsArray.length - (i+1)].title != 'New message'" src="img/media-icon.svg">
@@ -26,12 +26,11 @@
                     <h2 *ngIf="storeNotificationsArray[storeNotificationsArray.length - (i+1)].title == 'New message'">Chat Message</h2>
                     <h2 *ngIf="storeNotificationsArray[storeNotificationsArray.length - (i+1)].title != 'New message'">{{ storeNotificationsArray[storeNotificationsArray.length - (i+1)].title }}</h2>
                     <p>{{ storeNotificationsArray[storeNotificationsArray.length - (i+1)].message }}</p>
-                    <button class="viewButton" (click)="viewBtnPressed(storeNotificationsArray[storeNotificationsArray.length - (i+1)])" ion-button clear item-right>View</button>
+                    <button class="view-btn" (click)="viewBtnPressed(storeNotificationsArray[storeNotificationsArray.length - (i+1)])" ion-button clear item-right>View</button>
                 </ion-item>
-                <ion-item-options side="left">
-                    <button ion-button color="primary"><ion-icon name="text"></ion-icon>Text</button>
-                    <button ion-button color="secondary"><ion-icon name="call"></ion-icon>Call</button>
-                </ion-item-options>
+                <!--<ion-item-options side="right">
+                    <button (click)="deleteItem(storeNotificationsArray.length - (i+1))" class="delete-btn" ion-button color="danger">Delete</button>
+                </ion-item-options>-->
             </ion-item-sliding>
         </ion-list>
     </div>

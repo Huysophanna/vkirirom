@@ -1,28 +1,38 @@
-<ion-slides [options]="sliderOptions">
+<ion-slides #Slides [options]="sliderOptions">
  
   <ion-slide>
-    <img src="img/slide1.jpg" />
+    <img src="img/app-intro/welcome-intro.png"/>
+    <div class="next-btn">
+      <button (click)="nextSlide()" ion-button>Next<ion-icon name="ios-arrow-forward"></ion-icon></button>
+    </div>
   </ion-slide>
  
   <ion-slide>
-    <img src="img/slide1.jpg" />
+    <img src="img/app-intro/map-intro.png"/>
+    <div class="next-btn">
+      <button (click)="nextSlide()" ion-button>Next<ion-icon name="ios-arrow-forward"></ion-icon></button>
+    </div>
   </ion-slide>
  
   <ion-slide>
-    <img src="img/slide1.jpg" />
+    <img src="img/app-intro/sos-intro.png"/>
+    <div class="next-btn">
+      <button (click)="nextSlide()" ion-button>Next<ion-icon name="ios-arrow-forward"></ion-icon></button>
+    </div>
+  </ion-slide>
+
+  <ion-slide>
+    <img src="img/app-intro/chat-intro.png"/>
+    <div class="next-btn">
+      <button (click)="nextSlide()" ion-button>Next<ion-icon name="ios-arrow-forward"></ion-icon></button>
+    </div>
   </ion-slide>
  
   <ion-slide>
-    <ion-row>
-      <ion-col>
-        <img src="img/slide1.jpg" />
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <button ion-button color="light" (click)="goToHome()">Start Using vKirirom</button>
-      </ion-col>
-    </ion-row>
+    <img src="img/app-intro/mode-intro.png"/>
+    <div class="start-btn">
+      <button ion-button (click)="goToHome()">Get Started</button>
+    </div>
   </ion-slide>
  
 </ion-slides>

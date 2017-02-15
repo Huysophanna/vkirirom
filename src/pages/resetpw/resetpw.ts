@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, MenuController, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { Keyboard } from 'ionic-native';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
@@ -19,11 +19,13 @@ export class Resetpw {
   loading: any;
 
   constructor(public nav: NavController, public authData: AuthData, public formBuilder: FormBuilder,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public menuCtrl: MenuController, public platform: Platform) {
+
     Keyboard.disableScroll(true);
     this.resetForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required])]
     });
+    
   }
 
   resetPassword(){

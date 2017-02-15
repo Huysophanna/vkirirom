@@ -143,6 +143,17 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
 
 //for android when there is home button below
 .platform-android {
+    @media only screen and (device-width: 360px) {
+        .container {
+            .dashboard-action {
+                .emergency {
+                    button {
+                       height: 4.1em;
+                    }
+                }
+            }
+        }
+    }
     .container {
         .dashboard-action {
             .first-row {
@@ -152,7 +163,7 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
                 margin-top: 3%;
             }
             .emergency {
-                margin-top: 4%;
+                margin-top: 5%;
             }
         }
     }
