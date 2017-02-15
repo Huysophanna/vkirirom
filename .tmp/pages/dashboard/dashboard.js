@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { SMS, Toast, Geolocation, Network, NativeStorage, Diagnostic } from 'ionic-native';
 import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
-import { SMS, Toast, Geolocation, Network, NativeStorage } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
@@ -25,18 +25,84 @@ export var Dashboard = (function () {
         this.menuCtrl = menuCtrl;
         this.membership = Membership;
         this.isUnknown = false;
-        document.addEventListener('deviceready', function () {
-            cordova.plugins.backgroundMode.setDefaults({
-                title: 'TheTitleOfYourProcess',
-                text: 'Executing background tasks.'
+        this.launchCount = 0;
+        platform.ready().then(function () {
+            _this.launchCount = _this.launchCount + 1;
+            NativeStorage.getItem('launchCount').then(function (data) {
+                data = data + 1;
+                NativeStorage.setItem('launchCount', data).then(function (data) {
+                    console.log("Set launchCount success " + data);
+                }, function (err) {
+                    console.error("Set launchCount error : " + err);
+                });
+            }, function (err) {
+                NativeStorage.setItem('launchCount', _this.launchCount).then(function (data) {
+                    console.log("Set launchCount success in err " + data);
+                }, function (err) {
+                    console.error("Set launchCount error in err : " + err);
+                });
             });
-            cordova.plugins.backgroundMode.enable();
-            cordova.plugins.backgroundMode.onactivate = function () {
-                var _this = this;
-                setInterval(function () {
-                    Geolocation.getCurrentPosition().then(function (resp) {
-                        var latitute = resp.coords.latitude;
-                        var longitute = resp.coords.longitude;
+            _this.diagnosticFunction();
+        });
+    }
+    Dashboard.prototype.diagnosticFunction = function () {
+        var _this = this;
+        Diagnostic.isLocationEnabled().then(function (enabled) {
+            if (enabled) {
+                _this.geolocationFunction();
+            }
+            else {
+                NativeStorage.getItem('launchCount').then(function (data) {
+                    if (data === 1) {
+                        setTimeout(function () {
+                            var confirm = _this.alertCtrl.create({
+                                title: 'Your location service is turned off',
+                                message: 'Enable to continue using the application, you can disable in setting.',
+                                buttons: [
+                                    {
+                                        text: 'Disagree',
+                                        handler: function () {
+                                            console.log('Disagree clicked');
+                                        }
+                                    },
+                                    {
+                                        text: 'Agree',
+                                        handler: function () {
+                                            Diagnostic.switchToLocationSettings();
+                                            _this.geolocationFunction();
+                                        }
+                                    }
+                                ]
+                            });
+                            confirm.present();
+                        }, 500);
+                    }
+                    else {
+                        console.log("Not the first launch");
+                        return;
+                    }
+                }, function (err) {
+                    console.error("Get launchCount error : " + err);
+                });
+            }
+        });
+        this.geolocationFunction();
+        //show side menu if it's not login screen
+        this.menuCtrl.enable(true);
+    };
+    Dashboard.prototype.geolocationFunction = function () {
+        var _this = this;
+        Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(function (resp) {
+            var latitute = resp.coords.latitude;
+            var longitute = resp.coords.longitude;
+            document.addEventListener('deviceready', function () {
+                cordova.plugins.backgroundMode.setDefaults({
+                    title: 'Chain',
+                    text: 'BackgroundGeolocation'
+                });
+                cordova.plugins.backgroundMode.enable();
+                cordova.plugins.backgroundMode.onactivate = function () {
+                    setInterval(function () {
                         var userlocation = [];
                         NativeStorage.getItem('userlocation').then(function (data) {
                             if (JSON.parse(data).length == 5) {
@@ -47,7 +113,7 @@ export var Dashboard = (function () {
                                     console.log("Set userlocation failed :" + err);
                                 });
                             }
-                            else if (_this.userlocation.length >= 0) {
+                            else if (JSON.parse(data).length >= 0) {
                                 userlocation.push({
                                     lat: latitute,
                                     lng: longitute
@@ -61,46 +127,53 @@ export var Dashboard = (function () {
                             else {
                                 console.log("Oupp something went wrong!!!");
                             }
+                        }, function (err) {
+                            userlocation.push({
+                                lat: latitute,
+                                lng: longitute
+                            });
+                            NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
+                                console.log("Set user location success :" + data);
+                            }, function (err) {
+                                console.log("Set user location failed :" + err);
+                            });
                         });
-                    });
-                }, 2000);
-            };
-        }, false);
-        this.locationTracker.lastLocationTracker();
-        //show side menu if it's not login screen
-        this.menuCtrl.enable(true);
-        setInterval(function () {
-            _this.checkNetworkConnection();
-            _this.kiriromScope();
-        }, 2000);
-    }
+                    }, 2000);
+                };
+                cordova.plugins.backgroundMode.ondeactivate = function () {
+                    alert("On ondeactivate");
+                };
+            }, false);
+            _this.locationTracker.lastLocationTracker(latitute, longitute);
+            setInterval(function () {
+                _this.kiriromScope(latitute, longitute);
+            }, 2000);
+        }, function (err) {
+            console.log("Geolocation Error :" + _this.isKirirom);
+            _this.isUnknown = true;
+        });
+    };
+    Dashboard.prototype.ionViewWillEnter = function () {
+        alert("ionViewWillEnter");
+    };
     Dashboard.prototype.showNoti = function () {
         var notiModal = this.modalCtrl.create(Notificationpanel);
         notiModal.present();
     };
-    Dashboard.prototype.kiriromScope = function () {
-        var _this = this;
-        Geolocation.getCurrentPosition().then(function (resp) {
-            var latitute = resp.coords.latitude;
-            var longitude = resp.coords.longitude;
-            console.log("My location :" + latitute + longitude);
-            var distance = _this.userScope.distanceCal(latitute, longitude);
-            if (distance < 1) {
-                var test = distance * 1000;
-                _this.isKirirom = true;
+    Dashboard.prototype.kiriromScope = function (latitute, longitute) {
+        var distance = this.userScope.distanceCal(latitute, longitute);
+        if (distance < 1) {
+            var test = distance * 1000;
+            this.isKirirom = true;
+        }
+        else {
+            if (distance <= 17) {
+                this.isKirirom = true;
             }
             else {
-                if (distance <= 17) {
-                    _this.isKirirom = true;
-                }
-                else {
-                    _this.isKirirom = false;
-                }
+                this.isKirirom = false;
             }
-        }, function (Error) {
-            console.log("Geolocation Error :" + _this.isKirirom);
-            _this.isUnknown = true;
-        });
+        }
     };
     Dashboard.prototype.navigate = function (num) {
         switch (num) {
@@ -115,12 +188,18 @@ export var Dashboard = (function () {
                 this.navCtrl.push(GoogleMapPage);
                 break;
             case 4:
-                if (this.isKirirom === undefined) {
+                if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
                     var loader = this.loadingCtrl.create({
                         content: 'Identifying your current location....',
                         duration: 1000
                     });
                     loader.present();
+                }
+                else if ((this.isKirirom == undefined) && (this.isUnknown == true)) {
+                    this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+                }
+                else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+                    this.warningAlert("Outdoor Mode", "Sorry, this function is not accessible outside kirirom area.");
                 }
                 else {
                     this.navCtrl.push(Chat);
@@ -136,7 +215,17 @@ export var Dashboard = (function () {
     };
     Dashboard.prototype.sos = function () {
         var _this = this;
-        if (this.isKirirom == false) {
+        if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
+            var loader = this.loadingCtrl.create({
+                content: 'Identifying your current location....',
+                duration: 1000
+            });
+            loader.present();
+        }
+        else if ((this.isKirirom == undefined) && (this.isKirirom == true)) {
+            this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+        }
+        else if ((this.isKirirom == false) && (this.isUnknown == false)) {
             this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
         }
         else {
@@ -173,7 +262,7 @@ export var Dashboard = (function () {
                                     });
                                 });
                             }, function (err) {
-                                _this.warningAlert("Get user location failed", err);
+                                _this.warningAlert("Get user location from storage failed", err);
                             });
                         }
                     }]

@@ -1,6 +1,6 @@
 import { Component, Inject, NgZone } from '@angular/core';
+import { SMS, Toast, Geolocation, Push, Network, NativeStorage, BackgroundGeolocation, Diagnostic } from 'ionic-native';
 import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
-import { SMS, Toast, Geolocation, Push, Network, NativeStorage, BackgroundGeolocation, Geofence } from 'ionic-native';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
 import { GoogleMapPage } from '../map/map';
@@ -31,85 +31,153 @@ export class Dashboard {
   lastLat: any;
   lastLng: any;
   deviceToken: any;
+  launchCount: number = 0;
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController) {
-      document.addEventListener('deviceready', function () {
-          cordova.plugins.backgroundMode.setDefaults({ 
-              title:  'TheTitleOfYourProcess',
-              text:   'Executing background tasks.'
+      platform.ready().then(() => {
+        this.launchCount = this.launchCount + 1;
+        NativeStorage.getItem('launchCount').then(data => {
+          data = data + 1;
+          NativeStorage.setItem('launchCount', data).then(data => {
+            console.log("Set launchCount success " + data);
+          }, err => {
+            console.error("Set launchCount error : " + err);
           });
-          cordova.plugins.backgroundMode.enable();
-          cordova.plugins.backgroundMode.onactivate = function () {
-              setInterval(() => {
-                Geolocation.getCurrentPosition().then(resp => {
-                  let latitute = resp.coords.latitude;
-                  let longitute = resp.coords.longitude;
-                  let userlocation = [];
-                  NativeStorage.getItem('userlocation').then(data => {
-                    if (JSON.parse(data).length == 5) {
-                      userlocation = [];
-                      NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
-                        console.log("Set user location success :" + data);
-                      }, err => {
-                        console.log("Set userlocation failed :" + err);
-                      });
-                    } else if (this.userlocation.length >= 0) {
-                      userlocation.push({
-                        lat: latitute,
-                        lng: longitute
-                      });
-                      NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
-                        console.log("Set user location success :" + data);
-                      }, err => {
-                        console.log("Set userlocation failed :" + err);
-                      });
-                    } else {
-                      console.log("Oupp something went wrong!!!");
-                    }
-                  });
-                });
-              }, 2000);
-          }
-      }, false);
-      this.locationTracker.lastLocationTracker();
-      
-      //show side menu if it's not login screen
-      this.menuCtrl.enable(true);
-
-      setInterval(() => {
-        this.checkNetworkConnection();
-        this.kiriromScope();
-      }, 2000);
-
+        }, err => {
+          NativeStorage.setItem('launchCount', this.launchCount).then(data => {
+            console.log("Set launchCount success in err " + data);
+          }, err => {
+            console.error("Set launchCount error in err : " + err);
+          });
+        });
+        this.diagnosticFunction();
+      });
   }
 
-
-showNoti() {
-  let notiModal = this.modalCtrl.create(Notificationpanel);
-  notiModal.present();
-
-}
-
-  kiriromScope() {
-    Geolocation.getCurrentPosition().then(resp => {
-      let latitute = resp.coords.latitude;
-      let longitude = resp.coords.longitude;
-      console.log("My location :" + latitute + longitude);
-      var distance = this.userScope.distanceCal(latitute, longitude);
-      if (distance < 1) {
-        var test = distance * 1000;
-        this.isKirirom = true;
+  diagnosticFunction() {
+    Diagnostic.isLocationEnabled().then(enabled => {
+      if (enabled) {
+        this.geolocationFunction();
       } else {
-        if (distance <= 17) {
-          this.isKirirom = true;
-        } else {
-          this.isKirirom = false;
-        }
+        NativeStorage.getItem('launchCount').then(data => {
+          if (data === 1) {
+            setTimeout(() => {
+              let confirm = this.alertCtrl.create({
+                title: 'Your location service is turned off',
+                message: 'Enable to continue using the application, you can disable in setting.',
+                buttons: [
+                  {
+                    text: 'Disagree',
+                    handler: () => {
+                      console.log('Disagree clicked');
+                    }
+                  },
+                  {
+                    text: 'Agree',
+                    handler: () => {
+                    Diagnostic.switchToLocationSettings();
+                    this.geolocationFunction();
+                  }
+                }
+              ]
+            });
+          confirm.present();
+        }, 500);             
+      } else {
+        console.log("Not the first launch");
+        return;
       }
-    }, (Error) => {
+    }, err => {
+      console.error("Get launchCount error : " + err);
+    });
+  }
+});
+this.geolocationFunction();
+//show side menu if it's not login screen
+this.menuCtrl.enable(true);
+  }
+  geolocationFunction() {
+    Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
+      let latitute = resp.coords.latitude;
+      let longitute = resp.coords.longitude;
+      document.addEventListener('deviceready', function () {
+        cordova.plugins.backgroundMode.setDefaults({
+          title: 'Chain',
+          text: 'BackgroundGeolocation'
+        });
+        cordova.plugins.backgroundMode.enable();
+        cordova.plugins.backgroundMode.onactivate = function () {
+          setInterval(() => {
+            let userlocation = [];
+            NativeStorage.getItem('userlocation').then(data => {
+              if (JSON.parse(data).length == 5) {
+                userlocation = [];
+                NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
+                  console.log("Set user location success :" + data);
+                }, err => {
+                  console.log("Set userlocation failed :" + err);
+                });
+              } else if (JSON.parse(data).length >= 0) {
+                userlocation.push({
+                  lat: latitute,
+                  lng: longitute
+                });
+                NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
+                  console.log("Set user location success :" + data);
+                }, err => {
+                  console.log("Set userlocation failed :" + err);
+                });
+              } else {
+                  console.log("Oupp something went wrong!!!");
+              }
+            }, err => {
+              userlocation.push({
+                lat: latitute,
+                lng: longitute
+              });
+              NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
+                console.log("Set user location success :" + data);
+              }, err => {
+                console.log("Set user location failed :" + err);
+              });
+            });
+          }, 2000);
+        };
+        cordova.plugins.backgroundMode.ondeactivate = function() {
+          alert("On ondeactivate");
+        }
+      }, false);
+      this.locationTracker.lastLocationTracker(latitute, longitute);
+      setInterval(() => {
+        this.kiriromScope(latitute, longitute);
+      }, 2000);
+     }, err => {
       console.log("Geolocation Error :" + this.isKirirom);
       this.isUnknown = true;
     });
+  }
+
+  ionViewWillEnter() {
+    alert("ionViewWillEnter");
+  }
+
+  showNoti() {
+    let notiModal = this.modalCtrl.create(Notificationpanel);
+    notiModal.present();
+  }
+
+  kiriromScope(latitute, longitute) {
+    var distance = this.userScope.distanceCal(latitute, longitute);
+    if (distance < 1) {
+      var test = distance * 1000;
+      this.isKirirom = true;
+    } else {
+      if (distance <= 17) {
+        this.isKirirom = true;
+      } else {
+        this.isKirirom = false;
+      }
+    }
   }
 
   navigate(num) {
@@ -125,12 +193,16 @@ showNoti() {
         
         break;
         case 4:
-            if (this.isKirirom === undefined) {
+            if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
               let loader = this.loadingCtrl.create({
                 content: 'Identifying your current location....',
                 duration: 1000
               });
               loader.present();
+            } else if ((this.isKirirom == undefined) && (this.isUnknown == true)){
+              this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+            } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+              this.warningAlert("Outdoor Mode", "Sorry, this function is not accessible outside kirirom area.");
             } else {
               this.navCtrl.push(Chat);
             }
@@ -143,7 +215,15 @@ showNoti() {
   }
 
   sos() {
-    if (this.isKirirom == false) {
+    if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
+      let loader = this.loadingCtrl.create({
+        content: 'Identifying your current location....',
+        duration: 1000
+      });
+      loader.present();
+    } else if ((this.isKirirom == undefined) && (this.isKirirom == true)) {
+      this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+    } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
         this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
     } else {
         let confirmAlert = this.alertCtrl.create({
@@ -184,7 +264,7 @@ showNoti() {
                       );
                     });
                 }, err => {
-                  this.warningAlert("Get user location failed", err);
+                  this.warningAlert("Get user location from storage failed", err);
                 });
               }
             }]

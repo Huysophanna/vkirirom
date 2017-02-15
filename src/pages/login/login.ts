@@ -68,7 +68,7 @@ export class Login {
           this.userProfile = authData;
 
           //store user device token and other details to firebase after creating the user account
-   //       this.storeDeviceTokenToFirebase();
+          //  this.storeDeviceTokenToFirebase();
 
           if (this.userProfile.photoURL == '') {
             this.userProfile.photoURL = "img/profile.svg";
@@ -143,7 +143,8 @@ export class Login {
             this.userProfile = success;
             this.userExist();
             //store user device token and other details to firebase after creating the user account
-   //         this.storeDeviceTokenToFirebase();
+            //  this.storeDeviceTokenToFirebase();
+            //alert("Firebase success: " + JSON.stringify(success));
             this.nav.setRoot(Dashboard);
 
             //store userProfile object to the phone storage
