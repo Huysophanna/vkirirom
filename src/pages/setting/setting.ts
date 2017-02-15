@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, NavController, AlertController } from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
+import { NativeStorage, LocationAccuracy, Diagnostic } from 'ionic-native';
 import { SettingService } from '../../providers/setting-service';
 import { FirebaseUserData } from '../../providers/firebase-user-data';
 import firebase from 'firebase';
@@ -13,8 +13,6 @@ declare var io: any;
   templateUrl: 'setting.html'
 })
 export class Setting {
-  public location:any = [];
-  public notification:any = [];
   public loc: any;
   public noti: any;
   public socket: any;
@@ -25,77 +23,149 @@ export class Setting {
 
     platform.ready().then(() => {
       NativeStorage.getItem('bgLocationTag').then(val => {
+        Diagnostic.isLocationEnabled().then((enabled) => {
+          if (enabled && val) {
+            this.loc = enabled;
+            this.firebaseUserData.updateBgLocationTag(enabled);
+          } else {
+            alert("Some logical error occur!");
+            if (enabled) {
+              // user location service is turned on and bgLocationTag is false
+              // Turn off location service
+              this.loc = val;
+              this.firebaseUserData.updateBgLocationTag(val);
+              this.forceUser();
+            } else {
+              // user location service is turned off and bgLocationTag is true
+              // solution : set bgLocationTag to false
+              this.loc = enabled;
+              this.firebaseUserData.updateBgLocationTag(enabled);
+            }
+          }
+        }, err => console.error(err));
         this.loc = val;
+        this.turnLoc(this.loc);
+      }, err => {
+        console.error("bgLocationTag error : " + err);
       });
-
-    });
-
-    this.locationData();
-    this.notificationData();
-  }
-
-  locationData() {
-    NativeStorage.getItem('location').then(data => {
-      var parseData = JSON.parse(data);
-      this.loc = parseData[parseData.length - 1];
-    }, err => {
-      console.log("NativeStorage error " + err);
     });
   }
 
-  notificationData() {
-    NativeStorage.getItem('notification').then(data => {
-      var parseData = JSON.parse(data);
-      this.noti = parseData[parseData.length - 1];
-      this.turnNoti(this.noti);
-    }, err => {
-      console.log("NativeStorage error " + err);
-    });
+  forceUser() {
+    alert("In force user function");
+    let confirm = this.alertCtrl.create({
+      title: 'Switch to Location Setting',
+      message: 'To use setting, Please turn off your location service',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            console.log('Disagree clicked');
+            setTimeout(() => {
+              this.forceUser();
+            }, 200);
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+          Diagnostic.switchToLocationSettings();
+          Diagnostic.isLocationEnabled().then((enabled) => {
+            if (enabled) {
+              this.forceUser();
+            } else {
+              this.loc = enabled;
+              this.firebaseUserData.updateBgLocationTag(enabled);
+            }
+          })
+        }
+      }
+    ]
+  });
+  confirm.present();
   }
 
   turnLoc(location) {
+    
     if (location == true) {
+      alert("location :" + location);
       cordova.plugins.backgroundMode.enable();
-      // this.data.bgLocationTag = true;
     } else {
+      alert("location :" + location);
       cordova.plugins.backgroundMode.disable();
-      // this.data.bgLocationTag = false;
     }
-    //emit user data to server
-    // this.socket.emit('backgroundLocation', (this.data));
   }
 
-  turnNoti(notification) {
-    if (notification == true) {
-      console.log("Turn on the notification");
-    } else {
-      console.log("Turn off the notification");
-    }
-  }
 
   setLocation(data) {
-    this.location.push(data);
-
-    //update bgLocationTag to firebase using provider
     this.firebaseUserData.updateBgLocationTag(data);
 
-    // this.data.locationTag = data;
-    // this.socket.emit('backgroundLocation', (this.data));
 
-    // NativeStorage.setItem('location', JSON.stringify(this.location)).then(() => {
-    //   console.log("Stored Item");
-    // }, error => {
-    //   console.log("NativeStorage error");
-    // });
-  }
 
-  setNotification(data) {
-    this.notification.push(data);
-    NativeStorage.setItem('notification', JSON.stringify(this.notification)).then(() => {
-      console.log("Stored Item");
-    }, error => {
-      console.log("NativeStorage error!" + error);
-    });
+    Diagnostic.isLocationEnabled().then((enabled) => {
+      alert("Enabled : " +  enabled);
+      if ((enabled == true) && (data == false)) {
+        // turn the location off
+        let confirm = this.alertCtrl.create({
+          title: 'One more step to turn your location off',
+          message: 'Would you like to switch to the Location Settings page ?',
+          buttons: [
+            {
+              text: 'Disagree',
+              handler: () => {
+                console.log('Disagree clicked');
+                this.loc = true;
+                this.firebaseUserData.updateBgLocationTag(enabled);
+              }
+            },
+          {
+            text: 'Agree',
+              handler: () => {
+                Diagnostic.switchToLocationSettings();
+                Diagnostic.isLocationEnabled().then((enabled) => {
+                  this.firebaseUserData.updateBgLocationTag(enabled);
+                })
+              }
+            }
+          ]
+        });
+        confirm.present();
+      } else if ((enabled == false) && (data == true)) {
+        alert("Enabled : " + enabled);
+        // turn the location on
+        LocationAccuracy.canRequest().then((canRequest: boolean) => {
+          alert("canRequest : " + canRequest);
+          if(canRequest) {
+            LocationAccuracy.request(LocationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => {
+                alert('Request successful');
+                this.loc = data;
+                this.firebaseUserData.updateBgLocationTag(data);
+              },
+              error => {
+                alert('Request Failed');
+                if (error) {
+                  console.error("error code="+error.code+"; error message="+error.message);
+                  if (error.code !== LocationAccuracy.ERROR_USER_DISAGREED) {
+                    if(window.confirm("Failed to automatically set Location Mode to 'High Accuracy'. Would you like to switch to the Location Settings page and do this manually?")){
+                      Diagnostic.switchToLocationSettings();
+                      Diagnostic.isLocationEnabled().then((enabled) => {
+                        this.firebaseUserData.updateBgLocationTag(enabled);
+                      }, err => console.error("some logical error occur"))
+                    }
+                  } else {
+                    this.loc = false;
+                    this.firebaseUserData.updateBgLocationTag(this.loc);
+                  }
+                }
+              }
+            );
+          }
+        });
+      } else {
+        console.error("logical error");
+      }
+    }, err => console.error("isLocationEnabled error : " + err));
   }
 
 }

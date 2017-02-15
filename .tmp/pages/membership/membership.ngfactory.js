@@ -647,7 +647,7 @@ var _View_Membership0 = (function (_super) {
 }(import1.AppView));
 export function viewFactory_Membership0(viewUtils, parentInjector, declarationEl) {
     if ((renderType_Membership === null)) {
-        (renderType_Membership = viewUtils.createRenderComponentType('/Users/sbc/ionic_project/vkirirom/.tmp/pages/membership/membership.html', 0, import10.ViewEncapsulation.None, styles_Membership, {}));
+        (renderType_Membership = viewUtils.createRenderComponentType('D:/vkirirom/.tmp/pages/membership/membership.html', 0, import10.ViewEncapsulation.None, styles_Membership, {}));
     }
     return new _View_Membership0(viewUtils, parentInjector, declarationEl);
 }

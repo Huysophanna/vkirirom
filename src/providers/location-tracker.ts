@@ -13,38 +13,32 @@ export class LocationTracker {
   public latitute = [];
   public longitute = [];
 
-  lastLocationTracker() {
+  lastLocationTracker(latitute, longitute) {
     setInterval(() => {
-      
-      Geolocation.getCurrentPosition().then(resp => {
-        alert("In Geolocation");
-        let latitute = resp.coords.latitude;
-        let longitute = resp.coords.longitude;
-        NativeStorage.getItem('userlocation').then(data => {
-          alert("In normal : " + JSON.parse(data).length);
-          if (JSON.parse(data).length == 5) {
-            this.userlocation = [];
-            this.setUserlocation(this.userlocation);
-            alert("in if :" + this.userlocation);
-          } else if (JSON.parse(data) >= 0) {
-            this.userlocation.push({
-              lat: latitute,
-              lng: longitute
-            });            
-            this.setUserlocation(this.userlocation);
-            alert("in else if :" + this.userlocation);
-          } else {
-            console.log("Oupp something went wrong!!!");
-          }
-        }, err => {
-          console.log("Cannot getItem");
+      NativeStorage.getItem('userlocation').then(data => {
+        // alert("lastLocationTracker getItem : " + JSON.stringify(data) + "JSON length :" + JSON.parse(data).length);
+        if (JSON.parse(data).length == 5) {
+          this.userlocation = [];
+          this.setUserlocation(this.userlocation);
+          // alert("in if :" + this.userlocation);
+        } else if (JSON.parse(data) >= 0) {
           this.userlocation.push({
             lat: latitute,
             lng: longitute
           });
           this.setUserlocation(this.userlocation);
-          alert("set In err :" + this.userlocation);
+          // alert("in else if :" + this.userlocation);
+        } else {
+          console.log("Oupp something went wrong!!!");
+        }
+      }, err => {
+        // alert("lastLocationTracker cannot getItem");
+        this.userlocation.push({
+          lat: latitute,
+          lng: longitute
         });
+        this.setUserlocation(this.userlocation);
+        // alert("set In err :" + this.userlocation);
       });
     }, 2000);
   }

@@ -1,7 +1,7 @@
 <ion-header class="header">
     <ion-navbar>
         <ion-title class="header-title">
-            <span *ngIf="(isKirirom == undefined) && (isUnknown == false)" style="color: goldenrod">Identifying</span>
+            <span *ngIf="(isKirirom == undefined) && (isUnknown == false)" style="color: goldenrod">Fetching...</span>
             <span *ngIf="(isKirirom == undefined) && (isUnknown == true)" style="color: #795548">Unidentify</span>
             <span *ngIf="(isKirirom == true) && (isUnknown == false)">Indoor Mode</span>
             <span *ngIf="(isKirirom == false) && (isUnknown == false)" style="color: #827717;">Outdoor Mode</span>
