@@ -5,13 +5,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Userscope {
 
-  // Kirirom
-  KIRIROMLAT = 11.3292865;
-  KIRIROMLNG = 104.0593739;
-
-  // Phnom Penh
-  // KIRIROMLAT = 11.563190;
-  // KIRIROMLNG = 104.884316;
+  KIRIROMLAT = 11.316541;
+  KIRIROMLNG = 104.065818;
 
   constructor(public http: Http) {
     console.log('Hello Userscope Provider');
