@@ -57,7 +57,6 @@ export class Setting {
     });
   }
 
-
 //   forceUser() {
 //     let confirm = this.alertCtrl.create({
 //       title: 'Switch to Location Setting',

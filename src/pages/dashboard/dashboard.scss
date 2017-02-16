@@ -107,6 +107,9 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
         img {
             width: 100%;
         }
+        p {
+            font-size: 10px;
+        }
         button {
             background: transparent;
             width: 30%;
@@ -148,7 +151,7 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
             .dashboard-action {
                 .emergency {
                     button {
-                       height: 4.1em;
+                        height: 4.1em;
                     }
                 }
             }
@@ -168,6 +171,7 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
         }
     }
 }
+
 .platform-ios {
     .header-title {
         display: block;
@@ -176,14 +180,24 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
 }
 
 //iphone 5 screen
-@media only screen and (max-device-width: 320px) {
+@media only screen and (min-device-width: 320px) {
     .header {
-        .app-mode {
-            font-size: large;
+        button {
+            font-size: x-large;
+        }
+        .header-title {
+            top: 13px;
+            .toolbar-title {
+                font-size: small !important;
+            }
         }
     }
     .container {
+        .noti-bar {
+            font-size: x-small;
+        }
         .dashboard-action {
+            height: 70%;
             .first-row {
                 margin-top: 4%;
             }
@@ -191,11 +205,116 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
                 margin-top: 4%;
             }
             .emergency {
-                margin-top: 7%;
+                margin-top: 10%;
                 button {
                     height: 4em;
+                    font-size: 15px;
                 }
             }
+            p {
+                margin: 0;
+            }
         }
+    }
+}
+
+// Iphone 6 and 6 plus
+@media only screen and (min-device-width: 375px) {
+    .container .dashboard-action p {
+        margin: 0;
+        font-size: 10px;
+    }
+    .container .dashboard-action .first-row {
+        margin-top: 5%;
+    }
+    .container .dashboard-action .second-row {
+        margin-top: 5%;
+    }
+    .container .dashboard-action .emergency {
+        margin-top: 10% !important;
+    }
+    .header .header-title {
+        top: 13px;
+    }
+}
+
+// Ipad screen
+@media only screen and (min-device-width: 768px) {
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        width: 50%;
+        height: 60%;
+    }
+    .container .top-bar .vkirirom-img {
+        height: 85%;
+        width: 35%;
+    }
+    .container .dashboard-action .first-row {
+        margin-top: 5%;
+    }
+    .container .dashboard-action .second-row {
+        margin-top: 5%;
+    }
+    .container .dashboard-action .emergency {
+        margin-top: 9%;
+    }
+    .container .dashboard-action .emergency button {
+        font-size: 25px;
+    }
+    .container .dashboard-action {
+        height: 70%;
+    }
+    .header .header-title {
+        top: 15px;
+    }
+    .container .dashboard-action img {
+        width: 70%;
+    }
+    .container .dashboard-action p {
+        font-size: medium;
+        margin: 0;
+    }
+}
+
+// Ipad pro screen
+@media only screen and (min-device-width: 1024px) {
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        width: 50%;
+        height: 80%;
+    }
+    .container {
+        font-size: x-large;
+    }
+    .vtop-bar .vkirirom-img {
+        width: 35% !important;
+    }
+    .container .top-bar .vkirirom-img {
+        height: 85%;
+        width: 35%;
+    }
+    .header .header-title {
+        top: 13px;
+    }
+    .container .noti-bar {
+        font-size: x-large;
+    }
+    .container .dashboard-action .first-row {
+        margin-top: 5%;
+    }
+    .container .dashboard-action .second-row {
+        margin-top: 5%;
+    }
+    .container .dashboard-action img {
+        width: 70%;
+    }
+    .container .dashboard-action p {
+        font-size: x-large;
+        margin: 0;
+    }
+    .container .dashboard-action .emergency button {
+        font-size: 25px;
     }
 }
