@@ -22069,6 +22069,12 @@ sub {
   }
 }
 
+@media only screen and (min-device-width: 412px) {
+  .container .dashboard-action .emergency button {
+    height: 5em;
+  }
+}
+
 @media only screen and (min-device-width: 768px) {
   img {
     max-width: 100%;
@@ -22716,9 +22722,9 @@ label {
   margin-top: 0;
 }
 
-.vtop-bar {
+.vtop-bar-signup {
   width: 100%;
-  height: 30%;
+  height: 28%;
   display: -webkit-flex !important;
   display: -ms-flexbox !important;
   display: flex !important;
@@ -22730,7 +22736,7 @@ label {
   justify-content: center;
 }
 
-.vtop-bar .vkirirom-img {
+.vtop-bar-signup .vkirirom-img {
   width: 45%;
   margin: 0 auto;
 }
@@ -22741,6 +22747,10 @@ label {
   margin-top: 5%;
 }
 
+.input-signup ion-item ion-label {
+  padding: 0 0 5px;
+}
+
 .input-signup input {
   border-bottom: 1px solid white;
   color: white;
@@ -22748,6 +22758,7 @@ label {
 
 .input-signup ion-item {
   background-color: transparent;
+  margin: -3px 0 2px;
 }
 
 .input-signup ion-label {
@@ -22786,6 +22797,18 @@ label {
   .submit-login {
     margin-top: 0;
   }
+}
+
+.platform-android ion-item ion-label {
+  padding: 0 0 2px;
+}
+
+.platform-android .error-message {
+  background: transparent;
+}
+
+.platform-android .error-message p {
+  font-size: 10%;
 }
 
 .platform-android .submit-login {

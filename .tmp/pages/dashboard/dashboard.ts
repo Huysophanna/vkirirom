@@ -281,7 +281,7 @@ export class Dashboard {
             } else if ((this.isKirirom == undefined) && (this.isUnknown == true)){
               this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
             } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-              this.warningAlert("Outdoor Mode", "Sorry, this function is not accessible outside kirirom area.");
+              this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
             } else {
               this.navCtrl.push(Chat);
             }

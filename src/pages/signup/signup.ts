@@ -29,8 +29,6 @@ export class Signup {
     
     platform.ready().then(() => {
       this.isPlatform = platform.is('ios') ? 'ios' : 'android';
-      alert(this.isPlatform);
-      alert(JSON.stringify(platform.version()));
     })
 
     Keyboard.disableScroll(true);

@@ -238,6 +238,13 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
     }
 }
 
+// Iphone 6 and 6 plus
+@media only screen and (min-device-width: 412px) {
+    .container .dashboard-action .emergency button {
+        height: 5em;
+    }
+}
+
 // Ipad screen
 @media only screen and (min-device-width: 768px) {
     img {

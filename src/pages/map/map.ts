@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Events, NavController, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, Geolocation, GoogleMapsMarker, CameraPosition, GoogleMapsMarkerOptions} from 'ionic-native';
 declare var plugin: any;
@@ -10,7 +10,7 @@ declare var navigator: any;
 })
 
 export class GoogleMapPage {
-	Map: any;
+  Map: any;
   Longitude: any;
   Latitude: any;
   map: any;
@@ -19,26 +19,26 @@ export class GoogleMapPage {
   icon: any;
   marker: any;
   loader: any;
+  androidVersion: any;
+  addedOverlayInterval: any;
 
   constructor(public events: Events, public navCtrl: NavController, public platform: Platform, public loadingCtrl: LoadingController) {
-      platform.ready().then(() => {
-        this.initMap();
-        this.watchPosition();
-      });
+    platform.ready().then(() => {
+
+        if (platform.is('android')) {
+            //check android version
+            this.androidVersion = parseInt(platform.version().str);
+        }
+        this.loader = this.loadingCtrl.create({
+            content: 'Initializing Map ...',
+        });
+        this.loader.present();
+        
+    });
   }
-
-  watchPosition(){
-    navigator.geolocation.watchPosition(this.onWatchSuccess,this.onWatchError,{enableHighAccuracy: true});
-  }
-
-  onWatchSuccess(position){
-    this.Latitude = position.coords.Latitude;
-    this.Longitude = position.coords.Longitude;
-
-  }
-
-  onWatchError(error){
-    console.log(error.code+" : "+error.message);
+  
+  ngAfterViewInit() {
+      this.initMap();
   }
 
   initMap(){
@@ -64,9 +64,9 @@ export class GoogleMapPage {
           },
           camera: {
             latLng: LatLng,
-            tilt: 30,
+            // tilt: 30,
             zoom: 15,
-            bearing: 50
+            // bearing: 50
           }
         });
 
@@ -84,23 +84,11 @@ export class GoogleMapPage {
       //   new GoogleMapsLatLng(11.3099, 104.0734),
       // ];
 
-      this.loader = this.loadingCtrl.create({
-            content: 'Initializing Map ...',
-        });
-      this.loader.present();
-
-      let addedOverlayInterval = setInterval(() => {
-        this.map.addGroundOverlay({
-          'url': "img/vmap.png",
-          'bounds': bounds
-        }).then(_success => {
-          clearInterval(addedOverlayInterval);
-          this.loader.dismiss();
-        });
-      }, 1000);
+    //   }, 1000);
 
 
-      this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+
+      this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
           // create CameraPosition
           let position: CameraPosition = {
             target: LatLng,
@@ -138,8 +126,38 @@ export class GoogleMapPage {
           this.marker.forEach(element => {
             this.createNewMarker(element.lat, element.lng, element.title, element.snippet);
           });
+          
 
-          this.map.setAllGesturesEnabled(true);
+
+          let mapUrl: any;
+          if (this.platform.is('ios')) {
+            mapUrl = "img/vmap.png";
+          } else {
+              if (this.androidVersion >= 6) {
+                //above android 6.0, load higher quality map
+                mapUrl = "img/vmap.png";
+              } else {
+                //below android 6.0, replace with low quality map
+                mapUrl = "img/vmap-android.png";
+              }
+          }
+
+        this.map.addGroundOverlay({
+            'url': mapUrl,
+            'bounds': bounds
+        }).then(_success => {
+            this.addedOverlayInterval = setInterval(() => {
+                if (_success) {
+                    clearInterval(this.addedOverlayInterval);
+                    this.loader.dismiss();
+                }
+            });
+        });
+            
+            
+
+            this.map.setAllGesturesEnabled(true);
+
       });
 
         
@@ -171,11 +189,11 @@ export class GoogleMapPage {
 
   }
 
-  ionViewDidLeave() {
-    //remove all markers and clear the map after leaving the screen
-    //avoid duplicated markers being initialized
-    this.map.clear();
-    this.map.remove();
+  ngOnDestroy() {
+      if (this.platform.is('ios')) {
+        this.map.clear();
+        this.map.remove();
+      }
   }
 
 }
