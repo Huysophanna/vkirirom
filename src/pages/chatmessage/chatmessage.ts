@@ -47,6 +47,7 @@ export class Chatmessage implements AfterViewInit {
   keyboardShownValue: any;
   i=0;
   notificationType: any;
+  settingToggleNotification: any;
 
 
   constructor(public events: Events, public popoverCtrl: PopoverController, private navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
@@ -170,6 +171,10 @@ export class Chatmessage implements AfterViewInit {
           this.userPhoto = photo
         }
       );
+
+      NativeStorage.getItem('settingToggleNotification').then(_data => {
+        this.settingToggleNotification = _data;
+      });
       
   }
 

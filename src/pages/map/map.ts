@@ -18,11 +18,16 @@ export class GoogleMapPage {
   snippet: any;
   icon: any;
   marker: any;
+  loader: any;
 
   constructor(public events: Events, public navCtrl: NavController, public platform: Platform, public loadingCtrl: LoadingController) {
     platform.ready().then(() => {
-        this.initMap();
-        this.watchPosition();
+      this.loader = this.loadingCtrl.create({
+          content: 'Initializing Map ...',
+      });
+      this.loader.present();
+      this.initMap();
+      this.watchPosition();
     });
   }
 
@@ -83,19 +88,13 @@ export class GoogleMapPage {
       //   new GoogleMapsLatLng(11.3099, 104.0734),
       // ];
 
-        
-      let loader = this.loadingCtrl.create({
-          content: 'Initializing Map ...',
-      });
-      loader.present();
-
       let addedOverlayInterval = setInterval(() => {
         this.map.addGroundOverlay({
           'url': "img/vmap.png",
           'bounds': bounds
         }).then(_success => {
           clearInterval(addedOverlayInterval);
-          loader.dismiss();
+          this.loader.dismiss();
         });
       }, 1000);
 
@@ -111,7 +110,7 @@ export class GoogleMapPage {
           // move the map's camera to position
           this.map.animateCamera({
             'target': LatLng,
-            'zoom': 16
+            'zoom': 17
             // 'bearing': 140
           });
 

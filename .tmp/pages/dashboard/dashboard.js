@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SMS, Toast, Geolocation, Network, NativeStorage, Diagnostic } from 'ionic-native';
+import { SMS, Toast, Geolocation, Network, NativeStorage } from 'ionic-native';
 import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
@@ -27,93 +27,42 @@ export var Dashboard = (function () {
         this.isUnknown = false;
         this.launchCount = 0;
         platform.ready().then(function () {
-            _this.launchCount = _this.launchCount + 1;
-            NativeStorage.getItem('launchCount').then(function (data) {
-                data = data + 1;
-                NativeStorage.setItem('launchCount', data).then(function (data) {
-                    console.log("Set launchCount success " + data);
-                }, function (err) {
-                    console.error("Set launchCount error : " + err);
-                });
-            }, function (err) {
-                NativeStorage.setItem('launchCount', _this.launchCount).then(function (data) {
-                    console.log("Set launchCount success in err " + data);
-                }, function (err) {
-                    console.error("Set launchCount error in err : " + err);
-                });
-            });
-            _this.diagnosticFunction();
-        });
-    }
-    Dashboard.prototype.diagnosticFunction = function () {
-        var _this = this;
-        Diagnostic.isLocationEnabled().then(function (enabled) {
-            if (enabled) {
-                _this.geolocationFunction();
-            }
-            else {
-                NativeStorage.getItem('launchCount').then(function (data) {
-                    if (data === 1) {
-                        setTimeout(function () {
-                            var confirm = _this.alertCtrl.create({
-                                title: 'Your location service is turned off',
-                                message: 'Enable to continue using the application, you can disable in setting.',
-                                buttons: [
-                                    {
-                                        text: 'Disagree',
-                                        handler: function () {
-                                            console.log('Disagree clicked');
-                                        }
-                                    },
-                                    {
-                                        text: 'Agree',
-                                        handler: function () {
-                                            Diagnostic.switchToLocationSettings();
-                                            _this.geolocationFunction();
-                                        }
-                                    }
-                                ]
-                            });
-                            confirm.present();
-                        }, 500);
-                    }
-                    else {
-                        console.log("Not the first launch");
-                        return;
-                    }
-                }, function (err) {
-                    console.error("Get launchCount error : " + err);
-                });
-            }
-        });
-        this.geolocationFunction();
-        //show side menu if it's not login screen
-        this.menuCtrl.enable(true);
-    };
-    Dashboard.prototype.geolocationFunction = function () {
-        var _this = this;
-        Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(function (resp) {
-            var latitute = resp.coords.latitude;
-            var longitute = resp.coords.longitude;
-            document.addEventListener('deviceready', function () {
-                cordova.plugins.backgroundMode.setDefaults({
-                    title: 'Chain',
-                    text: 'BackgroundGeolocation'
-                });
-                cordova.plugins.backgroundMode.enable();
-                cordova.plugins.backgroundMode.onactivate = function () {
-                    setInterval(function () {
-                        var userlocation = [];
-                        NativeStorage.getItem('userlocation').then(function (data) {
-                            if (JSON.parse(data).length == 5) {
-                                userlocation = [];
-                                NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
-                                    console.log("Set user location success :" + data);
-                                }, function (err) {
-                                    console.log("Set userlocation failed :" + err);
-                                });
-                            }
-                            else if (JSON.parse(data).length >= 0) {
+            Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(function (resp) {
+                var latitute = resp.coords.latitude;
+                var longitute = resp.coords.longitude;
+                document.addEventListener('deviceready', function () {
+                    cordova.plugins.backgroundMode.setDefaults({
+                        title: 'Chain',
+                        text: 'BackgroundGeolocation'
+                    });
+                    cordova.plugins.backgroundMode.enable();
+                    cordova.plugins.backgroundMode.onactivate = function () {
+                        setInterval(function () {
+                            var userlocation = [];
+                            NativeStorage.getItem('userlocation').then(function (data) {
+                                if (JSON.parse(data).length == 5) {
+                                    userlocation = [];
+                                    NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
+                                        console.log("Set user location success :" + data);
+                                    }, function (err) {
+                                        console.log("Set userlocation failed :" + err);
+                                    });
+                                }
+                                else if (JSON.parse(data).length >= 0) {
+                                    userlocation.push({
+                                        lat: latitute,
+                                        lng: longitute
+                                    });
+                                    NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
+                                        console.log("Set user location success :" + data);
+                                    }, function (err) {
+                                        console.log("Set userlocation failed :" + err);
+                                    });
+                                }
+                                else {
+                                    console.log("Oupp something went wrong!!!");
+                                }
+                            }, function (err) {
                                 userlocation.push({
                                     lat: latitute,
                                     lng: longitute
@@ -121,17 +70,10 @@ export var Dashboard = (function () {
                                 NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
                                     console.log("Set user location success :" + data);
                                 }, function (err) {
-                                    console.log("Set userlocation failed :" + err);
+                                    console.log("Set user location failed :" + err);
                                 });
-                            }
-                            else {
-                                console.log("Oupp something went wrong!!!");
-                            }
-                        }, function (err) {
-                            userlocation.push({
-                                lat: latitute,
-                                lng: longitute
                             });
+<<<<<<< HEAD
                             NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
                                 console.log("Set user location success :" + data);
                             }, function (err) {
@@ -176,6 +118,166 @@ export var Dashboard = (function () {
             }
         }, function (err) { return console.error(err); });
     };
+=======
+                        }, 2000);
+                    };
+                    cordova.plugins.backgroundMode.ondeactivate = function () {
+                        var _this = this;
+                        this.locationTracker.lastLocationTracker(latitute, longitute);
+                        setInterval(function () {
+                            _this.kiriromScope(latitute, longitute);
+                        }, 2000);
+                    };
+                }, false);
+                _this.locationTracker.lastLocationTracker(latitute, longitute);
+                setInterval(function () {
+                    _this.kiriromScope(latitute, longitute);
+                }, 2000);
+            }, function (err) {
+                console.log("Geolocation Error :" + _this.isKirirom);
+                _this.isUnknown = true;
+            });
+            // this.launchCount = this.launchCount + 1;
+            // NativeStorage.getItem('launchCount').then(data => {
+            //   data = data + 1;
+            //   NativeStorage.setItem('launchCount', data).then(data => {
+            //     console.log("Set launchCount success " + data);
+            //   }, err => {
+            //     console.error("Set launchCount error : " + err);
+            //   });
+            // }, err => {
+            //   NativeStorage.setItem('launchCount', this.launchCount).then(data => {
+            //     console.log("Set launchCount success in err " + data);
+            //   }, err => {
+            //     console.error("Set launchCount error in err : " + err);
+            //   });
+            // });
+            // this.diagnosticFunction();
+        });
+    }
+    //   diagnosticFunction() {
+    //     Diagnostic.isLocationEnabled().then(enabled => {
+    //       if (enabled) {
+    //         this.geolocationFunction();
+    //       } else {
+    //         NativeStorage.getItem('launchCount').then(data => {
+    //           if (data === 1) {
+    //             setTimeout(() => {
+    //               let confirm = this.alertCtrl.create({
+    //                 title: 'Your location service is turned off',
+    //                 message: 'Enable to continue using the application, you can disable in setting.',
+    //                 buttons: [
+    //                   {
+    //                     text: 'Disagree',
+    //                     handler: () => {
+    //                       console.log('Disagree clicked');
+    //                     }
+    //                   },
+    //                   {
+    //                     text: 'Agree',
+    //                     handler: () => {
+    //                     Diagnostic.switchToLocationSettings();
+    //                     this.geolocationFunction();
+    //                   }
+    //                 }
+    //               ]
+    //             });
+    //           confirm.present();
+    //         }, 500);             
+    //       } else {
+    //         console.log("Not the first launch");
+    //         return;
+    //       }
+    //     }, err => {
+    //       console.error("Get launchCount error : " + err);
+    //     });
+    //   }
+    // });
+    // this.geolocationFunction();
+    // //show side menu if it's not login screen
+    // this.menuCtrl.enable(true);
+    //   }
+    // geolocationFunction() {
+    //   Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
+    //     let latitute = resp.coords.latitude;
+    //     let longitute = resp.coords.longitude;
+    //     document.addEventListener('deviceready', function () {
+    //       cordova.plugins.backgroundMode.setDefaults({
+    //         title: 'Chain',
+    //         text: 'BackgroundGeolocation'
+    //       });
+    //       cordova.plugins.backgroundMode.enable();
+    //       cordova.plugins.backgroundMode.onactivate = function () {
+    //         setInterval(() => {
+    //           let userlocation = [];
+    //           NativeStorage.getItem('userlocation').then(data => {
+    //             if (JSON.parse(data).length == 5) {
+    //               userlocation = [];
+    //               NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
+    //                 console.log("Set user location success :" + data);
+    //               }, err => {
+    //                 console.log("Set userlocation failed :" + err);
+    //               });
+    //             } else if (JSON.parse(data).length >= 0) {
+    //               userlocation.push({
+    //                 lat: latitute,
+    //                 lng: longitute
+    //               });
+    //               NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
+    //                 console.log("Set user location success :" + data);
+    //               }, err => {
+    //                 console.log("Set userlocation failed :" + err);
+    //               });
+    //             } else {
+    //                 console.log("Oupp something went wrong!!!");
+    //             }
+    //           }, err => {
+    //             userlocation.push({
+    //               lat: latitute,
+    //               lng: longitute
+    //             });
+    //             NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
+    //               console.log("Set user location success :" + data);
+    //             }, err => {
+    //               console.log("Set user location failed :" + err);
+    //             });
+    //           });
+    //         }, 2000);
+    //       };
+    //       cordova.plugins.backgroundMode.ondeactivate = function() {
+    //         this.locationTracker.lastLocationTracker(latitute, longitute);
+    //           setInterval(() => {
+    //             this.kiriromScope(latitute, longitute);
+    //         }, 2000);
+    //       }
+    //     }, false);
+    //     this.locationTracker.lastLocationTracker(latitute, longitute);
+    //     setInterval(() => {
+    //       this.kiriromScope(latitute, longitute);
+    //     }, 2000);
+    //    }, err => {
+    //     console.log("Geolocation Error :" + this.isKirirom);
+    //     this.isUnknown = true;
+    //   });
+    // }
+    // ionViewWillEnter() {
+    //   Diagnostic.isLocationEnabled().then(enabled => {
+    //     if (enabled) {
+    //       Geolocation.getCurrentPosition().then(resp => {
+    //         let latitute = resp.coords.latitude;
+    //         let longitute = resp.coords.longitude;
+    //         this.locationTracker.lastLocationTracker(latitute, longitute);
+    //         setInterval(() => {
+    //           this.kiriromScope(latitute, longitute);
+    //         }, 2000);
+    //       }, err => console.error(err));
+    //     } else {
+    //       this.isKirirom = undefined;
+    //       this.isUnknown = true;
+    //     }
+    //   }, err => console.error(err));
+    // }
+>>>>>>> 1a748ff0f96a696044ada9a413d1448cdb013f0d
     Dashboard.prototype.showNoti = function () {
         var notiModal = this.modalCtrl.create(Notificationpanel);
         notiModal.present();

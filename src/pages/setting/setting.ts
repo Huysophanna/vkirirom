@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { ViewController, Platform, NavController, AlertController, Events } from 'ionic-angular';
 import { NativeStorage, LocationAccuracy, Diagnostic } from 'ionic-native';
-import { ViewController, Platform, NavController, AlertController } from 'ionic-angular';
 import { SettingService } from '../../providers/setting-service';
 import { FirebaseUserData } from '../../providers/firebase-user-data';
 import firebase from 'firebase';
@@ -18,9 +18,9 @@ export class Setting {
   public socket: any;
   public token: any;
   public locationTag: any;
+  public test: any;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController) {
-
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController, public events: Events) {
     platform.ready().then(() => {
       document.addEventListener('deviceready', function() {
         cordova.plugins.backgroundMode.enable();
@@ -62,6 +62,7 @@ export class Setting {
         console.error("bgLocationTag error : " + err);
       });
     });
+    console.log(this.noti);
   }
 
   ionViewWillEnter() {
@@ -102,12 +103,78 @@ export class Setting {
     ]
   });
   confirm.present();
+}
+
+  ngOnInit() {
+    this.test = true;
+        console.log(this.test + ' On Init ----------------------------------------------------------------------------');
+    // NativeStorage.getItem('settingToggleNotification').then(_val => {
+    //     this.test = _val;
+    //     console.log(this.noti + '----------------------------------------------------------------------------');
+        
+    //   }, error => {
+    //     console.log(this.noti + '----------------------------------------------------------------------------');
+    //   });
+  }
+
+//   forceUser() {
+//     let confirm = this.alertCtrl.create({
+//       title: 'Switch to Location Setting',
+//       message: 'To use setting, Please turn off your location service',
+//       buttons: [
+//         {
+//           text: 'Disagree',
+//           handler: () => {
+//             console.log('Disagree clicked');
+//             setTimeout(() => {
+//               this.forceUser();
+//             }, 200);
+//           }
+//         },
+//         {
+//           text: 'Agree',
+//           handler: () => {
+//           Diagnostic.switchToLocationSettings();
+//           Diagnostic.isLocationEnabled().then((enabled) => {
+//             if (enabled) {
+//               this.forceUser();
+//             } else {
+//               this.loc = enabled;
+//               this.firebaseUserData.updateBgLocationTag(enabled);
+//             }
+//           })
+//         }
+//       }
+//     ]
+//   });
+//   confirm.present();
+// }
+
+  clickHelp() {
+    this.warningAlert('Help', 'Notification: Turn OFF/ON all incoming alert notification including Digital News Content as well as Chat Messaging.');
   }
 
 
   dismiss() {
     this.viewCtrl.dismiss();
   }
+
+  setNotification(data) {
+    //emit events to turn off alert push notification
+    this.events.publish("settingToggleNotification", data);
+    // alert(data);
+  }
+
+   warningAlert(title, message) {
+      this.alertCtrl.create( {
+          title: title,
+          message: message,
+          buttons: [{
+            text: 'Okay',
+            role: 'cancel'
+          }]
+      }).present();
+    }
 
   setLocation(data) {
     this.firebaseUserData.updateBgLocationTag(data);

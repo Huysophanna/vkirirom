@@ -47,7 +47,7 @@ export class LocationTracker {
     NativeStorage.setItem('userlocation', JSON.stringify(location)).then(data => {
       console.log("Set user location success :" + data);
     }, err => {
-      console.log("Set userlocation failed :" + err);
+      console.error("Set userlocation failed :" + err);
     });
   }
 

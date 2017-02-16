@@ -8,6 +8,17 @@ $green_primary_color: #1C8954;
         font-weight: normal;
     }
 }
+.clearNoti {
+    color: white;
+    button {
+        display: block;
+        font-size: 60%;
+        transition: 0.2s;
+    }
+    button.activated {
+        color: transparent;
+    }
+}
 .noNotification {
     font-size: large;
     color: $green_primary_color;

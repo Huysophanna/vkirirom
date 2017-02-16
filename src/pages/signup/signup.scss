@@ -74,7 +74,7 @@ $blue_fb_color: #3956A0;
         }
     }
     .item-block {
-        min-height: 1.5em;
+        min-height: 0;
     }
     .item-inner {
         border-bottom: transparent !important;
@@ -86,23 +86,11 @@ $blue_fb_color: #3956A0;
     .submit-login {
         margin-top: 0;
     }
-    .input-signup {
-        .item {
-            //make each field decrease the line height, smaller
-            line-height: 10px;
-        }
-    }
 }
 
 //for android when there is home button below
 .platform-android {
     .submit-login {
         margin-top: 5%;
-    }
-    .input-signup {
-        .item {
-            //make each field decrease the line height, smaller
-            line-height: 10px;
-        }
     }
 }

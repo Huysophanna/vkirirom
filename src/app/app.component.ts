@@ -42,6 +42,8 @@ export class MyApp {
   isEmailUser: boolean;
   isChatMessageScreen: any;
   isAuthenticated: any;
+  isChangingProfilePicture: any;
+  settingToggleNotification: any;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
 
@@ -59,9 +61,19 @@ export class MyApp {
           badge: 'true',
           sound: 'true',
           senderID: "82070365426",
-          gcmSandbox: "true"
+          gcmSandbox: "true",
         },
         windows: {}
+      });
+
+      //event listens to check if the user turn OFF/ON notification in Setting
+      this.events.subscribe('settingToggleNotification', val => {
+        this.settingToggleNotification = val;
+        NativeStorage.setItem('settingToggleNotification', val);
+      });
+      //event listens to check if chat message screen is active
+      this.events.subscribe("isChatMessageScreen", val => {
+        this.isChatMessageScreen = val;
       });
 
 
@@ -78,6 +90,7 @@ export class MyApp {
             dismissOnPageChange: true,
           });
           if (user) {
+            
             Splashscreen.hide();
             // NativeStorage.setItem('userAuthService', true);
             this.currentUser = firebase.auth().currentUser;
@@ -100,7 +113,6 @@ export class MyApp {
             }, error => {
                 //first time, need to show intro slides
                 this.rootPage = Introslides;
-                NativeStorage.setItem("introShown", true);
             });
 
             this.loading.dismiss().then(() => {
@@ -109,69 +121,65 @@ export class MyApp {
           }
         });
 
-      //Android splash screen needs to be delayed longer than iOS to prevent -
-      //showing Dashboard screen as rootpage before Login screen
       
-
-
       push.on('registration', (data) => {
         NativeStorage.setItem('deviceToken', data.registrationId);
       });
       push.on('notification', (data) => {
+        if (this.settingToggleNotification == 'true') {
 
-        //store all notifications to local storage for the notification panel
-        this.storeNotificationsArray.push(data);
+          //store all notifications to local storage for the notification panel
+          this.storeNotificationsArray.push(data);
+          NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
 
-        NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
+          let self = this;
+          let confirmAlert: any;
 
-        let self = this;
-        let confirmAlert: any;
+          //if user using app and push notification comes
+            if (data.additionalData.foreground) {
+                // if application open on foreground, show popup
+                if (data.title.indexOf('New message') >= 0) {
+                  //alert notification for chat messages
+                  if (this.isChatMessageScreen != "true") {
+                    //push notification, present alert except chat message screen
+                    confirmAlert = this.alertCtrl.create({
+                      title: data.title,
+                      message: data.message,
+                      buttons: [{
+                        text: 'Ignore',
+                        role: 'cancel'
+                      }, {
+                        text: 'View',
+                        handler: () => {
+                          self.nav.push(Chatmessage, { message: data.message });
+                        }
+                      }]
+                    }).present();
+                  }
 
-        //event listens to check if chat message screen is active
-        this.events.subscribe("isChatMessageScreen", val => {
-          this.isChatMessageScreen = val;
-        });
-
-        //if user using app and push notification comes
-          if (data.additionalData.foreground) {
-            
-              // if application open on foreground, show popup
-              if (data.title.indexOf('New message') >= 0) {
-                //alert notification for chat messages
-
-                if (this.isChatMessageScreen != "true") {
-                  //push notification, present alert except chat message screen
-                  confirmAlert = this.alertCtrl.create({
-                    title: data.title,
-                    message: data.message,
-                    buttons: [{
-                      text: 'Ignore',
-                      role: 'cancel'
-                    }, {
-                      text: 'View',
-                      handler: () => {
-                        self.nav.push(Chatmessage, { message: data.message });
-                      }
-                    }]
-                  }).present();
+                } else {
+                  // this.events.publish('foreground-marketing-notification', data.message);
+                  let title = "Hi, " + this.userName;
+                  let message = data.title + ': ' + data.message;
+                  this.warningAlert(title, message);
                 }
-
-              } else {
-                // this.events.publish('foreground-marketing-notification', data.message);
-                let title = "Hi, " + this.userName;
-                this.warningAlert(title, data.message);
+              
+            } else {
+              //if user NOT using app and push notification comes
+              if (data.title.indexOf('New message') >= 0) {
+                self.nav.push(Chatmessage, { message: data.message });
               }
-            
-          } else {
-            //if user NOT using app and push notification comes
-            if (data.title.indexOf('New message') >= 0) {
-              self.nav.push(Chatmessage, { message: data.message });
             }
-          }
+        } //end of setting notification condition
 
       });
       push.on('error', (e) => {
         console.log(e.message);
+      });
+
+      this.events.subscribe('clearNotification', data => {
+        this.storeNotificationsArray = [];
+        NativeStorage.setItem('storeNotificationsArray', []);
       });
       
       StatusBar.styleDefault();
@@ -194,19 +202,17 @@ export class MyApp {
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Update Profile Picture',
+      title: 'Upload Profile Picture',
       buttons: [
         {
           text: 'Take Photo',
           handler: () => {
-            // this.takePicture(Camera.PictureSourceType.CAMERA);
             this.doGetPicture(Camera.PictureSourceType.CAMERA);
           }
         },
         {
           text: 'Select from Photo Library',
           handler: () => {
-            // this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
             this.doGetPicture(Camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
@@ -226,8 +232,11 @@ export class MyApp {
       targetWidth: 300,
       targetHeight: 300,
       sourceType: imageSource,
-      correctOrientation: true,
+      correctOrientation: true
     }).then(_imagePath => {
+      //variable indicates user changing profile picture
+      this.isChangingProfilePicture = true;
+      
       //convert picture to blob
       return this.makeFileIntoBlob(_imagePath);
     }).then(_imageBlob => {
@@ -236,6 +245,14 @@ export class MyApp {
     }, error => {
       //user cancelled, not selecting any photos
     });
+  }
+
+  getOpacity() {
+    if (this.isChangingProfilePicture) {
+      return 0.3;
+    } else {
+      return 1;
+    }
   }
 
   makeFileIntoBlob(_imagePath) {
@@ -292,6 +309,9 @@ export class MyApp {
             });
 
             this.makeToast("Success! New profile picture is now updated.");
+
+            //variable indicates user's profile picture finished changing
+            this.isChangingProfilePicture = false;
           });
         });
     });
@@ -375,7 +395,7 @@ export class MyApp {
         Facebook.logout();
         NativeStorage.setItem('userDetails', "");
         //reset notification panel items
-        NativeStorage.setItem('storeNotificationsArray', "");
+        NativeStorage.setItem('storeNotificationsArray', []);
         this.nav.setRoot(Login);
         break;
     }

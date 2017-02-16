@@ -1,22 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Events, NavController, AlertController, ViewController } from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
+import { Toast, NativeStorage } from 'ionic-native';
 
-/*
-  Generated class for the Notificationpanel page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-notificationpanel',
   templateUrl: 'notificationpanel.html'
   // styles: ['.scroll-content { overflow-y: auto }']
 })
 export class Notificationpanel {
-  storeNotificationsArray: any;
+  storeNotificationsArray: any = [];
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertCtrl: AlertController, public events: Events) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertCtrl: AlertController, public events: Events, public ngZone: NgZone) {
     this.getStorageItem();
   }
 
@@ -41,6 +35,18 @@ export class Notificationpanel {
     this.warningAlert(notiTitle, notiIndex.message);
   }
 
+  clearNotification() {
+    if (this.storeNotificationsArray != []) {
+      this.makeToast('Success! Notifications are cleared');
+    } else {
+      this.makeToast('No Notifications to be cleared');
+    }
+    this.ngZone.run(() => {
+      this.storeNotificationsArray = [];
+    });
+    this.events.publish('clearNotification');
+  }
+
   getStorageItem() {
       NativeStorage.getItem('storeNotificationsArray').then(notifications => {
           this.storeNotificationsArray = notifications;
@@ -56,6 +62,14 @@ export class Notificationpanel {
           role: 'cancel'
         }]
     }).present();
+  }
+
+  makeToast(message) {
+    Toast.show(message, '5000', 'bottom').subscribe(
+        toast => {
+          console.log(toast);
+        }
+    );
   }
 
 }

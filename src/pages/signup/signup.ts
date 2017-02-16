@@ -52,13 +52,23 @@ export class Signup {
           displayName: this.signupForm.value.name,
           photoURL: "img/man.svg"
         });
-        this.nav.setRoot(Login);
-        this.warningAlert("Success! You can now proceed logging in to your new account.");
         //store user data into firebase database
         this.createNewUser(signUpData);
+        
+        this.nav.setRoot(Login);
+        this.loading.dismiss().then(success => {
+          this.warningAlert("Success! You can now proceed logging in to your new account.");
+        });
       }, (error) => {
-        this.loading.dismiss();
-        this.warningAlert(error.message);
+        this.loading.dismiss().then(success => {
+          if (error.code.indexOf('auth/invalid-email') >= 0) {
+              this.warningAlert('Please provide a valid form of email address.');
+          } else if (error.code.indexOf('auth/email-already-in-use') >= 0) {
+              this.warningAlert(error.message);
+          } else {
+              this.warningAlert('There is a problem with network connection. Please try again later.');
+          }
+        });
       });
 
       this.loading = this.loadingCtrl.create({
