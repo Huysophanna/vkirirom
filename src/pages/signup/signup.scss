@@ -30,9 +30,9 @@ $blue_fb_color: #3956A0;
         margin-top: 0;
     }
 }
-.vtop-bar {
+.vtop-bar-signup {
     width: 100%; 
-    height: 30%;
+    height: 28%;
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -46,12 +46,19 @@ $blue_fb_color: #3956A0;
     width: 100%;
     height: 15%;
     margin-top: 5%;
+    ion-item {
+        ion-label {
+            padding: 0 0 5px;
+        }
+    }
+    
     input {
         border-bottom: 1px solid white;
         color: white;
     }
     ion-item {
         background-color: transparent;
+        margin: -3px 0 2px;
     }
     ion-label {
         color: white !important;
@@ -90,6 +97,17 @@ $blue_fb_color: #3956A0;
 
 //for android when there is home button below
 .platform-android {
+    ion-item {
+        ion-label {
+            padding: 0 0 2px;
+        }
+    }
+     .error-message {
+        background: transparent;
+        p {
+            font-size: 10%;
+        }
+     }
     .submit-login {
         margin-top: 5%;
     }

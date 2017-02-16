@@ -24,12 +24,14 @@ export class Login {
   userProfile: any; users: any;
   hideMenuToggle: boolean;
   deviceToken: any;
+  isPlatform: any;
 
   constructor(public menuCtrl: MenuController, public platform: Platform, public nav: NavController, public authData: AuthData,
     public formBuilder: FormBuilder, public alertCtrl: AlertController,
     public loadingCtrl: LoadingController, public fb: Facebook, public events: Events) {
 
     platform.ready().then(() => {
+      this.isPlatform = platform.is('ios') ? 'ios' : 'android';
       //hide side mneu on login screen
       this.menuCtrl.enable(false);
     });
@@ -68,7 +70,7 @@ export class Login {
           this.userProfile = authData;
 
           //store user device token and other details to firebase after creating the user account
-          //  this.storeDeviceTokenToFirebase();
+           this.storeDeviceTokenToFirebase();
 
           if (this.userProfile.photoURL == '') {
             this.userProfile.photoURL = "img/profile.svg";
@@ -105,7 +107,7 @@ export class Login {
 
   createNewUser() {
     let user = firebase.database().ref('/Users');
-    user.child(this.userProfile.uid).set({ "name": this.userProfile.displayName, "cardid": "", "email": this.userProfile.email, "vpoint": "", "type": "", "joined": "", "expire": "", "location": "", "platform": "", "deviceToken": "", "group": "default", "bgLocationTag": true });
+    user.child(this.userProfile.uid).set({ "name": this.userProfile.displayName, "cardid": "", "email": this.userProfile.email, "vpoint": "", "type": "", "joined": "", "expire": "", "location": "", "platform": this.isPlatform, "deviceToken": this.deviceToken, "group": "default", "bgLocationTag": true });
   }
 
   userExist() {
@@ -116,8 +118,11 @@ export class Login {
         let existed = response.child('name').exists();
         if (!existed) {
           this.createNewUser();
+        } else {
+          //user existed
+          //re-store user device token and other details to firebase after creating the user account
+          this.storeDeviceTokenToFirebase();
         }
-        console.log(existed);
       }).catch((err) => {
         console.log(err);
         this.warningAlert(err + ". Please contact customer support.")
@@ -142,8 +147,7 @@ export class Login {
           .then((success) => {
             this.userProfile = success;
             this.userExist();
-            //store user device token and other details to firebase after creating the user account
-            //  this.storeDeviceTokenToFirebase();
+            
             //alert("Firebase success: " + JSON.stringify(success));
             this.nav.setRoot(Dashboard);
 
@@ -182,8 +186,10 @@ export class Login {
   }
 
   storeDeviceTokenToFirebase() {
-    let user = firebase.database().ref('/Users/' + this.userProfile.uid);
-    user.update({"deviceToken": this.deviceToken});
+    if (this.deviceToken) {
+      let user = firebase.database().ref('/Users/' + this.userProfile.uid);
+      user.update({"deviceToken": this.deviceToken});
+    }
   }
 
   /**

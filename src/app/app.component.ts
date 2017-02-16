@@ -357,31 +357,19 @@ export class MyApp {
         let actionSheet = this.actionsheetController.create({
           title: 'Contact',
             buttons: [
-              {
-                text: 'Room Reservation',
+               {
+                text: 'Reception (+855 78 777 284)',
                 handler: () => {
                   console.log('Reservation clicked');
-                  CallNumber.callNumber("0962304669", true);
+                  CallNumber.callNumber("078777284", true);
                 }
-              },{
-                text: 'Security & Safety',
+              }, {
+                text: 'Reception (+855 96 2222 735)',
                 handler: () => {
-                  console.log('Security clicked');
-                  CallNumber.callNumber("0962304669", true);
+                  console.log('Reservation clicked');
+                  CallNumber.callNumber("0962222735", true);
                 }
-              },{
-                text: 'Regular Shuttle Bus',
-                handler: () => {
-                  console.log('Suttle Bus clicked');
-                  CallNumber.callNumber("0962304669", true);
-                }
-              },{
-                text: 'Restaurant',
-                handler: () => {
-                  console.log('Restaurant clicked');
-                  CallNumber.callNumber("0962304669", true);
-                }
-              },{
+              }, {
                 text: 'Cancel',
                 role: 'cancel',
                 handler: () => {

@@ -197,6 +197,7 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
             font-size: x-small;
         }
         .dashboard-action {
+            height: 70%;
             .first-row {
                 margin-top: 4%;
             }
@@ -234,6 +235,13 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
     }
     .header .header-title {
         top: 13px;
+    }
+}
+
+// Iphone 6 and 6 plus
+@media only screen and (min-device-width: 412px) {
+    .container .dashboard-action .emergency button {
+        height: 5em;
     }
 }
 

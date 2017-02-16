@@ -35,6 +35,8 @@ export class Dashboard {
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController) {
       platform.ready().then(() => {
+        //show side menu if it's not login screen
+        menuCtrl.enable(true);
         Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
           let latitute = resp.coords.latitude;
           let longitute = resp.coords.longitude;
@@ -155,8 +157,6 @@ export class Dashboard {
 //   }
 // });
 // this.geolocationFunction();
-// //show side menu if it's not login screen
-// this.menuCtrl.enable(true);
 //   }
   // geolocationFunction() {
   //   Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
@@ -281,7 +281,11 @@ export class Dashboard {
             } else if ((this.isKirirom == undefined) && (this.isUnknown == true)){
               this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
             } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+<<<<<<< HEAD
               this.warningAlert("OffSite Mode", "Sorry, this function is not accessible outside kirirom area.");
+=======
+              this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
+>>>>>>> 0574e1e1c9582dfd26de58d5660a720775d74582
             } else {
               this.navCtrl.push(Chat);
             }
