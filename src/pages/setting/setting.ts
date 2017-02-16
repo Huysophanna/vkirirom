@@ -55,7 +55,6 @@ export class Setting {
       //   console.error("bgLocationTag error : " + err);
       // });
     });
-    console.log(this.notiToggle);
   }
 
 
@@ -108,7 +107,7 @@ export class Setting {
 
     this.alertCtrl.create({
         title: 'Notification',
-        message: 'Notifications includes Digital News Content, also Group Chat alert. Turn OFF to avoid push notifications.?',
+        message: 'Notifications includes Digital News Content, also Group Chat alert. Turn OFF to avoid push notifications.',
         buttons: [
           {
             text: 'Turn OFF',

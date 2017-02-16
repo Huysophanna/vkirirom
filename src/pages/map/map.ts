@@ -84,12 +84,12 @@ export class GoogleMapPage {
       //   new GoogleMapsLatLng(11.3099, 104.0734),
       // ];
 
-      let addedOverlayInterval = setInterval(() => {
-        this.loader = this.loadingCtrl.create({
+      this.loader = this.loadingCtrl.create({
             content: 'Initializing Map ...',
         });
-        this.loader.present();
+      this.loader.present();
 
+      let addedOverlayInterval = setInterval(() => {
         this.map.addGroundOverlay({
           'url': "img/vmap.png",
           'bounds': bounds

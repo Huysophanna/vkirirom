@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, MenuController, NavController, LoadingController, AlertController } from 'ionic-angular';
-import { Keyboard } from 'ionic-native';
+import { NativeStorage, Keyboard } from 'ionic-native';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
 import { Dashboard } from '../dashboard/dashboard';
@@ -21,10 +21,17 @@ export class Signup {
   passwordConfirmChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
-
+  isPlatform: any;
+  token: any;
 
   constructor(public nav: NavController, public authData: AuthData, public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController, public menuCtrl: MenuController, public platform: Platform) {
+    
+    platform.ready().then(() => {
+      this.isPlatform = platform.is('ios') ? 'ios' : 'android';
+      alert(this.isPlatform);
+      alert(JSON.stringify(platform.version()));
+    })
 
     Keyboard.disableScroll(true);
     this.signupForm = formBuilder.group({
@@ -87,7 +94,7 @@ export class Signup {
 
   createNewUser(signUpData) {
     let user = firebase.database().ref('/Users');
-    user.child(signUpData.uid).set({ "name": signUpData.displayName, "cardid": "", "email": signUpData.email, "vpoint": "", "type": "", "joined": "", "expire": "", "location": "", "platform": "", "deviceToken": "", "group": "default", "bgLocationTag": true });
+    user.child(signUpData.uid).set({ "name": signUpData.displayName, "cardid": "", "email": signUpData.email, "vpoint": "", "type": "", "joined": "", "expire": "", "location": "", "platform": this.isPlatform, "deviceToken": "", "group": "default", "bgLocationTag": true });
   }
 
   warningAlert(message) {
