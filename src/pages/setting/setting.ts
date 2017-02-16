@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ViewController, Platform, NavController, AlertController, Events } from 'ionic-angular';
+import { NgZone, Component } from '@angular/core';
+import { NavParams, ViewController, Platform, NavController, AlertController, Events } from 'ionic-angular';
 import { NativeStorage, LocationAccuracy, Diagnostic } from 'ionic-native';
 import { SettingService } from '../../providers/setting-service';
 import { FirebaseUserData } from '../../providers/firebase-user-data';
@@ -14,23 +14,17 @@ declare var io: any;
 })
 export class Setting {
   public loc: any;
-  public noti: any;
+  public notiToggle: any;
   public socket: any;
   public token: any;
   public locationTag: any;
-  public test: any;
+  public notification: any;
+  
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController, public events: Events) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public settingService: SettingService, private firebaseUserData: FirebaseUserData, private platform: Platform, public viewCtrl: ViewController, public events: Events, public navParams: NavParams, public ngZone: NgZone) {
     platform.ready().then(() => {
-      this.noti = this.test;
-      console.log('constructor ------------------------------------------------------');
+      this.notiToggle = this.navParams.get("settingToggleNotification");
       
-      // this.noti = false;
-      // NativeStorage.getItem('settingToggleNotification').then(_val => {
-      //   this.noti = _val;
-      //   console.log(this.noti + '----------------------------------------------------------------------------');
-        
-      // });
       // document.addEventListener('deviceready', function() {
       //   cordova.plugins.backgroundMode.ondeactivate = function() {
       //     alert("backgroundMode in setting");
@@ -61,20 +55,9 @@ export class Setting {
       //   console.error("bgLocationTag error : " + err);
       // });
     });
-    console.log(this.noti);
+    console.log(this.notiToggle);
   }
 
-  ngOnInit() {
-    this.test = true;
-        console.log(this.test + ' On Init ----------------------------------------------------------------------------');
-    // NativeStorage.getItem('settingToggleNotification').then(_val => {
-    //     this.test = _val;
-    //     console.log(this.noti + '----------------------------------------------------------------------------');
-        
-    //   }, error => {
-    //     console.log(this.noti + '----------------------------------------------------------------------------');
-    //   });
-  }
 
 //   forceUser() {
 //     let confirm = this.alertCtrl.create({
@@ -118,10 +101,38 @@ export class Setting {
     this.viewCtrl.dismiss();
   }
 
-  setNotification(data) {
-    //emit events to turn off alert push notification
-    this.events.publish("settingToggleNotification", data);
-    // alert(data);
+  setNotification() {
+    // //emit events to turn off alert push notification
+    // this.events.publish("settingToggleNotification", data);
+    // // alert(data);
+
+    this.alertCtrl.create({
+        title: 'Notification',
+        message: 'Notifications includes Digital News Content, also Group Chat alert. Turn OFF to avoid push notifications.?',
+        buttons: [
+          {
+            text: 'Turn OFF',
+            handler: () => {
+              this.ngZone.run(() => {
+                this.notiToggle = "OFF";
+              });
+              //emit events to turn off alert push notification
+              this.events.publish("settingToggleNotification", this.notiToggle);
+            }
+          },
+          {
+            text: 'Turn ON',
+            handler: () => {
+                this.notiToggle = "ON";
+              //emit events to turn off alert push notification
+              this.events.publish("settingToggleNotification", this.notiToggle);
+            }
+          }
+        ]
+      }).present();
+    
+
+
   }
 
    warningAlert(title, message) {

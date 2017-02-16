@@ -43,7 +43,7 @@ export class MyApp {
   isChatMessageScreen: any;
   isAuthenticated: any;
   isChangingProfilePicture: any;
-  settingToggleNotification: any;
+  settingToggleNotification: any = "ON";
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
 
@@ -126,7 +126,7 @@ export class MyApp {
         NativeStorage.setItem('deviceToken', data.registrationId);
       });
       push.on('notification', (data) => {
-        if (this.settingToggleNotification == 'true') {
+        if (this.settingToggleNotification == 'ON') {
 
           //store all notifications to local storage for the notification panel
           this.storeNotificationsArray.push(data);
@@ -189,6 +189,7 @@ export class MyApp {
         this.currentUser = firebase.auth().currentUser;
         this.getStorageItem();
       });
+
 
     });
 
@@ -348,7 +349,7 @@ export class MyApp {
     //logout function
     switch (page.id) {
       case 1:
-        let presentModal = this.modalCtrl.create(Setting);
+        let presentModal = this.modalCtrl.create(Setting , {"settingToggleNotification": this.settingToggleNotification});
         presentModal.present();
         break;
       case 2:
