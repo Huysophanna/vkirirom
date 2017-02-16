@@ -10,8 +10,20 @@ label {
         color: #9e9e9e;
         display: inline-block;
     }
-}
-
-.toggle-checked {
-    background-color: #1C8954 !important;
+    .arrow {
+        display: inline-block;
+        float: right;
+        font-size: 120%;
+        font-weight: bold;
+        color: #9e9e9e;
+    }
+    .notification-status {
+        font-size: 100%;
+        font-weight: bold;
+        color: #9e9e9e;
+        display: inline-block;
+        float: right;
+        margin-right: 3%;
+        margin-top: 0.75%;
+    }
 }

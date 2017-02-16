@@ -21,14 +21,10 @@ export class GoogleMapPage {
   loader: any;
 
   constructor(public events: Events, public navCtrl: NavController, public platform: Platform, public loadingCtrl: LoadingController) {
-    platform.ready().then(() => {
-      this.loader = this.loadingCtrl.create({
-          content: 'Initializing Map ...',
+      platform.ready().then(() => {
+        this.initMap();
+        this.watchPosition();
       });
-      this.loader.present();
-      this.initMap();
-      this.watchPosition();
-    });
   }
 
   watchPosition(){
@@ -89,6 +85,11 @@ export class GoogleMapPage {
       // ];
 
       let addedOverlayInterval = setInterval(() => {
+        this.loader = this.loadingCtrl.create({
+            content: 'Initializing Map ...',
+        });
+        this.loader.present();
+
         this.map.addGroundOverlay({
           'url': "img/vmap.png",
           'bounds': bounds

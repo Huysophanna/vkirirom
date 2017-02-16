@@ -15,12 +15,14 @@
                     <ion-label class="custom-setting-label">Location</ion-label>
                     <ion-toggle [(ngModel)]="loc" (click)="setLocation(loc)"></ion-toggle>
                 </ion-item>-->
-                <ion-item>
-                    <ion-label class="custom-setting-label">Notification</ion-label>
-                    <ion-toggle [(ngModel)]="noti" (click)="setNotification(noti)"></ion-toggle>
+                <ion-item (click)="setNotification()">
+                    <p class="custom-setting-label">Notification</p>
+                    <p class="arrow"><ion-icon name="arrow-forward"></ion-icon></p>
+                    <p class="notification-status">{{notiToggle}}</p>
                 </ion-item>
+                
 
-                <ion-item>
+                <ion-item (click)="clickHelp()">
                     <ion-label class="custom-setting-label">Help</ion-label>
                 </ion-item>
             </div>
