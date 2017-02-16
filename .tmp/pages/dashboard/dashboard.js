@@ -73,52 +73,6 @@ export var Dashboard = (function () {
                                     console.log("Set user location failed :" + err);
                                 });
                             });
-<<<<<<< HEAD
-                            NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
-                                console.log("Set user location success :" + data);
-                            }, function (err) {
-                                console.log("Set user location failed :" + err);
-                            });
-                        });
-                    }, 2000);
-                };
-                cordova.plugins.backgroundMode.ondeactivate = function () {
-                    var _this = this;
-                    this.locationTracker.lastLocationTracker(latitute, longitute);
-                    setInterval(function () {
-                        _this.kiriromScope(latitute, longitute);
-                    }, 2000);
-                };
-            }, false);
-            _this.locationTracker.lastLocationTracker(latitute, longitute);
-            setInterval(function () {
-                _this.kiriromScope(latitute, longitute);
-            }, 2000);
-        }, function (err) {
-            console.log("Geolocation Error :" + _this.isKirirom);
-            _this.isUnknown = true;
-        });
-    };
-    Dashboard.prototype.ionViewWillEnter = function () {
-        var _this = this;
-        Diagnostic.isLocationEnabled().then(function (enabled) {
-            if (enabled) {
-                Geolocation.getCurrentPosition().then(function (resp) {
-                    var latitute = resp.coords.latitude;
-                    var longitute = resp.coords.longitude;
-                    _this.locationTracker.lastLocationTracker(latitute, longitute);
-                    setInterval(function () {
-                        _this.kiriromScope(latitute, longitute);
-                    }, 2000);
-                }, function (err) { return console.error(err); });
-            }
-            else {
-                _this.isKirirom = undefined;
-                _this.isUnknown = true;
-            }
-        }, function (err) { return console.error(err); });
-    };
-=======
                         }, 2000);
                     };
                     cordova.plugins.backgroundMode.ondeactivate = function () {
@@ -277,7 +231,6 @@ export var Dashboard = (function () {
     //     }
     //   }, err => console.error(err));
     // }
->>>>>>> 1a748ff0f96a696044ada9a413d1448cdb013f0d
     Dashboard.prototype.showNoti = function () {
         var notiModal = this.modalCtrl.create(Notificationpanel);
         notiModal.present();
@@ -321,7 +274,7 @@ export var Dashboard = (function () {
                     this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
                 }
                 else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-                    this.warningAlert("Outdoor Mode", "Sorry, this function is not accessible outside kirirom area.");
+                    this.warningAlert("OffSite Mode", "Sorry, this function is not accessible outside kirirom area.");
                 }
                 else {
                     this.navCtrl.push(Chat);

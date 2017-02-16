@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Slides } from 'ionic-angular';
+import { NavController, Slides, Platform } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { NativeStorage } from 'ionic-native';
 import { Login } from '../login/login';
@@ -16,10 +16,16 @@ import { Login } from '../login/login';
 })
 
 export class Introslides {
+  isIpad: any;
   @ViewChild(Slides) slides: Slides;
   sliderOptions: any;
  
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public platform: Platform) {
+    if (this.platform.width() > 700) {
+      this.isIpad = true;
+    } else {
+      this.isIpad = false;
+    }
  
     this.sliderOptions = {
       pager: true

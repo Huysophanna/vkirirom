@@ -92,42 +92,6 @@ export class Dashboard {
           setInterval(() => {
             this.kiriromScope(latitute, longitute);
           }, 2000);
-<<<<<<< HEAD
-        };
-        cordova.plugins.backgroundMode.ondeactivate = function() {
-          this.locationTracker.lastLocationTracker(latitute, longitute);
-            setInterval(() => {
-              this.kiriromScope(latitute, longitute);
-          }, 2000);
-        }
-      }, false);
-      this.locationTracker.lastLocationTracker(latitute, longitute);
-      setInterval(() => {
-        this.kiriromScope(latitute, longitute);
-      }, 2000);
-     }, err => {
-      console.log("Geolocation Error :" + this.isKirirom);
-      this.isUnknown = true;
-    });
-  }
-
-  ionViewWillEnter() {
-    Diagnostic.isLocationEnabled().then(enabled => {
-      if (enabled) {
-        Geolocation.getCurrentPosition().then(resp => {
-          let latitute = resp.coords.latitude;
-          let longitute = resp.coords.longitude;
-          this.locationTracker.lastLocationTracker(latitute, longitute);
-          setInterval(() => {
-            this.kiriromScope(latitute, longitute);
-          }, 2000);
-        }, err => console.error(err));
-      } else {
-        this.isKirirom = undefined;
-        this.isUnknown = true;
-      }
-    }, err => console.error(err));
-=======
         }, err => {
           console.log("Geolocation Error :" + this.isKirirom);
           this.isUnknown = true;
@@ -150,7 +114,6 @@ export class Dashboard {
         // });
         // this.diagnosticFunction();
       });
->>>>>>> 1a748ff0f96a696044ada9a413d1448cdb013f0d
   }
 
 //   diagnosticFunction() {
@@ -318,7 +281,7 @@ export class Dashboard {
             } else if ((this.isKirirom == undefined) && (this.isUnknown == true)){
               this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
             } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-              this.warningAlert("Outdoor Mode", "Sorry, this function is not accessible outside kirirom area.");
+              this.warningAlert("OffSite Mode", "Sorry, this function is not accessible outside kirirom area.");
             } else {
               this.navCtrl.push(Chat);
             }

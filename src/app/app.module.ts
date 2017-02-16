@@ -18,6 +18,7 @@ import { ContactModal } from '../pages/contact-modal/contact-modal';
 import { Notificationpanel } from '../pages/notificationpanel/notificationpanel';
 import { Editprofile } from '../pages/editprofile/editprofile';
 import { Reservation } from '../pages/reservation/reservation';
+import { Ipadintro } from '../pages/ipadintro/ipadintro';
 import { AuthData } from '../providers/auth-data';
 import { FirebaseUserData } from '../providers/firebase-user-data';
 import { Api } from '../providers/api';
@@ -46,7 +47,8 @@ import { Userscope } from '../providers/userscope';
     ContactModal,
     Notificationpanel,
     Editprofile,
-    Introslides
+    Introslides,
+    Ipadintro
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -70,7 +72,8 @@ import { Userscope } from '../providers/userscope';
     ContactModal,
     Notificationpanel,
     Editprofile,
-    Introslides
+    Introslides,
+    Ipadintro
   ],
   providers: [
     AuthData,

@@ -48,6 +48,7 @@ export class MyApp {
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
 
     platform.ready().then(() => {
+      console.log("Platform width : " + this.platform.width());
 
       this.getStorageItem();
       this.firebaseUserData.retrieveUserData();

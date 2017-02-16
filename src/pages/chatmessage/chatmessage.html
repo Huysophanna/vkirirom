@@ -7,7 +7,7 @@
 
 <ion-content class="chatmessage-container">
     <div class="chat-content" #scrollMe style="overflow: scroll;" [style.height]="checkKeyboardValue? keyboardShownValue + 'px' : '93.5%'">
-    <!--<ion-scroll #scrollMe scrollY="true" class="chat-content">-->
+        <!--<ion-scroll #scrollMe scrollY="true" class="chat-content">-->
         <ion-list>
             <!--check network connection-->
             <div class="error-messages" *ngIf="connectionStatus">
@@ -19,12 +19,12 @@
                     <!--Chat history section-->
                     <div class="loading-messages" *ngIf="chatHistory==''">
                         <!--loading and while retrieving data-->
-                            <div class="loader">
-                                <svg class="circular" viewBox="25 25 50 50">
+                        <div class="loader">
+                            <svg class="circular" viewBox="25 25 50 50">
                                     <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
                                 </svg>
-                            </div>
-                            <p>Loading messages...</p>
+                        </div>
+                        <p>Loading messages...</p>
                     </div>
                     <div class="chat-history-wrapper" *ngFor="let data of chatHistory; let i=index">
                         <!--Date & time of messages-->
@@ -66,10 +66,10 @@
                                 <b>{{ data.time }}</b>
                             </div>
 
-                        </div>  
-                        
+                        </div>
+
                     </div>
-                    
+
 
                     <!--Real time chat message section-->
                     <div class="chat-wrapper" *ngFor="let i of time; let j=index;">
@@ -111,13 +111,13 @@
 
     <div class="chat-input" #chatinput>
         <!-- Real floating action button, fixed. It will not scroll with the content -->
-            <ion-fab right bottom *ngIf="notificationType != undefined && settingToggleNotification == 'true'">
-                <button ion-fab color="light"><ion-icon [ngStyle]="{'color': '#1C8954'}" name="md-add"></ion-icon></button>
-                <ion-fab-list side="top">
-                    <button *ngIf="notificationType == 'ON'" (click)="notificationOn()" ion-fab><ion-icon [ngStyle]="{'color': 'black'}" name="notifications"></ion-icon></button>
-                    <button *ngIf="notificationType == 'OFF'" (click)="notificationOff()" ion-fab><ion-icon [ngStyle]="{'color': 'black'}" name="notifications-off"></ion-icon></button>
-                </ion-fab-list>
-            </ion-fab>
+        <ion-fab right bottom *ngIf="notificationType != undefined && settingToggleNotification == 'true'">
+            <button ion-fab color="light"><ion-icon [ngStyle]="{'color': '#1C8954'}" name="md-add"></ion-icon></button>
+            <ion-fab-list side="top">
+                <button *ngIf="notificationType == 'ON'" (click)="notificationOn()" ion-fab><ion-icon [ngStyle]="{'color': 'black'}" name="notifications"></ion-icon></button>
+                <button *ngIf="notificationType == 'OFF'" (click)="notificationOff()" ion-fab><ion-icon [ngStyle]="{'color': 'black'}" name="notifications-off"></ion-icon></button>
+            </ion-fab-list>
+        </ion-fab>
         <textarea autocomplete="on" autocorrect="on" autocapitalize="on" keyboardAttach class="chatinput-field" type="text" [(ngModel)]="chatinp" placeholder="Type a message..."></textarea>
         <input type="submit" class="chatinput-btn" fab (click)="send(chatinp)" value="Send" />
     </div>
