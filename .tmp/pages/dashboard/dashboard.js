@@ -274,7 +274,11 @@ export var Dashboard = (function () {
                     this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
                 }
                 else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+<<<<<<< HEAD
+                    this.warningAlert("OffSite Mode", "Sorry, this function is not accessible outside kirirom area.");
+=======
                     this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
+>>>>>>> 0574e1e1c9582dfd26de58d5660a720775d74582
                 }
                 else {
                     this.navCtrl.push(Chat);

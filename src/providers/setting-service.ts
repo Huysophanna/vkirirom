@@ -5,8 +5,7 @@ import { NativeStorage } from 'ionic-native';
 
 @Injectable()
 export class SettingService {
-  public isLocation: boolean;
-  public isNotification: boolean;
+  isIpad: boolean;
 
   constructor(public http: Http) {
     console.log('Hello SettingService Provider');

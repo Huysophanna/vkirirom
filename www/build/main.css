@@ -21622,6 +21622,7 @@ sub {
   position: relative;
   overflow: hidden;
   border-radius: 100%;
+  z-index: 10;
 }
 
 .chatmessage-container .chat-wrapper .chat-person-image img {
@@ -21733,6 +21734,10 @@ sub {
   text-align: right;
 }
 
+.chatmessage-container .chat-wrapper .me p {
+  text-align: left;
+}
+
 .chatmessage-container .chat-wrapper .me::before {
   box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, 0.4);
   right: -9px;
@@ -21792,15 +21797,36 @@ sub {
   opacity: 0.2;
 }
 
-@media screen and (max-width: 320px) {
+@media only screen and (min-device-width: 320px) {
   .chatmessage-container .chat-wrapper .chat-person-image {
-    width: 20%;
+    width: 18%;
+  }
+  .chatmessage-container .chat-wrapper .chat-bubble p {
+    max-width: 70%;
   }
 }
 
-@media screen and (min-width: 360px) and (max-width: 400px) {
+@media only screen and (min-device-width: 360px) {
   .chatmessage-container .chat-wrapper .chat-person-image {
-    width: 17%;
+    width: 16%;
+  }
+}
+
+@media only screen and (min-device-width: 412px) {
+  .chatmessage-container .chat-wrapper .chat-person-image {
+    width: 14%;
+  }
+}
+
+@media only screen and (min-device-width: 768px) {
+  .chatmessage-container .chat-wrapper .chat-person-image {
+    width: 7%;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) {
+  .chatmessage-container .chat-wrapper .chat-person-image {
+    width: 5%;
   }
 }
 
@@ -22220,48 +22246,71 @@ sub {
   border-color: transparent;
 }
 
-.ios page-introslides ion-slide, .md page-introslides ion-slide {
-  background-color: #1C8954;
+.ios page-introslides ion-slide,
+.md page-introslides ion-slide {
+  /* ff3.6+ */
+  /* safari4+,chrome */
+  /* safari5.1+,chrome10+ */
+  /* opera 11.10+ */
+  /* ie10+ */
+  background: radial-gradient(ellipse at center, #3ca55c 0%, #3ca55c 32%, #1c8954 100%);
+  /* w3c */
 }
 
-.ios page-introslides ion-slide img, .md page-introslides ion-slide img {
+.ios page-introslides ion-slide img,
+.md page-introslides ion-slide img {
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
 }
 
-.ios page-introslides .next-btn, .md page-introslides .next-btn {
+.ios page-introslides .next-btn,
+.md page-introslides .next-btn {
   position: absolute;
   width: 100%;
   bottom: 5%;
 }
 
-.ios page-introslides .next-btn button, .md page-introslides .next-btn button {
+.ios page-introslides .next-btn button,
+.md page-introslides .next-btn button {
   background: transparent;
   box-shadow: none;
 }
 
-.ios page-introslides .next-btn ion-icon, .md page-introslides .next-btn ion-icon {
+.ios page-introslides .next-btn ion-icon,
+.md page-introslides .next-btn ion-icon {
   margin-left: 15%;
 }
 
-.ios page-introslides .start-btn, .md page-introslides .start-btn {
+.ios page-introslides .start-btn,
+.md page-introslides .start-btn {
   position: absolute;
   width: 100%;
   bottom: 30%;
 }
 
-.ios page-introslides .start-btn button, .md page-introslides .start-btn button {
+.ios page-introslides .start-btn button,
+.md page-introslides .start-btn button {
   background: transparent;
   font-size: 100%;
   box-shadow: none;
   text-transform: none;
 }
 
-.ios page-introslides .start-btn ion-icon, .md page-introslides .start-btn ion-icon {
+.ios page-introslides .start-btn ion-icon,
+.md page-introslides .start-btn ion-icon {
   margin-left: 15%;
+}
+
+@media only screen and (min-device-width: 768px) {
+  .start-btn button {
+    font-size: xx-large !important;
+  }
 }
 
 .platform-android .forgot-btn.button-md {
