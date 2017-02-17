@@ -1,0 +1,30 @@
+$green_primary_color: #1C8954;
+    ion-slides {
+        background-color: black;
+    }
+    ion-slide img {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    }
+    .dismiss-btn {
+        button {
+            position: absolute;
+            font-size: 250%;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+        }
+    }
+
+// Ipad screen
+@media only screen and (min-device-width: 768px) {
+    ion-slide img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+    }
+}

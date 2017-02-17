@@ -319,12 +319,12 @@ export class Dashboard {
                   this.lastLat = parseUserlocation[parseUserlocation.length - 1].lat;
                   this.lastLng = parseUserlocation[parseUserlocation.length - 1].lng;
                   var number = "0962304669";
-                  var message = "http://maps.google.com/?q=" + this.lastLat + "," + this.lastLng + "";
+                  var message = "Please help! I'm currently facing an emergency problem. Here is my Location: http://maps.google.com/?q=" + this.lastLat + "," + this.lastLng + "";
                   var options = {
                   replaceLineBreaks: false, // true to replace \n by a new line, false by default
                     android: {
-                      //  intent: 'INTENT'  // Opens Default sms app
-                      intent: '' // Sends sms without opening default sms app
+                       intent: 'INTENT'  // Opens Default sms app
+                      // intent: '' // Sends sms without opening default sms app
                     }
                   }
 
