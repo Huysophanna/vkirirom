@@ -34,6 +34,17 @@ export class Dashboard {
   launchCount: number = 0;
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController) {
+
+    // let seconds = 0; let flag: any;
+    // let checkInterval = setInterval(() => {
+    //   if (seconds != 10) {
+    //     if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
+          
+    //     }
+    //   }
+    //   seconds++;
+    // }, 1000);
+
       platform.ready().then(() => {
         //show side menu if it's not login screen
         menuCtrl.enable(true);
@@ -84,17 +95,36 @@ export class Dashboard {
               }, 2000);
             };
             cordova.plugins.backgroundMode.ondeactivate = function() {
-              this.locationTracker.lastLocationTracker(latitute, longitute);
-                setInterval(() => {
-                  this.kiriromScope(latitute, longitute);
-              }, 2000);
+              let test = true;
             }
           }, false);
           this.locationTracker.lastLocationTracker(latitute, longitute);
+          // alert(latitute + "  " + longitute);
           setInterval(() => {
             this.kiriromScope(latitute, longitute);
           }, 2000);
         }, err => {
+          switch(err.code) {
+            case err.PERMISSION_DENIED:
+              this.events.publish('locationPermission', err.PERMISSION_DENIED);
+              // alert("PERMISSION_DENIED " + err.PERMISSION_DENIED);
+              break;
+            case err.POSITION_UNAVAILABLE:
+              this.events.publish('locationPermission', err.POSITION_UNAVAILABLE);
+              // alert("POSITION_UNAVAILABLE " + err.POSITION_UNAVAILABLE);
+              break;
+            case err.TIMEOUT:
+              this.events.publish('locationPermission', err.TIMEOUT);
+              // alert("TIMEOUT " + err.TIMEOUT);
+              break;
+            case err.UNKNOWN_ERROR:
+              this.events.publish('locationPermission', err.UNKNOWN_ERROR);
+              // alert("UNKNOWN_ERROR " + err.UNKNOWN_ERROR);
+              break;
+          }
+          // if (err.PERMISSION_DENIED) {
+          //   alert("PERMISSION_DENIED");
+          // }
           console.log("Geolocation Error :" + this.isKirirom);
           this.isUnknown = true;
         });
@@ -240,6 +270,26 @@ export class Dashboard {
   //   }, err => console.error(err));
   // }
 
+  ionViewCanLeave() {
+    console.log("ionViewDidEnter");
+    
+    this.events.subscribe('locationPermission', success=> {
+      switch(success) {
+        case 1:
+          setTimeout(() => {
+            this.warningAlert("Location Permission denied", "Turn on Location Service to Determine your current location");
+          }, 1000);
+          break;
+        case 2:
+          Toast.show("Your location is unavailable.", '5000', 'bottom').subscribe(
+            toast => {
+              console.log(toast);
+            }
+          );
+      }
+    });
+  }
+
   showNoti() {
     let notiModal = this.modalCtrl.create(Notificationpanel);
     notiModal.present();
@@ -250,11 +300,14 @@ export class Dashboard {
     if (distance < 1) {
       var test = distance * 1000;
       this.isKirirom = true;
+      this.events.publish('isKirirom', this.isKirirom);
     } else {
       if (distance <= 17) {
         this.isKirirom = true;
+        this.events.publish('isKirirom', this.isKirirom);
       } else {
         this.isKirirom = false;
+        this.events.publish('isKirirom', this.isKirirom);
       }
     }
   }

@@ -12,6 +12,10 @@ import { SettingService } from '../../providers/setting-service';
 import { Notificationpanel } from '../notificationpanel/notificationpanel';
 export var Dashboard = (function () {
     function Dashboard(platform, navCtrl, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events, menuCtrl) {
+        // let seconds = 0; let flag: any;
+        // let checkInterval = setInterval(() => {
+        //   if (seconds != 10) {
+        //     if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
         var _this = this;
         this.platform = platform;
         this.navCtrl = navCtrl;
@@ -26,6 +30,10 @@ export var Dashboard = (function () {
         this.membership = Membership;
         this.isUnknown = false;
         this.launchCount = 0;
+        //     }
+        //   }
+        //   seconds++;
+        // }, 1000);
         platform.ready().then(function () {
             //show side menu if it's not login screen
             menuCtrl.enable(true);
@@ -86,10 +94,32 @@ export var Dashboard = (function () {
                     };
                 }, false);
                 _this.locationTracker.lastLocationTracker(latitute, longitute);
+                // alert(latitute + "  " + longitute);
                 setInterval(function () {
                     _this.kiriromScope(latitute, longitute);
                 }, 2000);
             }, function (err) {
+                switch (err.code) {
+                    case err.PERMISSION_DENIED:
+                        _this.events.publish('locationPermission', err.PERMISSION_DENIED);
+                        // alert("PERMISSION_DENIED " + err.PERMISSION_DENIED);
+                        break;
+                    case err.POSITION_UNAVAILABLE:
+                        _this.events.publish('locationPermission', err.POSITION_UNAVAILABLE);
+                        // alert("POSITION_UNAVAILABLE " + err.POSITION_UNAVAILABLE);
+                        break;
+                    case err.TIMEOUT:
+                        _this.events.publish('locationPermission', err.TIMEOUT);
+                        // alert("TIMEOUT " + err.TIMEOUT);
+                        break;
+                    case err.UNKNOWN_ERROR:
+                        _this.events.publish('locationPermission', err.UNKNOWN_ERROR);
+                        // alert("UNKNOWN_ERROR " + err.UNKNOWN_ERROR);
+                        break;
+                }
+                // if (err.PERMISSION_DENIED) {
+                //   alert("PERMISSION_DENIED");
+                // }
                 console.log("Geolocation Error :" + _this.isKirirom);
                 _this.isUnknown = true;
             });
@@ -231,6 +261,23 @@ export var Dashboard = (function () {
     //     }
     //   }, err => console.error(err));
     // }
+    Dashboard.prototype.ionViewCanLeave = function () {
+        var _this = this;
+        console.log("ionViewDidEnter");
+        this.events.subscribe('locationPermission', function (success) {
+            switch (success) {
+                case 1:
+                    setTimeout(function () {
+                        _this.warningAlert("Location Permission denied", "Turn on Location Service to Determine your current location");
+                    }, 1000);
+                    break;
+                case 2:
+                    Toast.show("Your location is unavailable.", '5000', 'bottom').subscribe(function (toast) {
+                        console.log(toast);
+                    });
+            }
+        });
+    };
     Dashboard.prototype.showNoti = function () {
         var notiModal = this.modalCtrl.create(Notificationpanel);
         notiModal.present();
@@ -274,11 +321,7 @@ export var Dashboard = (function () {
                     this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
                 }
                 else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-<<<<<<< HEAD
-                    this.warningAlert("OffSite Mode", "Sorry, this function is not accessible outside kirirom area.");
-=======
                     this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
->>>>>>> 0574e1e1c9582dfd26de58d5660a720775d74582
                 }
                 else {
                     this.navCtrl.push(Chat);

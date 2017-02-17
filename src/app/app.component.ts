@@ -25,7 +25,7 @@ declare var window: any;
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  public rootPage: any = Dashboard;
+  public rootPage: any;
   isHome: boolean = false;
   pages: any = []
   authData: any = AuthData;
@@ -78,49 +78,7 @@ export class MyApp {
       });
 
 
-      //firebase configuration
-        firebase.initializeApp({
-          apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
-          authDomain: "vkirirom-809f8.firebaseapp.com",
-          databaseURL: "https://vkirirom-809f8.firebaseio.com",
-          storageBucket: "vkirirom-809f8.appspot.com",
-          messagingSenderId: "82070365426"
-        });
-        firebase.auth().onAuthStateChanged((user) => {
-          this.loading = this.loadingCtrl.create({
-            dismissOnPageChange: true,
-          });
-          if (user) {
-            
-            Splashscreen.hide();
-            // NativeStorage.setItem('userAuthService', true);
-            this.currentUser = firebase.auth().currentUser;
-
-            //identify whether the user is signed in using Facebook or Email
-            firebase.auth().currentUser.providerData.forEach(element => {
-              this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
-              this.isEmailUser = element.providerId == 'password' ? true : false;
-            });
-          } else {
-            
-            // NativeStorage.setItem('userAuthService', false);
-            this.loading.present();
-            // this.rootPage = Login;
-
-            //logic for intro slides
-            NativeStorage.getItem("introShown").then(success => {
-                //intro slider is already shown before
-                this.rootPage = Login;
-            }, error => {
-                //first time, need to show intro slides
-                this.rootPage = Introslides;
-            });
-
-            this.loading.dismiss().then(() => {
-              Splashscreen.hide();
-            });
-          }
-        });
+      
 
       
       push.on('registration', (data) => {
@@ -201,6 +159,52 @@ export class MyApp {
       { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline' }
     ];
   } 
+
+  ngOnInit() {
+    //firebase configuration
+        firebase.initializeApp({
+          apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
+          authDomain: "vkirirom-809f8.firebaseapp.com",
+          databaseURL: "https://vkirirom-809f8.firebaseio.com",
+          storageBucket: "vkirirom-809f8.appspot.com",
+          messagingSenderId: "82070365426"
+        });
+        firebase.auth().onAuthStateChanged((user) => {
+          this.loading = this.loadingCtrl.create({
+            dismissOnPageChange: true,
+          });
+          if (user) {
+            // this.rootPage = Dashboard;
+            this.nav.setRoot(Dashboard);
+            Splashscreen.hide();
+            // NativeStorage.setItem('userAuthService', true);
+            this.currentUser = firebase.auth().currentUser;
+
+            //identify whether the user is signed in using Facebook or Email
+            firebase.auth().currentUser.providerData.forEach(element => {
+              this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
+              this.isEmailUser = element.providerId == 'password' ? true : false;
+            });
+          } else {
+            // NativeStorage.setItem('userAuthService', false);
+            this.loading.present();
+            // this.rootPage = Login;
+
+            //logic for intro slides
+            NativeStorage.getItem("introShown").then(success => {
+                //intro slider is already shown before
+                this.rootPage = Login;
+            }, error => {
+                //first time, need to show intro slides
+                this.rootPage = Introslides;
+            });
+
+            this.loading.dismiss().then(() => {
+              Splashscreen.hide();
+            });
+          }
+        });
+  }
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
