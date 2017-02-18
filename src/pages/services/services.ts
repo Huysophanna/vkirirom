@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { LocationTracker } from '../../providers/location-tracker';
+import { ServiceDetail } from '../service-detail/service-detail';
 
-/*
-  Generated class for the Services page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-services',
   templateUrl: 'services.html'
 })
 export class Services {
-  constructor(public navCtrl: NavController, public locationTracker: LocationTracker) {
+  viewModal: any;
+
+  constructor(public navCtrl: NavController, public locationTracker: LocationTracker, public modalCtrl: ModalController) {
   }
 
-  ionViewDidLoad() {
-    console.log('Hello Services Page');
+  viewDetail(item) {
+    if (item == 2) {
+      //massage service
+      this.viewModal = this.modalCtrl.create(ServiceDetail, {'imageURL': 'img/massage-poster.jpg'});
+      this.viewModal.present();
+    }
   }
 
 }

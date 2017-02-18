@@ -4,12 +4,6 @@ import { ViewChild } from '@angular/core';
 import { NativeStorage } from 'ionic-native';
 import { Login } from '../login/login';
 
-/*
-  Generated class for the Introslides page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-introslides',
   templateUrl: 'introslides.html'
