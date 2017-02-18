@@ -82,10 +82,11 @@ export class Editprofile {
         }).then(success => {
           //success updating username
             NativeStorage.setItem('userDetails', this.currentUser).then(() => {
-              this.loading.dismiss();
-              this.events.publish('UserLogin', this.currentUser.displayName);
-              this.makeToast("Success! Your details are now updated.");
-              this.dismiss();
+              this.loading.dismiss().then(success => {
+                this.events.publish('UserLogin', this.currentUser.displayName);
+                this.makeToast("Success! Your details are now updated.");
+                this.dismiss();
+              });
             });
         });
       }, _error => {

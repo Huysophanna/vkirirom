@@ -238,12 +238,14 @@ $green_primary_color: #1C8954;
             text-align: right;
             p {
                 text-align: left;
+                background-color: darkcyan;
             }
         }
         .me::before {
             box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4);
             right: -9px;
             transform: rotate( 7deg) skew( -40deg);
+            background-color: darkcyan;
         }
     }
     .chat-input {
@@ -251,7 +253,7 @@ $green_primary_color: #1C8954;
         border-top: 1px solid $green_primary_color;
         width: 100%;
         padding-right: 10px;
-        z-index: 2;
+        z-index: 10;
         //fab button positioning & colors
         button {
             box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .14), 0 4px 5px rgba(0, 0, 0, .1);
@@ -302,6 +304,7 @@ $green_primary_color: #1C8954;
             .chat-bubble {
                 p {
                     max-width: 70%;
+                    word-break: break-word;
                 }
             }
         }

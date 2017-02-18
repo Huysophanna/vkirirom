@@ -43,13 +43,12 @@ export class MyApp {
   isChatMessageScreen: any;
   isAuthenticated: any;
   isChangingProfilePicture: any;
-  settingToggleNotification: any = "ON";
+  settingToggleNotification: any;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
 
     platform.ready().then(() => {
-      console.log("Platform width : " + this.platform.width());
-
+    
       this.getStorageItem();
       this.firebaseUserData.retrieveUserData();
       //push configuration
@@ -77,7 +76,41 @@ export class MyApp {
         this.isChatMessageScreen = val;
       });
 
+      //firebase configuration
+        firebase.initializeApp({
+          apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
+          authDomain: "vkirirom-809f8.firebaseapp.com",
+          databaseURL: "https://vkirirom-809f8.firebaseio.com",
+          storageBucket: "vkirirom-809f8.appspot.com",
+          messagingSenderId: "82070365426"
+        });
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            this.nav.setRoot(Dashboard);
+            // NativeStorage.setItem('userAuthService', true);
+            this.currentUser = firebase.auth().currentUser;
 
+            //identify whether the user is signed in using Facebook or Email
+            firebase.auth().currentUser.providerData.forEach(element => {
+              this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
+              this.isEmailUser = element.providerId == 'password' ? true : false;
+            });
+          } else {
+            //logic for intro slides
+            NativeStorage.getItem("introShown").then(success => {
+                //intro slider is already shown before
+                this.nav.setRoot(Login);
+            }, error => {
+                //first time, need to show intro slides
+                this.nav.setRoot(Introslides);
+                //set toggle notification setting to be ON for the first time
+                NativeStorage.setItem('settingToggleNotification', 'ON');
+            });
+          }
+          setTimeout(() => {
+              Splashscreen.hide();
+          }, 1000)
+        });
       
 
       
@@ -158,52 +191,6 @@ export class MyApp {
       { title: 'Contact Us', id: 2, ionicon: 'ios-call-outline' },
       { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline' }
     ];
-  } 
-
-  ngOnInit() {
-    //firebase configuration
-        firebase.initializeApp({
-          apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
-          authDomain: "vkirirom-809f8.firebaseapp.com",
-          databaseURL: "https://vkirirom-809f8.firebaseio.com",
-          storageBucket: "vkirirom-809f8.appspot.com",
-          messagingSenderId: "82070365426"
-        });
-        firebase.auth().onAuthStateChanged((user) => {
-          this.loading = this.loadingCtrl.create({
-            dismissOnPageChange: true,
-          });
-          if (user) {
-            // this.rootPage = Dashboard;
-            this.nav.setRoot(Dashboard);
-            Splashscreen.hide();
-            // NativeStorage.setItem('userAuthService', true);
-            this.currentUser = firebase.auth().currentUser;
-
-            //identify whether the user is signed in using Facebook or Email
-            firebase.auth().currentUser.providerData.forEach(element => {
-              this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
-              this.isEmailUser = element.providerId == 'password' ? true : false;
-            });
-          } else {
-            // NativeStorage.setItem('userAuthService', false);
-            this.loading.present();
-            // this.rootPage = Login;
-
-            //logic for intro slides
-            NativeStorage.getItem("introShown").then(success => {
-                //intro slider is already shown before
-                this.rootPage = Login;
-            }, error => {
-                //first time, need to show intro slides
-                this.rootPage = Introslides;
-            });
-
-            this.loading.dismiss().then(() => {
-              Splashscreen.hide();
-            });
-          }
-        });
   }
 
   presentActionSheet() {
@@ -324,11 +311,14 @@ export class MyApp {
   }
 
   getStorageItem() {
+    
     NativeStorage.getItem('userPhoto').then(data => {
       this.ngzone.run(() => {
         this.userPhoto = data;
       });
-
+    });
+    NativeStorage.getItem('settingToggleNotification').then(_toggle => {
+      this.settingToggleNotification = _toggle;
     });
     NativeStorage.getItem('userDetails').then(data => {
       this.ngzone.run(() => {

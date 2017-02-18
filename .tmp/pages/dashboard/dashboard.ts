@@ -32,6 +32,8 @@ export class Dashboard {
   lastLng: any;
   deviceToken: any;
   launchCount: number = 0;
+  locationPermissionDenied: any;
+  getUserLocation: boolean;
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController) {
 
@@ -49,6 +51,8 @@ export class Dashboard {
         //show side menu if it's not login screen
         menuCtrl.enable(true);
         Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
+          console.log("Geolocation");
+          
           let latitute = resp.coords.latitude;
           let longitute = resp.coords.longitude;
           document.addEventListener('deviceready', function () {
@@ -95,10 +99,7 @@ export class Dashboard {
               }, 2000);
             };
             cordova.plugins.backgroundMode.ondeactivate = function() {
-              this.locationTracker.lastLocationTracker(latitute, longitute);
-                setInterval(() => {
-                  this.kiriromScope(latitute, longitute);
-              }, 2000);
+              let test = true;
             }
           }, false);
           this.locationTracker.lastLocationTracker(latitute, longitute);
@@ -108,27 +109,21 @@ export class Dashboard {
           }, 2000);
         }, err => {
           switch(err.code) {
+            //check
             case err.PERMISSION_DENIED:
-              this.events.publish('locationPermission', err.PERMISSION_DENIED);
-              // alert("PERMISSION_DENIED " + err.PERMISSION_DENIED);
+              this.locationPermissionDenied = true;
               break;
             case err.POSITION_UNAVAILABLE:
-              this.events.publish('locationPermission', err.POSITION_UNAVAILABLE);
-              // alert("POSITION_UNAVAILABLE " + err.POSITION_UNAVAILABLE);
+              this.getUserLocation = false;
               break;
             case err.TIMEOUT:
-              this.events.publish('locationPermission', err.TIMEOUT);
-              // alert("TIMEOUT " + err.TIMEOUT);
+            this.makeToast('There is a problem getting your current location. Please try relaunch the app.');
               break;
             case err.UNKNOWN_ERROR:
-              this.events.publish('locationPermission', err.UNKNOWN_ERROR);
-              // alert("UNKNOWN_ERROR " + err.UNKNOWN_ERROR);
+              this.makeToast('There is a problem getting your current location. Please try relaunch the app.');
               break;
           }
-          // if (err.PERMISSION_DENIED) {
-          //   alert("PERMISSION_DENIED");
-          // }
-          console.log("Geolocation Error :" + this.isKirirom);
+
           this.isUnknown = true;
         });
 
@@ -273,26 +268,6 @@ export class Dashboard {
   //   }, err => console.error(err));
   // }
 
-  ionViewCanLeave() {
-    console.log("ionViewDidEnter");
-    
-    this.events.subscribe('locationPermission', success=> {
-      switch(success) {
-        case 1:
-          setTimeout(() => {
-            this.warningAlert("Location Permission denied", "Turn on Location Service to Determine your current location");
-          }, 1000);
-          break;
-        case 2:
-          Toast.show("Your location is unavailable.", '5000', 'bottom').subscribe(
-            toast => {
-              console.log(toast);
-            }
-          );
-      }
-    });
-  }
-
   showNoti() {
     let notiModal = this.modalCtrl.create(Notificationpanel);
     notiModal.present();
@@ -303,11 +278,14 @@ export class Dashboard {
     if (distance < 1) {
       var test = distance * 1000;
       this.isKirirom = true;
+      this.events.publish('isKirirom', this.isKirirom);
     } else {
       if (distance <= 17) {
         this.isKirirom = true;
+        this.events.publish('isKirirom', this.isKirirom);
       } else {
         this.isKirirom = false;
+        this.events.publish('isKirirom', this.isKirirom);
       }
     }
   }
@@ -332,7 +310,15 @@ export class Dashboard {
               });
               loader.present();
             } else if ((this.isKirirom == undefined) && (this.isUnknown == true)){
-              this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+              if (this.locationPermissionDenied) {
+                //if the location is denied or turn off by user
+                this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode");
+              } else if (this.getUserLocation == false){
+                //can't get location 
+                this.makeToast('There a problem getting your current location. Please allow the internet connectivity or relaunch the app and try again.');
+              } else {
+                this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
+              }
             } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
               this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
             } else {
@@ -353,14 +339,22 @@ export class Dashboard {
         duration: 1000
       });
       loader.present();
-    } else if ((this.isKirirom == undefined) && (this.isKirirom == true)) {
-      this.warningAlert("Location failed", "We cannot Identify your current location, Please check your internet connection.");
+    } else if ((this.isKirirom == undefined) && (this.isUnknown == true)) {
+        if (this.locationPermissionDenied) {
+            //if the location is denied or turn off by user
+            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode");
+        } else if (this.getUserLocation == false){
+            //can't get location 
+            this.makeToast('There a problem getting your current location. Please allow the internet connectivity or relaunch the app and try again.');
+        } else {
+            this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
+        }
     } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
         this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
     } else {
         let confirmAlert = this.alertCtrl.create({
             title: 'Emergency SOS',
-            message: 'We will send a SMS along with your current location to our supports',
+            message: "We will generate a SMS along with your current location to our supports. We suggest you not to move far away from your current position, as we're trying our best to get there as soon as possible. \n (Standard SMS rates may apply)",
             buttons: [{
               text: 'Cancel',
               role: 'cancel'
