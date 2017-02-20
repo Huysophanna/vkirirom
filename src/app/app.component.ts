@@ -25,7 +25,7 @@ declare var window: any;
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  public rootPage: any;
+  public rootPage: any = Dashboard;
   isHome: boolean = false;
   pages: any = []
   authData: any = AuthData;
@@ -48,6 +48,9 @@ export class MyApp {
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
 
     platform.ready().then(() => {
+      // setTimeout(() => {
+        Splashscreen.hide();
+      // }, 1000)
     
       this.getStorageItem();
       this.firebaseUserData.retrieveUserData();
@@ -85,31 +88,33 @@ export class MyApp {
           messagingSenderId: "82070365426"
         });
         firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            this.nav.setRoot(Dashboard);
-            // NativeStorage.setItem('userAuthService', true);
-            this.currentUser = firebase.auth().currentUser;
+          this.ngzone.run(() => {
+            console.log("onAuthStateChanged");
+            
+            if (user) {
+              // NativeStorage.setItem('userAuthService', true);
+              this.currentUser = firebase.auth().currentUser;
 
-            //identify whether the user is signed in using Facebook or Email
-            firebase.auth().currentUser.providerData.forEach(element => {
-              this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
-              this.isEmailUser = element.providerId == 'password' ? true : false;
-            });
-          } else {
-            //logic for intro slides
-            NativeStorage.getItem("introShown").then(success => {
-                //intro slider is already shown before
-                this.nav.setRoot(Login);
-            }, error => {
-                //first time, need to show intro slides
-                this.nav.setRoot(Introslides);
-                //set toggle notification setting to be ON for the first time
-                NativeStorage.setItem('settingToggleNotification', 'ON');
-            });
-          }
-          setTimeout(() => {
-              Splashscreen.hide();
-          }, 1000)
+              //identify whether the user is signed in using Facebook or Email
+              firebase.auth().currentUser.providerData.forEach(element => {
+                this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
+                this.isEmailUser = element.providerId == 'password' ? true : false;
+              });
+            } else {
+              //logic for intro slides
+              NativeStorage.getItem("introShown").then(success => {
+                  //intro slider is already shown before
+                  this.rootPage = Login;
+              }, error => {
+                  //first time, need to show intro slides
+                  this.rootPage = Introslides;
+                  //set toggle notification setting to be ON for the first time
+                  NativeStorage.setItem('settingToggleNotification', 'ON');
+              });
+            }
+            
+          });
+          
         });
       
 

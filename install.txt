@@ -1,5 +1,6 @@
 //plugins to install when re-add platform
 
+ionic plugin add cordova-plugin-background-mode
 ionic plugin add cordova-plugin-geolocation
 ionic plugin add cordova-sms-plugin
 ionic plugin add phonegap-plugin-push --variable SENDER_ID="82070365426"
@@ -19,6 +20,7 @@ ionic plugin add cordova-plugin-filepath
 ionic plugin add cordova-plugin-x-toast
 ionic plugin add cordova.plugins.diagnostic
 ionic plugin add cordova-plugin-request-location-accuracy
+ionic plugin add cordova-plugin-crosswalk-webview
 
 
 //For server installation

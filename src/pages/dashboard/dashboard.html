@@ -5,7 +5,6 @@
             <span (click)="modeClicked(2)" *ngIf="(isKirirom == undefined) && (isUnknown == true)" style="color: #795548">Unidentified</span>
             <span (click)="modeClicked(3)" *ngIf="(isKirirom == true) && (isUnknown == false)">OnSite Mode</span>
             <span (click)="modeClicked(4)" *ngIf="(isKirirom == false) && (isUnknown == false)" style="color: #827717;">OffSite Mode</span>
-            <!--<span *ngIf="connectionStatus == false" style="color: maroon;">No Connection</span>-->
         </ion-title>
         <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
         <ion-buttons end>

@@ -1,5 +1,5 @@
-import { Component, Inject, NgZone } from '@angular/core';
-import { SMS, Toast, Geolocation, Push, Network, NativeStorage, BackgroundGeolocation, Diagnostic } from 'ionic-native';
+import { Component, Inject, NgZone, AfterContentChecked } from '@angular/core';
+import { BackgroundMode, SMS, Toast, Geolocation, Push, Network, NativeStorage, BackgroundGeolocation, Diagnostic } from 'ionic-native';
 import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { Membership } from '../membership/membership';
 import { Services } from '../services/services';
@@ -34,27 +34,100 @@ export class Dashboard {
   launchCount: number = 0;
   locationPermissionDenied: any;
   getUserLocation: boolean;
+  connectionWatchSubscription: any;
 
-  constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController) {
-
-    // let seconds = 0; let flag: any;
-    // let checkInterval = setInterval(() => {
-    //   if (seconds != 10) {
-    //     if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
-          
-    //     }
-    //   }
-    //   seconds++;
-    // }, 1000);
-
+  constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController, public ngZone: NgZone) {
       platform.ready().then(() => {
         //show side menu if it's not login screen
         menuCtrl.enable(true);
-        Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
-          console.log("Geolocation");
+        this.fetchUserGeoLocation();
+
+        BackgroundMode.enable();
+        BackgroundMode.ondeactivate().subscribe(() => {
+          this.fetchUserGeoLocation();
+          console.log('activated');
+        });
+      });
+  }
+
+
+  showNoti() {
+    let notiModal = this.modalCtrl.create(Notificationpanel);
+    notiModal.present();
+  }
+
+  kiriromScope(latitute, longitute) {
+    this.ngZone.run(() => {
+      var distance = this.userScope.distanceCal(latitute, longitute);
+      if (distance < 1) {
+        var test = distance * 1000;
+        this.isKirirom = true;
+        this.isUnknown = false;
+        this.events.publish('isKirirom', this.isKirirom);
+      } else {
+        if (distance <= 17) {
+          this.isKirirom = true;
+          this.isUnknown = false;
+          this.events.publish('isKirirom', this.isKirirom);
+        } else {
+          this.isKirirom = false;
+          this.isUnknown = false;
+          this.events.publish('isKirirom', this.isKirirom);
+        }
+      }
+    });
+    
+  }
+
+  navigate(num) {
+      switch (num) {
+        case 1: this.navCtrl.push(Services);
+        break;
+        case 2:
+          this.warningAlert("Coming Soon!", "Introducing vKirirom Membership Card with vPoints, will be available soon.");
+          // this.navCtrl.push(Membership);
+        break;
+        case 3: 
+          this.navCtrl.push(GoogleMapPage);
+        
+        break;
+        case 4:
+            if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
+              let loader = this.loadingCtrl.create({
+                content: 'Identifying your current location....',
+                duration: 1000
+              });
+              loader.present();
+            } else if ((this.isKirirom == undefined) && (this.isUnknown == true)){
+              if (this.locationPermissionDenied) {
+                //if the location is denied or turn off by user
+                this.permissionDeniedWarning();
+              } else if (this.getUserLocation == false){
+                //can't get location 
+                this.makeToast('There a problem getting your current location. Please allow the internet connectivity or relaunch the app and try again.');
+              } else {
+                this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
+              }
+            } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+              this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
+            } else {
+              this.navCtrl.push(Chat);
+            }
+        break;
+        case 5: this.warningAlert("Coming Soon!", "Introducing vKirirom Media, will be available soon.");
+        break;
+        case 6: this.navCtrl.push(About);
+        break;
+      }
+  }
+
+  fetchUserGeoLocation() {
+       Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
           
           let latitute = resp.coords.latitude;
           let longitute = resp.coords.longitude;
+          
+
           document.addEventListener('deviceready', function () {
             cordova.plugins.backgroundMode.setDefaults({
               title: 'Chain',
@@ -108,6 +181,7 @@ export class Dashboard {
             this.kiriromScope(latitute, longitute);
           }, 2000);
         }, err => {
+          
           switch(err.code) {
             //check
             case err.PERMISSION_DENIED:
@@ -127,209 +201,6 @@ export class Dashboard {
           this.isUnknown = true;
         });
 
-        // this.launchCount = this.launchCount + 1;
-        // NativeStorage.getItem('launchCount').then(data => {
-        //   data = data + 1;
-        //   NativeStorage.setItem('launchCount', data).then(data => {
-        //     console.log("Set launchCount success " + data);
-        //   }, err => {
-        //     console.error("Set launchCount error : " + err);
-        //   });
-        // }, err => {
-        //   NativeStorage.setItem('launchCount', this.launchCount).then(data => {
-        //     console.log("Set launchCount success in err " + data);
-        //   }, err => {
-        //     console.error("Set launchCount error in err : " + err);
-        //   });
-        // });
-        // this.diagnosticFunction();
-      });
-  }
-
-//   diagnosticFunction() {
-//     Diagnostic.isLocationEnabled().then(enabled => {
-//       if (enabled) {
-//         this.geolocationFunction();
-//       } else {
-//         NativeStorage.getItem('launchCount').then(data => {
-//           if (data === 1) {
-//             setTimeout(() => {
-//               let confirm = this.alertCtrl.create({
-//                 title: 'Your location service is turned off',
-//                 message: 'Enable to continue using the application, you can disable in setting.',
-//                 buttons: [
-//                   {
-//                     text: 'Disagree',
-//                     handler: () => {
-//                       console.log('Disagree clicked');
-//                     }
-//                   },
-//                   {
-//                     text: 'Agree',
-//                     handler: () => {
-//                     Diagnostic.switchToLocationSettings();
-//                     this.geolocationFunction();
-//                   }
-//                 }
-//               ]
-//             });
-//           confirm.present();
-//         }, 500);             
-//       } else {
-//         console.log("Not the first launch");
-//         return;
-//       }
-//     }, err => {
-//       console.error("Get launchCount error : " + err);
-//     });
-//   }
-// });
-// this.geolocationFunction();
-//   }
-  // geolocationFunction() {
-  //   Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
-  //     let latitute = resp.coords.latitude;
-  //     let longitute = resp.coords.longitude;
-  //     document.addEventListener('deviceready', function () {
-  //       cordova.plugins.backgroundMode.setDefaults({
-  //         title: 'Chain',
-  //         text: 'BackgroundGeolocation'
-  //       });
-  //       cordova.plugins.backgroundMode.enable();
-  //       cordova.plugins.backgroundMode.onactivate = function () {
-  //         setInterval(() => {
-  //           let userlocation = [];
-  //           NativeStorage.getItem('userlocation').then(data => {
-  //             if (JSON.parse(data).length == 5) {
-  //               userlocation = [];
-  //               NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
-  //                 console.log("Set user location success :" + data);
-  //               }, err => {
-  //                 console.log("Set userlocation failed :" + err);
-  //               });
-  //             } else if (JSON.parse(data).length >= 0) {
-  //               userlocation.push({
-  //                 lat: latitute,
-  //                 lng: longitute
-  //               });
-  //               NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
-  //                 console.log("Set user location success :" + data);
-  //               }, err => {
-  //                 console.log("Set userlocation failed :" + err);
-  //               });
-  //             } else {
-  //                 console.log("Oupp something went wrong!!!");
-  //             }
-  //           }, err => {
-  //             userlocation.push({
-  //               lat: latitute,
-  //               lng: longitute
-  //             });
-  //             NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
-  //               console.log("Set user location success :" + data);
-  //             }, err => {
-  //               console.log("Set user location failed :" + err);
-  //             });
-  //           });
-  //         }, 2000);
-  //       };
-  //       cordova.plugins.backgroundMode.ondeactivate = function() {
-  //         this.locationTracker.lastLocationTracker(latitute, longitute);
-  //           setInterval(() => {
-  //             this.kiriromScope(latitute, longitute);
-  //         }, 2000);
-  //       }
-  //     }, false);
-  //     this.locationTracker.lastLocationTracker(latitute, longitute);
-  //     setInterval(() => {
-  //       this.kiriromScope(latitute, longitute);
-  //     }, 2000);
-  //    }, err => {
-  //     console.log("Geolocation Error :" + this.isKirirom);
-  //     this.isUnknown = true;
-  //   });
-  // }
-
-  // ionViewWillEnter() {
-  //   Diagnostic.isLocationEnabled().then(enabled => {
-  //     if (enabled) {
-  //       Geolocation.getCurrentPosition().then(resp => {
-  //         let latitute = resp.coords.latitude;
-  //         let longitute = resp.coords.longitude;
-  //         this.locationTracker.lastLocationTracker(latitute, longitute);
-  //         setInterval(() => {
-  //           this.kiriromScope(latitute, longitute);
-  //         }, 2000);
-  //       }, err => console.error(err));
-  //     } else {
-  //       this.isKirirom = undefined;
-  //       this.isUnknown = true;
-  //     }
-  //   }, err => console.error(err));
-  // }
-
-  showNoti() {
-    let notiModal = this.modalCtrl.create(Notificationpanel);
-    notiModal.present();
-  }
-
-  kiriromScope(latitute, longitute) {
-    var distance = this.userScope.distanceCal(latitute, longitute);
-    if (distance < 1) {
-      var test = distance * 1000;
-      this.isKirirom = true;
-      this.events.publish('isKirirom', this.isKirirom);
-    } else {
-      if (distance <= 17) {
-        this.isKirirom = true;
-        this.events.publish('isKirirom', this.isKirirom);
-      } else {
-        this.isKirirom = false;
-        this.events.publish('isKirirom', this.isKirirom);
-      }
-    }
-  }
-
-  navigate(num) {
-      switch (num) {
-        case 1: this.navCtrl.push(Services);
-        break;
-        case 2:
-          this.warningAlert("Coming Soon!", "Introducing vKirirom Membership Card with vPoints, will be available soon.");
-          // this.navCtrl.push(Membership);
-        break;
-        case 3: 
-          this.navCtrl.push(GoogleMapPage);
-        
-        break;
-        case 4:
-            if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
-              let loader = this.loadingCtrl.create({
-                content: 'Identifying your current location....',
-                duration: 1000
-              });
-              loader.present();
-            } else if ((this.isKirirom == undefined) && (this.isUnknown == true)){
-              if (this.locationPermissionDenied) {
-                //if the location is denied or turn off by user
-                this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode");
-              } else if (this.getUserLocation == false){
-                //can't get location 
-                this.makeToast('There a problem getting your current location. Please allow the internet connectivity or relaunch the app and try again.');
-              } else {
-                this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
-              }
-            } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-              this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
-            } else {
-              this.navCtrl.push(Chat);
-            }
-        break;
-        case 5: this.warningAlert("Coming Soon!", "Introducing vKirirom Media, will be available soon.");
-        break;
-        case 6: this.navCtrl.push(About);
-        break;
-      }
   }
 
   sos() {
@@ -342,7 +213,7 @@ export class Dashboard {
     } else if ((this.isKirirom == undefined) && (this.isUnknown == true)) {
         if (this.locationPermissionDenied) {
             //if the location is denied or turn off by user
-            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode");
+            this.permissionDeniedWarning();
         } else if (this.getUserLocation == false){
             //can't get location 
             this.makeToast('There a problem getting your current location. Please allow the internet connectivity or relaunch the app and try again.');
@@ -365,7 +236,7 @@ export class Dashboard {
                   var parseUserlocation = JSON.parse(data);
                   this.lastLat = parseUserlocation[parseUserlocation.length - 1].lat;
                   this.lastLng = parseUserlocation[parseUserlocation.length - 1].lng;
-                  var number = "0962304669";
+                  var number = ["0962222735", "078777346", "010254531"];
                   var message = "Please help! I'm currently facing an emergency problem. Here is my Location: http://maps.google.com/?q=" + this.lastLat + "," + this.lastLng + "";
                   var options = {
                   replaceLineBreaks: false, // true to replace \n by a new line, false by default
@@ -405,7 +276,12 @@ export class Dashboard {
     switch (_val) {
       case 1: message = 'Identifying your location to determine application mode.';
       break;
-      case 2: message = 'vKapp could not identify app mode. Please ensure the location service is on.'
+      case 2: 
+          if (this.platform.is('ios')) {
+              message = "Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always";
+          } else {
+              message = "Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.";
+          }
       break;
       case 3: message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
       break;
@@ -414,6 +290,14 @@ export class Dashboard {
     }
 
     this.makeToast(message);
+  }
+
+  permissionDeniedWarning() {
+    if (this.platform.is('ios')) {
+      this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always");
+    } else {
+      this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.");
+    }
   }
 
   warningAlert(title, message) {
@@ -425,15 +309,6 @@ export class Dashboard {
           role: 'cancel'
         }]
     }).present();
-  }
-
-  checkNetworkConnection() {
-    if ((<string> Network.connection === 'none')) {
-        this.connectionStatus = false;
-        this.isKirirom = false;
-    } else {
-        this.connectionStatus = true;
-    }
   }
 
   makeToast(message) {

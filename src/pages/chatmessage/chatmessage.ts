@@ -1,4 +1,4 @@
-import { Component, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, NgZone, ViewChild, ElementRef, AfterViewInit, AfterContentChecked } from '@angular/core';
 import { Events, ViewController, PopoverController, NavController, Content, Platform, AlertController} from 'ionic-angular';
 import { NativeStorage, Network, Keyboard } from 'ionic-native';
 import { Observable } from 'rxjs/Observable';
@@ -48,6 +48,7 @@ export class Chatmessage implements AfterViewInit {
   i=0;
   notificationType: any;
   settingToggleNotification: any;
+  connectionWatchSubscription: any;
 
 
   constructor(public events: Events, public popoverCtrl: PopoverController, private navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
@@ -116,7 +117,6 @@ export class Chatmessage implements AfterViewInit {
               this.timeLength = this.time.length;
               this.chatsLength = this.chats.length;
             });
-            this.checkNetworkConnection();
         }); 
 
         // called when the user enter the chat room
@@ -251,6 +251,9 @@ export class Chatmessage implements AfterViewInit {
   }
 
   ngAfterContentChecked() {
+    //check network connectivity
+    this.checkNetworkConnection();
+    
     if (this.chatHistory!='') {
       //let it checks for 5 times only and scroll chat content to bottom
       if (this.i<5) {
@@ -268,7 +271,8 @@ export class Chatmessage implements AfterViewInit {
   
   // called when user send thier message
   send(msg) {
-      if ((<string> Network.connection === 'none')) {
+
+      if ((<string> Network.type === 'none')) {
         let alert = this.alertCtrl.create({
             title: "Something went wrong",
             subTitle: "There was a problem with network connection. Please make sure you have internet access and try again in another minutes ...",
@@ -370,10 +374,13 @@ export class Chatmessage implements AfterViewInit {
       //emit events to turn off alert push notification
       this.events.publish("isChatMessageScreen", "false");
 
+      //unsubscribe check connection event
+      this.connectionWatchSubscription.unsubscribe();
+
   }
 
   checkNetworkConnection() {
-    if ((<string> Network.connection === 'none')) {
+    if ((<string> Network.type === 'none')) {
         this.connectionStatus = "No internet";
     } else {
         this.connectionStatus = "";
