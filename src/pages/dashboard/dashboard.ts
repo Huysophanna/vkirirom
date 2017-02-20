@@ -34,95 +34,9 @@ export class Dashboard {
   launchCount: number = 0;
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController) {
-
-    // let seconds = 0; let flag: any;
-    // let checkInterval = setInterval(() => {
-    //   if (seconds != 10) {
-    //     if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
-          
-    //     }
-    //   }
-    //   seconds++;
-    // }, 1000);
-
       platform.ready().then(() => {
-        //show side menu if it's not login screen
-        BackgroundMode.enable();
-          if (BackgroundMode.isEnabled()) {
-            alert("Is enable");
-          } else {
-            alert("Is not enable");
-        }
         menuCtrl.enable(true);
-        // BackgroundMode.ondeactivate().subscribe(success => {
-        //   this.geolocationFunction();
-        // });
-
-        // this.launchCount = this.launchCount + 1;
-        // NativeStorage.getItem('launchCount').then(data => {
-        //   data = data + 1;
-        //   NativeStorage.setItem('launchCount', data).then(data => {
-        //     console.log("Set launchCount success " + data);
-        //   }, err => {
-        //     console.error("Set launchCount error : " + err);
-        //   });
-        // }, err => {
-        //   NativeStorage.setItem('launchCount', this.launchCount).then(data => {
-        //     console.log("Set launchCount success in err " + data);
-        //   }, err => {
-        //     console.error("Set launchCount error in err : " + err);
-        //   });
-        // });
-        // this.diagnosticFunction();
-      });
-  }
-
-  ngAfterContentChecked() {
-    this.geolocationFunction();
-  }
-
-//   diagnosticFunction() {
-//     Diagnostic.isLocationEnabled().then(enabled => {
-//       if (enabled) {
-//         this.geolocationFunction();
-//       } else {
-//         NativeStorage.getItem('launchCount').then(data => {
-//           if (data === 1) {
-//             setTimeout(() => {
-//               let confirm = this.alertCtrl.create({
-//                 title: 'Your location service is turned off',
-//                 message: 'Enable to continue using the application, you can disable in setting.',
-//                 buttons: [
-//                   {
-//                     text: 'Disagree',
-//                     handler: () => {
-//                       console.log('Disagree clicked');
-//                     }
-//                   },
-//                   {
-//                     text: 'Agree',
-//                     handler: () => {
-//                     Diagnostic.switchToLocationSettings();
-//                     this.geolocationFunction();
-//                   }
-//                 }
-//               ]
-//             });
-//           confirm.present();
-//         }, 500);             
-//       } else {
-//         console.log("Not the first launch");
-//         return;
-//       }
-//     }, err => {
-//       console.error("Get launchCount error : " + err);
-//     });
-//   }
-// });
-// this.geolocationFunction();
-//   }
-  geolocationFunction() {
-    Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
+        Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(resp => {
       let latitute = resp.coords.latitude;
       let longitute = resp.coords.longitude;
       alert("My location : " + latitute + "  " + longitute);
@@ -197,25 +111,8 @@ export class Dashboard {
       console.log("Geolocation Error :" + this.isKirirom);
       this.isUnknown = true;
     });
+      });
   }
-
-  // ionViewWillEnter() {
-  //   Diagnostic.isLocationEnabled().then(enabled => {
-  //     if (enabled) {
-  //       Geolocation.getCurrentPosition().then(resp => {
-  //         let latitute = resp.coords.latitude;
-  //         let longitute = resp.coords.longitude;
-  //         this.locationTracker.lastLocationTracker(latitute, longitute);
-  //         setInterval(() => {
-  //           this.kiriromScope(latitute, longitute);
-  //         }, 2000);
-  //       }, err => console.error(err));
-  //     } else {
-  //       this.isKirirom = undefined;
-  //       this.isUnknown = true;
-  //     }
-  //   }, err => console.error(err));
-  // }
 
 
   ionViewDidEnter() {
