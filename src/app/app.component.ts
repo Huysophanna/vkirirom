@@ -25,7 +25,7 @@ declare var window: any;
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  public rootPage: any;
+  public rootPage: any = Dashboard;
   isHome: boolean = false;
   pages: any = []
   authData: any = AuthData;
@@ -43,13 +43,17 @@ export class MyApp {
   isChatMessageScreen: any;
   isAuthenticated: any;
   isChangingProfilePicture: any;
-  settingToggleNotification: any = "ON";
+  settingToggleNotification: any;
+  isLoggedOut: any;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
-
+     this.presentLoading('Authenticating');
     platform.ready().then(() => {
-      console.log("Platform width : " + this.platform.width());
-
+      setTimeout(() => {
+        Splashscreen.hide();
+        this.loading.dismiss();
+      }, 1000);
+    
       this.getStorageItem();
       this.firebaseUserData.retrieveUserData();
       //push configuration
@@ -77,7 +81,44 @@ export class MyApp {
         this.isChatMessageScreen = val;
       });
 
+      //firebase configuration
+        firebase.initializeApp({
+          apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
+          authDomain: "vkirirom-809f8.firebaseapp.com",
+          databaseURL: "https://vkirirom-809f8.firebaseio.com",
+          storageBucket: "vkirirom-809f8.appspot.com",
+          messagingSenderId: "82070365426"
+        });
+        firebase.auth().onAuthStateChanged((user) => {
+          this.ngzone.run(() => {
+            console.log("onAuthStateChanged");
+            
+            if (user) {
+              this.isLoggedOut = false;
+              // NativeStorage.setItem('userAuthService', true);
+              this.currentUser = firebase.auth().currentUser;
 
+              //identify whether the user is signed in using Facebook or Email
+              firebase.auth().currentUser.providerData.forEach(element => {
+                this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
+                this.isEmailUser = element.providerId == 'password' ? true : false;
+              });
+            } else {
+              //logic for intro slides
+              NativeStorage.getItem("introShown").then(success => {
+                  //intro slider is already shown before
+                  this.rootPage = Login;
+              }, error => {
+                  //first time, need to show intro slides
+                  this.rootPage = Introslides;
+                  //set toggle notification setting to be ON for the first time
+                  NativeStorage.setItem('settingToggleNotification', 'ON');
+              });
+            }
+            
+          });
+          
+        });
       
 
       
@@ -85,7 +126,7 @@ export class MyApp {
         NativeStorage.setItem('deviceToken', data.registrationId);
       });
       push.on('notification', (data) => {
-        if (this.settingToggleNotification == 'ON') {
+        if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false) {
 
           //store all notifications to local storage for the notification panel
           this.storeNotificationsArray.push(data);
@@ -158,52 +199,6 @@ export class MyApp {
       { title: 'Contact Us', id: 2, ionicon: 'ios-call-outline' },
       { title: 'Log Out', id: 3, ionicon: 'ios-exit-outline' }
     ];
-  } 
-
-  ngOnInit() {
-    //firebase configuration
-        firebase.initializeApp({
-          apiKey: "AIzaSyDorWd2MGbJbVjHiKvL3jo2F1qe31A6R08",
-          authDomain: "vkirirom-809f8.firebaseapp.com",
-          databaseURL: "https://vkirirom-809f8.firebaseio.com",
-          storageBucket: "vkirirom-809f8.appspot.com",
-          messagingSenderId: "82070365426"
-        });
-        firebase.auth().onAuthStateChanged((user) => {
-          this.loading = this.loadingCtrl.create({
-            dismissOnPageChange: true,
-          });
-          if (user) {
-            // this.rootPage = Dashboard;
-            this.nav.setRoot(Dashboard);
-            Splashscreen.hide();
-            // NativeStorage.setItem('userAuthService', true);
-            this.currentUser = firebase.auth().currentUser;
-
-            //identify whether the user is signed in using Facebook or Email
-            firebase.auth().currentUser.providerData.forEach(element => {
-              this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
-              this.isEmailUser = element.providerId == 'password' ? true : false;
-            });
-          } else {
-            // NativeStorage.setItem('userAuthService', false);
-            this.loading.present();
-            // this.rootPage = Login;
-
-            //logic for intro slides
-            NativeStorage.getItem("introShown").then(success => {
-                //intro slider is already shown before
-                this.rootPage = Login;
-            }, error => {
-                //first time, need to show intro slides
-                this.rootPage = Introslides;
-            });
-
-            this.loading.dismiss().then(() => {
-              Splashscreen.hide();
-            });
-          }
-        });
   }
 
   presentActionSheet() {
@@ -324,11 +319,14 @@ export class MyApp {
   }
 
   getStorageItem() {
+    
     NativeStorage.getItem('userPhoto').then(data => {
       this.ngzone.run(() => {
         this.userPhoto = data;
       });
-
+    });
+    NativeStorage.getItem('settingToggleNotification').then(_toggle => {
+      this.settingToggleNotification = _toggle;
     });
     NativeStorage.getItem('userDetails').then(data => {
       this.ngzone.run(() => {
@@ -390,6 +388,8 @@ export class MyApp {
         NativeStorage.setItem('userDetails', "");
         //reset notification panel items
         NativeStorage.setItem('storeNotificationsArray', []);
+        //user logged out 
+        this.isLoggedOut = true;
         this.nav.setRoot(Login);
         break;
     }

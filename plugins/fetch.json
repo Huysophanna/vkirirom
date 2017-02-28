@@ -7,14 +7,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-console": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-console@~1.0.4"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
@@ -126,15 +118,12 @@
             "id": "call-number"
         },
         "is_top_level": true,
-        "variables": {
-            "API_KEY_FOR_ANDROID": "AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y",
-            "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
-        }
+        "variables": {}
     },
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-inappbrowser@1.5.0"
+            "id": "cordova-plugin-inappbrowser@1.6.1"
         },
         "is_top_level": true,
         "variables": {}
@@ -217,6 +206,22 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-x-toast"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-mauron85-background-geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-mauron85-background-geolocation"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-console": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-console@~1.0.4"
         },
         "is_top_level": true,
         "variables": {}

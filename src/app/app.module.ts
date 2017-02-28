@@ -21,7 +21,7 @@ import { Reservation } from '../pages/reservation/reservation';
 import { AuthData } from '../providers/auth-data';
 import { FirebaseUserData } from '../providers/firebase-user-data';
 import { Api } from '../providers/api';
-import { Storage } from '@ionic/storage';
+// import { Storage } from '@ionic/storage';
 import { LocationTracker } from '../providers/location-tracker';
 import { SettingService } from '../providers/setting-service';
 import { Userscope } from '../providers/userscope';
@@ -75,7 +75,7 @@ import { Userscope } from '../providers/userscope';
   providers: [
     AuthData,
     Facebook,
-    Storage,
+    // Storage,
     LocationTracker,
     SettingService,
     Userscope,

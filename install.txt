@@ -1,16 +1,16 @@
 //plugins to install when re-add platform
 
+ionic plugin add cordova-plugin-background-mode
 ionic plugin add cordova-plugin-geolocation
 ionic plugin add cordova-sms-plugin
-cordova plugin add phonegap-plugin-push --variable SENDER_ID="82070365426"
+ionic plugin add phonegap-plugin-push --variable SENDER_ID="82070365426"
 cordova plugin add cordova-plugin-nativestorage
+ionic plugin add ionic-plugin-keyboard
 cordova plugin add cordova-plugin-network-information
 ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y" --variable API_KEY_FOR_IOS="AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
 ionic plugin add call-number
 ionic plugin add cordova-plugin-mauron85-background-geolocation
-npm install jquery --save
-npm install -g typings
-typings install dt~jquery --global --save
+ionic plugin add cordova-plugin-inappbrowser
 ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1190088291053783" --variable APP_NAME="vkirirom"
 ionic plugin add cordova-plugin-splashscreen
 ionic plugin add cordova-plugin-camera
@@ -20,6 +20,7 @@ ionic plugin add cordova-plugin-filepath
 ionic plugin add cordova-plugin-x-toast
 ionic plugin add cordova.plugins.diagnostic
 ionic plugin add cordova-plugin-request-location-accuracy
+ionic plugin add cordova-plugin-crosswalk-webview
 
 
 //For server installation
