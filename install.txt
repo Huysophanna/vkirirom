@@ -11,7 +11,7 @@ ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaS
 ionic plugin add call-number
 ionic plugin add cordova-plugin-mauron85-background-geolocation
 ionic plugin add cordova-plugin-inappbrowser
-ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1190088291053783" --variable APP_NAME="vkirirom"
+ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1190088291053783" --variable APP_NAME="vKclub"
 ionic plugin add cordova-plugin-splashscreen
 ionic plugin add cordova-plugin-camera
 ionic plugin add cordova-plugin-file
@@ -20,7 +20,6 @@ ionic plugin add cordova-plugin-filepath
 ionic plugin add cordova-plugin-x-toast
 ionic plugin add cordova.plugins.diagnostic
 ionic plugin add cordova-plugin-request-location-accuracy
-ionic plugin add cordova-plugin-crosswalk-webview
 
 
 //For server installation

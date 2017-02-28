@@ -85,6 +85,11 @@ export class GoogleMapPage {
       // ];
 
     //   }, 1000);
+    this.map.on(GoogleMapsEvent.MY_LOCATION_BUTTON_CLICK).subscribe(() => {
+      this.map.getMyLocation().then(location => {
+        console.log("getMyLocation " + JSON.stringify(location));
+      }, err => console.error("getMyLocation error :" + JSON.stringify(err)));
+    }, err => console.error("Error encounter " + JSON.stringify(err)));
 
 
 

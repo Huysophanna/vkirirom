@@ -44,13 +44,15 @@ export class MyApp {
   isAuthenticated: any;
   isChangingProfilePicture: any;
   settingToggleNotification: any;
+  isLoggedOut: any;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
-
+     this.presentLoading('Authenticating');
     platform.ready().then(() => {
-      // setTimeout(() => {
+      setTimeout(() => {
         Splashscreen.hide();
-      // }, 1000)
+        this.loading.dismiss();
+      }, 1000);
     
       this.getStorageItem();
       this.firebaseUserData.retrieveUserData();
@@ -92,6 +94,7 @@ export class MyApp {
             console.log("onAuthStateChanged");
             
             if (user) {
+              this.isLoggedOut = false;
               // NativeStorage.setItem('userAuthService', true);
               this.currentUser = firebase.auth().currentUser;
 
@@ -123,7 +126,7 @@ export class MyApp {
         NativeStorage.setItem('deviceToken', data.registrationId);
       });
       push.on('notification', (data) => {
-        if (this.settingToggleNotification == 'ON') {
+        if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false) {
 
           //store all notifications to local storage for the notification panel
           this.storeNotificationsArray.push(data);
@@ -385,6 +388,8 @@ export class MyApp {
         NativeStorage.setItem('userDetails', "");
         //reset notification panel items
         NativeStorage.setItem('storeNotificationsArray', []);
+        //user logged out 
+        this.isLoggedOut = true;
         this.nav.setRoot(Login);
         break;
     }

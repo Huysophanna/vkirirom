@@ -7,14 +7,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-console": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-console@~1.0.4"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
@@ -55,7 +47,7 @@
         "is_top_level": true,
         "variables": {
             "APP_ID": "1190088291053783",
-            "APP_NAME": "vkirirom"
+            "APP_NAME": "vKclub"
         }
     },
     "cordova-sqlite-storage": {
@@ -97,19 +89,6 @@
         },
         "is_top_level": true,
         "variables": {}
-    },
-    "cordova-plugin-googlemaps": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-googlemaps"
-        },
-        "is_top_level": true,
-        "variables": {
-            "API_KEY_FOR_ANDROID": "AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y",
-            "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw",
-            "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
-            "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map"
-        }
     },
     "com.googlemaps.ios": {
         "source": {
@@ -218,6 +197,22 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-mauron85-background-geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-mauron85-background-geolocation"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-console": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-console@~1.0.4"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-splashscreen": {
         "source": {
             "type": "registry",
@@ -226,10 +221,29 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-mauron85-background-geolocation": {
+    "cordova-plugin-request-location-accuracy": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-mauron85-background-geolocation"
+            "id": "cordova-plugin-request-location-accuracy"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-googlemaps": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-googlemaps"
+        },
+        "is_top_level": true,
+        "variables": {
+            "API_KEY_FOR_ANDROID": "AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y",
+            "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
+        }
+    },
+    "cordova.plugins.diagnostic": {
+        "source": {
+            "type": "registry",
+            "id": "cordova.plugins.diagnostic"
         },
         "is_top_level": true,
         "variables": {}
