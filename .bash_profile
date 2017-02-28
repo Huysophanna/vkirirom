@@ -1,0 +1,1 @@
+export PATH="$PATH:/Users/USERNAME/PATH TO ANDROID SDK/platform-tools/

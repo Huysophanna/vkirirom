@@ -274,14 +274,14 @@ export class Dashboard {
   modeClicked(_val) {
     let message;
     switch (_val) {
-      case 1: 
+      case 1: message = 'Identifying your location to determine application mode.';
+      break;
+      case 2: 
           if (this.platform.is('ios')) {
               message = "Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always";
           } else {
               message = "Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.";
           }
-      break;
-      case 2: message = 'vKapp could not identify app mode. Please ensure the location service is on.'
       break;
       case 3: message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
       break;
