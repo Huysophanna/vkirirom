@@ -70,6 +70,8 @@ export class Signup {
               this.warningAlert('Please provide a valid form of email address.');
           } else if (error.code.indexOf('auth/email-already-in-use') >= 0) {
               this.warningAlert(error.message);
+          } else if (error.code.indexOf('auth/wrong-password')) {
+            this.warningAlert('Please provide a valid password.');
           } else {
               this.warningAlert('There is a problem with network connection. Please try again later.');
           }

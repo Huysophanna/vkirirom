@@ -35,16 +35,6 @@ export var Dashboard = (function () {
                 _this.fetchUserGeoLocation();
                 console.log("fetchUserGeoLocation in platform ready");
             }, 2000);
-            // this.fetchUserGeoLocation();
-            // BackgroundMode.ondeactivate().subscribe(() => {
-            //   clearInterval(fetchUserLocation);
-            //   // this.fetchUserGeoLocation();
-            //   setInterval(() => {
-            //     this.fetchUserGeoLocation();
-            //     console.log("fetchUserGeoLocation in background on deactivated");
-            //   }, 2000);
-            //   // alert('deactivated');
-            // });
         });
     }
     Dashboard.prototype.showNoti = function () {
@@ -60,11 +50,13 @@ export var Dashboard = (function () {
                 _this.isKirirom = true;
                 _this.isUnknown = false;
                 _this.events.publish('isKirirom', _this.isKirirom);
+                NativeStorage.setItem('mapFirstInitialization', true);
             }
             else {
                 if (distance <= 17) {
                     _this.isKirirom = true;
                     _this.isUnknown = false;
+                    NativeStorage.setItem('mapFirstInitialization', true);
                     _this.events.publish('isKirirom', _this.isKirirom);
                 }
                 else {
@@ -73,10 +65,6 @@ export var Dashboard = (function () {
                     _this.events.publish('isKirirom', _this.isKirirom);
                 }
             }
-            // alert("isGeolocation : " + geolocation);
-            // if (geolocation == true) {
-            //   this.events.publish('isGeolocation', geolocation);
-            // }
         });
     };
     Dashboard.prototype.navigate = function (num) {
@@ -89,7 +77,18 @@ export var Dashboard = (function () {
                 // this.navCtrl.push(Membership);
                 break;
             case 3:
-                this.navCtrl.push(GoogleMapPage);
+                if (this.platform.is('android')) {
+                    if (this.locationPermissionDenied) {
+                        this.warningAlert("Unidentified App Mode", "Location permission denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > App > vKclub > Permission > Location");
+                    }
+                    else {
+                        this.navCtrl.push(GoogleMapPage);
+                    }
+                }
+                else {
+                    //is iOS platform
+                    this.navCtrl.push(GoogleMapPage);
+                }
                 break;
             case 4:
                 if ((this.isKirirom == undefined) && (this.isUnknown == false) && (this.isLocationEnable == true)) {
@@ -147,12 +146,9 @@ export var Dashboard = (function () {
                     var longitute = resp.coords.longitude;
                     BackgroundMode.enable();
                     BackgroundMode.onactivate().subscribe(function () {
-                        // console.log("------------------------------------------------------onactivate");
                         var userlocation = [];
                         NativeStorage.getItem('userlocation').then(function (data) {
-                            // console.log("----------------------------userlocation------------------------------- " + JSON.parse(data).length + " ===");
                             if (JSON.parse(data).length >= 5) {
-                                // console.log("length in if /////////////////////////////" + JSON.parse(data).length);
                                 userlocation = [];
                                 NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
                                     console.log("Set user location success :" + data);
@@ -161,7 +157,6 @@ export var Dashboard = (function () {
                                 });
                             }
                             else if ((JSON.parse(data).length >= 0) && (JSON.parse(data).length < 5)) {
-                                // console.log("length in if /////////////////////////////" + JSON.parse(data).length);
                                 userlocation.push({
                                     lat: latitute,
                                     lng: longitute
@@ -181,9 +176,9 @@ export var Dashboard = (function () {
                                 lng: longitute
                             });
                             NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
-                                console.log("===========================Set user location success :" + data);
+                                console.log("Set user location success :" + data);
                             }, function (err) {
-                                console.log("============================Set user location failed :" + err);
+                                console.log("Set user location failed :" + err);
                             });
                         });
                     }, function (err) { return console.error(err); });
@@ -273,13 +268,19 @@ export var Dashboard = (function () {
                                 };
                                 SMS.send(number, message, options)
                                     .then(function () {
-                                    Toast.show("Please stay safe. Our team will be there so soon!", '5000', 'bottom').subscribe(function (toast) {
-                                        console.log(toast);
-                                    });
+                                    // Toast.show("Please stay safe. Our team will be there so soon!", '5000', 'bottom').subscribe(
+                                    //   toast => {
+                                    //     console.log(toast);
+                                    //   }
+                                    // );
+                                    console.log("Message sent success");
                                 }, function (error) {
-                                    Toast.show("You cancelled the action", '5000', 'bottom').subscribe(function (toast) {
-                                        console.log(toast);
-                                    });
+                                    // Toast.show("You cancelled the action", '5000', 'bottom').subscribe(
+                                    //   toast => {
+                                    //     console.log(toast);
+                                    //   }
+                                    // );
+                                    console.log("User cancel the action");
                                 });
                             }, function (err) {
                                 _this.warningAlert("Get user location from storage failed", err);
