@@ -154,14 +154,13 @@ export class Dashboard {
           BackgroundMode.enable();
             
             BackgroundMode.onactivate().subscribe(() => {
-              console.log("------------------------------------------------------onactivate");
-              
+              // console.log("------------------------------------------------------onactivate");
               let userlocation = [];
                 NativeStorage.getItem('userlocation').then(data => {
-                  console.log("----------------------------userlocation------------------------------- " + JSON.parse(data).length + " ===");
+                  // console.log("----------------------------userlocation------------------------------- " + JSON.parse(data).length + " ===");
                   
                   if (JSON.parse(data).length >= 5) {
-                    console.log("length in if /////////////////////////////" + JSON.parse(data).length);
+                    // console.log("length in if /////////////////////////////" + JSON.parse(data).length);
                     
                     userlocation = [];
                     NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(data => {
@@ -170,7 +169,7 @@ export class Dashboard {
                       console.log("Set userlocation failed :" + err);
                     });
                   } else if ((JSON.parse(data).length >= 0) && (JSON.parse(data).length < 5)) {
-                    console.log("length in if /////////////////////////////" + JSON.parse(data).length);
+                    // console.log("length in if /////////////////////////////" + JSON.parse(data).length);
                     userlocation.push({
                       lat: latitute,
                       lng: longitute
@@ -181,11 +180,9 @@ export class Dashboard {
                       console.log("Set userlocation failed :" + err);
                     });
                   } else {
-                    console.log("length in if /////////////////////////////" + JSON.parse(data).length);
-                    console.log("kikilu!!! " + JSON.parse(data).length + " ===");
+                    console.log("Error, went wrong!!! " + JSON.parse(data).length);
                   }
                 }, err => {
-                  console.log("------------------------------------------------------error");
                   userlocation.push({
                     lat: latitute,
                     lng: longitute
