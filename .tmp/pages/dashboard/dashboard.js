@@ -218,14 +218,14 @@ export var Dashboard = (function () {
     };
     Dashboard.prototype.sos = function () {
         var _this = this;
-        if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
+        if ((this.isKirirom == undefined) && (this.isUnknown == false) && (this.isLocationEnable == true)) {
             var loader = this.loadingCtrl.create({
                 content: 'Identifying your current location....',
                 duration: 1000
             });
             loader.present();
         }
-        else if ((this.isKirirom == undefined) && (this.isUnknown == true) && (this.isLocationEnable == true)) {
+        else if ((this.isKirirom == undefined) && (this.isUnknown == true)) {
             if (this.locationPermissionDenied) {
                 //if the location is denied or turn off by user
                 this.permissionDeniedWarning();
@@ -299,16 +299,16 @@ export var Dashboard = (function () {
                 break;
             case 2:
                 if (this.platform.is('ios')) {
-                    this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always");
+                    this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKclub > Always");
                     message = "";
                 }
                 else {
-                    this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.");
+                    this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKclub > Permissions > Location.");
                     message = "";
                 }
                 break;
             case 3:
-                message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
+                message = 'Welcome to vKirirom. Experience full features of vKclub with OnSite mode including Emergency SOS & Group Chat';
                 break;
             case 4:
                 message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
@@ -328,10 +328,10 @@ export var Dashboard = (function () {
     };
     Dashboard.prototype.permissionDeniedWarning = function () {
         if (this.platform.is('ios')) {
-            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always");
+            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKclub > Always");
         }
         else {
-            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.");
+            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKclub > Permissions > Location.");
         }
     };
     Dashboard.prototype.warningAlert = function (title, message) {
