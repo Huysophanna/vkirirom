@@ -87,7 +87,7 @@ export class Login {
               this.warningAlert('The username and password you entered did not match our records. Please double-check and try again.');
             } else if (error.code.indexOf('auth/invalid-email') >= 0) {
               this.warningAlert('Please provide a valid form of email address.');
-            } else if (error.code.indexOf('auth/wrong-password')) {
+            } else if (error.code.indexOf('auth/wrong-password') >= 0) {
               this.warningAlert('Please provide a valid password.');
             } else {
               this.warningAlert('There is a problem with network connection. Please try again later.');
