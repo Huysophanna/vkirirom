@@ -147,12 +147,12 @@ export var Dashboard = (function () {
                     var longitute = resp.coords.longitude;
                     BackgroundMode.enable();
                     BackgroundMode.onactivate().subscribe(function () {
-                        console.log("------------------------------------------------------onactivate");
+                        // console.log("------------------------------------------------------onactivate");
                         var userlocation = [];
                         NativeStorage.getItem('userlocation').then(function (data) {
-                            console.log("----------------------------userlocation------------------------------- " + JSON.parse(data).length + " ===");
+                            // console.log("----------------------------userlocation------------------------------- " + JSON.parse(data).length + " ===");
                             if (JSON.parse(data).length >= 5) {
-                                console.log("length in if /////////////////////////////" + JSON.parse(data).length);
+                                // console.log("length in if /////////////////////////////" + JSON.parse(data).length);
                                 userlocation = [];
                                 NativeStorage.setItem('userlocation', JSON.stringify(userlocation)).then(function (data) {
                                     console.log("Set user location success :" + data);
@@ -161,7 +161,7 @@ export var Dashboard = (function () {
                                 });
                             }
                             else if ((JSON.parse(data).length >= 0) && (JSON.parse(data).length < 5)) {
-                                console.log("length in if /////////////////////////////" + JSON.parse(data).length);
+                                // console.log("length in if /////////////////////////////" + JSON.parse(data).length);
                                 userlocation.push({
                                     lat: latitute,
                                     lng: longitute
@@ -173,11 +173,9 @@ export var Dashboard = (function () {
                                 });
                             }
                             else {
-                                console.log("length in if /////////////////////////////" + JSON.parse(data).length);
-                                console.log("kikilu!!! " + JSON.parse(data).length + " ===");
+                                console.log("Error, went wrong!!! " + JSON.parse(data).length);
                             }
                         }, function (err) {
-                            console.log("------------------------------------------------------error");
                             userlocation.push({
                                 lat: latitute,
                                 lng: longitute
@@ -301,16 +299,16 @@ export var Dashboard = (function () {
                 break;
             case 2:
                 if (this.platform.is('ios')) {
-                    this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always");
+                    this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKclub > Always");
                     message = "";
                 }
                 else {
-                    this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.");
+                    this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKclub > Permissions > Location.");
                     message = "";
                 }
                 break;
             case 3:
-                message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
+                message = 'Welcome to vKirirom. Experience full features of vKclub with OnSite mode including Emergency SOS & Group Chat';
                 break;
             case 4:
                 message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
@@ -330,10 +328,10 @@ export var Dashboard = (function () {
     };
     Dashboard.prototype.permissionDeniedWarning = function () {
         if (this.platform.is('ios')) {
-            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always");
+            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKclub > Always");
         }
         else {
-            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.");
+            this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKclub > Permissions > Location.");
         }
     };
     Dashboard.prototype.warningAlert = function (title, message) {

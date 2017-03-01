@@ -307,14 +307,14 @@ export class Dashboard {
       break;
       case 2: 
           if (this.platform.is('ios')) {
-              this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always");
+              this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKclub > Always");
               message = "";
           } else {
-              this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.");
+              this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKclub > Permissions > Location.");
               message = "";
           }
       break;
-      case 3: message = 'Welcome to vKirirom. Experience full features of vKapp with OnSite mode including Emergency SOS & Group Chat';
+      case 3: message = 'Welcome to vKirirom. Experience full features of vKclub with OnSite mode including Emergency SOS & Group Chat';
       break;
       case 4: message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
       break;
@@ -334,9 +334,9 @@ export class Dashboard {
 
   permissionDeniedWarning() {
     if (this.platform.is('ios')) {
-      this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKapp > Always");
+      this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKclub > Always");
     } else {
-      this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKapp > Permissions > Location.");
+      this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKclub > Permissions > Location.");
     }
   }
 

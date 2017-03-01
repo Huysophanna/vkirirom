@@ -239,13 +239,5 @@
             "API_KEY_FOR_ANDROID": "AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y",
             "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
         }
-    },
-    "cordova.plugins.diagnostic": {
-        "source": {
-            "type": "registry",
-            "id": "cordova.plugins.diagnostic"
-        },
-        "is_top_level": true,
-        "variables": {}
     }
 }
