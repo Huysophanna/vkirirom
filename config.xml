@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="chain.vkirirom" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="chain.vkirirom" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>vKclub</name>
   <description>This app is used for vKirirom Pine Resort located on top of Kirirom mountain in Cambodia.</description>
   <author email="huysophanna@hotmail.com" href="kit.edu.kh">Chain Solution</author>

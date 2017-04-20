@@ -230,32 +230,7 @@ export class Dashboard {
   }
 
   sos() {
-    if ((this.isKirirom == undefined) && (this.isUnknown == false) && (this.isLocationEnable == true)) {
-      let loader = this.loadingCtrl.create({
-        content: 'Identifying your current location....',
-        duration: 1000
-      });
-      loader.present();
-    } else if ((this.isKirirom == undefined) && (this.isUnknown == true)) {
-        if (this.locationPermissionDenied) {
-            //if the location is denied or turn off by user
-            this.permissionDeniedWarning();
-        } else if (this.getUserLocation == false){
-            //can't get location 
-            this.makeToast('There a problem getting your current location. Please allow the internet connectivity or relaunch the app and try again.');
-        } else {
-            this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
-        }
-    } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-        this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
-    } else if (this.isLocationEnable == false) {
-      if (this.platform.is('ios')) {
-          this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services");
-      } else {
-          this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location");
-      }
-    } else {
-        let confirmAlert = this.alertCtrl.create({
+    let confirmAlert = this.alertCtrl.create({
             title: 'Emergency SOS',
             message: "We will generate a SMS along with your current location to our supports. We suggest you not to move far away from your current position, as we're trying our best to get there as soon as possible. \n (Standard SMS rates may apply)",
             buttons: [{
@@ -301,7 +276,78 @@ export class Dashboard {
             }]
           });
         confirmAlert.present();
-    }
+    // if ((this.isKirirom == undefined) && (this.isUnknown == false) && (this.isLocationEnable == true)) {
+    //   let loader = this.loadingCtrl.create({
+    //     content: 'Identifying your current location....',
+    //     duration: 1000
+    //   });
+    //   loader.present();
+    // } else if ((this.isKirirom == undefined) && (this.isUnknown == true)) {
+    //     if (this.locationPermissionDenied) {
+    //         //if the location is denied or turn off by user
+    //         this.permissionDeniedWarning();
+    //     } else if (this.getUserLocation == false){
+    //         //can't get location 
+    //         this.makeToast('There a problem getting your current location. Please allow the internet connectivity or relaunch the app and try again.');
+    //     } else {
+    //         this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
+    //     }
+    // } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+    //     this.warningAlert("Outdoor Mode", "This function is not accessible from outside vKirirom area.");
+    // } else if (this.isLocationEnable == false) {
+    //   if (this.platform.is('ios')) {
+    //       this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services");
+    //   } else {
+    //       this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location");
+    //   }
+    // } else {
+    //     let confirmAlert = this.alertCtrl.create({
+    //         title: 'Emergency SOS',
+    //         message: "We will generate a SMS along with your current location to our supports. We suggest you not to move far away from your current position, as we're trying our best to get there as soon as possible. \n (Standard SMS rates may apply)",
+    //         buttons: [{
+    //           text: 'Cancel',
+    //           role: 'cancel'
+    //         }, {
+    //           text: 'Confirm',
+    //           handler: data => {
+    //             NativeStorage.getItem('userlocation').then(data => {
+    //               var parseUserlocation = JSON.parse(data);
+    //               this.lastLat = parseUserlocation[parseUserlocation.length - 1].lat;
+    //               this.lastLng = parseUserlocation[parseUserlocation.length - 1].lng;
+    //               var number = ["0962222735", "078777346", "010254531"];
+    //               var message = "Please help! I'm currently facing an emergency problem. Here is my Location: http://maps.google.com/?q=" + this.lastLat + "," + this.lastLng + "";
+    //               var options = {
+    //               replaceLineBreaks: false, // true to replace \n by a new line, false by default
+    //                 android: {
+    //                    intent: 'INTENT'  // Opens Default sms app
+    //                   // intent: '' // Sends sms without opening default sms app
+    //                 }
+    //               }
+
+    //               SMS.send(number, message, options)
+    //                 .then(() => {
+    //                   // Toast.show("Please stay safe. Our team will be there so soon!", '5000', 'bottom').subscribe(
+    //                   //   toast => {
+    //                   //     console.log(toast);
+    //                   //   }
+    //                   // );
+    //                   console.log("Message sent success");
+    //                 }, (error) => {
+    //                   // Toast.show("You cancelled the action", '5000', 'bottom').subscribe(
+    //                   //   toast => {
+    //                   //     console.log(toast);
+    //                   //   }
+    //                   // );
+    //                   console.log("User cancel the action");
+    //                 });
+    //             }, err => {
+    //               this.warningAlert("Get user location from storage failed", err);
+    //             });
+    //           }
+    //         }]
+    //       });
+    //     confirmAlert.present();
+    // }
   }
 
   //show app mode description when it's clicked
@@ -315,7 +361,7 @@ export class Dashboard {
               this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKclub > Always");
               message = "";
           } else {
-              this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKclub > Permissions > Location.");
+              this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > App > vKclub > Permission > Location");
               message = "";
           }
       break;
@@ -341,7 +387,7 @@ export class Dashboard {
     if (this.platform.is('ios')) {
       this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services > vKclub > Always");
     } else {
-      this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location > vKclub > Permissions > Location.");
+      this.warningAlert("Unidentified App Mode", "Location Permission Denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > App > vKclub > Permission > Location");
     }
   }
 

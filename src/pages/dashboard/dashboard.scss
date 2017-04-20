@@ -70,6 +70,16 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
     }
 }
 
+.emergencyAlert {
+    .alert-title {
+        color: red;
+    }
+}
+
+.alert-message {
+    line-height: 1.3em !important;
+}
+
 .container {
     position: relative;
     width: 100%;
@@ -135,6 +145,7 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
                 position: relative;
                 width: 80%;
                 height: 4.5em;
+                width: 60%;
                 font-size: 120%;
                 border-radius: 15px;
                 color: red;
@@ -205,10 +216,10 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
                 margin-top: 4%;
             }
             .emergency {
-                margin-top: 10%;
+                margin-top: 13% !important;
                 button {
-                    height: 4em;
-                    font-size: 15px;
+                    height: 3em;
+                    font-size: 13px;
                 }
             }
             p {
@@ -231,17 +242,21 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
         margin-top: 5%;
     }
     .container .dashboard-action .emergency {
-        margin-top: 10% !important;
+        margin-top: 15% !important;
     }
     .header .header-title {
-        top: 13px;
+        top: 10px;
     }
 }
 
 // Iphone 6 and 6 plus
 @media only screen and (min-device-width: 412px) {
     .container .dashboard-action .emergency button {
-        height: 5em;
+        height: 4em;
+        font-size: 13px;
+    }
+    .container .dashboard-action .emergency {
+        margin-top: 13% !important;
     }
 }
 
@@ -267,7 +282,7 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
         margin-top: 9%;
     }
     .container .dashboard-action .emergency button {
-        font-size: 25px;
+        font-size: 20px;
     }
     .container .dashboard-action {
         height: 70%;
