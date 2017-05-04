@@ -161,7 +161,8 @@ export class Dashboard {
 
           BackgroundMode.enable();
             
-            BackgroundMode.onactivate().subscribe(() => {
+            // BackgroundMode.onactivate().subscribe(() => {
+            BackgroundMode.on("activate").subscribe(() => {
               let userlocation = [];
                 NativeStorage.getItem('userlocation').then(data => {
 

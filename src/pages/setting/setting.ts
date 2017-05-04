@@ -98,7 +98,7 @@ export class Setting {
             this.ngZone.run(() => {
               BackgroundMode.enable();
               Diagnostic.switchToLocationSettings();
-              BackgroundMode.ondeactivate().subscribe(() => {
+              BackgroundMode.on("deactivate").subscribe(() => {
                 Diagnostic.isLocationEnabled().then(isEnabled => {
                   if (isEnabled) {
                     this.locToggle = "ON";
@@ -107,6 +107,15 @@ export class Setting {
                   }
                 }, err => console.error(err));
               });
+              // BackgroundMode.ondeactivate().subscribe(() => {
+              //   Diagnostic.isLocationEnabled().then(isEnabled => {
+              //     if (isEnabled) {
+              //       this.locToggle = "ON";
+              //     } else {
+              //       this.locToggle = "OFF";
+              //     }
+              //   }, err => console.error(err));
+              // });
             });
           }
         },
