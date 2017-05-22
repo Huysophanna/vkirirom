@@ -110,7 +110,7 @@
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-inappbrowser@1.6.1"
+            "id": "cordova-plugin-inappbrowser@1.7.1"
         },
         "is_top_level": true,
         "variables": {}
@@ -229,7 +229,9 @@
         "is_top_level": true,
         "variables": {
             "API_KEY_FOR_ANDROID": "AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y",
-            "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
+            "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw",
+            "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
+            "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map"
         }
     },
     "plugin.google.maps": {
@@ -247,14 +249,6 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-console@~1.0.4"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova.plugins.diagnostic": {
-        "source": {
-            "type": "registry",
-            "id": "cordova.plugins.diagnostic"
         },
         "is_top_level": true,
         "variables": {}

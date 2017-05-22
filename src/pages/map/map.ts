@@ -22,7 +22,10 @@ export class GoogleMapPage {
   androidVersion: any;
   addedOverlayInterval: any;
 
-  constructor(public events: Events, public navCtrl: NavController, public platform: Platform, public loadingCtrl: LoadingController) {
+  constructor(public events: Events,
+    public navCtrl: NavController,
+    public platform: Platform,
+    public loadingCtrl: LoadingController) {
     platform.ready().then(() => {
 
         if (platform.is('android')) {
@@ -32,11 +35,11 @@ export class GoogleMapPage {
         this.loader = this.loadingCtrl.create({
             content: 'Initializing Map ...',
         });
-        this.loader.present();
-        
+        // this.loader.present();
+
     });
   }
-  
+
   ngAfterViewInit() {
       this.initMap();
   }
@@ -85,11 +88,6 @@ export class GoogleMapPage {
       // ];
 
     //   }, 1000);
-    this.map.on(GoogleMapsEvent.MY_LOCATION_BUTTON_CLICK).subscribe(() => {
-      this.map.getMyLocation().then(location => {
-        console.log("getMyLocation " + JSON.stringify(location));
-      }, err => console.error("getMyLocation error :" + JSON.stringify(err)));
-    }, err => console.error("Error encounter " + JSON.stringify(err)));
 
 
 
@@ -126,12 +124,13 @@ export class GoogleMapPage {
             {title: "Camping Area", lat: 11.3134, lng: 104.0648, snippet: "Enjoy camping with camp fire in a large area space with high level security provided."},
             {title: "Generator Building", lat: 11.3156, lng: 104.0648, snippet: "Generate main electricity source - internet servers for the whole resort usage."},
             {title: "Staff Building", lat: 11.3136, lng: 104.0731, snippet: "Accommodation building for staffs and other workers."},
+						{title: "Tennis Court " , lat: 11.3121, lng: 104.0652, snippet: "Tennis court for the customer . "},
           ];
 
           this.marker.forEach(element => {
             this.createNewMarker(element.lat, element.lng, element.title, element.snippet);
           });
-          
+
 
 
           let mapUrl: any;
@@ -147,41 +146,49 @@ export class GoogleMapPage {
               }
           }
 
-        this.map.addGroundOverlay({
-            'url': mapUrl,
-            'bounds': bounds
-        }).then(_success => {
-            this.addedOverlayInterval = setInterval(() => {
-                if (_success) {
-                    clearInterval(this.addedOverlayInterval);
-                    this.loader.dismiss();
-                }
-            });
-        });
-            
-            
+        // this.map.addGroundOverlay({
+        //     'url': mapUrl,
+        //     'bounds': bounds
+        // }).then(_success => {
+        //     this.addedOverlayInterval = setInterval(() => {
+        //         if (_success) {
+        //             clearInterval(this.addedOverlayInterval);
+        //             this.loader.dismiss();
+        //         }
+        //     });
+        // });
+				// let mapBounds = new plugin.google.maps.LatLngBounds(
+				//     new plugin.google.maps.LatLng(11.309760, 104.059195),
+				//     new plugin.google.maps.LatLng(11.320254, 104.075164));
+      
+				this.map.addTileOverlaY({
+					tileUrlFormat: "img/map/<zoom>/<x>/<y>.png",
+					zIndex: 10
+				}, function(tileOverlay){
+						// this.map.showDialog();
+				});
 
-            this.map.setAllGesturesEnabled(true);
+        this.map.setAllGesturesEnabled(true);
 
       });
 
-        
+
   }
-      
+
   createNewMarker(lat, lng, title, snippet) {
      // create new marker
       let markerOptions: GoogleMapsMarkerOptions = {
         position: new GoogleMapsLatLng(lat, lng),
         title: [title].join("\n"),
         snippet: snippet,
-        
+
         icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
         styles: {
             "text-align": "center",
             "maxWidth": "80%", // This can be percentage (%) or just a numeric value from 0.0 to 1.0 for percentile representation, or the numeric width in pixels.
             "color": "#1C8954"
         },
-        
+
         // animation: plugin.google.maps.Animation.DROP
       };
 
