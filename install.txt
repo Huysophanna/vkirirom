@@ -9,7 +9,6 @@ ionic plugin add ionic-plugin-keyboard
 cordova plugin add cordova-plugin-network-information
 ionic plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y" --variable API_KEY_FOR_IOS="AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
 ionic plugin add call-number
-ionic plugin add cordova-plugin-mauron85-background-geolocation
 ionic plugin add cordova-plugin-inappbrowser
 ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1190088291053783" --variable APP_NAME="vKclub"
 ionic plugin add cordova-plugin-splashscreen
@@ -19,7 +18,6 @@ ionic plugin add cordova-plugin-file-transfer
 ionic plugin add cordova-plugin-filepath
 ionic plugin add cordova-plugin-x-toast
 ionic plugin add cordova.plugins.diagnostic
-ionic plugin add cordova-plugin-request-location-accuracy
 
 
 //For server installation

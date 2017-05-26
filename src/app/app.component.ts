@@ -47,11 +47,14 @@ export class MyApp {
   isLoggedOut: any;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
+    console.log("JOL TA");
+    
      this.presentLoading('Authenticating');
+     console.log("FINE");
     platform.ready().then(() => {
       setTimeout(() => {
         Splashscreen.hide();
-        this.loading.dismiss();
+        this.loading.dismiss().catch(() => console.log('ERROR CATCH: LoadingController dismiss'));
       }, 1000);
     
       this.getStorageItem();

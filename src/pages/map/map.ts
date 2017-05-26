@@ -19,6 +19,7 @@ export class GoogleMapPage {
   icon: any;
   marker: any;
   loader: any;
+  mapTile: any;
   androidVersion: any;
   addedOverlayInterval: any;
 
@@ -70,19 +71,20 @@ export class GoogleMapPage {
           }
         });
 
-
       let bounds = [
-        new GoogleMapsLatLng(11.3191, 104.0743),
-        new GoogleMapsLatLng(11.3202, 104.0606),
-        new GoogleMapsLatLng(11.3116, 104.0599),
-        new GoogleMapsLatLng(11.3099, 104.0734),
+        new GoogleMapsLatLng(11.3432, 104.0842),
+        new GoogleMapsLatLng(11.3432, 104.0323),
+        new GoogleMapsLatLng(11.3044, 104.0322),
+        new GoogleMapsLatLng(11.3040, 104.0846),
       ];
+
       // let bounds = [
-      //   new GoogleMapsLatLng(11.3202, 104.0734),
-      //   new GoogleMapsLatLng(11.3202, 104.0599),
-      //   new GoogleMapsLatLng(11.3099, 104.0599),
+      //   new GoogleMapsLatLng(11.3191, 104.0743),
+      //   new GoogleMapsLatLng(11.3202, 104.0606),
+      //   new GoogleMapsLatLng(11.3116, 104.0599),
       //   new GoogleMapsLatLng(11.3099, 104.0734),
       // ];
+     
 
     //   }, 1000);
     this.map.on(GoogleMapsEvent.MY_LOCATION_BUTTON_CLICK).subscribe(() => {
@@ -93,59 +95,78 @@ export class GoogleMapPage {
 
 
 
-      this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-          // create CameraPosition
-          let position: CameraPosition = {
-            target: LatLng,
-            zoom: 18,
-            tilt: 30
-          };
+    this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
+        // create CameraPosition
+        let position: CameraPosition = {
+          target: LatLng,
+          zoom: 18,
+          tilt: 30
+        };
 
-          // move the map's camera to position
-          this.map.animateCamera({
-            'target': LatLng,
-            'zoom': 17
-            // 'bearing': 140
-          });
+        // move the map's camera to position
+        this.map.animateCamera({
+          'target': LatLng,
+          'zoom': 17
+          // 'bearing': 140
+        });
 
-          this.marker = [
-            {title: "Kirirom Institute of Technology", lat: 11.3150, lng: 104.0677, snippet: "First boarding school in Cambodia, specialize skill in Software Engineer."},
-            {title: "Activity Center", lat: 11.3165, lng: 104.0648, snippet: "Enjoy vKirirom activities, team building with your family and friends. Visit us now!"},
-            {title: "Pine View Restaurant", lat: 11.3167, lng: 104.0653, snippet: "Serves the best foods with our experienced chefs among all the pine trees."},
-            {title: "Reception", lat: 11.3174, lng: 104.0649, snippet: "We offer accommodation - activites and many more services that are available to book now in our Reception."},
-            {title: "Big Party Tent", lat: 11.3135, lng: 104.0666, snippet: "Celetebrate big events, party, conferences and many activities here with large space provided."},
-            {title: "Mogina Restaurant", lat: 11.3151, lng: 104.0637, snippet: "Serves best Khmer foods, drinks and many other kind of snacks with perfect taste. Visit us now!"},
-            {title: "Villa Jasmine", lat: 11.3181, lng: 104.0633, snippet: "One type of real estate we provide that comes with natural & comfortable design."},
-            {title: "Orchid Hills", lat: 11.3180, lng: 104.0650, snippet: "One type of real estate we provide that comes with natural & comfortable design."},
-            {title: "Borey Type V", lat: 11.3175, lng: 104.0666, snippet: "One type of real estate we provide that comes with natural & comfortable design."},
-            {title: "Container Hotel", lat: 11.3158, lng: 104.0721, snippet: "Experience new hotel designed based on a container which is only available at vKirirom."},
-            {title: "Pipe Room", lat: 11.3117, lng: 104.0625, snippet: "The most amazing designed room from a pipe which serves best among all."},
-            {title: "Luxury Tent", lat: 11.3146, lng: 104.0649, snippet: "Another amazing designed room from a tent, serves best with many facilities provided."},
-            {title: "Khmer Cottage", lat: 11.3150, lng: 104.0643, snippet: "From Khmer traditional way, cottage is still best especially in this green environment."},
-            {title: "Playground Field", lat: 11.3131, lng: 104.0661, snippet: "Enjoy many kind of activities in playground field including soccers, bubble sumo etc."},
-            {title: "Camping Area", lat: 11.3134, lng: 104.0648, snippet: "Enjoy camping with camp fire in a large area space with high level security provided."},
-            {title: "Generator Building", lat: 11.3156, lng: 104.0648, snippet: "Generate main electricity source - internet servers for the whole resort usage."},
-            {title: "Staff Building", lat: 11.3136, lng: 104.0731, snippet: "Accommodation building for staffs and other workers."},
-          ];
+        this.marker = [
+          { title: "Kirirom Institute of Technology", lat: 11.3152, lng: 104.0676, snippet: "The first boarding school in Cambodia, specialized in software engineering. Students are also engaged in internship projects while studying." }, 
+                { title: "Activity Center", lat: 11.3165, lng: 104.0648, snippet: "Pleasant activity staff offers the information regarding various types of activities. Activity in fresh air helps you refresh your mind. Open 8:00-17:00." }, 
+                { title: "Pine View Kitchen", lat: 11.3167, lng: 104.0653, snippet: "At the open space restaurant, Pine View Kitchen helps you enjoy a chef’s special full course of modern Khmer cuisine." }, 
+                { title: "Reception", lat: 11.3174, lng: 104.0649, snippet: "Customers can be welcomed to vKirirom Pine Resort. Open 8:00-20:00.Our staffs can speak English, Khmer, Japanese. Customers are provided with amenities as well." }, 
+                { title: "Big Party Tent", lat: 11.3137, lng: 104.0667, snippet: "A tent which occupies large space which is suitable for big events, conferences and many activities. Even during rainy days, this large tent provides enjoyable indoor activity." }, 
+                { title: "Mogina Restaurant", lat: 11.3154, lng: 104.0638, snippet: "Khmer style nature fused restaurant which serves Khmer original meals. You can also buy breads and drinks here." }, 
+                { title: "Villa Jasmine", lat: 11.3181, lng: 104.0633, snippet: "Quite elegant cottage which promises you a lot of pleasant experiences on the cool Kirirom Mountain top for couples and small families." }, 
+                { title: "Villa Suite", lat: 11.3180, lng: 104.0655, snippet: "Modern designed luxury room. This two-bedroom villa with a mezzanine level is suitable for big families or groups." }, 
+                { title: "Pipe Room", lat: 11.3126, lng: 104.0628, snippet: "The most uniquely designed room derived from an earthen pipe which serves best amongst all." }, 
+                { title: "Luxury Tent", lat: 11.3145, lng: 104.0646, snippet: "High quality tent with comfortable hotel type room. Modern tent houses which have a king size bed and a nice shower room." }, 
+                { title: "Khmer Cottage", lat: 11.3149, lng: 104.0644, snippet: "Khmer farmers' open-style houses which are nicely decorated with natural materials. Best rooms to experience real Khmer tradition and feel the natural fresh air." }, 
+                { title: "Playground Field", lat: 11.3162, lng: 104.0654, snippet: "Enjoy many kinds of activities including football, tennis, volleyball, bubble sumo etc. Feel free to ask our activity staff for details." }, 
+                { title: "Camping Area", lat: 11.3134, lng: 104.0648, snippet: "Enjoy camping with camp fire in a large area space with high level of security provided." }, 
+                { title: "Climbing Theater", lat: 11.3158, lng: 104.0654, snippet: "It is a multi-purpose building which during day time can be used to enjoy wall climbing as well as a movie screen at night time." }, 
+                { title: "Lake", lat: 11.3344, lng: 104.0516, snippet: "Kirirom Lake"}, 
+                { title: "Village", lat: 11.3348, lng: 104.0550, snippet: "Village" }, 
+                { title: "Ministry of Environment", lat: 11.3330, lng: 104.0531, snippet: "Ministry of Environment" }, 
+                { title: "Bungalow", lat: 11.3165, lng: 104.0658, snippet: "Bungalow" }, 
+                { title: "Swimming Pool", lat: 11.3168, lng: 104.0658, snippet: "Swimming Pool" }, 
+                { title: "Tennis Court", lat: 11.3121, lng: 104.0653, snippet: "Tennis Court" }, 
+                { title: "Parking Area", lat: 11.3169, lng: 104.0647, snippet: "Parking Area" }, 
+                { title: "Container Coffee", lat: 11.3139, lng: 104.0654, snippet: "Container Coffee" }, 
+                { title: "Farm", lat: 11.3134, lng: 104.0636, snippet: "Farming" }, 
+                { title: "Crazy Hills", lat: 11.3136, lng: 104.0751, snippet: "An outdoor party stage for big event in the top mountain of kirirom. You can enjoy lunch, BBQ and also drinks with karaoke." }, 
+                { title: "Dragon Statue", lat: 11.3409, lng: 104.0597, snippet: "Dragon Statues (snake God) whose four heads are landmark, is situated in the center of the center of the intersection." }, 
+                { title: "Old Kirirom Pagoda", lat: 11.3201, lng: 104.0362, snippet: "It is a Buddhist temple with the longest histroy in Kirirom.It makes you back to the good days in Cambodia.Please follow this good manners when worship ping the temple." }, 
+                { title: "New Kirirom Pagoda", lat: 11.3304, lng: 104.0769, snippet: "On the top of the stairs of gentle slope. A mural paining drawn Buddha's life inside of the building is also an sightseeing spot." }, 
+                { title: "Otrosek Waterfall", lat: 11.3111, lng: 104.0784, snippet: "This place us know to those in the know, and it is loved by locals. We recommend you to visit there during the rainy season." }, 
+                { title: "Srash Srang Lake", lat: 11.3291, lng: 104.0379, snippet: "The landscape is almost as if it is a framed picture. You can feel the magnificence of the nature while being away from the hustle and bustle of the city." }, 
+                { title: "King's Residence", lat: 11.3309, lng: 104.0606, snippet: "The residence,which quietly stands among a pine grove,was a old fashioned cottage built of bricks." }, 
+                { title: "Visitor Center", lat: 11.3351, lng: 104.0407, snippet: "It is visitor center which introduce the history of Kirirom. It is a wonderful photogenic spot." }, 
+                { title: "Football Court", lat: 11.3133, lng: 104.0657, snippet: "Football Court" }, 
+                { title: "Volleyball Court", lat: 11.3129, lng: 104.0657, snippet: "Volleyball Court" }, 
+                { title: "Hanamaru International School attached KIT", lat: 11.3153, lng: 104.0687, snippet: "An international primary school is going to start. Students can enjoy their schooling days among fresh nature." }, 
+                { title: "Kirirom Elementary School", lat: 11.3345, lng: 104.0553, snippet: "It is the only elementary school established by mainly vKirirom stuff.For the bright future of children regardless of the envirionment the were grown up." },
+            
+        ];
 
-          this.marker.forEach(element => {
-            this.createNewMarker(element.lat, element.lng, element.title, element.snippet);
-          });
+        this.marker.forEach(element => {
+          this.createNewMarker(element.lat, element.lng, element.title, element.snippet);
+        });
           
 
 
-          let mapUrl: any;
-          if (this.platform.is('ios')) {
-            mapUrl = "img/vmap.png";
-          } else {
-              if (this.androidVersion >= 6) {
-                //above android 6.0, load higher quality map
-                mapUrl = "img/vmap.png";
-              } else {
-                //below android 6.0, replace with low quality map
-                mapUrl = "img/vmap-android.png";
-              }
-          }
+        let mapUrl: any;
+        if (this.platform.is('ios')) {
+          mapUrl = "img/vmap.png";
+        } else {
+            if (this.androidVersion >= 6) {
+              //above android 6.0, load higher quality map
+              mapUrl = "img/vmap.png";
+            } else {
+              //below android 6.0, replace with low quality map
+              mapUrl = "img/vmap-android.png";
+            }
+        }
 
         this.map.addGroundOverlay({
             'url': mapUrl,
@@ -158,10 +179,16 @@ export class GoogleMapPage {
                 }
             });
         });
-            
-            
 
-            this.map.setAllGesturesEnabled(true);
+        // this.map.addedOverlayInterval({
+        //   tileUrlFormat: "https://a.tile.openstreetmap.org/<zoom>/<x>/<y>.png",
+        //   zIndex: 10
+        // }, function(tileOverlay){
+        //     alert('callback function');
+        //     this.mapTile = tileOverlay;
+        // });
+            
+        this.map.setAllGesturesEnabled(true);
 
       });
 

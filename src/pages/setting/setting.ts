@@ -26,7 +26,6 @@ export class Setting {
     platform.ready().then(() => {
       this.notiToggle = this.navParams.get("settingToggleNotification");
       Diagnostic.isLocationEnabled().then(isEnabled => {
-        alert("Location is " + isEnabled);
         if (isEnabled) {
           this.locToggle = "ON";
         } else {
