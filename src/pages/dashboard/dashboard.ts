@@ -267,6 +267,7 @@ export class Dashboard {
                   }
 
                   if (this.connectionStatus === 'internet') {
+
                     this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                     // reqeust twilio api
                     this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=hithereemergency&From=phanith').map(res => res.json()).subscribe(data => {

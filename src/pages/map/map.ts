@@ -23,7 +23,10 @@ export class GoogleMapPage {
   androidVersion: any;
   addedOverlayInterval: any;
 
-  constructor(public events: Events, public navCtrl: NavController, public platform: Platform, public loadingCtrl: LoadingController) {
+  constructor(public events: Events,
+    public navCtrl: NavController,
+    public platform: Platform,
+    public loadingCtrl: LoadingController) {
     platform.ready().then(() => {
 
         if (platform.is('android')) {
@@ -33,11 +36,11 @@ export class GoogleMapPage {
         this.loader = this.loadingCtrl.create({
             content: 'Initializing Map ...',
         });
-        this.loader.present();
-        
+        // this.loader.present();
+
     });
   }
-  
+
   ngAfterViewInit() {
       this.initMap();
   }
@@ -87,11 +90,6 @@ export class GoogleMapPage {
      
 
     //   }, 1000);
-    this.map.on(GoogleMapsEvent.MY_LOCATION_BUTTON_CLICK).subscribe(() => {
-      this.map.getMyLocation().then(location => {
-        console.log("getMyLocation " + JSON.stringify(location));
-      }, err => console.error("getMyLocation error :" + JSON.stringify(err)));
-    }, err => console.error("Error encounter " + JSON.stringify(err)));
 
 
 
@@ -152,7 +150,6 @@ export class GoogleMapPage {
         this.marker.forEach(element => {
           this.createNewMarker(element.lat, element.lng, element.title, element.snippet);
         });
-          
 
 
         let mapUrl: any;
@@ -187,28 +184,28 @@ export class GoogleMapPage {
         //     alert('callback function');
         //     this.mapTile = tileOverlay;
         // });
-            
+        
         this.map.setAllGesturesEnabled(true);
 
       });
 
-        
+
   }
-      
+
   createNewMarker(lat, lng, title, snippet) {
      // create new marker
       let markerOptions: GoogleMapsMarkerOptions = {
         position: new GoogleMapsLatLng(lat, lng),
         title: [title].join("\n"),
         snippet: snippet,
-        
+
         icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
         styles: {
             "text-align": "center",
             "maxWidth": "80%", // This can be percentage (%) or just a numeric value from 0.0 to 1.0 for percentile representation, or the numeric width in pixels.
             "color": "#1C8954"
         },
-        
+
         // animation: plugin.google.maps.Animation.DROP
       };
 

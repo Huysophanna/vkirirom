@@ -267,6 +267,7 @@ export class Dashboard {
                   }
 
                   if (this.connectionStatus === 'internet') {
+<<<<<<< HEAD
                     this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                     // reqeust twilio api
                     this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=hithereemergency&From=phanith').map(res => res.json()).subscribe(data => {
@@ -275,11 +276,23 @@ export class Dashboard {
                           this.warningAlert('Send Sucesss', 'Your emergency message has been sent sucessfully! Our team will try best to rescure as soon as possible.');
                       } else {
                           this.warningAlert('Message is already sent', 'Your emergency message has been sent once please stay there and we will try our best to reach there.');
+=======
+                    alert('request api');
+                    // reqeust twilio api
+                    this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=hithereemergency&From=phanith').map(res => res.json()).subscribe(data => {
+                      console.log('data from twilio ' + data.result);
+                      if (data.result) {
+                        alert('Not Emergency Message! Or message is already save once');
+>>>>>>> e60d1abc28094b5c196fa02d6b8ea6cf39717f0e
                       }
                     }, (error) => {
                       this.warningAlert('Connection Problem', 'There is problem due to internet connection. Please try again.');
                     });
                   } else {
+<<<<<<< HEAD
+=======
+                    alert('Send message');
+>>>>>>> e60d1abc28094b5c196fa02d6b8ea6cf39717f0e
                     // send SMS
                     SMS.send(number, message, options)
                     .then(() => {

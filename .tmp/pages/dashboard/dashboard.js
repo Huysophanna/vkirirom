@@ -249,6 +249,7 @@ export var Dashboard = (function () {
                                 }
                             };
                             if (_this.connectionStatus === 'internet') {
+<<<<<<< HEAD
                                 _this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                                 // reqeust twilio api
                                 _this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=hithereemergency&From=phanith').map(function (res) { return res.json(); }).subscribe(function (data) {
@@ -258,12 +259,24 @@ export var Dashboard = (function () {
                                     }
                                     else {
                                         _this.warningAlert('Message is already sent', 'Your emergency message has been sent once please stay there and we will try our best to reach there.');
+=======
+                                alert('request api');
+                                // reqeust twilio api
+                                _this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=hithereemergency&From=phanith').map(function (res) { return res.json(); }).subscribe(function (data) {
+                                    console.log('data from twilio ' + data.result);
+                                    if (data.result) {
+                                        alert('Not Emergency Message! Or message is already save once');
+>>>>>>> e60d1abc28094b5c196fa02d6b8ea6cf39717f0e
                                     }
                                 }, function (error) {
                                     _this.warningAlert('Connection Problem', 'There is problem due to internet connection. Please try again.');
                                 });
                             }
                             else {
+<<<<<<< HEAD
+=======
+                                alert('Send message');
+>>>>>>> e60d1abc28094b5c196fa02d6b8ea6cf39717f0e
                                 // send SMS
                                 SMS.send(number, message, options)
                                     .then(function () {
