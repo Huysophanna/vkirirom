@@ -14,10 +14,10 @@ ionic plugin add cordova-plugin-facebook4 --variable APP_ID="1190088291053783" -
 ionic plugin add cordova-plugin-splashscreen
 ionic plugin add cordova-plugin-camera
 ionic plugin add cordova-plugin-file
-ionic plugin add cordova-plugin-file-transfer
 ionic plugin add cordova-plugin-filepath
 ionic plugin add cordova-plugin-x-toast
 ionic plugin add cordova.plugins.diagnostic
+ionic plugin add cordova-plugin-file-transfer
 
 
 //For server installation

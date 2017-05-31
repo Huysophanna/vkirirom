@@ -100,7 +100,7 @@ export class MyApp {
               this.isLoggedOut = false;
               // NativeStorage.setItem('userAuthService', true);
               this.currentUser = firebase.auth().currentUser;
-
+              
               //identify whether the user is signed in using Facebook or Email
               firebase.auth().currentUser.providerData.forEach(element => {
                 this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;

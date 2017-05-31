@@ -149,14 +149,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-file-transfer": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-file-transfer"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-filepath": {
         "source": {
             "type": "registry",
@@ -205,14 +197,6 @@
         "is_top_level": false,
         "variables": {}
     },
-    "cordova.plugins.diagnostic": {
-        "source": {
-            "type": "registry",
-            "id": "cordova.plugins.diagnostic@~3.6.2"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-googlemaps": {
         "source": {
             "type": "registry",
@@ -246,6 +230,22 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-geolocation@^2.4.3"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-file-transfer": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file-transfer@^1.6.3"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova.plugins.diagnostic": {
+        "source": {
+            "type": "registry",
+            "id": "cordova.plugins.diagnostic@^3.6.2"
         },
         "is_top_level": true,
         "variables": {}

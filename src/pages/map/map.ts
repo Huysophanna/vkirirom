@@ -142,9 +142,8 @@ export class GoogleMapPage {
                 { title: "Visitor Center", lat: 11.3351, lng: 104.0407, snippet: "It is visitor center which introduce the history of Kirirom. It is a wonderful photogenic spot." }, 
                 { title: "Football Court", lat: 11.3133, lng: 104.0657, snippet: "Football Court" }, 
                 { title: "Volleyball Court", lat: 11.3129, lng: 104.0657, snippet: "Volleyball Court" }, 
-                { title: "Hanamaru International School attached KIT", lat: 11.3153, lng: 104.0687, snippet: "An international primary school is going to start. Students can enjoy their schooling days among fresh nature." }, 
+                // { title: "Hanamaru International School attached KIT", lat: 11.3153, lng: 104.0687, snippet: "An international primary school is going to start. Students can enjoy their schooling days among fresh nature." }, 
                 { title: "Kirirom Elementary School", lat: 11.3345, lng: 104.0553, snippet: "It is the only elementary school established by mainly vKirirom stuff.For the bright future of children regardless of the envirionment the were grown up." },
-            
         ];
 
         this.marker.forEach(element => {

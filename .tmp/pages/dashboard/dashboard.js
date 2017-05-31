@@ -12,6 +12,7 @@ import { SettingService } from '../../providers/setting-service';
 import { Notificationpanel } from '../notificationpanel/notificationpanel';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import firebase from 'firebase';
 export var Dashboard = (function () {
     function Dashboard(platform, navCtrl, locationTracker, userScope, alertCtrl, modalCtrl, loadingCtrl, settingService, events, menuCtrl, ngZone, http) {
         var _this = this;
@@ -31,6 +32,7 @@ export var Dashboard = (function () {
         this.isUnknown = false;
         this.launchCount = 0;
         this.isLocationEnable = true;
+        this.sosRequestResult = "testing";
         this.checkNetworkConnection();
         platform.ready().then(function () {
             //show side menu if it's not login screen
@@ -217,12 +219,45 @@ export var Dashboard = (function () {
         Diagnostic.isLocationEnabled().then(successCallback).catch(errorCallback);
     };
     Dashboard.prototype.sos = function () {
-        this.checkNetworkConnection();
-        if (this.connectionStatus === "internet") {
-            this.presentSOSAlert("We will forward the request along with your current location to our supports. We suggest you not to move far away from your current position, as we're trying our best to get there as soon as possible.");
+        if ((this.isKirirom == undefined) && (this.isUnknown == false)) {
+            var loader = this.loadingCtrl.create({
+                content: 'Identifying your current location....',
+                duration: 1000
+            });
+            loader.present();
+        }
+        else if ((this.isKirirom == undefined) && (this.isUnknown == true) && (this.isLocationEnable == true)) {
+            if (this.locationPermissionDenied) {
+                //if the location is denied or turn off by user
+                this.permissionDeniedWarning();
+            }
+            else if (this.getUserLocation == false) {
+                //can't get location 
+                this.makeToast('There a problem getting your current location. Please allow the internet connectivity or relaunch the app and try again.');
+            }
+            else {
+                this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
+            }
+        }
+        else if ((this.isKirirom == false) && (this.isUnknown == false)) {
+            this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
+        }
+        else if (this.isLocationEnable == false) {
+            if (this.platform.is('ios')) {
+                this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services");
+            }
+            else {
+                this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Location");
+            }
         }
         else {
-            this.presentSOSAlert("We will generate a SMS along with your current location to our supports. We suggest you not to move far away from your current position, as we're trying our best to get there as soon as possible. \n (Standard SMS rates may apply)");
+            this.checkNetworkConnection();
+            if (this.connectionStatus === "internet") {
+                this.presentSOSAlert("We will forward the request along with your current location to our supports. We suggest you not to move far away from your current position, as we're trying our best to get there as soon as possible.");
+            }
+            else {
+                this.presentSOSAlert("We will generate a SMS along with your current location to our supports. We suggest you not to move far away from your current position, as we're trying our best to get there as soon as possible. \n (Standard SMS rates may apply)");
+            }
         }
     };
     Dashboard.prototype.presentSOSAlert = function (message) {
@@ -240,7 +275,7 @@ export var Dashboard = (function () {
                             var parseUserlocation = JSON.parse(data);
                             _this.lastLat = parseUserlocation[parseUserlocation.length - 1].lat;
                             _this.lastLng = parseUserlocation[parseUserlocation.length - 1].lng;
-                            var number = ["0962222735", "078777346", "010254531"];
+                            var number = ["+12564144812"];
                             var message = "Please help! I'm currently facing an emergency problem. Here is my Location: http://maps.google.com/?q=" + _this.lastLat + "," + _this.lastLng + "";
                             var options = {
                                 replaceLineBreaks: false,
@@ -249,34 +284,24 @@ export var Dashboard = (function () {
                                 }
                             };
                             if (_this.connectionStatus === 'internet') {
-<<<<<<< HEAD
                                 _this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                                 // reqeust twilio api
-                                _this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=hithereemergency&From=phanith').map(function (res) { return res.json(); }).subscribe(function (data) {
-                                    console.log('data from twilio ' + data.result);
-                                    if (data.status.sendSuccess) {
-                                        _this.warningAlert('Send Sucesss', 'Your emergency message has been sent sucessfully! Our team will try best to rescure as soon as possible.');
+                                _this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=' + message + '&From=' + firebase.auth().currentUser.displayName).map(function (res) { return res.json(); }).subscribe(function (data) {
+                                    _this.sosRequestResult = data.result;
+                                    if (!data.result) {
+                                        _this.warningAlert('Send Sucesss', 'Your emergency message has been sent sucessfully! Please stay safe while our team is trying best to reach you.');
+                                    }
+                                    else if (data.result.indexOf("already") >= 0) {
+                                        _this.warningAlert('Message is already sent', 'Your emergency message has already been sent. Please stay safe and wait for our team there. We will try our best to rescure as soon as possible.');
                                     }
                                     else {
-                                        _this.warningAlert('Message is already sent', 'Your emergency message has been sent once please stay there and we will try our best to reach there.');
-=======
-                                alert('request api');
-                                // reqeust twilio api
-                                _this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=hithereemergency&From=phanith').map(function (res) { return res.json(); }).subscribe(function (data) {
-                                    console.log('data from twilio ' + data.result);
-                                    if (data.result) {
-                                        alert('Not Emergency Message! Or message is already save once');
->>>>>>> e60d1abc28094b5c196fa02d6b8ea6cf39717f0e
+                                        _this.warningAlert('Operation Error', 'There is an error occur with our operation. Please contact us by our contact number.');
                                     }
                                 }, function (error) {
                                     _this.warningAlert('Connection Problem', 'There is problem due to internet connection. Please try again.');
                                 });
                             }
                             else {
-<<<<<<< HEAD
-=======
-                                alert('Send message');
->>>>>>> e60d1abc28094b5c196fa02d6b8ea6cf39717f0e
                                 // send SMS
                                 SMS.send(number, message, options)
                                     .then(function () {
@@ -369,6 +394,14 @@ export var Dashboard = (function () {
         }
         else {
             this.connectionStatus = "internet";
+        }
+    };
+    Dashboard.prototype.ngAfterContentChecked = function () {
+        if (this.sosRequestResult.indexOf("already") >= 0) {
+            console.log("================= already");
+        }
+        else if (this.sosRequestResult.indexOf("already") < 0) {
+            console.log("================= first send");
         }
     };
     Dashboard.decorators = [
