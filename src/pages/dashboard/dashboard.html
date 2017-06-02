@@ -4,8 +4,8 @@
             <span (click)="modeClicked(1)" *ngIf="(isKirirom == undefined) && (isUnknown == false) && (isLocationEnable == true)" style="color: goldenrod">Identifying...</span>
             <span (click)="modeClicked(2)" *ngIf="(isKirirom == undefined) && (isUnknown == true) && (isLocationEnable == true)" style="color: #795548">Unidentified</span>
             <span (click)="modeClicked(5)" *ngIf="(isLocationEnable == false)" style="color: #795548">Unidentified</span>
-            <span (click)="modeClicked(3)" *ngIf="(isKirirom == true) && (isUnknown == false) && (isLocationEnable == true)">OnSite Mode</span>
-            <span (click)="modeClicked(4)" *ngIf="(isKirirom == false) && (isUnknown == false) && (isLocationEnable == true)" style="color: #827717;">OffSite Mode</span>
+            <span (click)="modeClicked(3)" *ngIf="(isKirirom == true) && (isUnknown == false) && (isLocationEnable == true)">In-Kirirom Mode</span>
+            <span (click)="modeClicked(4)" *ngIf="(isKirirom == false) && (isUnknown == false) && (isLocationEnable == true)" style="color: #827717;">OFF-Kirirom Mode</span>
         </ion-title>
         <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
         <ion-buttons end>

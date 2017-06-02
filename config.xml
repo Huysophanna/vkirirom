@@ -88,13 +88,16 @@
     <allow-navigation href="data:*" />
     <allow-navigation href="http://10.10.10.122:8100" />
     <engine name="ios" spec="^4.4.0" />
+    <plugin name="cordova-plugin-camera" spec="~2.4.1" />
     <plugin name="cordova-plugin-console" spec="^1.0.7" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />
     <plugin name="cordova-plugin-facebook4" spec="^1.7.4">
         <variable name="APP_ID" value="1190088291053783" />
         <variable name="APP_NAME" value="vKclub" />
     </plugin>
+    <plugin name="cordova-plugin-file" spec="~4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
+    <plugin name="cordova-plugin-filepath" spec="~1.0.2" />
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value=" " />
     </plugin>

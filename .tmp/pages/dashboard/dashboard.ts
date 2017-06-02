@@ -29,7 +29,7 @@ export class Dashboard {
   isKirirom: boolean;
   isUnknown: boolean = false;
   connectionStatus: any;
-  loading;
+  loading: any;
   lastLat: any;
   lastLng: any;
   deviceToken: any;
@@ -38,8 +38,6 @@ export class Dashboard {
   getUserLocation: boolean;
   connectionWatchSubscription: any;
   isLocationEnable: any = true;
-  sosRequestResult = "testing";
-  sosFirstRequest: any;
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController, public ngZone: NgZone, public http: Http) {
       this.checkNetworkConnection();
@@ -136,7 +134,7 @@ export class Dashboard {
                 this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
               }
             } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-              this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
+              this.warningAlert("OFF-Kirirom Mode", "This function is not accessible outside kirirom area.");
             } else if (this.isLocationEnable == false) {
               if (this.platform.is('ios')) {
                 this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services");
@@ -253,7 +251,7 @@ export class Dashboard {
             this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
         }
     } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-        this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
+        this.warningAlert("OFF-Kirirom Mode", "This function is not accessible outside kirirom area.");
     } else if (this.isLocationEnable == false) {
       if (this.platform.is('ios')) {
           this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services");
@@ -285,7 +283,7 @@ export class Dashboard {
                   var parseUserlocation = JSON.parse(data);
                   this.lastLat = parseUserlocation[parseUserlocation.length - 1].lat;
                   this.lastLng = parseUserlocation[parseUserlocation.length - 1].lng;
-                  var number = ["+12564144812"];
+                  var number = ["+13343758067"];
                   var message = "Please help! I'm currently facing an emergency problem. Here is my Location: http://maps.google.com/?q=" + this.lastLat + "," + this.lastLng + "";
                   var options = {
                   replaceLineBreaks: false, // true to replace \n by a new line, false by default
@@ -300,8 +298,7 @@ export class Dashboard {
                     this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                         // reqeust twilio api
                         this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=' + message + '&From='+ firebase.auth().currentUser.displayName).map(res => res.json()).subscribe(data => {
-                          this.sosRequestResult = data.result;
-
+                          
                           if (!data.result) {
                             this.warningAlert('Send Sucesss', 'Your emergency message has been sent sucessfully! Please stay safe while our team is trying best to reach you.');
                           } else if (data.result.indexOf("already") >= 0) {
@@ -358,9 +355,9 @@ export class Dashboard {
               message = "";
           }
       break;
-      case 3: message = 'Welcome to vKirirom. Experience full features of vKclub with OnSite mode including Emergency SOS & Group Chat';
+      case 3: message = 'Welcome to vKirirom. Experience full features of vKclub with In-Kirirom mode including Emergency SOS & Group Chat';
       break;
-      case 4: message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
+      case 4: message = 'OFF-Kirirom mode is on. Emergency SOS & Group Chat features are not accessible for OFF-Kirirom users.';
       break;
       case 5:
         if (this.platform.is('ios')) {
@@ -408,15 +405,6 @@ export class Dashboard {
         this.connectionStatus = "No internet";
     } else {
         this.connectionStatus = "internet";
-    }
-  }
-
-  ngAfterContentChecked() {
-    if (this.sosRequestResult.indexOf("already")>=0) {
-      console.log("================= already");
-      
-    } else if (this.sosRequestResult.indexOf("already")<0) {
-      console.log("================= first send");   
     }
   }
 

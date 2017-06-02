@@ -32,7 +32,6 @@ export var Dashboard = (function () {
         this.isUnknown = false;
         this.launchCount = 0;
         this.isLocationEnable = true;
-        this.sosRequestResult = "testing";
         this.checkNetworkConnection();
         platform.ready().then(function () {
             //show side menu if it's not login screen
@@ -118,7 +117,7 @@ export var Dashboard = (function () {
                     }
                 }
                 else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-                    this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
+                    this.warningAlert("OFF-Kirirom Mode", "This function is not accessible outside kirirom area.");
                 }
                 else if (this.isLocationEnable == false) {
                     if (this.platform.is('ios')) {
@@ -240,7 +239,7 @@ export var Dashboard = (function () {
             }
         }
         else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-            this.warningAlert("OffSite Mode", "This function is not accessible outside kirirom area.");
+            this.warningAlert("OFF-Kirirom Mode", "This function is not accessible outside kirirom area.");
         }
         else if (this.isLocationEnable == false) {
             if (this.platform.is('ios')) {
@@ -275,7 +274,7 @@ export var Dashboard = (function () {
                             var parseUserlocation = JSON.parse(data);
                             _this.lastLat = parseUserlocation[parseUserlocation.length - 1].lat;
                             _this.lastLng = parseUserlocation[parseUserlocation.length - 1].lng;
-                            var number = ["+12564144812"];
+                            var number = ["+13343758067"];
                             var message = "Please help! I'm currently facing an emergency problem. Here is my Location: http://maps.google.com/?q=" + _this.lastLat + "," + _this.lastLng + "";
                             var options = {
                                 replaceLineBreaks: false,
@@ -287,7 +286,6 @@ export var Dashboard = (function () {
                                 _this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                                 // reqeust twilio api
                                 _this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=' + message + '&From=' + firebase.auth().currentUser.displayName).map(function (res) { return res.json(); }).subscribe(function (data) {
-                                    _this.sosRequestResult = data.result;
                                     if (!data.result) {
                                         _this.warningAlert('Send Sucesss', 'Your emergency message has been sent sucessfully! Please stay safe while our team is trying best to reach you.');
                                     }
@@ -347,10 +345,10 @@ export var Dashboard = (function () {
                 }
                 break;
             case 3:
-                message = 'Welcome to vKirirom. Experience full features of vKclub with OnSite mode including Emergency SOS & Group Chat';
+                message = 'Welcome to vKirirom. Experience full features of vKclub with In-Kirirom mode including Emergency SOS & Group Chat';
                 break;
             case 4:
-                message = 'OffSite mode is on. Emergency SOS & Group Chat features are not accessible for OffSite users.';
+                message = 'OFF-Kirirom mode is on. Emergency SOS & Group Chat features are not accessible for OFF-Kirirom users.';
                 break;
             case 5:
                 if (this.platform.is('ios')) {
@@ -394,14 +392,6 @@ export var Dashboard = (function () {
         }
         else {
             this.connectionStatus = "internet";
-        }
-    };
-    Dashboard.prototype.ngAfterContentChecked = function () {
-        if (this.sosRequestResult.indexOf("already") >= 0) {
-            console.log("================= already");
-        }
-        else if (this.sosRequestResult.indexOf("already") < 0) {
-            console.log("================= first send");
         }
     };
     Dashboard.decorators = [
