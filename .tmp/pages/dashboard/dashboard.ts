@@ -38,8 +38,6 @@ export class Dashboard {
   getUserLocation: boolean;
   connectionWatchSubscription: any;
   isLocationEnable: any = true;
-  sosRequestResult = "testing";
-  sosFirstRequest: any;
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController, public ngZone: NgZone, public http: Http) {
       this.checkNetworkConnection();
@@ -300,8 +298,7 @@ export class Dashboard {
                     this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                         // reqeust twilio api
                         this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=' + message + '&From='+ firebase.auth().currentUser.displayName).map(res => res.json()).subscribe(data => {
-                          this.sosRequestResult = data.result;
-
+                          
                           if (!data.result) {
                             this.warningAlert('Send Sucesss', 'Your emergency message has been sent sucessfully! Please stay safe while our team is trying best to reach you.');
                           } else if (data.result.indexOf("already") >= 0) {
@@ -408,15 +405,6 @@ export class Dashboard {
         this.connectionStatus = "No internet";
     } else {
         this.connectionStatus = "internet";
-    }
-  }
-
-  ngAfterContentChecked() {
-    if (this.sosRequestResult.indexOf("already")>=0) {
-      console.log("================= already");
-      
-    } else if (this.sosRequestResult.indexOf("already")<0) {
-      console.log("================= first send");   
     }
   }
 

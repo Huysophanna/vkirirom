@@ -64,24 +64,35 @@ export class Login {
           dismissOnPageChange: true,
         });
         this.loading.present();
-        this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then(authData => {
-          // alert(JSON.stringify(authData));
-          //store userProfile object to the phone storage
-          this.userProfile = authData;
+        
+          this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then(authData => {
+            // alert(JSON.stringify(authData));
+            //store userProfile object to the phone storage
+            this.userProfile = authData;
+            if (authData.emailVerified){
+                if (this.userProfile.photoURL == '') {
+                this.userProfile.photoURL = "img/profile.svg";
 
-          //store user device token and other details to firebase after creating the user account
-           this.storeDeviceTokenToFirebase();
+                }
+                this.storeDeviceTokenToFirebase();
+                //store user device token and other details to firebase after creating the user account
+                NativeStorage.setItem('userDetails', this.userProfile);
+                NativeStorage.setItem('userPhoto', this.userProfile.photoURL).then(() => {
+                this.events.publish('UserLogin', authData.displayName);
+                });
+                this.nav.setRoot(Dashboard);
 
-          if (this.userProfile.photoURL == '') {
-            this.userProfile.photoURL = "img/profile.svg";
-          }
-
-          NativeStorage.setItem('userDetails', this.userProfile);
-          NativeStorage.setItem('userPhoto', this.userProfile.photoURL).then(() => {
-            this.events.publish('UserLogin', authData.displayName);
-          });
-          this.nav.setRoot(Dashboard);
-        }, error => {
+            }
+            else {
+              let alert = this.alertCtrl.create({
+                title: 'Comfirmation',
+                subTitle: 'You need to verified your email',
+                buttons: ['OK']
+              });
+              this.loading.dismiss();
+              alert.present();
+            }
+          }, error => {
           this.loading.dismiss().then(() => {
             if (error.code.indexOf('auth/user-not-found') >= 0) {
               this.warningAlert('The username and password you entered did not match our records. Please double-check and try again.');

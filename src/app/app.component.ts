@@ -47,10 +47,7 @@ export class MyApp {
   isLoggedOut: any;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
-    console.log("JOL TA");
-    
-     this.presentLoading('Authenticating');
-     console.log("FINE");
+    this.presentLoading('Authenticating');
     platform.ready().then(() => {
       setTimeout(() => {
         Splashscreen.hide();
@@ -95,19 +92,31 @@ export class MyApp {
         firebase.auth().onAuthStateChanged((user) => {
           this.ngzone.run(() => {
             console.log("onAuthStateChanged");
-            
             if (user) {
-              this.isLoggedOut = false;
-              // NativeStorage.setItem('userAuthService', true);
-              this.currentUser = firebase.auth().currentUser;
-              
-              //identify whether the user is signed in using Facebook or Email
-              firebase.auth().currentUser.providerData.forEach(element => {
-                this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
-                this.isEmailUser = element.providerId == 'password' ? true : false;
-              });
+              if (user.emailVerified) {
+                // alert("user: " + user.emailVerified);
+                this.isLoggedOut = false;
+                // NativeStorage.setItem('userAuthService', true);
+                this.currentUser = firebase.auth().currentUser;
+                
+                //identify whether the user is signed in using Facebook or Email
+                firebase.auth().currentUser.providerData.forEach(element => {
+                  this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
+                  this.isEmailUser = element.providerId == 'password' ? true : false;
+                });
+              } else {
+                NativeStorage.getItem("introShown").then(success => {
+                    //intro slider is already shown before
+                    this.rootPage = Login;
+                }, error => {
+                    //first time, need to show intro slides
+                    this.rootPage = Introslides;
+                    //set toggle notification setting to be ON for the first time
+                    NativeStorage.setItem('settingToggleNotification', 'ON');
+                });
+              }
+
             } else {
-              //logic for intro slides
               NativeStorage.getItem("introShown").then(success => {
                   //intro slider is already shown before
                   this.rootPage = Login;
@@ -363,13 +372,13 @@ export class MyApp {
           title: 'Contact',
             buttons: [
                {
-                text: 'Reception (+855 78 777 284)',
+                text: 'English/Khmer Speaker: (+855) 78 777 284',
                 handler: () => {
                   console.log('Reservation clicked');
                   CallNumber.callNumber("078777284", true);
                 }
               }, {
-                text: 'Reception (+855 96 2222 735)',
+                text: 'Khmer Speaker: (+855) 96 2222 735',
                 handler: () => {
                   console.log('Reservation clicked');
                   CallNumber.callNumber("0962222735", true);

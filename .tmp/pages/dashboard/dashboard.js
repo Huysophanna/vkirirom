@@ -32,7 +32,6 @@ export var Dashboard = (function () {
         this.isUnknown = false;
         this.launchCount = 0;
         this.isLocationEnable = true;
-        this.sosRequestResult = "testing";
         this.checkNetworkConnection();
         platform.ready().then(function () {
             //show side menu if it's not login screen
@@ -287,7 +286,6 @@ export var Dashboard = (function () {
                                 _this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                                 // reqeust twilio api
                                 _this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=' + message + '&From=' + firebase.auth().currentUser.displayName).map(function (res) { return res.json(); }).subscribe(function (data) {
-                                    _this.sosRequestResult = data.result;
                                     if (!data.result) {
                                         _this.warningAlert('Send Sucesss', 'Your emergency message has been sent sucessfully! Please stay safe while our team is trying best to reach you.');
                                     }
@@ -394,14 +392,6 @@ export var Dashboard = (function () {
         }
         else {
             this.connectionStatus = "internet";
-        }
-    };
-    Dashboard.prototype.ngAfterContentChecked = function () {
-        if (this.sosRequestResult.indexOf("already") >= 0) {
-            console.log("================= already");
-        }
-        else if (this.sosRequestResult.indexOf("already") < 0) {
-            console.log("================= first send");
         }
     };
     Dashboard.decorators = [
