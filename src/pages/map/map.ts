@@ -107,14 +107,14 @@ export class GoogleMapPage {
           'zoom': 17
           // 'bearing': 140
         });
-
+        
         this.marker = [
           { title: "Kirirom Institute of Technology", lat: 11.3152, lng: 104.0676, snippet: "The first boarding school in Cambodia, specialized in software engineering. Students are also engaged in internship projects while studying." }, 
                 { title: "Activity Center", lat: 11.3165, lng: 104.0648, snippet: "Pleasant activity staff offers the information regarding various types of activities. Activity in fresh air helps you refresh your mind. Open 8:00-17:00." }, 
                 { title: "Pine View Kitchen", lat: 11.3167, lng: 104.0653, snippet: "At the open space restaurant, Pine View Kitchen helps you enjoy a chef’s special full course of modern Khmer cuisine." }, 
                 { title: "Reception", lat: 11.3174, lng: 104.0649, snippet: "Customers can be welcomed to vKirirom Pine Resort. Open 8:00-20:00.Our staffs can speak English, Khmer, Japanese. Customers are provided with amenities as well." }, 
                 { title: "Big Party Tent", lat: 11.3137, lng: 104.0667, snippet: "A tent which occupies large space which is suitable for big events, conferences and many activities. Even during rainy days, this large tent provides enjoyable indoor activity." }, 
-                { title: "Mogina Restaurant", lat: 11.3154, lng: 104.0638, snippet: "Khmer style nature fused restaurant which serves Khmer original meals. You can also buy breads and drinks here." }, 
+                { title: "Mogringa Restaurant", lat: 11.3154, lng: 104.0638, snippet: "Khmer style nature fused restaurant which serves Khmer original meals. You can also buy breads and drinks here." }, 
                 { title: "Villa Jasmine", lat: 11.3181, lng: 104.0633, snippet: "Quite elegant cottage which promises you a lot of pleasant experiences on the cool Kirirom Mountain top for couples and small families." }, 
                 { title: "Villa Suite", lat: 11.3180, lng: 104.0655, snippet: "Modern designed luxury room. This two-bedroom villa with a mezzanine level is suitable for big families or groups." }, 
                 { title: "Pipe Room", lat: 11.3126, lng: 104.0628, snippet: "The most uniquely designed room derived from an earthen pipe which serves best amongst all." }, 
@@ -192,13 +192,15 @@ export class GoogleMapPage {
   }
 
   createNewMarker(lat, lng, title, snippet) {
+      let customMarker = "www/assets/icon.png";
+
      // create new marker
       let markerOptions: GoogleMapsMarkerOptions = {
         position: new GoogleMapsLatLng(lat, lng),
         title: [title].join("\n"),
         snippet: snippet,
 
-        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+        icon: customMarker,
         styles: {
             "text-align": "center",
             "maxWidth": "80%", // This can be percentage (%) or just a numeric value from 0.0 to 1.0 for percentile representation, or the numeric width in pixels.

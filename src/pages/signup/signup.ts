@@ -59,10 +59,11 @@ export class Signup {
         });
         //store user data into firebase database
         this.createNewUser(signUpData);
+        signUpData.sendEmailVerification();
         
         this.nav.setRoot(Login);
         this.loading.dismiss().then(success => {
-          this.warningAlert("Success! You can now proceed logging in to your new account.");
+          this.warningAlert("You need to verified your email");
         });
       }, (error) => {
         this.loading.dismiss().then(success => {
