@@ -144,7 +144,7 @@
     "cordova-plugin-file": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-file"
+            "id": "cordova-plugin-file@~4.3.3"
         },
         "is_top_level": true,
         "variables": {}
@@ -152,7 +152,7 @@
     "cordova-plugin-filepath": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-filepath"
+            "id": "cordova-plugin-filepath@~1.0.2"
         },
         "is_top_level": true,
         "variables": {}
@@ -205,9 +205,7 @@
         "is_top_level": true,
         "variables": {
             "API_KEY_FOR_ANDROID": "AIzaSyCb2MVJVQlwOelKMNTZS5eMxfC2PARHM_Y",
-            "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw",
-            "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
-            "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map"
+            "API_KEY_FOR_IOS": "AIzaSyD7xkXmGSbjnyFUzjthXP4VXVGyajvDBnw"
         }
     },
     "cordova-sms-plugin": {
@@ -221,7 +219,7 @@
     "cordova-plugin-camera": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-camera"
+            "id": "cordova-plugin-camera@~2.4.1"
         },
         "is_top_level": true,
         "variables": {}

@@ -91,19 +91,21 @@ export class MyApp {
         });
         firebase.auth().onAuthStateChanged((user) => {
           this.ngzone.run(() => {
-            console.log("onAuthStateChanged");
+            // console.log("onAuthStateChanged");
             if (user) {
-              if (user.emailVerified) {
+              //identify whether the user is signed in using Facebook or Email
+              firebase.auth().currentUser.providerData.forEach(element => {
+                this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
+                this.isEmailUser = element.providerId == 'password' ? true : false;
+              });
+
+              if (user.emailVerified || this.isFacebookUser) {
                 // alert("user: " + user.emailVerified);
                 this.isLoggedOut = false;
                 // NativeStorage.setItem('userAuthService', true);
                 this.currentUser = firebase.auth().currentUser;
                 
-                //identify whether the user is signed in using Facebook or Email
-                firebase.auth().currentUser.providerData.forEach(element => {
-                  this.isFacebookUser = element.providerId == 'facebook.com' ? true : false;
-                  this.isEmailUser = element.providerId == 'password' ? true : false;
-                });
+                
               } else {
                 NativeStorage.getItem("introShown").then(success => {
                     //intro slider is already shown before

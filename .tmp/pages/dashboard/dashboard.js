@@ -117,7 +117,7 @@ export var Dashboard = (function () {
                     }
                 }
                 else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-                    this.warningAlert("OFF-Kirirom Mode", "This function is not accessible outside kirirom area.");
+                    this.warningAlert("Off-Kirirom Mode", "This function is not accessible outside kirirom area.");
                 }
                 else if (this.isLocationEnable == false) {
                     if (this.platform.is('ios')) {
@@ -239,7 +239,7 @@ export var Dashboard = (function () {
             }
         }
         else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-            this.warningAlert("OFF-Kirirom Mode", "This function is not accessible outside kirirom area.");
+            this.warningAlert("Off-Kirirom Mode", "This function is not accessible outside kirirom area.");
         }
         else if (this.isLocationEnable == false) {
             if (this.platform.is('ios')) {
@@ -348,7 +348,7 @@ export var Dashboard = (function () {
                 message = 'Welcome to vKirirom. Experience full features of vKclub with In-Kirirom mode including Emergency SOS & Group Chat';
                 break;
             case 4:
-                message = 'OFF-Kirirom mode is on. Emergency SOS & Group Chat features are not accessible for OFF-Kirirom users.';
+                message = 'Off-Kirirom mode is on. Emergency SOS & Group Chat features are not accessible for Off-Kirirom users.';
                 break;
             case 5:
                 if (this.platform.is('ios')) {
