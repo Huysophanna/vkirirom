@@ -122,7 +122,7 @@ export class GoogleMapPage {
                 { title: "Khmer Cottage", lat: 11.3149, lng: 104.0644, snippet: "Khmer farmers' open-style houses which are nicely decorated with natural materials. Best rooms to experience real Khmer tradition and feel the natural fresh air." }, 
                 { title: "Playground Field", lat: 11.3162, lng: 104.0654, snippet: "Enjoy many kinds of activities including football, tennis, volleyball, bubble sumo etc. Feel free to ask our activity staff for details." }, 
                 { title: "Camping Area", lat: 11.3134, lng: 104.0648, snippet: "Enjoy camping with camp fire in a large area space with high level of security provided." }, 
-                { title: "Climbing Theater", lat: 11.3158, lng: 104.0654, snippet: "It is a multi-purpose building which during day time can be used to enjoy wall climbing as well as a movie screen at night time." }, 
+                // { title: "Climbing Theater", lat: 11.3158, lng: 104.0654, snippet: "It is a multi-purpose building which during day time can be used to enjoy wall climbing as well as a movie screen at night time." }, 
                 { title: "Kirirom Lake", lat: 11.3344, lng: 104.0516, snippet: "A beautiful lake, provides enough water supply for all the villager"}, 
                 { title: "Village", lat: 11.3348, lng: 104.0550, snippet: "A Village where people enjoy living on Kirirom Mountain with a perfect view." }, 
                 { title: "Ministry of Environment", lat: 11.3330, lng: 104.0531, snippet: "Ministry of Environment that supports the whole Kirirom environment." }, 
@@ -145,7 +145,8 @@ export class GoogleMapPage {
                 // { title: "Hanamaru International School attached KIT", lat: 11.3153, lng: 104.0687, snippet: "An international primary school is going to start. Students can enjoy their schooling days among fresh nature." }, 
                 { title: "Kirirom Elementary School", lat: 11.3345, lng: 104.0553, snippet: "It is the only elementary school established by mainly vKirirom stuff.For the bright future of children regardless of the envirionment the were grown up." },
                 { title: "Bopha Road", lat: 11.3138, lng: 104.0727, snippet: "The 2km short cut road that opens up from an entrance of our resort to Conference Tent." },
-                { title: "Bell tent", lat: 11.3132, lng: 104.0648, snippet: "Glamping, glamourous camping provides you a good sleep on a fluffy bed." },
+                { title: "Bell tent", lat: 11.3126, lng: 104.0646, snippet: "Glamping, glamourous camping provides you a good sleep on a fluffy bed." },
+                 { title: "Climbing Theater", lat: 11.3158, lng: 104.0649, snippet: "It is a multi-purpose building which during day time can be used to enjoy wall climbing as well as a movie screen at night time." },
         ];
 
         this.marker.forEach(element => {

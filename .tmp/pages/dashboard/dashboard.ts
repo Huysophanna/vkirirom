@@ -1,4 +1,4 @@
-import { Component, Inject, NgZone, AfterContentChecked } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { BackgroundMode, SMS, Toast, Geolocation, Push, Network, NativeStorage, BackgroundGeolocation, Diagnostic } from 'ionic-native';
 import { MenuController, NavController, Platform, AlertController, Events, ModalController, LoadingController } from 'ionic-angular';
 import { Membership } from '../membership/membership';
@@ -98,17 +98,6 @@ export class Dashboard {
             } else {                
               this.navCtrl.push(GoogleMapPage);  
             }
-            // NativeStorage.getItem('mapFirstInitialization').then(data => {
-            //   this.navCtrl.push(GoogleMapPage);
-            // }, error => {
-            //   //first time launch the map after installing the app
-            //   if (this.locationPermissionDenied) {
-            //     this.warningAlert('Location Permission Denied','Map function requires to Turn ON location service only for the first initialization. Please allow turning on, later you can use this as offline map.');
-            //   } else {                
-            //     this.navCtrl.push(GoogleMapPage);  
-            //   }
-
-            // });
             
           } else {
             //is iOS platform
@@ -134,7 +123,7 @@ export class Dashboard {
                 this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
               }
             } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-              this.warningAlert("OFF-Kirirom Mode", "This function is not accessible outside kirirom area.");
+              this.warningAlert("Off-Kirirom Mode", "This function is not accessible outside kirirom area.");
             } else if (this.isLocationEnable == false) {
               if (this.platform.is('ios')) {
                 this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services");
@@ -251,7 +240,7 @@ export class Dashboard {
             this.warningAlert("Location failed", 'There is a problem getting your current location. Please try relaunch the app.');
         }
     } else if ((this.isKirirom == false) && (this.isUnknown == false)) {
-        this.warningAlert("OFF-Kirirom Mode", "This function is not accessible outside kirirom area.");
+        this.warningAlert("Off-Kirirom Mode", "This function is not accessible outside kirirom area.");
     } else if (this.isLocationEnable == false) {
       if (this.platform.is('ios')) {
           this.warningAlert("Unidentified App Mode", "Location failed. Turn on Location Service to Determine your current location for App Mode: \n Setting > Privacy > Location Services");
@@ -357,7 +346,7 @@ export class Dashboard {
       break;
       case 3: message = 'Welcome to vKirirom. Experience full features of vKclub with In-Kirirom mode including Emergency SOS & Group Chat';
       break;
-      case 4: message = 'OFF-Kirirom mode is on. Emergency SOS & Group Chat features are not accessible for OFF-Kirirom users.';
+      case 4: message = 'Off-Kirirom mode is on. Emergency SOS & Group Chat features are not accessible for Off-Kirirom users.';
       break;
       case 5:
         if (this.platform.is('ios')) {

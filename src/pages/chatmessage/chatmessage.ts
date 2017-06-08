@@ -102,7 +102,7 @@ export class Chatmessage implements AfterViewInit {
             room: 'room1'
         };
         this.time = [];
-        this.socket = io.connect('http://110.74.203.152:3000');
+        this.socket = io.connect('http://192.168.7.240:3000');
 
         this.socket.on('chatHistory', (chatData) => {
             this.chatHistory = chatData;
