@@ -114,7 +114,7 @@ export class GoogleMapPage {
                 { title: "Pine View Kitchen", lat: 11.3167, lng: 104.0653, snippet: "At the open space restaurant, Pine View Kitchen helps you enjoy a chef’s special full course of modern Khmer cuisine." }, 
                 { title: "Reception", lat: 11.3174, lng: 104.0649, snippet: "Customers can be welcomed to vKirirom Pine Resort. Open 8:00-20:00.Our staffs can speak English, Khmer, Japanese. Customers are provided with amenities as well." }, 
                 { title: "Conference Tent ", lat: 11.3137, lng: 104.0667, snippet: "A tent which occupies large space which is suitable for big events, conferences and many activities. Even during rainy days, this large tent provides enjoyable indoor activity." }, 
-                { title: "Moringa Restaurant", lat: 11.3154, lng: 104.0638, snippet: "Khmer style nature fused restaurant which serves Khmer original meals. You can also buy breads and drinks here." }, 
+                { title: "Moringa", lat: 11.3154, lng: 104.0638, snippet: "Khmer style nature fused restaurant which serves Khmer original meals. You can also buy breads and drinks here." }, 
                 { title: "Villa Jasmine", lat: 11.3181, lng: 104.0633, snippet: "Quite elegant cottage which promises you a lot of pleasant experiences on the cool Kirirom Mountain top for couples and small families." }, 
                 { title: "Villa Suite", lat: 11.3180, lng: 104.0655, snippet: "Modern designed luxury room. This two-bedroom villa with a mezzanine level is suitable for big families or groups." }, 
                 { title: "Pipe Room", lat: 11.3126, lng: 104.0628, snippet: "The most uniquely designed room derived from an earthen pipe which serves best amongst all." }, 
@@ -146,7 +146,7 @@ export class GoogleMapPage {
                 { title: "Kirirom Elementary School", lat: 11.3345, lng: 104.0553, snippet: "It is the only elementary school established by mainly vKirirom stuff.For the bright future of children regardless of the envirionment the were grown up." },
                 { title: "Bopha Road", lat: 11.3138, lng: 104.0727, snippet: "The 2km short cut road that opens up from an entrance of our resort to Conference Tent." },
                 { title: "Bell tent", lat: 11.3126, lng: 104.0646, snippet: "Glamping, glamourous camping provides you a good sleep on a fluffy bed." },
-                 { title: "Climbing Theater", lat: 11.3158, lng: 104.0649, snippet: "It is a multi-purpose building which during day time can be used to enjoy wall climbing as well as a movie screen at night time." },
+                { title: "Climbing Theater", lat: 11.3158, lng: 104.0649, snippet: "It is a multi-purpose building which during day time can be used to enjoy wall climbing as well as a movie screen at night time." },
         ];
 
         this.marker.forEach(element => {
