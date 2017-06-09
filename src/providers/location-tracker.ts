@@ -16,10 +16,6 @@ export class LocationTracker {
   lastLocationTracker(latitute, longitute) {
     setInterval(() => {
       NativeStorage.getItem('userlocation').then(data => {
-        console.log("---------"+data.length)
-        console.log("..............."+JSON.stringify(data))
-        console.log("============="+(data.length >= 0))
-        // alert("lastLocationTracker getItem : " + JSON.stringify(data) + "JSON length :" + JSON.parse(data).length);
         if (data.length >= 5) {
           this.userlocation = [];
           this.setUserlocation(this.userlocation);

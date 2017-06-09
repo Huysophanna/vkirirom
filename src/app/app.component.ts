@@ -45,6 +45,7 @@ export class MyApp {
   isChangingProfilePicture: any;
   settingToggleNotification: any;
   isLoggedOut: any;
+  isKirriom = false;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
     this.presentLoading('Authenticating');
@@ -140,7 +141,12 @@ export class MyApp {
         NativeStorage.setItem('deviceToken', data.registrationId);
       });
       push.on('notification', (data) => {
-        if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false) {
+
+        this.events.subscribe("isKirirom", isKirirom => {
+          this.isKirriom = isKirirom;
+        });
+
+        if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false && this.isKirriom) {
 
           //store all notifications to local storage for the notification panel
           this.storeNotificationsArray.push(data);
