@@ -153,10 +153,13 @@ export class MyApp {
             if (data.additionalData.foreground) {
                 // if application open on foreground, show popup
                 if (data.title.indexOf('New message') >= 0) {
+                  confirmAlert = this.alertCtrl;
+                  confirmAlert.dismiss()
+                
                   //alert notification for chat messages
                   if (this.isChatMessageScreen != "true") {
                     //push notification, present alert except chat message screen
-                    confirmAlert = this.alertCtrl.create({
+                    confirmAlert.create({
                       title: data.title,
                       message: data.message,
                       buttons: [{
@@ -169,7 +172,10 @@ export class MyApp {
                         }
                       }]
                     }).present();
+
+
                   }
+                  confirmAlert.dismiss();
 
                 } else {
                   // this.events.publish('foreground-marketing-notification', data.message);

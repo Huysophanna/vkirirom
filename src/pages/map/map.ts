@@ -109,7 +109,7 @@ export class GoogleMapPage {
         });
         
         this.marker = [
-          { title: "Kirirom Institute of Technology", lat: 11.3152, lng: 104.0676, snippet: "The first boarding school in Cambodia, specialized in software engineering. Students are also engaged in internship projects while studying." }, 
+                { title: "Kirirom Institute of Technology", lat: 11.3152, lng: 104.0676, snippet: "The first boarding school in Cambodia, specialized in software engineering. Students are also engaged in internship projects while studying." }, 
                 { title: "Activity Center", lat: 11.3165, lng: 104.0648, snippet: "Pleasant activity staff offers the information regarding various types of activities. Activity in fresh air helps you refresh your mind. Open 8:00-17:00." }, 
                 { title: "Pine View Kitchen", lat: 11.3167, lng: 104.0653, snippet: "At the open space restaurant, Pine View Kitchen helps you enjoy a chef’s special full course of modern Khmer cuisine." }, 
                 { title: "Reception", lat: 11.3174, lng: 104.0649, snippet: "Customers can be welcomed to vKirirom Pine Resort. Open 8:00-20:00.Our staffs can speak English, Khmer, Japanese. Customers are provided with amenities as well." }, 
