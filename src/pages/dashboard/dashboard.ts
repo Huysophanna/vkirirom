@@ -61,7 +61,6 @@ export class Dashboard {
     this.ngZone.run(() => {
       var distance = this.userScope.distanceCal(latitute, longitute);
       if (distance < 1) {
-        var test = distance * 1000;
         this.isKirirom = true;
         this.isUnknown = false;
         this.events.publish('isKirirom', this.isKirirom);

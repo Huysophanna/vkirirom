@@ -148,7 +148,6 @@ export class MyApp {
 
           let self = this;
           let confirmAlert: any;
-
           //if user using app and push notification comes
             if (data.additionalData.foreground) {
                 // if application open on foreground, show popup

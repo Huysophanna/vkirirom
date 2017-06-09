@@ -235,7 +235,7 @@
     "cordova-plugin-file-transfer": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-file-transfer@^1.6.3"
+            "id": "cordova-plugin-file-transfer"
         },
         "is_top_level": true,
         "variables": {}
@@ -243,7 +243,7 @@
     "cordova.plugins.diagnostic": {
         "source": {
             "type": "registry",
-            "id": "cordova.plugins.diagnostic@^3.6.2"
+            "id": "cordova.plugins.diagnostic"
         },
         "is_top_level": true,
         "variables": {}

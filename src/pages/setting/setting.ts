@@ -65,7 +65,16 @@ export class Setting {
         message: 'Notifications includes Digital News Content, also Group Chat alert. Turn OFF to avoid push notifications.',
         buttons: [
           {
-            text: 'Turn OFF',
+            text: 'Turn ON',
+            handler: () => {
+                this.notiToggle = "ON";
+              //emit events to turn off alert push notification
+              this.events.publish("settingToggleNotification", this.notiToggle);
+            }
+           
+          },
+          {
+             text: 'Turn OFF',
             handler: () => {
               this.ngZone.run(() => {
                 this.notiToggle = "OFF";
@@ -73,14 +82,7 @@ export class Setting {
               //emit events to turn off alert push notification
               this.events.publish("settingToggleNotification", this.notiToggle);
             }
-          },
-          {
-            text: 'Turn ON',
-            handler: () => {
-                this.notiToggle = "ON";
-              //emit events to turn off alert push notification
-              this.events.publish("settingToggleNotification", this.notiToggle);
-            }
+            
           }
         ]
       }).present();

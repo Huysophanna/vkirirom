@@ -102,7 +102,7 @@ export class Chatmessage implements AfterViewInit {
             room: 'room1'
         };
         this.time = [];
-        this.socket = io.connect('http://192.168.7.240:3000');
+        this.socket = io.connect('http://96.9.67.154:3000');
 
         this.socket.on('chatHistory', (chatData) => {
             this.chatHistory = chatData;
@@ -271,7 +271,6 @@ export class Chatmessage implements AfterViewInit {
   
   // called when user send thier message
   send(msg) {
-
       if ((<string> Network.type === 'none')) {
         let alert = this.alertCtrl.create({
             title: "Something went wrong",
@@ -280,7 +279,7 @@ export class Chatmessage implements AfterViewInit {
         });
         alert.present();
       } else {
-        if (msg != '') {
+        if (msg.trim() != '') {
             this.pkt.message = msg;
             this.pkt.photo = this.userPhoto;
             this.pkt.time = this.currentTimeAndStatus;
