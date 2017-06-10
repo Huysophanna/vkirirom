@@ -286,10 +286,10 @@ export class Dashboard {
                     this.makeToast("Requesting help to vKirirom Team using internet connection. Please stay safe and wait ...");
                         // reqeust twilio api
                         this.http.get('https://emergencysms.herokuapp.com/emergency_request?Body=' + message + '&From='+ firebase.auth().currentUser.displayName).map(res => res.json()).subscribe(data => {
-                          
-                          if (!data.result) {
+                        
+                          if (data.feedback.code == 200) {
                             this.warningAlert('Send Sucesss', 'Your emergency message has been sent sucessfully! Please stay safe while our team is trying best to reach you.');
-                          } else if (data.result.indexOf("already") >= 0) {
+                          } else if (data.feedback.code == 300) {
                             this.warningAlert('Message is already sent', 'Your emergency message has already been sent. Please stay safe and wait for our team there. We will try our best to rescure as soon as possible.');
                           } else {
                             this.warningAlert('Operation Error', 'There is an error occur with our operation. Please contact us by our contact number.');
