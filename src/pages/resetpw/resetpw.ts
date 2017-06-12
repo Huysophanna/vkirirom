@@ -23,7 +23,7 @@ export class Resetpw {
 
     Keyboard.disableScroll(true);
     this.resetForm = formBuilder.group({
-      email: ['', Validators.compose([Validators.required])]
+      email: ['', Validators.required]
     });
     
   }
@@ -39,21 +39,47 @@ export class Resetpw {
       });
       this.loading.present();
       // this.loading.dismiss();
-      this.authData.resetPassword(this.resetForm.value.email).then((user) => {
-      this.loading.dismiss().then(success => {
-        this.warningAlert("Success! We just sent you a reset link to your email address.");
-      });
-      }, (error) => {
+
+      //check account provider
+      firebase.auth().fetchProvidersForEmail(this.resetForm.value.email).then((accData) => {
+        //check if the account is linked with Facebook
+        if (JSON.stringify(accData).indexOf("facebook")>=0) {
+          this.loading.dismiss().then(success => {
+            this.warningAlert("Your account is linked with Facebook. Please Sign in with Facebook instead to move on.");
+          });
+        } else if (JSON.stringify(accData).indexOf("password")>=0){
+          //reset password process
+          this.authData.resetPassword(this.resetForm.value.email).then((user) => {
+          this.loading.dismiss().then(() => {
+            this.warningAlert("Success! We just sent you a reset link to your email address.");
+          });
+          }, (error) => {
+            this.loading.dismiss().then(() => {
+              if (error.code.indexOf('auth/user-not-found') >= 0) {
+                  this.warningAlert('The email you entered did not match our records. Please double-check and try again.');
+              } else if (error.code.indexOf('auth/invalid-email') >= 0) {
+                  this.warningAlert('Please provide a valid form of email address.');
+              } else {
+                  this.warningAlert('There is a problem with network connection. Please try again later.');
+              }
+            });
+          }); 
+        } else if (accData == "") {
+          this.loading.dismiss().then(() => {
+            this.warningAlert("The email you entered did not match our records. Please double-check and try again.");
+          });
+        } else {
+          this.loading.dismiss().then(() => {
+            this.warningAlert("An error occured. Please try again later.");
+          });
+        }
+      }, error => {
         this.loading.dismiss().then(() => {
-          if (error.code.indexOf('auth/user-not-found') >= 0) {
-              this.warningAlert('The email you entered did not match our records. Please double-check and try again.');
-          } else if (error.code.indexOf('auth/invalid-email') >= 0) {
-              this.warningAlert('Please provide a valid form of email address.');
-          } else {
-              this.warningAlert('There is a problem with network connection. Please try again later.');
-          }
+          this.warningAlert("Please provide a valid form of email address.");
         });
       });
+      
+      
     }
   }
   

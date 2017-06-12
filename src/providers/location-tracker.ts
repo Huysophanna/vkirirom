@@ -14,25 +14,24 @@ export class LocationTracker {
   public longitute = [];
 
   lastLocationTracker(latitute, longitute) {
-    setInterval(() => {
       NativeStorage.getItem('userlocation').then(data => {
-        console.log("---------"+data.length)
-        console.log("..............."+JSON.stringify(data))
-        console.log("============="+(data.length >= 0))
-        // alert("lastLocationTracker getItem : " + JSON.stringify(data) + "JSON length :" + JSON.parse(data).length);
-        if (data.length >= 5) {
-          this.userlocation = [];
-          this.setUserlocation(this.userlocation);
-          // alert("in if :" + this.userlocation);
-        } else if (data.length >= 0) {
+        if (JSON.parse(data).length <= 5 && JSON.parse(data).length >= 0) {
+          // this.userlocation = [];
+          // this.setUserlocation(this.userlocation);
+
           this.userlocation.push({
             lat: latitute,
             lng: longitute
           });
           this.setUserlocation(this.userlocation);
-          // alert("in else if :" + this.userlocation);
+          // alert("in if :" + this.userlocation);
         } else {
-          console.log("Oupp something went wrong!!!");
+          // console.log("Oupp something went wrong!!!");
+          this.userlocation = [{
+            lat: latitute,
+            lng: longitute
+          }];
+          this.setUserlocation(this.userlocation);
         }
       }, err => {
         // alert("lastLocationTracker cannot getItem");
@@ -43,11 +42,10 @@ export class LocationTracker {
         this.setUserlocation(this.userlocation);
         // alert("set In err :" + this.userlocation);
       });
-    }, 2000);
   }
 
   setUserlocation(location) {
-    NativeStorage.setItem('userlocation', location).then(data => {
+    NativeStorage.setItem('userlocation', JSON.stringify(location)).then(data => {
       //console.log("Set user location success :" + data);
     }, err => {
       console.error("Set userlocation failed :" + err);
