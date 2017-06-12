@@ -1,7 +1,6 @@
-import { Component, ViewChild, Input, NgZone } from '@angular/core';
-import { ModalController, ToastController, Nav, Platform, ActionSheetController, AlertController, LoadingController, NavController, Events } from 'ionic-angular';
-import { Splashscreen, Toast, Camera, StatusBar, Facebook, NativeStorage, CallNumber, Keyboard, Geolocation, BackgroundGeolocation, Geoposition, BackgroundMode, Push } from 'ionic-native';
-import { Api } from '../providers/api';
+import { Component, ViewChild, NgZone } from '@angular/core';
+import { ModalController, ToastController, Nav, Platform, ActionSheetController, AlertController, LoadingController, Events } from 'ionic-angular';
+import { Splashscreen, Toast, Camera, StatusBar, Facebook, NativeStorage, CallNumber, Push } from 'ionic-native';
 import firebase from 'firebase';
 import { Login } from '../pages/login/login';
 import { Editprofile } from '../pages/editprofile/editprofile';
@@ -9,10 +8,7 @@ import { Dashboard } from '../pages/dashboard/dashboard';
 import { Setting } from '../pages/setting/setting';
 import { Chatmessage } from '../pages/chatmessage/chatmessage';
 import { Introslides } from '../pages/introslides/introslides';
-import { GoogleMapPage } from '../pages/map/map';
 import { FirebaseUserData } from '../providers/firebase-user-data';
-import { Signup } from '../pages/signup/signup';
-import { Resetpw } from '../pages/resetpw/resetpw';
 import { AuthData } from '../providers/auth-data';
 import 'whatwg-fetch';
 
@@ -45,7 +41,7 @@ export class MyApp {
   isChangingProfilePicture: any;
   settingToggleNotification: any;
   isLoggedOut: any;
-  isKirriom = false;
+  isKirirom = false;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
     this.presentLoading('Authenticating');
@@ -80,6 +76,10 @@ export class MyApp {
       //event listens to check if chat message screen is active
       this.events.subscribe("isChatMessageScreen", val => {
         this.isChatMessageScreen = val;
+      });
+
+      this.events.subscribe("isKirirom", isKirirom => {
+        this.isKirirom = isKirirom;
       });
 
       //firebase configuration
@@ -141,13 +141,7 @@ export class MyApp {
         NativeStorage.setItem('deviceToken', data.registrationId);
       });
       push.on('notification', (data) => {
-
-        this.events.subscribe("isKirirom", isKirirom => {
-          this.isKirriom = isKirirom;
-        });
-
-        if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false && this.isKirriom) {
-
+        if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false) {
           //store all notifications to local storage for the notification panel
           this.storeNotificationsArray.push(data);
           NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
@@ -157,7 +151,7 @@ export class MyApp {
           //if user using app and push notification comes
             if (data.additionalData.foreground) {
                 // if application open on foreground, show popup
-                if (data.title.indexOf('New message') >= 0) {
+                if (((data.title.indexOf('New message') >= 0) && (this.isKirirom)).toString() == "true") {
                   //alert notification for chat messages
                   if (this.isChatMessageScreen != "true") {
                     //push notification, present alert except chat message screen
@@ -176,7 +170,8 @@ export class MyApp {
                     }).present();
                   }
 
-                } else {
+                } else if (data.title.indexOf('New message') < 0) {
+                  //push notification from admin
                   // this.events.publish('foreground-marketing-notification', data.message);
                   let title = "Hi, " + this.userName;
                   let message = data.title + ': ' + data.message;
@@ -185,7 +180,7 @@ export class MyApp {
               
             } else {
               //if user NOT using app and push notification comes
-              if (data.title.indexOf('New message') >= 0) {
+              if (((data.title.indexOf('New message') >= 0) && (this.isKirirom) == true)) {
                 self.nav.push(Chatmessage, { message: data.message });
               }
             }

@@ -18,7 +18,7 @@
           [class.invalid]="!resetForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
       </ion-item>
       <ion-item class="error-message">
-        <p  *ngIf="!resetForm.controls.email.valid  && (emailChanged || submitAttempt)">Please enter a valid email.</p>
+        <p *ngIf="!resetForm.controls.email.valid  && (emailChanged || submitAttempt)">Please enter a valid email.</p>
       </ion-item>
     </div>
     <div class="submit-login">

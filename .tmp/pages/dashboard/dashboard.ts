@@ -94,7 +94,7 @@ export class Dashboard {
           if (this.platform.is('android')) {
             if (this.locationPermissionDenied) {
               this.warningAlert("Unidentified App Mode", "Location permission denied. Turn on Location Service to Determine your current location for App Mode: \n Setting > App > vKclub > Permission > Location");
-            } else {                
+            } else {
               this.navCtrl.push(GoogleMapPage);  
             }
             
@@ -210,9 +210,13 @@ export class Dashboard {
           }
 
           this.isUnknown = true;
+          this.events.publish('isKirirom', false);
+          
+          
         });
       } else {
         this.isLocationEnable = false;
+        this.events.publish('isKirirom', false);
       }
     };
     let errorCallback = (e) => console.error(e);
