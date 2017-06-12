@@ -1,7 +1,6 @@
-import { Component, NgZone, ViewChild, ElementRef, AfterViewInit, AfterContentChecked } from '@angular/core';
-import { Events, ViewController, PopoverController, NavController, Content, Platform, AlertController} from 'ionic-angular';
+import { Component, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Events, PopoverController, NavController, Platform, AlertController} from 'ionic-angular';
 import { NativeStorage, Network, Keyboard } from 'ionic-native';
-import { Observable } from 'rxjs/Observable';
 declare var io: any;
 declare var window: any;
 

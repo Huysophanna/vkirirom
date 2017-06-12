@@ -45,6 +45,7 @@ export class MyApp {
   isChangingProfilePicture: any;
   settingToggleNotification: any;
   isLoggedOut: any;
+  confirmAlert: any;
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
     this.presentLoading('Authenticating');
@@ -145,37 +146,39 @@ export class MyApp {
           //store all notifications to local storage for the notification panel
           this.storeNotificationsArray.push(data);
           NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
+          
 
           let self = this;
-          let confirmAlert: any;
+          
+          
           //if user using app and push notification comes
             if (data.additionalData.foreground) {
                 // if application open on foreground, show popup
                 if (data.title.indexOf('New message') >= 0) {
-                  confirmAlert = this.alertCtrl;
-                  confirmAlert.dismiss()
-                
                   //alert notification for chat messages
                   if (this.isChatMessageScreen != "true") {
                     //push notification, present alert except chat message screen
-                    confirmAlert.create({
+                    
+
+                    if (this.confirmAlert != undefined) {
+                      this.confirmAlert.dismiss();
+                    }
+                    
+                    this.confirmAlert = this.alertCtrl.create({
                       title: data.title,
                       message: data.message,
+                      enableBackdropDismiss: false,
                       buttons: [{
                         text: 'Ignore',
-                        role: 'cancel'
                       }, {
                         text: 'View',
                         handler: () => {
                           self.nav.push(Chatmessage, { message: data.message });
                         }
                       }]
-                    }).present();
-
-
+                    });
+                    this.confirmAlert.present();
                   }
-                  confirmAlert.dismiss();
-
                 } else {
                   // this.events.publish('foreground-marketing-notification', data.message);
                   let title = "Hi, " + this.userName;
