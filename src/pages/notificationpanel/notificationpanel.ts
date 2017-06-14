@@ -42,7 +42,7 @@ export class Notificationpanel {
       this.makeToast('No Notifications to be cleared');
     }
     this.ngZone.run(() => {
-      this.storeNotificationsArray = [];
+    this.storeNotificationsArray = [];
     });
     this.events.publish('clearNotification');
   }

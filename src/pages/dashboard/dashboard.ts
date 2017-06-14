@@ -38,6 +38,8 @@ export class Dashboard {
   getUserLocation: boolean;
   connectionWatchSubscription: any;
   isLocationEnable: any = true;
+ 
+  notification_num :any;
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController, public ngZone: NgZone, public http: Http) {
       this.checkNetworkConnection();
@@ -53,8 +55,14 @@ export class Dashboard {
 
 
   showNoti() {
+
+
     let notiModal = this.modalCtrl.create(Notificationpanel);
     notiModal.present();
+    this.ngZone.run(() => {
+    this.notification_num= 0;
+    });
+    this.events.publish('clearNotification');
   }
 
   kiriromScope(latitute, longitute) {
@@ -398,6 +406,14 @@ export class Dashboard {
     } else {
         this.connectionStatus = "internet";
     }
+  }
+
+  getStorageItem() {
+      NativeStorage.getItem('notification_num').then(notifications => {
+          this.notification_num= notifications;
+          
+          alert("Notification length"+this.notification_num);
+      });
   }
 
 }

@@ -16,7 +16,7 @@
                 <span *ngIf="userName">{{ userName }}</span>
                 <span *ngIf="!userName">Username</span><br>
                 <span *ngIf="userEmail">{{ userEmail }}</span>
-                <span *ngIf="!userEmail">Someemail@email.com</span>
+                <span *ngIf="!userEmail"></span>
             </div>
             <button *ngIf="isEmailUser == true" (click)="editProfilePressed()" class="edit-btn" ion-button outline>Edit</button>
             <button *ngIf="isFacebookUser == true" (click)="editProfilePressed()" class="edit-btn" ion-button outline>FB Linked</button>

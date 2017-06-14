@@ -46,7 +46,7 @@
         "cordova-plugin-x-toast": "~2.6.0",
         "cordova-sms-plugin": "~0.1.11",
         "cordova-sqlite-storage": "^1.4.9",
-        "cordova.plugins.diagnostic": "^3.6.4",
+        "cordova.plugins.diagnostic": "^3.6.5",
         "firebase": "^3.6.3",
         "intl": "^1.2.5",
         "ionic-angular": "2.0.0-rc.1",
@@ -114,8 +114,8 @@
             "cordova-plugin-nativestorage": {},
             "cordova-sms-plugin": {},
             "cordova-plugin-background-mode": {},
-            "cordova-plugin-file-transfer": {},
-            "cordova.plugins.diagnostic": {}
+            "cordova.plugins.diagnostic": {},
+            "cordova-plugin-file-transfer": {}
         }
     }
 }

@@ -183,7 +183,12 @@ export class Login {
           }).catch((error) => {
             //alert("Firebase failure: " + JSON.stringify(error));
             this.loading.dismiss().then(() => {
-              this.warningAlert(error + ". Please contact Customer Service for this issue.");
+              let temp = JSON.stringify(error);
+              if (JSON.parse(temp).code.indexOf('auth/account-exists-with-different-credential') >= 0) {
+                this.warningAlert("An error occured. Your Facebook email has been used with another existing account.");
+              } else {
+                this.warningAlert(error + ". Please contact Customer Service for this issue.");
+              }
             });
           });
 
