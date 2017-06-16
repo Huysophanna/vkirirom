@@ -44,7 +44,7 @@ export class MyApp {
   isKirirom = false;
   confirmAlert: any;
   push: any;
-  notification_num:any;
+  notification_num = 0;
 
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
@@ -140,9 +140,27 @@ export class MyApp {
       this.events.subscribe('clearNotification', data => {
         this.storeNotificationsArray = [];
         this.notification_num = 0;
+        
         NativeStorage.setItem('storeNotificationsArray', []);
         NativeStorage.setItem('notification_num', 0);
+         
         
+   
+        
+      });
+
+      this.events.subscribe('clearnotification_num', data => {
+       
+        this.notification_num = 0;
+        
+        NativeStorage.setItem('notification_num', 0);
+        
+      });
+      this.events.subscribe('clearNotification', data => {
+        this.storeNotificationsArray = [];
+        
+        NativeStorage.setItem('storeNotificationsArray', []);
+      
       });
       
       StatusBar.styleDefault();
@@ -186,12 +204,30 @@ export class MyApp {
                 });
 
                  this.push.on('notification', (data) => {
-                   this.notification_num++;
+                   this.storeNotificationsArray.push(data);
+                 
+                   
+                    
+                   
+                   
+                   
+
                   if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false) {
-                    //store all notifications to local storage for the notification panel
-                    this.storeNotificationsArray.push(data);
-                    NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
+
+                    this.notification_num++;
                     NativeStorage.setItem('notification_num', this.notification_num);
+                    
+                    this.events.publish('notification_num');
+                    alert(this.notification_num)
+                   
+                   
+                   
+                    
+                    //store all notifications to local storage for the notification panel
+                    
+                    NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
+                    
+                    
                     let self = this;
                     //if user using app and push notification comes
                       if (data.additionalData.foreground) {
@@ -202,24 +238,24 @@ export class MyApp {
                               //push notification, present alert except chat message screen
                               
 
-                              if (this.confirmAlert != undefined) {
-                                this.confirmAlert.dismiss();
-                              }
+                              // if (this.confirmAlert != undefined) {
+                              //   this.confirmAlert.dismiss();
+                              // }
                               
-                              this.confirmAlert = this.alertCtrl.create({
-                                title: data.title,
-                                message: data.message,
-                                enableBackdropDismiss: false,
-                                buttons: [{
-                                  text: 'Ignore',
-                                }, {
-                                  text: 'View',
-                                  handler: () => {
-                                    self.nav.push(Chatmessage, { message: data.message });
-                                  }
-                                }]
-                              });
-                              this.confirmAlert.present();
+                              // this.confirmAlert = this.alertCtrl.create({
+                              //   title: data.title,
+                              //   message: data.message,
+                              //   enableBackdropDismiss: false,
+                              //   buttons: [{
+                              //     text: 'Ignore',
+                              //   }, {
+                              //     text: 'View',
+                              //     handler: () => {
+                              //       self.nav.push(Chatmessage, { message: data.message });
+                              //     }
+                              //   }]
+                              // });
+                              // this.confirmAlert.present();
                             }
                           } else if (data.title.indexOf('New message') < 0) {
                             //push notification from admin

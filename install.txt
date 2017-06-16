@@ -16,8 +16,8 @@ ionic plugin add cordova-plugin-camera
 ionic plugin add cordova-plugin-file
 ionic plugin add cordova-plugin-filepath
 ionic plugin add cordova-plugin-x-toast
-ionic plugin add cordova.plugins.diagnostic
-ionic plugin add cordova-plugin-file-transfer
+ionic plugin rm cordova.plugins.diagnostic
+ionic plugin rm cordova-plugin-file-transfer
 
 
 //For server installation

@@ -9,7 +9,7 @@
         </ion-title>
         <button left menuToggle><ion-icon [ngStyle]="{'color': 'white'}" name="menu"></ion-icon></button>
         <ion-buttons end>
-            <button class="showNotiBtn" (click)="showNoti()"><ion-icon [ngStyle]="{'color': 'white'}" name="ios-notifications"></ion-icon><span *ngFor="let notiIndex of notification_num; let i=index" class="button-badge">{{i}}</span></button>
+            <button class="showNotiBtn" (click)="showNoti()"><ion-icon [ngStyle]="{'color': 'white'}" name="ios-notifications"></ion-icon><span *ngIf="notification_num > 0"  class="button-badge">{{notification_num}}</span></button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
