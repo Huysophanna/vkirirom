@@ -118,8 +118,8 @@
                 <button *ngIf="notificationType == 'OFF'" (click)="notificationOff()" ion-fab><ion-icon [ngStyle]="{'color': 'black'}" name="notifications-off"></ion-icon></button>
             </ion-fab-list>
         </ion-fab>
-        <textarea autocomplete="on" autocorrect="on" autocapitalize="on" keyboardAttach class="chatinput-field" type="text" [(ngModel)]="chatinp" placeholder="Type a message..."></textarea>
-        <input type="submit" class="chatinput-btn" fab (click)="send(chatinp)" value="Send" />
+        <textarea  autocomplete="on" autocorrect="on" autocapitalize="on" keyboardAttach class="chatinput-field" type="text" [(ngModel)]="chatinp" placeholder="Type a message..." (ngModelChange)="elementChanged($event)" ></textarea>
+        <input  type="submit" class="chatinput-btn"  fab (click)="send(chatinp)" value="Send" [ngStyle]="{'opacity': sendbtnOpacity ? 1 : 0.4}"/>
     </div>
 
 </ion-content>

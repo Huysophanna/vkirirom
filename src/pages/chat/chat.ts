@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,MenuController } from 'ionic-angular';
 import { Chatmessage } from '../chatmessage/chatmessage';
 declare var io: any;
 
@@ -12,7 +12,10 @@ export class Chat {
   socket: any;
   groupChat = [{name: 'Open Discussion', description: 'Join a free topic conversation'}];
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,public menuCtrl: MenuController) {
+    this.menuCtrl.enable(true);
+    
+  }
 
   navtochatsms(name) {
     this.navCtrl.push(Chatmessage, {

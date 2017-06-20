@@ -42,45 +42,41 @@ export class Dashboard {
   notification_num :any;
 
   constructor(private platform: Platform, public navCtrl: NavController, private locationTracker: LocationTracker, private userScope: Userscope, private alertCtrl: AlertController, public modalCtrl: ModalController, private loadingCtrl: LoadingController, public settingService: SettingService, public events: Events, public menuCtrl: MenuController, public ngZone: NgZone, public http: Http) {
-       NativeStorage.getItem('notification_num').then(notifications => {
-          this.notification_num = notifications;
-          alert ("notifications"+notifications)
-
-          alert ("notification_num"+this.notification_num)
- 
-        
-          });
-          
-    
       
      
+    
       this.checkNetworkConnection();
       platform.ready().then(() => {
         //show side menu if it's not login screen
         menuCtrl.enable(true);
         setInterval(() => {
+         
+         
           
           this.fetchUserGeoLocation();
           console.log("fetchUserGeoLocation in platform ready");
         }, 2000);
       });
 
-        this.events.subscribe('notification_num', data => {
+      this.events.subscribe('notification_num', data => {
           this.getStorageItem();
          
          
-        });
+      });
 
-        alert("The nums "+this.notification_num);
-  }
-
-
-  showNoti() {
    
-
+  }
+ 
+  ionViewWillEnter() {
+     this.getStorageItem()
+    }
+  showNoti() {
     let notiModal = this.modalCtrl.create(Notificationpanel);
     notiModal.present();
-    this.ngZone.run(() => {
+   
+
+   
+  this.ngZone.run(() => {
     this.notification_num= 0;
     });
     this.events.publish('clearnotification_num');
@@ -431,13 +427,8 @@ export class Dashboard {
 
   getStorageItem() {
       NativeStorage.getItem('notification_num').then(notifications => {
-        this.notification_num = notifications;
-        alert("num 1"+this.notification_num)
-        
         this.ngZone.run(() => {
-        this.notification_num 
-        alert("num 2"+this.notification_num)
-        
+        this.notification_num = notifications;
         });
           
       });

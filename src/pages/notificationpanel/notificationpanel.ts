@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { Events, NavController, AlertController, ViewController } from 'ionic-angular';
+import { Events, NavController, AlertController, ViewController,MenuController,NavParams } from 'ionic-angular';
 import { Toast, NativeStorage } from 'ionic-native';
 
 @Component({
@@ -9,9 +9,13 @@ import { Toast, NativeStorage } from 'ionic-native';
 })
 export class Notificationpanel {
   storeNotificationsArray: any = [];
+  params :any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertCtrl: AlertController, public events: Events, public ngZone: NgZone) {
+  constructor(public navParams: NavParams,public navCtrl: NavController, public viewCtrl: ViewController, public alertCtrl: AlertController, public events: Events, public ngZone: NgZone,public menuCtrl : MenuController) {
     this.getStorageItem();
+   this.params = this.navParams.get('id');
+    
+    this.menuCtrl.enable(true);
   }
 
   dismiss() {

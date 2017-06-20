@@ -1,5 +1,5 @@
 import { Component, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Events, PopoverController, NavController, Platform, AlertController} from 'ionic-angular';
+import { Events, PopoverController, NavController, Platform, AlertController,MenuController} from 'ionic-angular';
 import { NativeStorage, Network, Keyboard } from 'ionic-native';
 declare var io: any;
 declare var window: any;
@@ -48,11 +48,13 @@ export class Chatmessage implements AfterViewInit {
   notificationType: any;
   settingToggleNotification: any;
   connectionWatchSubscription: any;
+  sendbtnOpacity:any;
 
 
-  constructor(public events: Events, public popoverCtrl: PopoverController, private navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController) {
+  constructor(public events: Events, public popoverCtrl: PopoverController, private navCtrl: NavController, public ngzone: NgZone, private platform: Platform, private alertCtrl: AlertController,public menuCtrl : MenuController) {
         Keyboard.disableScroll(true);
         this.checkNetworkConnection();
+        this.menuCtrl.enable(false);
 
         this.keyboardSubscribe = Keyboard.onKeyboardShow().subscribe((success) => {
           let CONST_FIX_VALUE = 100;
@@ -270,6 +272,7 @@ export class Chatmessage implements AfterViewInit {
   
   // called when user send thier message
   send(msg) {
+      this.elementChanged(false);
       if ((<string> Network.type === 'none')) {
         let alert = this.alertCtrl.create({
             title: "Something went wrong",
@@ -389,6 +392,16 @@ export class Chatmessage implements AfterViewInit {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch(err) { }
+  }
+  elementChanged(input) { 
+  
+    if(input) { 
+      
+      this.sendbtnOpacity = true; 
+    } else {
+       
+      this.sendbtnOpacity = false; 
+    } 
   }
 
 }

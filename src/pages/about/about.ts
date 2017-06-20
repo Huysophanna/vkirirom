@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { Component,NgZone } from '@angular/core';
+import { NavController, Platform ,Events,ModalController,MenuController} from 'ionic-angular';
+import { NativeStorage } from 'ionic-native';
+import { Notificationpanel } from '../notificationpanel/notificationpanel';
 
 declare var cordova: any;
 
@@ -10,9 +12,29 @@ declare var cordova: any;
 export class About {
 	service = "accom";
 	error: any;
-	constructor(public platform: Platform){
+	notification_num :any;
+	constructor(public platform: Platform,public ngZone :NgZone,public events :Events,public modalCtrl :ModalController,public menuCtrl : MenuController ){
+	this.events.subscribe('notification_num', data => {
+          this.getStorageItem();
+         
+         
+    });
 
+	this.menuCtrl.enable(true);
+	this.getStorageItem();
 	}
+	showNoti() {
+	let notiModal = this.modalCtrl.create(Notificationpanel);
+    notiModal.present();
+   
+
+    
+    
+    this.ngZone.run(() => {
+    this.notification_num= 0;
+    });
+    this.events.publish('clearnotification_num');
+  }
 
 	catagorize(i){
 
@@ -40,6 +62,16 @@ export class About {
 			cordova.InAppBrowser.open(url, "_blank", "location=true");
 		});
 	}
+	 getStorageItem() {
+      NativeStorage.getItem('notification_num').then(notifications => {
+ 
+        
+        this.ngZone.run(() => {
+        this.notification_num = notifications;
+        });
+          
+      });
+  }
 
 	// getContents(){
 	// 	let rootRef = firebase.database().ref();

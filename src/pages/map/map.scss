@@ -11,4 +11,31 @@ ion-app._gmaps_cdv_ .nav-decor{
 		height: 100%;
 		width: 100%;
 	}
+	.header {
+    	button {
+        	font-size: xx-large;
+        	background: transparent;
+    	}
+	}
+	position: relative;
+	width: 100%;
+	height: 100%;
+	box-sizing: borde-box;
+	.showNotiBtn {
+        transition: 0.2s;
+
+        .button-badge {
+            background-color: #fa3e3e;
+            border-radius: 50%;
+            color: white;
+
+            padding: 4px 6px 4px 6px;
+            font-size: 14px;
+
+            position: absolute; /* Position the badge within the relatively positioned button */
+            top: 0;
+            right: 0;
+            margin-right: 17px;
+        }
+	}
 }

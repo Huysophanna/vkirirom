@@ -44,7 +44,11 @@ export class MyApp {
   isKirirom = false;
   confirmAlert: any;
   push: any;
+
   notification_num = 0;
+
+  currentMode = true;
+
 
 
   constructor(public modalCtrl: ModalController, private firebaseUserData: FirebaseUserData, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public events: Events, public ngzone: NgZone, public actionsheetController: ActionSheetController) {
@@ -60,10 +64,12 @@ export class MyApp {
 
       //event listens to check if the user turn OFF/ON notification in Setting
       this.events.subscribe('settingToggleNotification', val => {
+        NativeStorage.setItem('settingToggleNotification', val);
         this.settingToggleNotification = val;
         if (val == "OFF") {
+          //unregister push notification
           this.push.unregister(() => {console.log("success unregistered");});
-        } else {
+        } else if (val == "ON"){
           //re-configure push configuration
           this.pushConfiguration();
         }
@@ -75,12 +81,16 @@ export class MyApp {
 
       this.events.subscribe("isKirirom", isKirirom => {
         this.isKirirom = isKirirom;
-        if ((this.isKirirom).toString() == "false") {
-          this.push.unregister(() => {console.log("success unregistered");});
-        } else {
-          //re-configure push configuration
-          this.pushConfiguration();
+        if ((this.isKirirom).toString() != this.currentMode.toString()) {
+          if ((this.isKirirom).toString() == "false") {
+            this.push.unregister(() => {console.log("success unregistered");});
+          } else {
+            //re-configure push configuration
+            this.pushConfiguration();
+          }
         }
+        this.currentMode = isKirirom;
+
       });
 
       //firebase configuration
@@ -107,7 +117,10 @@ export class MyApp {
                 // NativeStorage.setItem('userAuthService', true);
                 this.currentUser = firebase.auth().currentUser;
 
-                this.pushConfiguration();
+                if (this.settingToggleNotification == "ON") {
+                  //int push configuration when app launches
+                  this.pushConfiguration();
+                }
 
               } else {
                 NativeStorage.getItem("introShown").then(success => {
@@ -183,100 +196,88 @@ export class MyApp {
   }
 
   pushConfiguration() {
-        //push configuration
-                this.push = Push.init({
-                  android: {
-                    senderID: "82070365426"
-                  },
-                  ios: {
-                    alert: 'true',
-                    badge: 'true',
-                    sound: 'true',
-                    senderID: "82070365426",
-                    gcmSandbox: "true",
-                  },
-                  windows: {}
-                });
+      //push configuration
+      this.push = Push.init({
+        android: {
+          senderID: "82070365426"
+        },
+        ios: {
+          alert: 'true',
+          badge: 'true',
+          sound: 'true',
+          senderID: "82070365426",
+          gcmSandbox: "true",
+        },
+        windows: {}
+      });
 
-                this.push.on('registration', (data) => {
-                  NativeStorage.setItem('deviceToken', data.registrationId);
 
-                });
+        this.push.on('registration', (data) => {
+          NativeStorage.setItem('deviceToken', data.registrationId);
+        });
 
-                 this.push.on('notification', (data) => {
-                   this.storeNotificationsArray.push(data);
-                 
-                   
-                    
-                   
-                   
-                   
+        this.push.on('notification', (data) => {
+        if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false) {
 
-                  if (this.settingToggleNotification == 'ON' && this.isLoggedOut == false) {
+           this.notification_num++;
+           NativeStorage.setItem('notification_num', this.notification_num);
+                    
+           this.events.publish('notification_num');
+          
 
-                    this.notification_num++;
-                    NativeStorage.setItem('notification_num', this.notification_num);
-                    
-                    this.events.publish('notification_num');
-                    alert(this.notification_num)
-                   
-                   
-                   
-                    
-                    //store all notifications to local storage for the notification panel
-                    
-                    NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
-                    
-                    
-                    let self = this;
-                    //if user using app and push notification comes
-                      if (data.additionalData.foreground) {
-                          // if application open on foreground, show popup
-                          if (((data.title.indexOf('New message') >= 0) && (this.isKirirom)).toString() == "true") {
-                            //alert notification for chat messages
-                            if (this.isChatMessageScreen != "true") {
-                              //push notification, present alert except chat message screen
+
+          //store all notifications to local storage for the notification panel
+          this.storeNotificationsArray.push(data);
+          NativeStorage.setItem('storeNotificationsArray', this.storeNotificationsArray);
+          let self = this;
+          //if user using app and push notification comes
+            if (data.additionalData.foreground) {
+                // if application open on foreground, show popup
+                if (((data.title.indexOf('New message') >= 0) && (this.isKirirom)).toString() == "true") {
+                  //alert notification for chat messages
+                  if (this.isChatMessageScreen != "true") {
+                    //push notification, present alert except chat message screen
                               
 
-                              // if (this.confirmAlert != undefined) {
-                              //   this.confirmAlert.dismiss();
-                              // }
+                    // if (this.confirmAlert != undefined) {
+                    //   this.confirmAlert.dismiss();
+                    // }
                               
-                              // this.confirmAlert = this.alertCtrl.create({
-                              //   title: data.title,
-                              //   message: data.message,
-                              //   enableBackdropDismiss: false,
-                              //   buttons: [{
-                              //     text: 'Ignore',
-                              //   }, {
-                              //     text: 'View',
-                              //     handler: () => {
-                              //       self.nav.push(Chatmessage, { message: data.message });
-                              //     }
-                              //   }]
-                              // });
-                              // this.confirmAlert.present();
-                            }
-                          } else if (data.title.indexOf('New message') < 0) {
-                            //push notification from admin
-                            // this.events.publish('foreground-marketing-notification', data.message);
-                            let title = "Hi, " + this.userName;
-                            let message = data.title + ': ' + data.message;
-                            this.warningAlert(title, message);
-                          }
+                    // this.confirmAlert = this.alertCtrl.create({
+                    //   title: data.title,
+                    //   message: data.message,
+                    //   enableBackdropDismiss: false,
+                    //   buttons: [{
+                    //     text: 'Ignore',
+                    //   }, {
+                    //     text: 'View',
+                    //     handler: () => {
+                    //       self.nav.push(Chatmessage, { message: data.message });
+                    //     }
+                    //   }]
+                    // });
+                    // this.confirmAlert.present();
+                  }
+                } else if (data.title.indexOf('New message') < 0) {
+                  //push notification from admin
+                  // this.events.publish('foreground-marketing-notification', data.message);
+                  // let title = "Hi, " + this.userName;
+                  // let message = data.title + ': ' + data.message;
+                  // this.warningAlert(title, message);
+                }
                         
-                      } else {
-                        //if user NOT using app and push notification comes
-                        if (((data.title.indexOf('New message') >= 0) && (this.isKirirom) == true)) {
-                          self.nav.push(Chatmessage, { message: data.message });
-                        }
-                      }
-                  } //end of setting notification condition
+            } else {
+              //if user NOT using app and push notification comes
+              if (((data.title.indexOf('New message') >= 0) && (this.isKirirom) == true)) {
+                self.nav.push(Chatmessage, { message: data.message });
+              }
+            }
+        } //end of setting notification condition
 
-                });
-                this.push.on('error', (e) => {
-                  console.log(e.message);
-                });
+      });
+      this.push.on('error', (e) => {
+        console.log(e.message);
+      });
   }
 
   presentActionSheet() {
@@ -468,7 +469,7 @@ export class MyApp {
         NativeStorage.setItem('storeNotificationsArray', []);
         //user logged out 
         this.isLoggedOut = true;
-        this.push.unregister(() => {console.log("====================================== success unregistered");});
+        this.push.unregister(() => {console.log("success unregistered");});
         this.nav.setRoot(Login);
         break;
     }

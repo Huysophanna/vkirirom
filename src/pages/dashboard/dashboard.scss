@@ -12,7 +12,7 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
 
 .header {
     button {
-        font-size: xx-large;
+        font-size:  initial;
         background: transparent;
     }
     .toolbar-content {
@@ -42,7 +42,6 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
     }
     .showNotiBtn {
         transition: 0.2s;
-
         .button-badge {
             background-color: #fa3e3e;
             border-radius: 50%;
@@ -57,11 +56,16 @@ $outside-circle-margin: (($outside-circle-size / 2) + $outside-circle-border) * 
             margin-right: 17px;
         }
     }
-   
+    .showNotiBtn button {
+        font-size: initial;
+    }
     .showNotiBtn.activated {
         opacity: 0.2;
         animation: bounce 1s .5s;
         transform: scale(0.85);
+    }
+    .clearNoti button {
+        font-size: initial;
     }
     @keyframes bounce {
         0% {

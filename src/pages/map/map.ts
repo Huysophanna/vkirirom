@@ -1,6 +1,7 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { Events, NavController, LoadingController, AlertController, Platform } from 'ionic-angular';
-import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, Geolocation, GoogleMapsMarker, CameraPosition, GoogleMapsMarkerOptions} from 'ionic-native';
+import { Component, AfterViewInit ,NgZone} from '@angular/core';
+import { Events, NavController, LoadingController, AlertController, Platform ,ModalController,MenuController} from 'ionic-angular';
+import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, Geolocation, GoogleMapsMarker, CameraPosition, GoogleMapsMarkerOptions,NativeStorage} from 'ionic-native';
+import { Notificationpanel } from '../notificationpanel/notificationpanel';
 declare var plugin: any;
 declare var navigator: any;
 
@@ -22,12 +23,27 @@ export class GoogleMapPage {
   mapTile: any;
   androidVersion: any;
   addedOverlayInterval: any;
+  notification_num :any;
+  params : Object;
+  pushPage :any;
 
   constructor(public events: Events,
+    public ngZone : NgZone,
+    public modalCtrl :ModalController,
     public navCtrl: NavController,
     public platform: Platform,
+    public menuCtrl : MenuController,
     public loadingCtrl: LoadingController) {
+    this.events.subscribe('notification_num', data => {
+          this.getStorageItem();
+         
+         
+    });
+
+    this.getStorageItem();
+    
     platform.ready().then(() => {
+       menuCtrl.enable(true);
 
         if (platform.is('android')) {
             //check android version
@@ -39,6 +55,33 @@ export class GoogleMapPage {
         // this.loader.present();
 
     });
+  }
+  showNoti() {
+    
+    this.navCtrl.push(Notificationpanel,{
+       id : 1
+    });
+   
+   
+
+    
+    
+    this.ngZone.run(() => {
+    this.notification_num= 0;
+    });
+    this.events.publish('clearnotification_num');
+   
+    
+
+  }
+  getStorageItem() {
+      NativeStorage.getItem('notification_num').then(notifications => {
+      this.ngZone.run(() => {
+      this.notification_num = notifications;
+      });
+          
+    });
+    
   }
 
   ngAfterViewInit() {

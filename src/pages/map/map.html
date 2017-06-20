@@ -1,6 +1,9 @@
 <ion-header class="header">
   <ion-navbar>
     <ion-title>Map</ion-title>
+    <ion-buttons end>
+        <button class="showNotiBtn" (click)="showNoti()"   ><ion-icon [ngStyle]="{'color': 'white'}" name="ios-notifications"></ion-icon><span *ngIf="notification_num > 0"  class="button-badge">{{notification_num}}</span></button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

@@ -12,7 +12,7 @@ $green_primary_color: #1C8954;
     color: white;
     button {
         display: block;
-        font-size: 60%;
+        font-size: 30%;
         transition: 0.2s;
     }
     button.activated {
@@ -32,5 +32,4 @@ $green_primary_color: #1C8954;
         color: green;
         font-size: -webkit-xxx-large;
     }
-
 }

@@ -1,4 +1,27 @@
 $green_primary_color: #1C8954;
+.header {
+    	button {
+        	background: transparent;
+    	}
+	}
+
+.showNotiBtn {
+        transition: 0.2s;
+
+        .button-badge {
+            background-color: #fa3e3e;
+            border-radius: 50%;
+            color: white;
+
+            padding: 4px 6px 4px 6px;
+            font-size: 14px;
+
+            position: absolute; /* Position the badge within the relatively positioned button */
+            top: 0;
+            right: 0;
+            margin-right: 17px;
+        }
+    }
 
 .item-booking {
     margin: 0 auto;
@@ -16,6 +39,7 @@ $green_primary_color: #1C8954;
         width: 60%;
     }
 }
+
 
 @media only screen and (max-device-width: 320px) {
     .item-booking {
